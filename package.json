@@ -1,17 +1,30 @@
 {
   "name": "@nhm-data/zoa",
-  "private": true,
   "version": "0.1.0",
+  "description": "UI toolkit for the NHM Data Portal.",
+  "homepage": "https://github.com/NaturalHistoryMuseum/zoa",
+  "bugs": {
+    "url": "https://github.com/NaturalHistoryMuseum/zoa/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NaturalHistoryMuseum/zoa.git"
+  },
+  "license": "GPL-3.0-or-later",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/zoa.umd.cjs",
-  "module": "./dist/zoa.js",
+  "main": "dist/zoa.cjs",
+  "module": "dist/zoa.js",
   "exports": {
     ".": {
       "import": "./dist/zoa.js",
-      "require": "./dist/zoa.umd.cjs"
+      "require": "./dist/zoa.cjs"
+    },
+    "./elements": {
+      "import": "./dist/zoa-elements.js",
+      "require": "./dist/zoa-elements.cjs"
     }
   },
   "scripts": {
@@ -20,6 +33,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@storybook/addon-essentials": "^7.0.4",
@@ -37,7 +51,5 @@
     "storybook-css-modules": "^1.0.8",
     "vite": "^4.1.4",
     "vue": "^3.2.47"
-  },
-  "peerDependencies": {},
-  "dependencies": {}
+  }
 }
