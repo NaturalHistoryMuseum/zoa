@@ -1,0 +1,31 @@
+@import 'palette';
+@import 'fonts';
+
+.button {
+  font-family: $body-font;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em 0.6em;
+}
+
+.button-kind--normal {
+  background-color: $light;
+  color: black;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $light-darker;
+  }
+}
+
+.button-kind--primary {
+  background-color: $secondary;
+  color: white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $secondary-darker;
+  }
+}

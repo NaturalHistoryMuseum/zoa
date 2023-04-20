@@ -1,0 +1,16 @@
+$primary: #fcb47e;
+$secondary: #00755f;
+$dark: #532200;
+$light: #dfe0df;
+
+$primary-darker: darken($primary, 20%);
+$primary-lighter: lighten($primary, 20%);
+
+$secondary-darker: darken($secondary, 20%);
+$secondary-lighter: lighten($secondary, 20%);
+
+$dark-darker: darken($dark, 20%);
+$dark-lighter: lighten($dark, 20%);
+
+$light-darker: darken($light, 20%);
+$light-lighter: lighten($light, 20%);
