@@ -6,6 +6,8 @@
   border: none;
   border-radius: 5px;
   padding: 0.5em 1em 0.6em;
+  transition: 0.2s;
+  cursor: pointer;
 }
 
 .button-kind--normal {
@@ -15,7 +17,7 @@
   &:hover,
   &:focus,
   &:active {
-    background-color: $light-darker;
+    background-color: $light-a;
   }
 }
 
@@ -26,6 +28,6 @@
   &:hover,
   &:focus,
   &:active {
-    background-color: $secondary-darker;
+    background-color: $secondary-a;
   }
 }
