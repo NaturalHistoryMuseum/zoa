@@ -1,4 +1,4 @@
 import { registerZoa } from '../main.js';
-import { ZoaButton } from '../elements.js';
+import { ZoaButton, ZoaTextbox } from '../elements.js';
 
-registerZoa([ZoaButton]);
+registerZoa([ZoaButton, ZoaTextbox]);

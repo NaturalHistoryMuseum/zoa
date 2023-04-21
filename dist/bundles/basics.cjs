@@ -1,1 +1,1 @@
-"use strict";const e=require("../zoa.cjs"),t=require("../zoa-elements.cjs");e.registerZoa([t.ZoaButton]);
+"use strict";const o=require("../zoa.cjs"),e=require("../zoa-elements.cjs");o.registerZoa([e.ZoaButton,e.ZoaTextbox]);
