@@ -10,6 +10,7 @@ const config = {
     '@storybook/addon-interactions',
     'storybook-css-modules',
   ],
+  staticDirs: ['./assets'],
   framework: {
     name: '@storybook/vue3-vite',
     options: {},

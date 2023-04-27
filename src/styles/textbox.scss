@@ -1,9 +1,10 @@
 @import 'palette';
 @import 'fonts';
+@import 'vars';
 
 input {
   font-family: $body-font;
-  border: 1px solid $light;
-  border-radius: 5px;
-  padding: 0.5em 1em 0.6em;
+  border: 1px solid $grey;
+  border-radius: $rounding;
+  padding: $padding;
 }

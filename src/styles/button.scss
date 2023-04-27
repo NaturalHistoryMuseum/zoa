@@ -1,33 +1,36 @@
 @import 'palette';
 @import 'fonts';
+@import 'vars';
 
 .button {
-  font-family: $body-font;
+  font-family: $header-font;
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
-  padding: 0.5em 1em 0.6em;
+  border-radius: $rounding;
+  padding: $padding;
   transition: 0.2s;
   cursor: pointer;
 }
 
 .button-kind--normal {
-  background-color: $light;
+  background-color: $secondary;
   color: black;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $light-a;
+    background-color: $secondary-b;
   }
 }
 
 .button-kind--primary {
-  background-color: $secondary;
-  color: white;
+  background-color: $primary;
+  color: black;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $secondary-a;
+    background-color: $primary-b;
+    color: black;
   }
 }

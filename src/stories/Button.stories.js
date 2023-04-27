@@ -40,7 +40,7 @@ export const Normal = {
 export const Primary = {
   args: {
     kind: 'primary',
-    default: 'Special Button',
+    label: 'Special Button',
   },
   render: meta.render,
 };
