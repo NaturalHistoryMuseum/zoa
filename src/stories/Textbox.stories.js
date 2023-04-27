@@ -5,7 +5,6 @@ import '../styles/textbox.scss';
 const meta = {
   title: 'Components/Textbox',
   component: Textbox,
-  tags: ['autodocs'],
   argTypes: {
     placeholder: {
       control: 'text',

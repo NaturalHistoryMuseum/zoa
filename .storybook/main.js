@@ -16,7 +16,7 @@ const config = {
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
   },
   async viteFinal(config) {
     return mergeConfig(config, {});

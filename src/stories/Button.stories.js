@@ -5,7 +5,6 @@ import '../styles/button.scss';
 const meta = {
   title: 'Components/Button',
   component: Button,
-  tags: ['autodocs'],
   argTypes: {
     kind: {
       control: 'select',
