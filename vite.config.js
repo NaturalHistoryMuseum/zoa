@@ -18,6 +18,7 @@ export default defineConfig({
         zoa: 'src/main.js',
         'zoa-elements': 'src/elements.js',
         'bundles/basics': 'src/bundles/basics.js',
+        'bundles/all': 'src/bundles/all.js',
       },
     },
   },
