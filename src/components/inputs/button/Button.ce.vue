@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :class="`button-kind--${kind}`">
+  <button class="zoa-button" :class="`zoa-button-kind--${kind}`">
     {{ label }}
   </button>
 </template>

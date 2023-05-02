@@ -2,7 +2,7 @@
 @import '../../../styles/fonts';
 @import '../../../styles/vars';
 
-.button {
+.zoa-button {
   font-family: $header-font;
   font-weight: 600;
   border: none;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.button-kind--normal {
+.zoa-button-kind--normal {
   background-color: $secondary;
   color: black;
 
@@ -23,7 +23,7 @@
   }
 }
 
-.button-kind--primary {
+.zoa-button-kind--primary {
   background-color: $primary;
   color: black;
 

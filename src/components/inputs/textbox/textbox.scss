@@ -10,31 +10,31 @@ input {
   padding: $padding;
 }
 
-.textbox-label {
+.zoa-textbox-label {
   @include header-font;
   font-size: 0.9em;
   padding: $padding;
 
-  &.textbox-label-position--right,
-  &.textbox-label-position--below {
+  &.zoa-textbox-label-position--right,
+  &.zoa-textbox-label-position--below {
     order: 2;
   }
 }
 
-.textbox-grid {
+.zoa-textbox-grid {
   display: grid;
   align-items: center;
 
-  &.textbox-grid--above,
-  &.textbox-grid--below {
+  &.zoa-textbox-grid--above,
+  &.zoa-textbox-grid--below {
     grid-template-rows: auto auto;
   }
 
-  &.textbox-grid--left {
+  &.zoa-textbox-grid--left {
     grid-template-columns: auto 1fr;
   }
 
-  &.textbox-grid--right {
+  &.zoa-textbox-grid--right {
     grid-template-columns: 1fr auto;
   }
 }

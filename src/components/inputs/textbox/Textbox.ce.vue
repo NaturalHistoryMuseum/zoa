@@ -1,10 +1,10 @@
 <template>
-  <div class="textbox-grid" :class="`textbox-grid--${labelPosition}`">
+  <div class="zoa-textbox-grid" :class="`zoa-textbox-grid--${labelPosition}`">
     <label
       for="textbox"
       v-if="label && labelPosition !== 'none'"
-      class="textbox-label"
-      :class="`textbox-label-position--${labelPosition}`"
+      class="zoa-textbox-label"
+      :class="`zoa-textbox-label-position--${labelPosition}`"
       >{{ label }}</label
     >
     <input type="text" :placeholder="placeholder" id="textbox" />
@@ -12,8 +12,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-
 const props = defineProps({
   placeholder: {
     type: String,
