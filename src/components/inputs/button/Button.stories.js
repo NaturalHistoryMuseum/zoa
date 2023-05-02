@@ -1,9 +1,5 @@
-import Button from './Button.ce.vue';
-import './button.scss';
-
 const meta = {
   title: 'Components/Button',
-  component: Button,
   argTypes: {
     kind: {
       control: 'select',
@@ -14,31 +10,36 @@ const meta = {
       control: 'text',
     },
   },
-  render: (args) => ({
-    components: { Button },
-    setup() {
-      return { args };
-    },
-    template: `
-      <Button v-bind="args"/>
-    `,
-  }),
 };
 
 export default meta;
 
-export const Normal = {
+const Base = {
   args: {
-    kind: 'normal',
     label: 'Button',
   },
-  render: meta.render,
+  render: (args) => ({
+    components: 'zoa-button',
+    setup() {
+      return { args };
+    },
+    template: `
+      <zoa-button v-bind="args"/>
+    `,
+  }),
+};
+
+export const Normal = {
+  ...Base,
+  args: {
+    kind: 'normal',
+  },
 };
 
 export const Primary = {
+  ...Base,
   args: {
     kind: 'primary',
     label: 'Special Button',
   },
-  render: meta.render,
 };
