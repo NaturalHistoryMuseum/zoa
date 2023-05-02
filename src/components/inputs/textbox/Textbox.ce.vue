@@ -11,4 +11,4 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss" src="../styles/textbox.scss" />
+<style lang="scss" src="./textbox.scss" />

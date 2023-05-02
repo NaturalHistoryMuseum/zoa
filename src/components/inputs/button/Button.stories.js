@@ -1,7 +1,6 @@
-import Button from '../components/Button.ce.vue';
-import '../styles/button.scss';
+import Button from './Button.ce.vue';
+import './button.scss';
 
-// More on how to set up stories at: https://storybook.js.org/docs/7.0/vue/writing-stories/introduction
 const meta = {
   title: 'Components/Button',
   component: Button,

@@ -1,7 +1,6 @@
-import Textbox from '../components/Textbox.ce.vue';
-import '../styles/textbox.scss';
+import Textbox from './Textbox.ce.vue';
+import './textbox.scss';
 
-// More on how to set up stories at: https://storybook.js.org/docs/7.0/vue/writing-stories/introduction
 const meta = {
   title: 'Components/Textbox',
   component: Textbox,
