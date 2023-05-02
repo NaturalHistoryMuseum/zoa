@@ -1,5 +1,5 @@
-$v-pad: 8px;
-$h-pad: 16px;
+$v-pad: var(--zoa-pad-v, 8px);
+$h-pad: var(--zoa-pad-h, 16px);
 $padding: $v-pad $h-pad;
 
-$rounding: 10px;
+$rounding: var(--zoa-rounding, 10px);

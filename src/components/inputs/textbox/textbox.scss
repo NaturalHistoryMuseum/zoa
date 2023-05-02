@@ -3,8 +3,38 @@
 @import '../../../styles/vars';
 
 input {
-  font-family: $body-font;
+  @include body-font;
+  font-size: 1em;
   border: 1px solid $grey;
   border-radius: $rounding;
   padding: $padding;
+}
+
+.textbox-label {
+  @include header-font;
+  font-size: 0.9em;
+  padding: $padding;
+
+  &.textbox-label-position--right,
+  &.textbox-label-position--below {
+    order: 2;
+  }
+}
+
+.textbox-grid {
+  display: grid;
+  align-items: center;
+
+  &.textbox-grid--above,
+  &.textbox-grid--below {
+    grid-template-rows: auto auto;
+  }
+
+  &.textbox-grid--left {
+    grid-template-columns: auto 1fr;
+  }
+
+  &.textbox-grid--right {
+    grid-template-columns: 1fr auto;
+  }
 }
