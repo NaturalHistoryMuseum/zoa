@@ -17,4 +17,4 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss" src="../styles/button.scss" />
+<style lang="scss" src="./button.scss" />
