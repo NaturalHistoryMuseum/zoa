@@ -16,7 +16,8 @@ export default defineConfig({
     lib: {
       entry: {
         zoa: 'src/main.js',
-        'zoa-elements': 'src/elements.js',
+        'zoa-wc': 'src/elements.js',
+        'zoa-vue': 'src/components/index.js',
         'bundles/basics': 'src/bundles/basics.js',
         'bundles/all': 'src/bundles/all.js',
       },

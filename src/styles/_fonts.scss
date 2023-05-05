@@ -1,2 +1,11 @@
 $body-font: var(--zoa-body-font, sans-serif);
 $header-font: var(--zoa-header-font, sans-serif);
+
+@mixin body-font {
+  font-family: $body-font;
+}
+
+@mixin header-font {
+  font-family: $header-font;
+  font-weight: bold;
+}

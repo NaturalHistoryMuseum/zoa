@@ -13,7 +13,8 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "dist/zoa.cjs",
   "module": "dist/zoa.js",
@@ -22,10 +23,12 @@
       "import": "./dist/zoa.js",
       "require": "./dist/zoa.cjs"
     },
-    "./elements": {
-      "import": "./dist/zoa-elements.js",
-      "require": "./dist/zoa-elements.cjs"
-    }
+    "./wc": {
+      "import": "./dist/zoa-wc.js",
+      "require": "./dist/zoa-wc.cjs"
+    },
+    "./vue": "./dist/zoa-vue.js",
+    "./theme": "./dist/style.css"
   },
   "scripts": {
     "build": "vite build",

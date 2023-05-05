@@ -1,24 +1,25 @@
-import { allElements as r } from "./zoa-elements.js";
-const c = new RegExp("([^/.]+)(?=.ce)"), m = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g"), l = "zoa";
-function s(n) {
-  let e;
+import { allElements as n } from "./zoa-wc.js";
+import "./Textbox.ce-af5e5fd4.js";
+const i = new RegExp("([^/.]+)(?=.ce)"), d = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g"), b = "zoa";
+function l(a) {
+  let o;
   try {
-    e = c.exec(n)[0];
+    o = i.exec(a)[0];
   } catch {
     return;
   }
-  let o = e.replace(
-    m,
-    (t, a) => (a ? "-" : "") + t.toLowerCase()
+  let t = o.replace(
+    d,
+    (e, r) => (r ? "-" : "") + e.toLowerCase()
   );
-  return [l, o].join("-");
+  return [b, t].join("-");
 }
-function g(n) {
-  n = n || r, n.forEach((e) => {
-    const o = s(e.def.__name);
-    o === null && console.error(`${e.def.__name} could not be registered.`), customElements.define(o, e);
+function c(a) {
+  a = a || n, a.forEach((o) => {
+    const t = l(o.def.__name);
+    t === null && console.error(`${o.def.__name} could not be registered.`), customElements.define(t, o);
   });
 }
 export {
-  g as registerZoa
+  c as registerZoa
 };

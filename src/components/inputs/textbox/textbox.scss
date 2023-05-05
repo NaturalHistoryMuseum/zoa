@@ -3,8 +3,38 @@
 @import '../../../styles/vars';
 
 input {
-  font-family: $body-font;
+  @include body-font;
+  font-size: 1em;
   border: 1px solid $grey;
   border-radius: $rounding;
   padding: $padding;
+}
+
+.zoa-textbox-label {
+  @include header-font;
+  font-size: 0.9em;
+  padding: $padding;
+
+  &.zoa-textbox-label-position--right,
+  &.zoa-textbox-label-position--below {
+    order: 2;
+  }
+}
+
+.zoa-textbox-grid {
+  display: grid;
+  align-items: center;
+
+  &.zoa-textbox-grid--above,
+  &.zoa-textbox-grid--below {
+    grid-template-rows: auto auto;
+  }
+
+  &.zoa-textbox-grid--left {
+    grid-template-columns: auto 1fr;
+  }
+
+  &.zoa-textbox-grid--right {
+    grid-template-columns: 1fr auto;
+  }
 }
