@@ -1,3 +1,13 @@
+## v0.2.2 (2023-07-11)
+
+### Fix
+
+- fix dependency version
+
+### Chores/Misc
+
+- remove yarn cache from action
+
 ## v0.2.1 (2023-07-11)
 
 ### Fix
