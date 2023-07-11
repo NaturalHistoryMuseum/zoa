@@ -1,4 +1,7 @@
+import ZoaTextbox from './Textbox.vue';
+
 const meta = {
+  component: ZoaTextbox,
   title: 'Components/Textbox',
   argTypes: {
     placeholder: {
@@ -24,7 +27,7 @@ const Base = {
     label: 'Textbox',
   },
   render: (args) => ({
-    components: 'zoa-textbox',
+    components: { ZoaTextbox },
     setup() {
       return { args };
     },

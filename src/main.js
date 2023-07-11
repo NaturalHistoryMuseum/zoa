@@ -1,16 +1,15 @@
-import { getElementName } from './utils.js';
-import { allElements } from './elements.js';
+import * as components from './components';
+import { kebabify } from './utils.js';
 
-const styles = import.meta.glob('./components/**/*.scss', { eager: true });
+const Zoa = {
+  install(app, options) {
+    Object.entries(components).forEach((c) => {
+      const elementName = kebabify(c[0]);
+      app.component(elementName, c[1]);
+    });
+  },
+};
 
-/* REGISTRATION */
-export function registerZoa(elements) {
-  elements = elements || allElements;
-  elements.forEach((e) => {
-    const elementName = getElementName(e.def.__name);
-    if (elementName === null) {
-      console.error(`${e.def.__name} could not be registered.`);
-    }
-    customElements.define(elementName, e);
-  });
-}
+export { Zoa };
+
+export * from './components';

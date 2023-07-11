@@ -1,4 +1,7 @@
+import ZoaButton from './Button.vue';
+
 const meta = {
+  component: ZoaButton,
   title: 'Components/Button',
   argTypes: {
     kind: {
@@ -19,7 +22,7 @@ const Base = {
     label: 'Button',
   },
   render: (args) => ({
-    components: 'zoa-button',
+    components: { ZoaButton },
     setup() {
       return { args };
     },

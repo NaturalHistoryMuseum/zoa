@@ -1,7 +1,6 @@
 /** @type { import('@storybook/vue3').Preview } */
 
 import './storybook.css';
-import '../dist/bundles/all.js';
 
 const preview = {
   parameters: {
