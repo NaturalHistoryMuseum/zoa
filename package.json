@@ -1,6 +1,6 @@
 {
   "name": "@nhm-data/zoa",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "UI toolkit for the NHM Data Portal.",
   "homepage": "https://github.com/NaturalHistoryMuseum/zoa",
   "bugs": {
@@ -38,7 +38,7 @@
     "@storybook/addon-interactions": "^7.0.26",
     "@storybook/addon-links": "^7.0.26",
     "@storybook/blocks": "^7.0.26",
-    "@storybook/testing-library": "^0.2.0",
+    "@storybook/testing-library": "^0.2.1",
     "@storybook/vue3": "^7.0.26",
     "@storybook/vue3-vite": "^7.0.26",
     "@vitejs/plugin-vue": "^4.2.3",

@@ -1,3 +1,9 @@
+## v0.2.1 (2023-07-11)
+
+### Fix
+
+- move storybook css into assets folder
+
 ## v0.2.0 (2023-07-11)
 
 ### Feature
