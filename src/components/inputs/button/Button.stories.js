@@ -1,11 +1,8 @@
-import Button from '../components/Button.ce.vue';
-import '../styles/button.scss';
+import ZoaButton from './Button.vue';
 
-// More on how to set up stories at: https://storybook.js.org/docs/7.0/vue/writing-stories/introduction
 const meta = {
+  component: ZoaButton,
   title: 'Components/Button',
-  component: Button,
-  tags: ['autodocs'],
   argTypes: {
     kind: {
       control: 'select',
@@ -16,31 +13,36 @@ const meta = {
       control: 'text',
     },
   },
-  render: (args) => ({
-    components: { Button },
-    setup() {
-      return { args };
-    },
-    template: `
-      <Button v-bind="args"/>
-    `,
-  }),
 };
 
 export default meta;
 
-export const Normal = {
+const Base = {
   args: {
-    kind: 'normal',
     label: 'Button',
   },
-  render: meta.render,
+  render: (args) => ({
+    components: { ZoaButton },
+    setup() {
+      return { args };
+    },
+    template: `
+      <zoa-button v-bind="args"/>
+    `,
+  }),
+};
+
+export const Normal = {
+  ...Base,
+  args: {
+    kind: 'normal',
+  },
 };
 
 export const Primary = {
+  ...Base,
   args: {
     kind: 'primary',
-    default: 'Special Button',
+    label: 'Special Button',
   },
-  render: meta.render,
 };

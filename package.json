@@ -1,43 +1,53 @@
 {
   "name": "@nhm-data/zoa",
-  "private": true,
   "version": "0.1.0",
+  "description": "UI toolkit for the NHM Data Portal.",
+  "homepage": "https://github.com/NaturalHistoryMuseum/zoa",
+  "bugs": {
+    "url": "https://github.com/NaturalHistoryMuseum/zoa/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NaturalHistoryMuseum/zoa.git"
+  },
+  "license": "GPL-3.0-or-later",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
-  "main": "./dist/zoa.umd.cjs",
-  "module": "./dist/zoa.js",
+  "main": "dist/zoa.umd.js",
+  "module": "dist/zoa.es.js",
   "exports": {
     ".": {
-      "import": "./dist/zoa.js",
-      "require": "./dist/zoa.umd.cjs"
-    }
+      "import": "./dist/zoa.es.js",
+      "require": "./dist/zoa.umd.js"
+    },
+    "./theme": "./dist/style.css"
   },
   "scripts": {
     "build": "vite build",
     "watch": "vite build --watch",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build -o docs --docs"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.21.0",
-    "@storybook/addon-essentials": "^7.0.4",
-    "@storybook/addon-interactions": "^7.0.4",
-    "@storybook/addon-links": "^7.0.4",
-    "@storybook/blocks": "^7.0.4",
-    "@storybook/testing-library": "^0.1.0",
-    "@storybook/vue3": "^7.0.4",
-    "@storybook/vue3-vite": "^7.0.4",
-    "@vitejs/plugin-vue": "^4.0.0",
+    "@babel/core": "^7.22.8",
+    "@storybook/addon-essentials": "^7.0.26",
+    "@storybook/addon-interactions": "^7.0.26",
+    "@storybook/addon-links": "^7.0.26",
+    "@storybook/blocks": "^7.0.26",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/vue3": "^7.0.26",
+    "@storybook/vue3-vite": "^7.0.26",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "sass": "^1.63.6",
+    "storybook": "^7.0.26",
+    "storybook-css-modules": "^1.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.58.3",
-    "storybook": "^7.0.4",
-    "storybook-css-modules": "^1.0.8",
-    "vite": "^4.1.4",
-    "vue": "^3.2.47"
-  },
-  "peerDependencies": {},
-  "dependencies": {}
+    "vite": "^4.4.3",
+    "vue": "^3.3.4"
+  }
 }

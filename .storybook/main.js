@@ -10,12 +10,13 @@ const config = {
     '@storybook/addon-interactions',
     'storybook-css-modules',
   ],
+  staticDirs: ['./assets'],
   framework: {
     name: '@storybook/vue3-vite',
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
   },
   async viteFinal(config) {
     return mergeConfig(config, {});
