@@ -1,6 +1,6 @@
 {
   "name": "@nhm-data/zoa",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "UI toolkit for the NHM Data Portal.",
   "homepage": "https://github.com/NaturalHistoryMuseum/zoa",
   "bugs": {

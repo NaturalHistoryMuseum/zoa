@@ -1,3 +1,10 @@
+## v0.2.3 (2023-07-12)
+
+### Docs
+
+- add introduction file
+- theme the docs
+
 ## v0.2.2 (2023-07-11)
 
 ### Fix
