@@ -5,10 +5,10 @@ import { mergeConfig } from 'vite';
 const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
+    '@storybook/addon-links',
     '@storybook/addon-interactions',
-    'storybook-css-modules',
+    '@storybook/addon-a11y',
   ],
   staticDirs: ['./assets'],
   framework: {
