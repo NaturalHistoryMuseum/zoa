@@ -2,7 +2,7 @@ import ZoaTextbox from './Textbox.vue';
 
 const meta = {
   component: ZoaTextbox,
-  title: 'Components/Textbox',
+  title: 'Components/Inputs/Textbox',
   argTypes: {
     placeholder: {
       control: 'text',
