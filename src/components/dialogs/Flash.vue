@@ -1,21 +1,16 @@
 <template>
   <div :class="[$style.main, $style[`kind--${kind}`]]">
-    <span>!</span>
+    <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
     <span>{{ message }}</span>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  kind: {
-    type: String,
-    default: 'info',
-  },
-  message: {
-    type: String,
-    default: 'Button',
-  },
-});
+import { dialogProps, useIcons } from './utils.js';
+
+const props = defineProps({ ...dialogProps });
+
+const { icon } = useIcons(props);
 </script>
 
 <style module lang="scss">
@@ -31,26 +26,43 @@ const props = defineProps({
   padding: $padding;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1em;
+  gap: 10px;
+  align-items: center;
 }
 
 .kind--info {
   border-color: $info-dark;
   background: $info-light;
+
+  .icon {
+    color: $info-dark;
+  }
 }
 
 .kind--warning {
   border-color: $warning-dark;
   background: $warning-light;
+
+  .icon {
+    color: $warning-dark;
+  }
 }
 
 .kind--error {
   border-color: $error-dark;
   background: $error-light;
+
+  .icon {
+    color: $error-dark;
+  }
 }
 
 .kind--success {
   border-color: $success-dark;
   background: $success-light;
+
+  .icon {
+    color: $success-dark;
+  }
 }
 </style>
