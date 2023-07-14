@@ -18,9 +18,9 @@ const props = defineProps({
 </script>
 
 <style module lang="scss">
-@import '../../../styles/palette';
-@import '../../../styles/fonts';
-@import '../../../styles/vars';
+@import '../../styles/palette';
+@import '../../styles/fonts';
+@import '../../styles/vars';
 
 .main {
   font-family: $header-font;

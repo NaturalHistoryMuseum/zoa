@@ -1,4 +1,4 @@
-import ZoaTextbox from './Textbox.vue';
+import { ZoaTextbox } from '../../index.js';
 
 const meta = {
   component: ZoaTextbox,
@@ -32,8 +32,8 @@ const Base = {
       return { args };
     },
     template: `
-      <zoa-textbox v-bind="args"/>
-    `,
+          <zoa-textbox v-bind="args"/>
+        `,
   }),
 };
 
