@@ -9,12 +9,19 @@ export default defineConfig({
         zoa: 'src/main.js',
       },
       name: 'Zoa',
+      formats: ['es'],
     },
     rollupOptions: {
-      external: ['vue'],
+      external: [
+        'vue',
+        '@fortawesome/vue-fontawesome@latest-3',
+        '@fortawesome/fontawesome-svg-core',
+        '@fortawesome/free-solid-svg-icons',
+        '@fortawesome/free-brands-svg-icons',
+      ],
       output: {
         globals: { vue: 'Vue' },
-        entryFileNames: 'zoa.[format].js',
+        entryFileNames: 'zoa.js',
       },
     },
   },

@@ -16,12 +16,10 @@
     "dist",
     "src"
   ],
-  "main": "dist/zoa.umd.js",
-  "module": "dist/zoa.es.js",
+  "module": "dist/zoa.js",
   "exports": {
     ".": {
-      "import": "./dist/zoa.es.js",
-      "require": "./dist/zoa.umd.js"
+      "import": "./dist/zoa.js"
     },
     "./theme": "./dist/style.css"
   },
@@ -32,7 +30,11 @@
     "build-storybook": "storybook build -o docs"
   },
   "dependencies": {
-    "@storybook/manager-api": "^7.0.26"
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.22.8",
@@ -41,6 +43,7 @@
     "@storybook/addon-interactions": "^7.0.26",
     "@storybook/addon-links": "^7.0.26",
     "@storybook/blocks": "^7.0.26",
+    "@storybook/manager-api": "^7.0.26",
     "@storybook/testing-library": "^0.2.0",
     "@storybook/vue3": "^7.0.26",
     "@storybook/vue3-vite": "^7.0.26",
@@ -49,7 +52,6 @@
     "react-dom": "^18.2.0",
     "sass": "^1.63.6",
     "storybook": "^7.0.26",
-    "vite": "^4.4.3",
-    "vue": "^3.3.4"
+    "vite": "^4.4.3"
   }
 }
