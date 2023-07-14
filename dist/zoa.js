@@ -81,7 +81,7 @@ const ee = "_main_guuuc_1", te = {
   },
   message: {
     type: String,
-    default: "Button"
+    default: "Here is an informational message."
   }
 };
 function me(e) {

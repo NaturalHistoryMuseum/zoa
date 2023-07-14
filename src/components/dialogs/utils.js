@@ -7,7 +7,7 @@ export const dialogProps = {
   },
   message: {
     type: String,
-    default: 'Button',
+    default: 'Here is an informational message.',
   },
 };
 
