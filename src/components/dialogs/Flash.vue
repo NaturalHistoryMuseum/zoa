@@ -7,6 +7,7 @@
 
 <script setup>
 import { dialogProps, useIcons } from './utils.js';
+import FontAwesomeIcon from '../../icons.js';
 
 const props = defineProps({ ...dialogProps });
 

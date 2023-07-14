@@ -1,8 +1,8 @@
-import { openBlock as O, createElementBlock as S, normalizeClass as b, toDisplayString as T, createCommentVNode as H, createElementVNode as $, computed as c, resolveComponent as X, createVNode as Z, unref as V, defineComponent as N, watch as Y, h as C } from "vue";
-import { parse as x, icon as J, config as L, text as q, library as Q } from "@fortawesome/fontawesome-svg-core";
-import { fas as ee } from "@fortawesome/free-solid-svg-icons";
-const te = "_main_guuuc_1", ne = {
-  main: te,
+import { openBlock as O, createElementBlock as S, normalizeClass as b, toDisplayString as w, createCommentVNode as X, createElementVNode as C, computed as c, defineComponent as N, watch as Z, h as L, createVNode as V, unref as B } from "vue";
+import { parse as x, icon as Y, config as G, text as J, library as q } from "@fortawesome/fontawesome-svg-core";
+import { fas as Q } from "@fortawesome/free-solid-svg-icons";
+const ee = "_main_guuuc_1", te = {
+  main: ee,
   "kind--normal": "_kind--normal_guuuc_11",
   "kind--primary": "_kind--primary_guuuc_19"
 }, j = (e, t) => {
@@ -10,7 +10,7 @@ const te = "_main_guuuc_1", ne = {
   for (const [r, i] of t)
     n[r] = i;
   return n;
-}, re = {
+}, ne = {
   __name: "Button",
   props: {
     kind: {
@@ -25,21 +25,21 @@ const te = "_main_guuuc_1", ne = {
   setup(e) {
     return (t, n) => (O(), S("button", {
       class: b([t.$style.main, t.$style[`kind--${e.kind}`]])
-    }, T(e.label), 3));
+    }, w(e.label), 3));
   }
-}, ae = {
-  $style: ne
-}, oe = /* @__PURE__ */ j(re, [["__cssModules", ae]]), ie = "_input_172pg_1", le = "_label_172pg_9", se = "_grid_172pg_19", ue = {
-  input: ie,
-  label: le,
+}, re = {
+  $style: te
+}, ae = /* @__PURE__ */ j(ne, [["__cssModules", re]]), oe = "_input_172pg_1", ie = "_label_172pg_9", le = "_grid_172pg_19", se = {
+  input: oe,
+  label: ie,
   "label--right": "_label--right_172pg_15",
   "label--below": "_label--below_172pg_15",
-  grid: se,
+  grid: le,
   "grid--above": "_grid--above_172pg_23",
   "grid--below": "_grid--below_172pg_23",
   "grid--left": "_grid--left_172pg_26",
   "grid--right": "_grid--right_172pg_29"
-}, ce = ["placeholder"], fe = {
+}, ue = ["placeholder"], ce = {
   __name: "Textbox",
   props: {
     placeholder: {
@@ -63,18 +63,18 @@ const te = "_main_guuuc_1", ne = {
         key: 0,
         for: "textbox",
         class: b([t.$style.label, t.$style[`label--${e.labelPosition}`]])
-      }, T(e.label), 3)) : H("", !0),
-      $("input", {
+      }, w(e.label), 3)) : X("", !0),
+      C("input", {
         type: "text",
         placeholder: e.placeholder,
         id: "textbox",
         class: b(t.$style.input)
-      }, null, 10, ce)
+      }, null, 10, ue)
     ], 2));
   }
-}, de = {
-  $style: ue
-}, pe = /* @__PURE__ */ j(fe, [["__cssModules", de]]), me = {
+}, fe = {
+  $style: se
+}, de = /* @__PURE__ */ j(ce, [["__cssModules", fe]]), pe = {
   kind: {
     type: String,
     default: "info"
@@ -84,7 +84,7 @@ const te = "_main_guuuc_1", ne = {
     default: "Button"
   }
 };
-function _e(e) {
+function me(e) {
   return { icon: c(() => {
     switch (e.kind) {
       case "info":
@@ -100,43 +100,7 @@ function _e(e) {
     }
   }) };
 }
-const ge = "_main_jkzk0_1", ye = "_icon_jkzk0_17", be = {
-  main: ge,
-  "kind--info": "_kind--info_jkzk0_13",
-  icon: ye,
-  "kind--warning": "_kind--warning_jkzk0_21",
-  "kind--error": "_kind--error_jkzk0_29",
-  "kind--success": "_kind--success_jkzk0_37"
-}, ve = {
-  __name: "Flash",
-  props: { ...me },
-  setup(e) {
-    const t = e, { icon: n } = _e(t);
-    return (r, i) => {
-      const l = X("font-awesome-icon");
-      return O(), S("div", {
-        class: b([r.$style.main, r.$style[`kind--${r.kind}`]])
-      }, [
-        Z(l, {
-          icon: ["fa-solid", V(n)],
-          class: b(r.$style.icon)
-        }, null, 8, ["icon", "class"]),
-        $("span", null, T(r.message), 1)
-      ], 2);
-    };
-  }
-}, he = {
-  $style: be
-}, Oe = /* @__PURE__ */ j(ve, [["__cssModules", he]]), Se = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  ZoaButton: oe,
-  ZoaFlash: Oe,
-  ZoaTextbox: pe
-}, Symbol.toStringTag, { value: "Module" })), xe = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g");
-function Ae(e) {
-  return e.replace(xe, (t, n) => (n ? "-" : "") + t.toLowerCase());
-}
-function B(e, t) {
+function R(e, t) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var r = Object.getOwnPropertySymbols(e);
@@ -149,9 +113,9 @@ function B(e, t) {
 function m(e) {
   for (var t = 1; t < arguments.length; t++) {
     var n = arguments[t] != null ? arguments[t] : {};
-    t % 2 ? B(Object(n), !0).forEach(function(r) {
+    t % 2 ? R(Object(n), !0).forEach(function(r) {
       u(e, r, n[r]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : B(Object(n)).forEach(function(r) {
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : R(Object(n)).forEach(function(r) {
       Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(n, r));
     });
   }
@@ -173,7 +137,7 @@ function u(e, t, n) {
     writable: !0
   }) : e[t] = n, e;
 }
-function ke(e, t) {
+function _e(e, t) {
   if (e == null)
     return {};
   var n = {}, r = Object.keys(e), i, l;
@@ -181,10 +145,10 @@ function ke(e, t) {
     i = r[l], !(t.indexOf(i) >= 0) && (n[i] = e[i]);
   return n;
 }
-function we(e, t) {
+function ge(e, t) {
   if (e == null)
     return {};
-  var n = ke(e, t), r, i;
+  var n = _e(e, t), r, i;
   if (Object.getOwnPropertySymbols) {
     var l = Object.getOwnPropertySymbols(e);
     for (i = 0; i < l.length; i++)
@@ -192,43 +156,43 @@ function we(e, t) {
   }
   return n;
 }
-function D(e) {
-  return De(e) || Ee(e) || Te(e) || Ne();
+function E(e) {
+  return ye(e) || be(e) || ve(e) || he();
 }
-function De(e) {
+function ye(e) {
   if (Array.isArray(e))
-    return E(e);
+    return T(e);
 }
-function Ee(e) {
+function be(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
-function Te(e, t) {
+function ve(e, t) {
   if (e) {
     if (typeof e == "string")
-      return E(e, t);
+      return T(e, t);
     var n = Object.prototype.toString.call(e).slice(8, -1);
     if (n === "Object" && e.constructor && (n = e.constructor.name), n === "Map" || n === "Set")
       return Array.from(e);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-      return E(e, t);
+      return T(e, t);
   }
 }
-function E(e, t) {
+function T(e, t) {
   (t == null || t > e.length) && (t = e.length);
   for (var n = 0, r = new Array(t); n < t; n++)
     r[n] = e[n];
   return r;
 }
-function Ne() {
+function he() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-var je = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, G = { exports: {} };
+var Oe = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, M = { exports: {} };
 (function(e) {
   (function(t) {
     var n = function(a, o, p) {
-      if (!g(o) || U(o) || F(o) || W(o) || s(o))
+      if (!g(o) || F(o) || W(o) || K(o) || s(o))
         return o;
       var y, v = 0, z = 0;
       if (d(o))
@@ -236,8 +200,8 @@ var je = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
           y.push(n(a, o[v], p));
       else {
         y = {};
-        for (var w in o)
-          Object.prototype.hasOwnProperty.call(o, w) && (y[a(w, p)] = n(a, o[w], p));
+        for (var D in o)
+          Object.prototype.hasOwnProperty.call(o, D) && (y[a(D, p)] = n(a, o[D], p));
       }
       return y;
     }, r = function(a, o) {
@@ -245,7 +209,7 @@ var je = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
       var p = o.separator || "_", y = o.split || /(?=[A-Z])/;
       return a.split(y).join(p);
     }, i = function(a) {
-      return K(a) ? a : (a = a.replace(/[\-_\s]+(.)?/g, function(o, p) {
+      return H(a) ? a : (a = a.replace(/[\-_\s]+(.)?/g, function(o, p) {
         return p ? p.toUpperCase() : "";
       }), a.substr(0, 1).toLowerCase() + a.substr(1));
     }, l = function(a) {
@@ -259,13 +223,13 @@ var je = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
       return a === Object(a);
     }, d = function(a) {
       return f.call(a) == "[object Array]";
-    }, U = function(a) {
-      return f.call(a) == "[object Date]";
     }, F = function(a) {
-      return f.call(a) == "[object RegExp]";
+      return f.call(a) == "[object Date]";
     }, W = function(a) {
-      return f.call(a) == "[object Boolean]";
+      return f.call(a) == "[object RegExp]";
     }, K = function(a) {
+      return f.call(a) == "[object Boolean]";
+    }, H = function(a) {
       return a = a - 0, a === a;
     }, k = function(a, o) {
       var p = o && "process" in o ? o.process : o;
@@ -291,20 +255,20 @@ var je = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
       }
     };
     e.exports ? e.exports = I : t.humps = I;
-  })(je);
-})(G);
-var Pe = G.exports, Ie = ["class", "style"];
-function ze(e) {
+  })(Oe);
+})(M);
+var Se = M.exports, xe = ["class", "style"];
+function Ae(e) {
   return e.split(";").map(function(t) {
     return t.trim();
   }).filter(function(t) {
     return t;
   }).reduce(function(t, n) {
-    var r = n.indexOf(":"), i = Pe.camelize(n.slice(0, r)), l = n.slice(r + 1).trim();
+    var r = n.indexOf(":"), i = Se.camelize(n.slice(0, r)), l = n.slice(r + 1).trim();
     return t[i] = l, t;
   }, {});
 }
-function Be(e) {
+function ke(e) {
   return e.split(/\s+/).reduce(function(t, n) {
     return t[n] = !0, t;
   }, {});
@@ -319,10 +283,10 @@ function P(e) {
     var d = e.attributes[g];
     switch (g) {
       case "class":
-        s.class = Be(d);
+        s.class = ke(d);
         break;
       case "style":
-        s.style = ze(d);
+        s.style = Ae(d);
         break;
       default:
         s.attrs[g] = d;
@@ -334,19 +298,19 @@ function P(e) {
     style: {}
   });
   n.class;
-  var l = n.style, _ = l === void 0 ? {} : l, f = we(n, Ie);
-  return C(e.tag, m(m(m({}, t), {}, {
+  var l = n.style, _ = l === void 0 ? {} : l, f = ge(n, xe);
+  return L(e.tag, m(m(m({}, t), {}, {
     class: i.class,
     style: m(m({}, i.style), _)
   }, i.attrs), f), r);
 }
-var M = !1;
+var U = !1;
 try {
-  M = !0;
+  U = !0;
 } catch {
 }
-function Re() {
-  if (!M && console && typeof console.error == "function") {
+function De() {
+  if (!U && console && typeof console.error == "function") {
     var e;
     (e = console).error.apply(e, arguments);
   }
@@ -354,7 +318,7 @@ function Re() {
 function h(e, t) {
   return Array.isArray(t) && t.length > 0 || !Array.isArray(t) && t ? u({}, e, t) : {};
 }
-function $e(e) {
+function Ee(e) {
   var t, n = (t = {
     "fa-spin": e.spin,
     "fa-pulse": e.pulse,
@@ -372,7 +336,7 @@ function $e(e) {
     return r;
   });
 }
-function R(e) {
+function $(e) {
   if (e && A(e) === "object" && e.prefix && e.iconName && e.icon)
     return e;
   if (x.icon)
@@ -392,7 +356,7 @@ function R(e) {
       iconName: e
     };
 }
-var Ce = N({
+var Te = N({
   name: "FontAwesomeIcon",
   props: {
     border: {
@@ -506,22 +470,22 @@ var Ce = N({
   },
   setup: function(t, n) {
     var r = n.attrs, i = c(function() {
-      return R(t.icon);
+      return $(t.icon);
     }), l = c(function() {
-      return h("classes", $e(t));
+      return h("classes", Ee(t));
     }), _ = c(function() {
       return h("transform", typeof t.transform == "string" ? x.transform(t.transform) : t.transform);
     }), f = c(function() {
-      return h("mask", R(t.mask));
+      return h("mask", $(t.mask));
     }), s = c(function() {
-      return J(i.value, m(m(m(m({}, l.value), _.value), f.value), {}, {
+      return Y(i.value, m(m(m(m({}, l.value), _.value), f.value), {}, {
         symbol: t.symbol,
         title: t.title
       }));
     });
-    Y(s, function(d) {
+    Z(s, function(d) {
       if (!d)
-        return Re("Could not find one or more icon(s)", i.value, f.value);
+        return De("Could not find one or more icon(s)", i.value, f.value);
     }, {
       immediate: !0
     });
@@ -542,11 +506,11 @@ N({
     }
   },
   setup: function(t, n) {
-    var r = n.slots, i = L.familyPrefix, l = c(function() {
-      return ["".concat(i, "-layers")].concat(D(t.fixedWidth ? ["".concat(i, "-fw")] : []));
+    var r = n.slots, i = G.familyPrefix, l = c(function() {
+      return ["".concat(i, "-layers")].concat(E(t.fixedWidth ? ["".concat(i, "-fw")] : []));
     });
     return function() {
-      return C("div", {
+      return L("div", {
         class: l.value
       }, r.default ? r.default() : []);
     };
@@ -576,12 +540,12 @@ N({
     }
   },
   setup: function(t, n) {
-    var r = n.attrs, i = L.familyPrefix, l = c(function() {
-      return h("classes", [].concat(D(t.counter ? ["".concat(i, "-layers-counter")] : []), D(t.position ? ["".concat(i, "-layers-").concat(t.position)] : [])));
+    var r = n.attrs, i = G.familyPrefix, l = c(function() {
+      return h("classes", [].concat(E(t.counter ? ["".concat(i, "-layers-counter")] : []), E(t.position ? ["".concat(i, "-layers-").concat(t.position)] : [])));
     }), _ = c(function() {
       return h("transform", typeof t.transform == "string" ? x.transform(t.transform) : t.transform);
     }), f = c(function() {
-      var g = q(t.value.toString(), m(m({}, _.value), l.value)), d = g.abstract;
+      var g = J(t.value.toString(), m(m({}, _.value), l.value)), d = g.abstract;
       return t.counter && (d[0].attributes.class = d[0].attributes.class.replace("fa-layers-text", "")), d[0];
     }), s = c(function() {
       return P(f.value, {}, r);
@@ -591,18 +555,51 @@ N({
     };
   }
 });
-Q.add(ee);
-const Ue = {
+q.add(Q);
+const we = "_main_jkzk0_1", Ne = "_icon_jkzk0_17", je = {
+  main: we,
+  "kind--info": "_kind--info_jkzk0_13",
+  icon: Ne,
+  "kind--warning": "_kind--warning_jkzk0_21",
+  "kind--error": "_kind--error_jkzk0_29",
+  "kind--success": "_kind--success_jkzk0_37"
+}, Pe = {
+  __name: "Flash",
+  props: { ...pe },
+  setup(e) {
+    const t = e, { icon: n } = me(t);
+    return (r, i) => (O(), S("div", {
+      class: b([r.$style.main, r.$style[`kind--${r.kind}`]])
+    }, [
+      V(B(Te), {
+        icon: ["fa-solid", B(n)],
+        class: b(r.$style.icon)
+      }, null, 8, ["icon", "class"]),
+      C("span", null, w(r.message), 1)
+    ], 2));
+  }
+}, Ie = {
+  $style: je
+}, ze = /* @__PURE__ */ j(Pe, [["__cssModules", Ie]]), Be = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  ZoaButton: ae,
+  ZoaFlash: ze,
+  ZoaTextbox: de
+}, Symbol.toStringTag, { value: "Module" })), Re = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g");
+function $e(e) {
+  return e.replace(Re, (t, n) => (n ? "-" : "") + t.toLowerCase());
+}
+const Me = {
   install(e, t) {
-    t || (t = {}), t.fontAwesome !== !1 && e.component("font-awesome-icon", Ce), Object.entries(Se).forEach((n) => {
-      const r = Ae(n[0]);
+    Object.entries(Be).forEach((n) => {
+      const r = $e(n[0]);
       e.component(r, n[1]);
     });
   }
 };
 export {
-  Ue as Zoa,
-  oe as ZoaButton,
-  Oe as ZoaFlash,
-  pe as ZoaTextbox
+  Me as Zoa,
+  ae as ZoaButton,
+  ze as ZoaFlash,
+  de as ZoaTextbox
 };
