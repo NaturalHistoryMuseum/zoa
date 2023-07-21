@@ -1,5 +1,6 @@
 import * as components from './components';
 import { kebabify } from './utils.js';
+import './styles/main.scss';
 
 const Zoa = {
   install(app, options) {

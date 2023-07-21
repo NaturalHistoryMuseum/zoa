@@ -16,12 +16,9 @@ const { icon } = useIcons(props);
 
 <style module lang="scss">
 @import '../../styles/palette';
-@import '../../styles/fonts';
 @import '../../styles/vars';
 
 .main {
-  @include body-font;
-  font-size: 1em;
   border: 2px solid;
   border-radius: $rounding;
   padding: $padding;
