@@ -1,5 +1,36 @@
 $v-pad: var(--zoa-pad-v, 8px);
 $h-pad: var(--zoa-pad-h, 16px);
 $padding: $v-pad $h-pad;
+$box-padding: 20px;
 
 $rounding: var(--zoa-rounding, 10px);
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+$breakpoints: (
+  'sm': $sm,
+  'md': $md,
+  'lg': $lg,
+  'xl': $xl,
+) !default;
+
+@mixin media-less-than($breakpoint) {
+  @media (max-width: map-get($breakpoints, $breakpoint) - 1) {
+    @content;
+  }
+}
+
+@mixin media-from($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin media-between($breakpoint-start, $breakpoint-end) {
+  @media (min-width: map-get($breakpoints, $breakpoint-start)) and (max-width: map-get($breakpoints, $breakpoint-end) - 1) {
+    @content;
+  }
+}

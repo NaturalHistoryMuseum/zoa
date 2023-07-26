@@ -1,0 +1,26 @@
+<svg
+        width="150mm"
+        height="150mm"
+        viewBox="0 0 150 150"
+        xmlns="http://www.w3.org/2000/svg">
+    <style>
+        path {
+            fill: none;
+            stroke: white;
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        @media (prefers-color-scheme: light) {
+            path { stroke: black; }
+        }
+    </style>
+    <g>
+        <path d="m 30,50 c 0,0 5,-40 45,-40 40,0 45,40 45,40"/>
+        <path d="m 30,50 c 0,0 5,5 45,5 40,0 45,-5 45,-5"/>
+        <path d="m 33,70 v 50"/>
+        <path d="m 61,75 v 65"/>
+        <path d="m 89,75 v 40"/>
+        <path d="m 117,70 v 55"/>
+    </g>
+</svg>

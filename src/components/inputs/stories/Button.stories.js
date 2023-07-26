@@ -1,8 +1,8 @@
-import ZoaButton from './Button.vue';
+import { ZoaButton } from '../../index.js';
 
 const meta = {
   component: ZoaButton,
-  title: 'Components/Button',
+  title: 'Components/Inputs/Button',
   argTypes: {
     kind: {
       control: 'select',
@@ -27,8 +27,8 @@ const Base = {
       return { args };
     },
     template: `
-      <zoa-button v-bind="args"/>
-    `,
+          <zoa-button v-bind="args"/>
+        `,
   }),
 };
 
