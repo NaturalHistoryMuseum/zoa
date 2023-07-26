@@ -1,11 +1,22 @@
 <template>
   <ZoaButton v-bind="buttonArgs" @click="openModal" />
-  <dialog ref="modal" :class="$style.main">
-    <h2>{{ message }}</h2>
-    <slot></slot>
-    <form method="dialog">
-      <ZoaButton label="Close" />
-    </form>
+  <dialog ref="modal" :class="[$style.main, $style[`kind--${kind}`]]">
+    <div :class="$style.container">
+      <form method="dialog" :class="$style.form" @submit="emit('closed')">
+        <button :class="$style.close">
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </button>
+      </form>
+      <div :class="$style.header">
+        <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
+        <h2>{{ header }}</h2>
+      </div>
+      <div :class="$style.content">
+        <slot>
+          {{ message }}
+        </slot>
+      </div>
+    </div>
   </dialog>
 </template>
 
@@ -13,7 +24,7 @@
 import { ZoaButton } from '../index.js';
 import { dialogProps, useIcons } from './utils.js';
 import FontAwesomeIcon from '../../icons.js';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   ...dialogProps,
@@ -27,18 +38,19 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(['opened', 'closed']);
+const emit = defineEmits(['opened', 'closed']);
 
 const { icon } = useIcons(props);
 const modal = ref(null);
 
 function openModal() {
   modal.value.show();
+  emit('opened');
 }
 </script>
 
 <style module lang="scss">
-@import '../../styles/palette';
+@import 'dialogs';
 
 .main {
   position: fixed;
@@ -46,6 +58,47 @@ function openModal() {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $light;
+
+  @include media-less-than('sm') {
+    width: 90vw;
+  }
+
+  @include media-between('sm', 'md') {
+    width: 80vw;
+  }
+
+  @include media-between('md', 'lg') {
+    width: 70vw;
+  }
+
+  @include media-from('lg') {
+    width: 50vw;
+  }
+}
+
+.container {
+  grid-template-areas:
+    'header button'
+    'content content';
+  grid-template-columns: 1fr auto;
+}
+
+.form {
+  grid-area: button;
+}
+
+.close {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
 }
 </style>

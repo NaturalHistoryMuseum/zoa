@@ -5,9 +5,14 @@ export const dialogProps = {
     type: String,
     default: 'info',
   },
-  message: {
+  header: {
     type: String,
     default: 'Here is an informational message.',
+  },
+  message: {
+    type: String,
+    default:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
   },
 };
 

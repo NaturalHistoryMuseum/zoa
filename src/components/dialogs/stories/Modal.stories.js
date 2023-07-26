@@ -9,7 +9,7 @@ const meta = {
       options: ['info', 'warning', 'success', 'error'],
       default: 'normal',
     },
-    message: {
+    header: {
       control: 'text',
     },
   },
@@ -34,7 +34,7 @@ export const Info = {
   ...Base,
   args: {
     kind: 'info',
-    message: 'Here is an informational message.',
+    header: 'Here is an informational message.',
   },
 };
 
@@ -42,7 +42,7 @@ export const Warning = {
   ...Base,
   args: {
     kind: 'warning',
-    message: "Are you sure that's a good idea?",
+    header: "Are you sure that's a good idea?",
   },
 };
 
@@ -50,7 +50,7 @@ export const Error = {
   ...Base,
   args: {
     kind: 'error',
-    message: 'Oh no! Something went wrong.',
+    header: 'Oh no! Something went wrong.',
   },
 };
 
@@ -58,6 +58,6 @@ export const Success = {
   ...Base,
   args: {
     kind: 'success',
-    message: 'Congratulations! The thing worked.',
+    header: 'Congratulations! The thing worked.',
   },
 };
