@@ -7,5 +7,5 @@ $header-font: var(--zoa-header-font, sans-serif);
 
 @mixin header-font {
   font-family: $header-font;
-  font-weight: bold;
+  font-weight: 600;
 }
