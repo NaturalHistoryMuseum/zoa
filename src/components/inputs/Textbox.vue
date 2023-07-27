@@ -17,15 +17,10 @@
 </template>
 
 <script setup>
+import { inputProps } from './common.js';
+
 const props = defineProps({
-  placeholder: {
-    type: String,
-    default: null,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
+  ...inputProps({ label: null }),
   labelPosition: {
     type: String,
     default: 'above',

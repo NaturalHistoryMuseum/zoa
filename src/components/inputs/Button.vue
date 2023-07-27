@@ -1,19 +1,16 @@
 <template>
   <button :class="[$style.main, $style[`kind--${kind}`]]">
-    {{ label }}
+    <slot>
+      {{ label }}
+    </slot>
   </button>
 </template>
 
 <script setup>
+import { inputProps } from './common.js';
+
 const props = defineProps({
-  kind: {
-    type: String,
-    default: 'normal',
-  },
-  label: {
-    type: String,
-    default: 'Button',
-  },
+  ...inputProps({ label: 'Button' }),
 });
 </script>
 
@@ -30,11 +27,11 @@ const props = defineProps({
   padding: $padding;
   transition: 0.2s;
   cursor: pointer;
+  color: black;
 }
 
 .kind--normal {
   background-color: $secondary;
-  color: black;
 
   &:hover,
   &:focus,
@@ -45,7 +42,6 @@ const props = defineProps({
 
 .kind--primary {
   background-color: $primary;
-  color: black;
 
   &:hover,
   &:focus,
