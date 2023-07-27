@@ -22,9 +22,10 @@
 
 <script setup>
 import { ZoaButton } from '../index.js';
-import { dialogProps, useIcons } from './utils.js';
+import { dialogProps } from './common.js';
+import { useKindIcon } from '../utils/icons.js';
 import FontAwesomeIcon from '../../icons.js';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   ...dialogProps,
@@ -40,7 +41,7 @@ const props = defineProps({
 
 const emit = defineEmits(['opened', 'closed']);
 
-const { icon } = useIcons(props);
+const { icon } = useKindIcon(props);
 const modal = ref(null);
 
 function openModal() {

@@ -13,12 +13,13 @@
 </template>
 
 <script setup>
-import { dialogProps, useIcons } from './utils.js';
+import { dialogProps } from './common.js';
+import { useKindIcon } from '../utils/icons.js';
 import FontAwesomeIcon from '../../icons.js';
 
 const props = defineProps({ ...dialogProps });
 
-const { icon } = useIcons(props);
+const { icon } = useKindIcon(props);
 </script>
 
 <style module lang="scss">
