@@ -1,7 +1,10 @@
 <template>
-  <div :class="[$style.grid, $style[`grid--${labelPosition}`]]">
+  <div
+    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :id="componentId"
+  >
     <label
-      for="textbox"
+      :for="subId('textbox')"
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
@@ -10,63 +13,26 @@
     <input
       type="text"
       :placeholder="placeholder"
-      id="textbox"
+      :id="subId('textbox')"
       :class="$style.input"
     />
   </div>
 </template>
 
 <script setup>
-import { inputProps } from './common.js';
+import { commonProps } from './common.js';
+import { getProps } from '../utils/props.js';
+import { useComponentId } from '../utils/compid.js';
 
-const props = defineProps({
-  ...inputProps({ label: null }),
-  labelPosition: {
-    type: String,
-    default: 'above',
-  },
-});
+const props = defineProps(
+  getProps(commonProps, {
+    include: ['labelPosition', 'label', 'placeholder'],
+  }),
+);
+
+const { componentId, subId } = useComponentId();
 </script>
 
 <style module lang="scss">
-@import '../../styles/palette';
-@import '../../styles/fonts';
-@import '../../styles/vars';
-
-.input {
-  @include body-font;
-  font-size: 1em;
-  border: 1px solid $grey;
-  border-radius: $rounding;
-  padding: $padding;
-}
-
-.label {
-  @include header-font;
-  font-size: 0.9em;
-  padding: $padding;
-
-  &.label--right,
-  &.label--below {
-    order: 2;
-  }
-}
-
-.grid {
-  display: grid;
-  align-items: center;
-
-  &.grid--above,
-  &.grid--below {
-    grid-template-rows: auto auto;
-  }
-
-  &.grid--left {
-    grid-template-columns: auto 1fr;
-  }
-
-  &.grid--right {
-    grid-template-columns: 1fr auto;
-  }
-}
+@import 'inputs';
 </style>
