@@ -13,17 +13,23 @@
 .label {
   @include header-font;
   font-size: 0.9em;
-  padding: $padding;
 
   &.label--right,
   &.label--below {
     order: 2;
+  }
+
+  &.label--above,
+  &.label--below {
+    padding: 0 $h-pad;
   }
 }
 
 .grid {
   display: grid;
   align-items: center;
+  gap: $padding;
+  padding: $padding;
 
   &.grid--above,
   &.grid--below {

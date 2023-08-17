@@ -80,14 +80,6 @@ const emit = defineEmits(['change']);
       display: block;
     }
   }
-
-  .grid--left > & {
-    margin-right: $h-pad;
-  }
-
-  .grid--right > & {
-    margin-left: $h-pad;
-  }
 }
 
 .check {
