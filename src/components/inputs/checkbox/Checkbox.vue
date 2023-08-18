@@ -29,15 +29,19 @@ import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   labelPosition: {
+    type: String,
     default: 'left',
   },
   label: {
+    type: String,
     default: 'Text',
   },
   placeholder: {
+    type: String,
     default: null,
   },
   delay: {
+    type: Number,
     default: 0,
   },
 });

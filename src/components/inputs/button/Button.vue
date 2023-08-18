@@ -9,9 +9,11 @@
 <script setup>
 const props = defineProps({
   label: {
+    type: String,
     default: 'Button',
   },
   kind: {
+    type: String,
     default: 'normal',
   },
 });

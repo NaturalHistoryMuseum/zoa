@@ -33,15 +33,20 @@ import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   labelPosition: {
+    type: String,
     default: 'above',
   },
   label: {
+    type: String,
     default: 'Dropdown',
   },
   delay: {
+    type: Number,
     default: 0,
   },
-  options: {},
+  options: {
+    type: Array,
+  },
 });
 
 const { componentId, subId } = useComponentId();
