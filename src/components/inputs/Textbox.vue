@@ -22,7 +22,7 @@
 
 <script setup>
 import { useComponentId } from '../utils/compid.js';
-import { debounce } from 'dettle';
+import { useChangeEmits } from './common.js';
 
 const props = defineProps({
   labelPosition: {
@@ -41,21 +41,8 @@ const props = defineProps({
 
 const { componentId, subId } = useComponentId();
 
-let delay;
-try {
-  delay = parseInt(props.delay) || 0;
-} catch {
-  delay = 0;
-}
 const emit = defineEmits(['change', 'update:modelValue']);
-function _emitChange(event) {
-  emit('change', event);
-}
-const emitChange = debounce(_emitChange, delay);
-function valueChanged(event) {
-  emit('update:modelValue', event.target.value);
-  emitChange(event);
-}
+const { valueChanged } = useChangeEmits(emit, props.delay);
 </script>
 
 <style module lang="scss">
