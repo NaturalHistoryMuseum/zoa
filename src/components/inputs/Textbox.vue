@@ -21,17 +21,23 @@
 </template>
 
 <script setup>
-import { commonProps } from './common.js';
-import { getProps } from '../utils/props.js';
 import { useComponentId } from '../utils/compid.js';
 import { debounce } from 'dettle';
 
-const props = defineProps(
-  getProps(commonProps, {
-    include: ['labelPosition', 'label', 'placeholder', 'delay'],
-    defaults: { label: 'Text' },
-  }),
-);
+const props = defineProps({
+  labelPosition: {
+    default: 'above',
+  },
+  label: {
+    default: 'Text',
+  },
+  placeholder: {
+    default: null,
+  },
+  delay: {
+    default: 200,
+  },
+});
 
 const { componentId, subId } = useComponentId();
 

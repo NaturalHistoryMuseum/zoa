@@ -26,24 +26,23 @@
 </template>
 
 <script setup>
-import { commonProps } from './common.js';
-import { getProps } from '../utils/props.js';
 import { useComponentId } from '../utils/compid.js';
 import { computed } from 'vue';
 import FontAwesomeIcon from '../../icons.js';
 import { debounce } from 'dettle';
 
-const props = defineProps(
-  getProps(commonProps, {
-    include: ['labelPosition', 'label', 'delay'],
-    additional: {
-      options: {
-        type: Array,
-      },
-    },
-    defaults: { delay: 0 },
-  }),
-);
+const props = defineProps({
+  labelPosition: {
+    default: 'above',
+  },
+  label: {
+    default: 'Dropdown',
+  },
+  delay: {
+    default: 0,
+  },
+  options: {},
+});
 
 const { componentId, subId } = useComponentId();
 

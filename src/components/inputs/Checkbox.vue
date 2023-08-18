@@ -23,18 +23,24 @@
 </template>
 
 <script setup>
-import { commonProps } from './common.js';
-import { getProps } from '../utils/props.js';
 import { useComponentId } from '../utils/compid.js';
 import FontAwesomeIcon from '../../icons.js';
 import { debounce } from 'dettle';
 
-const props = defineProps(
-  getProps(commonProps, {
-    include: ['labelPosition', 'label', 'placeholder', 'delay'],
-    defaults: { labelPosition: 'left', delay: 0 },
-  }),
-);
+const props = defineProps({
+  labelPosition: {
+    default: 'left',
+  },
+  label: {
+    default: 'Text',
+  },
+  placeholder: {
+    default: null,
+  },
+  delay: {
+    default: 0,
+  },
+});
 
 const { componentId, subId } = useComponentId();
 

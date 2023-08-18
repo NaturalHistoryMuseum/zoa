@@ -22,13 +22,24 @@
 
 <script setup>
 import { ZoaButton } from '../index.js';
-import { dialogProps } from './common.js';
 import { useKindIcon } from '../utils/icons.js';
 import FontAwesomeIcon from '../../icons.js';
 import { ref } from 'vue';
 
 const props = defineProps({
-  ...dialogProps,
+  kind: {
+    type: String,
+    default: 'info',
+  },
+  header: {
+    type: String,
+    default: 'Here is an informational message.',
+  },
+  message: {
+    type: String,
+    default:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
+  },
   buttonArgs: {
     type: Object,
     default: () => {

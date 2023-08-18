@@ -7,15 +7,14 @@
 </template>
 
 <script setup>
-import { commonProps } from './common.js';
-import { getProps } from '../utils/props.js';
-
-const props = defineProps(
-  getProps(commonProps, {
-    include: ['label', 'kind'],
-    defaults: { label: 'Button' },
-  }),
-);
+const props = defineProps({
+  label: {
+    default: 'Button',
+  },
+  kind: {
+    default: 'normal',
+  },
+});
 </script>
 
 <style module lang="scss">
