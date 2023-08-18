@@ -2092,6 +2092,7 @@ __metadata:
     "@storybook/vue3": ^7.3.1
     "@storybook/vue3-vite": ^7.3.1
     "@vitejs/plugin-vue": ^4.2.3
+    dettle: ^1.0.1
     modern-css-reset: ^1.4.0
     nanoid: ^4.0.2
     react: ^18.2.0
@@ -5287,6 +5288,13 @@ __metadata:
     detect: bin/detect-port.js
     detect-port: bin/detect-port.js
   checksum: b48da9340481742547263d5d985e65d078592557863402ecf538511735e83575867e94f91fe74405ea19b61351feb99efccae7e55de9a151d5654e3417cea05b
+  languageName: node
+  linkType: hard
+
+"dettle@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "dettle@npm:1.0.1"
+  checksum: 5d1da71214bc01bd3c2fafbb01c5f0d92b72744f690969c0b4cc46d1686a28b6b7015aa24fea417e85208557218e63e319eb1e6cdc27319bee596b4408612f19
   languageName: node
   linkType: hard
 

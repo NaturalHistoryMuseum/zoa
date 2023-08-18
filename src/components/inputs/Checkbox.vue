@@ -14,8 +14,7 @@
       type="checkbox"
       :id="subId('checkbox')"
       :class="$style.defaultCheckbox"
-      v-model="checked"
-      @change="emit('change')"
+      @change="valueChanged"
     />
     <span :class="$style.checkbox">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -27,21 +26,33 @@
 import { commonProps } from './common.js';
 import { getProps } from '../utils/props.js';
 import { useComponentId } from '../utils/compid.js';
-import { ref } from 'vue';
 import FontAwesomeIcon from '../../icons.js';
+import { debounce } from 'dettle';
 
 const props = defineProps(
   getProps(commonProps, {
-    include: ['labelPosition', 'label', 'placeholder'],
-    defaults: { labelPosition: 'left' },
+    include: ['labelPosition', 'label', 'placeholder', 'delay'],
+    defaults: { labelPosition: 'left', delay: 0 },
   }),
 );
 
 const { componentId, subId } = useComponentId();
 
-const checked = ref(null);
-
-const emit = defineEmits(['change']);
+let delay;
+try {
+  delay = parseInt(props.delay) || 0;
+} catch {
+  delay = 0;
+}
+const emit = defineEmits(['change', 'update:modelValue']);
+function _emitChange(event) {
+  emit('change', event);
+}
+const emitChange = debounce(_emitChange, delay);
+function valueChanged(event) {
+  emit('update:modelValue', event.target.value);
+  emitChange(event);
+}
 </script>
 
 <style module lang="scss">

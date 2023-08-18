@@ -34,6 +34,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "dettle": "^1.0.1",
     "modern-css-reset": "^1.4.0",
     "nanoid": "^4.0.2",
     "vue": "^3.3.4"

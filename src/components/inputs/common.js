@@ -15,4 +15,8 @@ export const commonProps = {
     type: String,
     default: 'normal',
   },
+  delay: {
+    type: Number,
+    default: 200,
+  },
 };

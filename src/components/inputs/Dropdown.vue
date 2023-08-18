@@ -11,7 +11,11 @@
       {{ label }}
     </label>
     <div :class="$style.wrapper">
-      <select :id="subId('dropdown')" :class="$style.input">
+      <select
+        :id="subId('dropdown')"
+        :class="$style.input"
+        @change="valueChanged"
+      >
         <option v-for="opt in dropdownOptions" value="opt.value">
           {{ opt.label }}
         </option>
@@ -27,15 +31,17 @@ import { getProps } from '../utils/props.js';
 import { useComponentId } from '../utils/compid.js';
 import { computed } from 'vue';
 import FontAwesomeIcon from '../../icons.js';
+import { debounce } from 'dettle';
 
 const props = defineProps(
   getProps(commonProps, {
-    include: ['labelPosition', 'label'],
+    include: ['labelPosition', 'label', 'delay'],
     additional: {
       options: {
         type: Array,
       },
     },
+    defaults: { delay: 0 },
   }),
 );
 
@@ -52,6 +58,22 @@ const dropdownOptions = computed(() => {
   });
   return outputOptions;
 });
+
+let delay;
+try {
+  delay = parseInt(props.delay) || 0;
+} catch {
+  delay = 0;
+}
+const emit = defineEmits(['change', 'update:modelValue']);
+function _emitChange(event) {
+  emit('change', event);
+}
+const emitChange = debounce(_emitChange, delay);
+function valueChanged(event) {
+  emit('update:modelValue', event.target.value);
+  emitChange(event);
+}
 </script>
 
 <style module lang="scss">
