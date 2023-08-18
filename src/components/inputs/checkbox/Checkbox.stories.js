@@ -1,4 +1,4 @@
-import ZoaCheckbox from '../Checkbox.vue';
+import ZoaCheckbox from './Checkbox.vue';
 
 const meta = {
   component: ZoaCheckbox,

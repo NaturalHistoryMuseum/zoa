@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import { useKindIcon } from '../utils/icons.js';
-import FontAwesomeIcon from '../../icons.js';
+import { useKindIcon } from '../../utils/icons.js';
+import FontAwesomeIcon from '../../../icons.js';
 
 const props = defineProps({
   kind: {
@@ -36,5 +36,5 @@ const { icon } = useKindIcon(props);
 </script>
 
 <style module lang="scss">
-@import 'dialogs';
+@import '../dialogs';
 </style>

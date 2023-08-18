@@ -1,4 +1,4 @@
-import { ZoaTextbox } from '../../index.js';
+import ZoaTextbox from './Textbox.vue';
 
 const meta = {
   component: ZoaTextbox,

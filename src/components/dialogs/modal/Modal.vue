@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-import { ZoaButton } from '../index.js';
-import { useKindIcon } from '../utils/icons.js';
-import FontAwesomeIcon from '../../icons.js';
+import { ZoaButton } from '../../index.js';
+import { useKindIcon } from '../../utils/icons.js';
+import FontAwesomeIcon from '../../../icons.js';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -62,7 +62,7 @@ function openModal() {
 </script>
 
 <style module lang="scss">
-@import 'dialogs';
+@import '../dialogs';
 
 .main {
   position: fixed;

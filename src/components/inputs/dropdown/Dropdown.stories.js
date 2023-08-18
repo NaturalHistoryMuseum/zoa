@@ -1,4 +1,4 @@
-import ZoaDropdown from '../Dropdown.vue';
+import ZoaDropdown from './Dropdown.vue';
 
 const meta = {
   component: ZoaDropdown,

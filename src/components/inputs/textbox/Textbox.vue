@@ -21,8 +21,8 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../utils/compid.js';
-import { useChangeEmits } from './common.js';
+import { useComponentId } from '../../utils/compid.js';
+import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   labelPosition: {
@@ -46,5 +46,5 @@ const { valueChanged } = useChangeEmits(emit, props.delay);
 </script>
 
 <style module lang="scss">
-@import 'inputs';
+@import '../inputs';
 </style>
