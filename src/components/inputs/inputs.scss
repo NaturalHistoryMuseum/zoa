@@ -8,6 +8,7 @@
   border: 1px solid $grey;
   border-radius: $rounding;
   padding: $padding;
+  width: 100%;
 }
 
 .label {
@@ -29,7 +30,6 @@
   display: grid;
   align-items: center;
   gap: $padding;
-  padding: $padding;
 
   &.grid--above,
   &.grid--below {
