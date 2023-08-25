@@ -56,7 +56,6 @@ const props = defineProps({
     type: String,
     default: 'any',
   },
-  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
