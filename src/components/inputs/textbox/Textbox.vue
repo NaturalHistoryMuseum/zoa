@@ -15,7 +15,7 @@
       :placeholder="placeholder"
       :id="subId('textbox')"
       :class="$style.input"
-      @input="valueChanged"
+      v-model="value"
     />
   </div>
 </template>
@@ -41,12 +41,13 @@ const props = defineProps({
     type: Number,
     default: 200,
   },
+  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
 
 const emit = defineEmits(['change', 'update:modelValue']);
-const { valueChanged } = useChangeEmits(emit, props.delay);
+const { value } = useChangeEmits(emit, props);
 </script>
 
 <style module lang="scss">

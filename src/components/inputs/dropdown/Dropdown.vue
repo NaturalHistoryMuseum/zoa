@@ -11,11 +11,7 @@
       {{ label }}
     </label>
     <div :class="$style.wrapper">
-      <select
-        :id="subId('dropdown')"
-        :class="$style.input"
-        @change="valueChanged"
-      >
+      <select :id="subId('dropdown')" :class="$style.input" v-model="value">
         <option v-for="opt in dropdownOptions" value="opt.value">
           {{ opt.label }}
         </option>
@@ -47,6 +43,7 @@ const props = defineProps({
   options: {
     type: Array,
   },
+  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
@@ -64,7 +61,7 @@ const dropdownOptions = computed(() => {
 });
 
 const emit = defineEmits(['change', 'update:modelValue']);
-const { valueChanged } = useChangeEmits(emit, props.delay);
+const { value } = useChangeEmits(emit, props);
 </script>
 
 <style module lang="scss">

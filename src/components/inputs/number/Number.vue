@@ -4,7 +4,7 @@
     :id="componentId"
   >
     <label
-      :for="subId('textbox')"
+      :for="subId('number')"
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
@@ -16,9 +16,9 @@
       :min="min"
       :max="max"
       :step="step"
-      :id="subId('textbox')"
+      :id="subId('number')"
       :class="$style.input"
-      @input="valueChanged"
+      v-model="value"
     />
   </div>
 </template>
@@ -56,12 +56,13 @@ const props = defineProps({
     type: Number,
     default: 0.1,
   },
+  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
 
 const emit = defineEmits(['change', 'update:modelValue']);
-const { valueChanged } = useChangeEmits(emit, props.delay);
+const { value } = useChangeEmits(emit, props);
 </script>
 
 <style module lang="scss">

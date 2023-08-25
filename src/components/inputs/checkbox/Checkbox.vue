@@ -14,7 +14,7 @@
       type="checkbox"
       :id="subId('checkbox')"
       :class="$style.defaultCheckbox"
-      @change="valueChanged"
+      @change="value"
     />
     <span :class="$style.checkbox">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -44,12 +44,13 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
 
 const emit = defineEmits(['change', 'update:modelValue']);
-const { valueChanged } = useChangeEmits(emit, props.delay);
+const { value } = useChangeEmits(emit, props);
 </script>
 
 <style module lang="scss">

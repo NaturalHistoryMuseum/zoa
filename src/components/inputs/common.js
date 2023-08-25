@@ -1,27 +1,38 @@
 import { debounce } from 'dettle';
+import { computed } from 'vue';
 
-export function useChangeEmits(emit, delay) {
+export function useChangeEmits(emit, props) {
   /**
    * Defines common emit functions for when inputs change.
    * @param emit - The emit object returned by defineEmits in <script setup>.
-   * @param {number} delay - The debounce delay for emitting the 'change' event.
+   * @param props - The props object returned by defineProps.
    */
+  let delay;
   try {
-    delay = parseInt(delay) || 0;
+    delay = parseInt(props.delay) || 0;
   } catch {
     delay = 0;
   }
 
-  function _emitChange(event) {
-    emit('change', event);
+  function _emitChange(newValue) {
+    emit('change', newValue);
   }
 
   const emitChange = debounce(_emitChange, delay);
 
-  function valueChanged(event) {
-    emit('update:modelValue', event.target.value);
-    emitChange(event);
+  function valueChanged(newValue) {
+    emit('update:modelValue', newValue);
+    emitChange(newValue);
   }
 
-  return { emitChange, valueChanged };
+  const value = computed({
+    get() {
+      return props.modelValue;
+    },
+    set(newValue) {
+      valueChanged(newValue);
+    },
+  });
+
+  return { emitChange, valueChanged, value };
 }
