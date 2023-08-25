@@ -1,5 +1,7 @@
 <template>
-  <button :class="[$style.main, $style[`kind--${kind}`]]">
+  <button
+    :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"
+  >
     <slot>
       {{ label }}
     </slot>
@@ -16,6 +18,10 @@ const props = defineProps({
     type: String,
     default: 'normal',
   },
+  size: {
+    type: String,
+    default: 'md',
+  },
 });
 </script>
 
@@ -29,7 +35,7 @@ const props = defineProps({
   font-weight: 600;
   border: none;
   border-radius: $rounding;
-  padding: $padding;
+
   transition: 0.2s;
   cursor: pointer;
   color: black;
@@ -54,5 +60,14 @@ const props = defineProps({
     background-color: $primary-b;
     color: black;
   }
+}
+
+.size--sm {
+  padding: calc($v-pad/2) calc($h-pad/2);
+  font-size: 0.8em;
+}
+
+.size--md {
+  padding: $padding;
 }
 </style>
