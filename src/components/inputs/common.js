@@ -1,5 +1,5 @@
 import { debounce } from 'dettle';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 export function useChangeEmits(emit, props) {
   /**
@@ -14,8 +14,6 @@ export function useChangeEmits(emit, props) {
     delay = 0;
   }
 
-  const modelValue = ref(null);
-
   function _emitChange(newValue) {
     emit('change', newValue);
   }
@@ -29,10 +27,9 @@ export function useChangeEmits(emit, props) {
 
   const value = computed({
     get() {
-      return modelValue.value;
+      return props.modelValue;
     },
     set(newValue) {
-      modelValue.value = newValue;
       valueChanged(newValue);
     },
   });

@@ -22,6 +22,7 @@ const props = defineProps({
     type: String,
     default: 'md',
   },
+  modelValue: {},
 });
 </script>
 
