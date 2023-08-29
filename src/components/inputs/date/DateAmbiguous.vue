@@ -2,6 +2,7 @@
   <div
     :class="[$style.grid, $style[`grid--${labelPosition}`]]"
     :id="componentId"
+    ref="container"
   >
     <label
       :for="subId('date')"
@@ -97,6 +98,7 @@ import ZoaButton from '../button/Button.vue';
 import { parseDate } from '../../utils/dates.js';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
+import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
   labelPosition: {
@@ -138,6 +140,11 @@ const { valueChanged } = useChangeEmits(emit, props.delay);
 const focused = ref(false);
 const displayBox = ref(null);
 const editing = ref(false);
+const container = ref(null);
+
+onClickOutside(container, () => {
+  focused.value = false;
+});
 
 // THE MAIN DATE
 const returnDate = computed(() => {
@@ -305,6 +312,7 @@ watch(returnDate, () => {
 
 .datePopup {
   position: absolute;
+  max-width: 530px;
   background: white;
   border: 1px solid $grey;
   border-radius: $rounding;
@@ -316,8 +324,16 @@ watch(returnDate, () => {
 }
 
 .popupSection {
-  display: flex;
-  gap: 2em;
+  display: grid;
+  align-items: start;
+
+  @include media-from('lg') {
+    grid-template-columns: 35% 1fr;
+  }
+  @include media-less-than('lg') {
+    padding-bottom: 1em;
+  }
+  gap: 1em 2em;
   padding: $padding;
 
   &:not(:last-child) {
@@ -326,21 +342,24 @@ watch(returnDate, () => {
 }
 
 .yearGrid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  //grid-template-columns: repeat(5, 1fr);
   gap: 5px;
-  grid-template-columns: repeat(5, 1fr);
 }
 
 .monthGrid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  //grid-template-columns: repeat(6, 1fr);
   gap: 5px;
-  grid-template-columns: repeat(6, 1fr);
 }
 
 .dayGrid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  //grid-template-columns: repeat(10, 1fr);
   gap: 5px;
-  grid-template-columns: repeat(10, 1fr);
 }
 
 .editing {
