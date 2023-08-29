@@ -1,5 +1,5 @@
 import { debounce } from 'dettle';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 export function useChangeEmits(emit, props) {
   /**
@@ -14,6 +14,8 @@ export function useChangeEmits(emit, props) {
     delay = 0;
   }
 
+  const internalModel = ref(null);
+
   function _emitChange(newValue) {
     emit('change', newValue);
   }
@@ -22,11 +24,17 @@ export function useChangeEmits(emit, props) {
 
   function valueChanged(newValue) {
     emit('update:modelValue', newValue);
+    internalModel.value = newValue;
     emitChange(newValue);
   }
 
   const value = computed({
     get() {
+      if (props.modelValue === undefined) {
+        // if there's no container or no v-model set, there won't be a ref to
+        // hold this value, so we store it internally as a backup
+        return internalModel.value;
+      }
       return props.modelValue;
     },
     set(newValue) {

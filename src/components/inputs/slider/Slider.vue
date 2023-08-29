@@ -53,7 +53,7 @@ const props = defineProps({
   },
   placeholder: {
     type: Number,
-    default: null,
+    default: 0,
   },
   min: {
     type: Number,
