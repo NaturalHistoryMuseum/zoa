@@ -4,7 +4,6 @@
     :id="componentId"
   >
     <label
-      :for="subId('slider')"
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
@@ -15,20 +14,45 @@
         <span :class="$style.track"></span>
         <span
           :class="[$style.track, $style['track--active']]"
-          :style="{ right: `${100 - handlePosition.handle}%` }"
+          :style="{
+            left: `${handleLower.handle}%`,
+            right: `${100 - handleUpper.handle}%`,
+          }"
         ></span>
+        <span
+          :class="$style.valueLabel"
+          :style="{ left: `${handleLower.label}%` }"
+          ref="labelLower"
+          >{{ valueLower }}</span
+        >
+        <span
+          :class="$style.valueLabel"
+          :style="{ left: `${handleUpper.label}%` }"
+          ref="labelUpper"
+          >{{ valueUpper }}</span
+        >
         <input
           type="range"
           :min="min"
           :max="max"
           :step="step"
-          :id="subId('slider')"
+          :id="subId('range-slider-one')"
           :class="$style.input"
-          v-model="value"
-          ref="slider"
+          v-model="valueOne"
+          ref="sliderOne"
+        />
+        <input
+          type="range"
+          :min="min"
+          :max="max"
+          :step="step"
+          :id="subId('range-slider-two')"
+          :class="$style.input"
+          v-model="valueTwo"
+          ref="sliderTwo"
         />
       </div>
-      <span :class="$style.trackLabel">{{ value }}</span>
+      <span :class="$style.trackLabel">{{ valueUpper - valueLower }}</span>
     </div>
   </div>
 </template>
@@ -36,7 +60,7 @@
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
 
 const props = defineProps({
@@ -46,7 +70,7 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: 'Slider',
+    default: 'Range',
   },
   delay: {
     type: Number,
@@ -74,20 +98,41 @@ const props = defineProps({
 const { componentId, subId } = useComponentId();
 
 const emit = defineEmits(['change', 'update:modelValue']);
-const { value } = useChangeEmits(emit, props);
+const { valueChanged } = useChangeEmits(emit, props);
 
-const slider = ref(null);
+const sliderOne = ref(null);
+const sliderTwo = ref(null);
+const labelLower = ref(null);
+const labelUpper = ref(null);
 
-const fraction = computed(() => {
-  return getFraction(value.value, props);
+const valueOne = ref(null);
+const valueTwo = ref(null);
+
+const valueLower = computed(() => Math.min(valueOne.value, valueTwo.value));
+const valueUpper = computed(() => Math.max(valueOne.value, valueTwo.value));
+const range = computed(() => {
+  return [valueLower, valueUpper];
 });
 
-const handlePosition = computed(() => {
-  return getHandlePosition(slider.value, fraction.value);
-});
+const fractionLower = computed(() => getFraction(valueLower.value, props));
+const fractionUpper = computed(() => getFraction(valueUpper.value, props));
 
-// set an initial value
-value.value = getInitialValue(props);
+// the slider passed into this function doesn't matter because it's just to get
+// the width (which should be the same for both)
+const handleLower = computed(() =>
+  getHandlePosition(sliderOne.value, fractionLower.value, labelLower.value),
+);
+const handleUpper = computed(() =>
+  getHandlePosition(sliderOne.value, fractionUpper.value, labelUpper.value),
+);
+
+// set initial values
+valueOne.value = getInitialValue(props) - props.step;
+valueTwo.value = getInitialValue(props) + props.step;
+
+watch(range, () => {
+  valueChanged(range.value);
+});
 </script>
 
 <style module lang="scss">
@@ -104,6 +149,7 @@ value.value = getInitialValue(props);
   height: 10px;
   border: none;
   position: absolute;
+  pointer-events: none;
 
   &::-webkit-slider-thumb,
   &::-moz-range-thumb {
@@ -115,6 +161,7 @@ value.value = getInitialValue(props);
     cursor: pointer;
     border-radius: 100%;
     z-index: 100;
+    pointer-events: all;
   }
 }
 
@@ -149,5 +196,15 @@ value.value = getInitialValue(props);
   &.track--active {
     background: $secondary;
   }
+}
+
+.valueLabel {
+  position: absolute;
+  top: 1.5em;
+  font-size: 0.8em;
+  padding: $half-pad;
+  border: 1px solid $grey;
+  border-radius: $rounding;
+  background: white;
 }
 </style>

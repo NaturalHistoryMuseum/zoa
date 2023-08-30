@@ -1,15 +1,15 @@
-import ZoaSlider from './Slider.vue';
+import ZoaRangeSlider from './RangeSlider.vue';
 
 const meta = {
-  component: ZoaSlider,
-  title: 'Components/Inputs/Slider/Single',
+  component: ZoaRangeSlider,
+  title: 'Components/Inputs/Slider/Range',
   argTypes: {
     placeholder: {
       control: 'number',
     },
     label: {
       control: 'text',
-      default: 'Slider',
+      default: 'Range',
     },
     labelPosition: {
       control: 'select',
@@ -23,15 +23,15 @@ export default meta;
 
 const Base = {
   args: {
-    label: 'Slider',
+    label: 'Range',
   },
   render: (args) => ({
-    components: { ZoaSlider },
+    components: { ZoaRangeSlider },
     setup() {
       return { args };
     },
     template: `
-          <zoa-slider v-bind="args"/>
+          <zoa-range-slider v-bind="args"/>
         `,
   }),
 };
