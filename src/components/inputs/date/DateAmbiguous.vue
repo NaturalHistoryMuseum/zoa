@@ -300,7 +300,7 @@ function formatDate(y, m, d) {
 // this has to go at the end; refreshes the display in the box when the main date changes
 watch(returnDate, () => {
   refreshDisplay();
-  valueChanged(returnDate);
+  valueChanged(returnDate.value);
 });
 </script>
 
