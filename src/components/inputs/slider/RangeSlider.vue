@@ -111,7 +111,7 @@ const valueTwo = ref(null);
 const valueLower = computed(() => Math.min(valueOne.value, valueTwo.value));
 const valueUpper = computed(() => Math.max(valueOne.value, valueTwo.value));
 const range = computed(() => {
-  return [valueLower, valueUpper];
+  return [valueLower.value, valueUpper.value];
 });
 
 const fractionLower = computed(() => getFraction(valueLower.value, props));
