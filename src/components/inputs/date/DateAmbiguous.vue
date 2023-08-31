@@ -101,6 +101,7 @@ import datenames from 'date-names';
 import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
+  modelValue: {},
   labelPosition: {
     type: String,
     default: 'above',
@@ -129,7 +130,6 @@ const props = defineProps({
     type: String,
     default: 'any',
   },
-  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();

@@ -28,6 +28,7 @@ import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
+  modelValue: {},
   labelPosition: {
     type: String,
     default: 'above',
@@ -43,7 +44,6 @@ const props = defineProps({
   options: {
     type: Array,
   },
-  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();

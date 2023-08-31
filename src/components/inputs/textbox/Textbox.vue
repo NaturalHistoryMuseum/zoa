@@ -25,6 +25,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
+  modelValue: {},
   labelPosition: {
     type: String,
     default: 'above',

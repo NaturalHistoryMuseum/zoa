@@ -40,6 +40,7 @@ import { computed, ref } from 'vue';
 import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
 
 const props = defineProps({
+  modelValue: {},
   labelPosition: {
     type: String,
     default: 'above',
@@ -68,7 +69,6 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
-  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();

@@ -28,6 +28,7 @@ import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
+  modelValue: {},
   labelPosition: {
     type: String,
     default: 'left',
@@ -44,7 +45,6 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  modelValue: {},
 });
 
 const { componentId, subId } = useComponentId();
