@@ -19,37 +19,39 @@
             right: `${100 - handleUpper.handle}%`,
           }"
         ></span>
-        <span
+        <label
+          :for="subId('range-slider-lower')"
           :class="$style.valueLabel"
           :style="{ left: `${handleLower.label}%` }"
           ref="labelLower"
-          >{{ valueLower }}</span
+          >{{ valueLower }}</label
         >
-        <span
+        <label
+          :for="subId('range-slider-upper')"
           :class="$style.valueLabel"
           :style="{ left: `${handleUpper.label}%` }"
           ref="labelUpper"
-          >{{ valueUpper }}</span
+          >{{ valueUpper }}</label
         >
         <input
           type="range"
           :min="min"
           :max="max"
           :step="step"
-          :id="subId('range-slider-one')"
+          :id="subId('range-slider-lower')"
           :class="$style.input"
-          v-model="valueOne"
-          ref="sliderOne"
+          v-model="valueLower"
+          ref="sliderLower"
         />
         <input
           type="range"
           :min="min"
           :max="max"
           :step="step"
-          :id="subId('range-slider-two')"
+          :id="subId('range-slider-upper')"
           :class="$style.input"
-          v-model="valueTwo"
-          ref="sliderTwo"
+          v-model="valueUpper"
+          ref="sliderUpper"
         />
       </div>
       <span :class="$style.trackLabel">{{ valueUpper - valueLower }}</span>
@@ -100,35 +102,61 @@ const { componentId, subId } = useComponentId();
 const emit = defineEmits(['change', 'update:modelValue']);
 const { valueChanged } = useChangeEmits(emit, props);
 
-const sliderOne = ref(null);
-const sliderTwo = ref(null);
+const sliderLower = ref(null);
+const sliderUpper = ref(null);
 const labelLower = ref(null);
 const labelUpper = ref(null);
 
-const valueOne = ref(null);
-const valueTwo = ref(null);
+const valueLower = ref(null);
+const valueUpper = ref(null);
 
-const valueLower = computed(() => Math.min(valueOne.value, valueTwo.value));
-const valueUpper = computed(() => Math.max(valueOne.value, valueTwo.value));
+const maxLower = computed(() => {
+  return Math.max(
+    Number(valueUpper.value) - Number(props.step),
+    Number(props.min),
+  );
+});
+const minUpper = computed(() => {
+  return Math.min(
+    Number(valueLower.value) + Number(props.step),
+    Number(props.max),
+  );
+});
+
 const range = computed(() => {
-  return [valueLower.value, valueUpper.value];
+  // never return a lower value that's higher than the upper value or vice versa
+  const lower = Math.min(valueLower.value, maxLower.value);
+  const upper = Math.max(valueUpper.value, minUpper.value);
+  return [lower, upper];
 });
 
 const fractionLower = computed(() => getFraction(valueLower.value, props));
 const fractionUpper = computed(() => getFraction(valueUpper.value, props));
 
-// the slider passed into this function doesn't matter because it's just to get
-// the width (which should be the same for both)
+// the slider passed into this function doesn't really matter because it's just
+// to get the width (which should be the same for both)
 const handleLower = computed(() =>
-  getHandlePosition(sliderOne.value, fractionLower.value, labelLower.value),
+  getHandlePosition(sliderLower.value, fractionLower.value, labelLower.value),
 );
 const handleUpper = computed(() =>
-  getHandlePosition(sliderOne.value, fractionUpper.value, labelUpper.value),
+  getHandlePosition(sliderUpper.value, fractionUpper.value, labelUpper.value),
 );
 
 // set initial values
-valueOne.value = getInitialValue(props) - props.step;
-valueTwo.value = getInitialValue(props) + props.step;
+valueLower.value = getInitialValue(props) - props.step;
+valueUpper.value = getInitialValue(props) + props.step;
+
+watch(valueLower, (newValue) => {
+  if (Number(newValue) >= Number(valueUpper.value)) {
+    valueLower.value = maxLower.value;
+  }
+});
+
+watch(valueUpper, (newValue) => {
+  if (Number(newValue) <= Number(valueLower.value)) {
+    valueUpper.value = minUpper.value;
+  }
+});
 
 watch(range, () => {
   valueChanged(range.value);
