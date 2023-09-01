@@ -21,7 +21,7 @@
         ref="textbox"
       />
       <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul>
+        <ul v-if="dropdownOptions.length > 0">
           <li
             v-for="opt in dropdownOptions"
             :class="$style.option"
@@ -32,6 +32,7 @@
             <input type="hidden" :value="opt.value" />
           </li>
         </ul>
+        <div :class="$style.noOptions" v-else>No options found</div>
       </div>
     </div>
   </div>
@@ -98,9 +99,13 @@ const textboxFocus = useFocus(textbox);
 const dropdownFocus = useFocusWithin(dropdown);
 
 function unfocus() {
-  container.value.blur();
-  textbox.value.blur();
-  dropdown.value.blur();
+  try {
+    container.value.blur();
+    textbox.value.blur();
+    dropdown.value.blur();
+  } catch {
+    // doesn't really matter
+  }
   focused.value = false;
 }
 
@@ -109,6 +114,9 @@ onClickOutside(container, () => {
 });
 
 onKeyStroke('ArrowDown', () => {
+  if (dropdownOptions.value.length === 0) {
+    return;
+  }
   if (textboxFocus.focused.value) {
     dropdown.value.children[0].children[0].focus();
   } else if (dropdownFocus.focused.value) {
@@ -122,6 +130,9 @@ onKeyStroke('ArrowDown', () => {
 });
 
 onKeyStroke('ArrowUp', () => {
+  if (dropdownOptions.value.length === 0) {
+    return;
+  }
   if (dropdownFocus.focused.value) {
     const selectedElement = dropdown.value.querySelector('li:focus');
     if (!selectedElement || !selectedElement.previousElementSibling) {
@@ -186,5 +197,12 @@ function setOption(text) {
   &:last-child {
     border-radius: 0 0 $rounding $rounding;
   }
+}
+
+.noOptions {
+  font-size: 0.8em;
+  font-style: italic;
+  padding: $padding;
+  opacity: 0.8;
 }
 </style>
