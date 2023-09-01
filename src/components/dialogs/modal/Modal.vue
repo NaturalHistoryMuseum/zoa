@@ -21,13 +21,25 @@
 </template>
 
 <script setup>
-import { ZoaButton } from '../index.js';
-import { dialogProps, useIcons } from './utils.js';
-import FontAwesomeIcon from '../../icons.js';
-import { ref, watch } from 'vue';
+import { ZoaButton } from '../../index.js';
+import { useKindIcon } from '../../utils/icons.js';
+import FontAwesomeIcon from '../../../icons.js';
+import { ref } from 'vue';
 
 const props = defineProps({
-  ...dialogProps,
+  kind: {
+    type: String,
+    default: 'info',
+  },
+  header: {
+    type: String,
+    default: 'Here is an informational message.',
+  },
+  message: {
+    type: String,
+    default:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
+  },
   buttonArgs: {
     type: Object,
     default: () => {
@@ -40,7 +52,7 @@ const props = defineProps({
 
 const emit = defineEmits(['opened', 'closed']);
 
-const { icon } = useIcons(props);
+const { icon } = useKindIcon(props);
 const modal = ref(null);
 
 function openModal() {
@@ -50,7 +62,7 @@ function openModal() {
 </script>
 
 <style module lang="scss">
-@import 'dialogs';
+@import '../dialogs';
 
 .main {
   position: fixed;

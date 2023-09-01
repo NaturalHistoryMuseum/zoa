@@ -1,8 +1,8 @@
-import ZoaFlash from '../Flash.vue';
+import ZoaModal from './Modal.vue';
 
 const meta = {
-  component: ZoaFlash,
-  title: 'Components/Dialogs/Flash',
+  component: ZoaModal,
+  title: 'Components/Dialogs/Modal',
   argTypes: {
     kind: {
       control: 'select',
@@ -20,12 +20,12 @@ export default meta;
 const Base = {
   args: {},
   render: (args) => ({
-    components: { ZoaFlash },
+    components: { ZoaModal },
     setup() {
       return { args };
     },
     template: `
-          <zoa-flash v-bind="args"/>
+      <zoa-modal v-bind="args"><span>Here is some content that goes in the modal.</span></zoa-modal>
         `,
   }),
 };
@@ -34,6 +34,7 @@ export const Info = {
   ...Base,
   args: {
     kind: 'info',
+    header: 'Here is an informational message.',
   },
 };
 

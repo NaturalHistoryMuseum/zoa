@@ -1,15 +1,15 @@
-import { ZoaTextbox } from '../../index.js';
+import ZoaSlider from './Slider.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox',
+  component: ZoaSlider,
+  title: 'Components/Inputs/Slider/Single',
   argTypes: {
     placeholder: {
-      control: 'text',
+      control: 'number',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Slider',
     },
     labelPosition: {
       control: 'select',
@@ -23,16 +23,15 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Slider',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaSlider },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-slider v-bind="args"/>
         `,
   }),
 };

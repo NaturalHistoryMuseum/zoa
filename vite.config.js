@@ -28,4 +28,9 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
+  css: {
+    modules: {
+      generateScopedName: 'zoa__[hash:base64:5]__[local]',
+    },
+  },
 });

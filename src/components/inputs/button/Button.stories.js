@@ -1,4 +1,4 @@
-import { ZoaButton } from '../../index.js';
+import ZoaButton from './Button.vue';
 
 const meta = {
   component: ZoaButton,
