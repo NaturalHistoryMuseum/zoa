@@ -1,5 +1,6 @@
 export { default as ZoaButton } from './inputs/button/Button.vue';
 export { default as ZoaTextbox } from './inputs/textbox/Textbox.vue';
+export { default as ZoaAutocompleteTextbox } from './inputs/textbox/AutocompleteTextbox.vue';
 export { default as ZoaDropdown } from './inputs/dropdown/Dropdown.vue';
 export { default as ZoaCheckbox } from './inputs/checkbox/Checkbox.vue';
 export { default as ZoaNumber } from './inputs/number/Number.vue';
