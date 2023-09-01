@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaDateSimple from './DateSimple.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaDateSimple,
+  title: 'Components/Inputs/Date/Simple Date',
   argTypes: {
     placeholder: {
       control: 'text',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Date',
     },
     labelPosition: {
       control: 'select',
@@ -23,16 +23,15 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Date',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaDateSimple },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-date-simple v-bind="args"/>
         `,
   }),
 };

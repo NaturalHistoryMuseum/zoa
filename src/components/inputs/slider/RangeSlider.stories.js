@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaRangeSlider from './RangeSlider.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaRangeSlider,
+  title: 'Components/Inputs/Slider/Range',
   argTypes: {
     placeholder: {
-      control: 'text',
+      control: 'number',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Range',
     },
     labelPosition: {
       control: 'select',
@@ -23,16 +23,15 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Range',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaRangeSlider },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-range-slider v-bind="args"/>
         `,
   }),
 };

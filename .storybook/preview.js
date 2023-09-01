@@ -2,33 +2,35 @@
 
 import './assets/storybook.css';
 import theme from './theme.js';
+import { setup } from '@storybook/vue3';
+import { Zoa } from '../src/main.js';
 
-const preview = {
-  parameters: {
-    controls: {
-      expanded: true,
-    },
-    docs: {
-      theme: theme,
-    },
-    backgrounds: {
-      default: 'light',
-      values: [
-        {
-          name: 'light',
-          value: '#ffffff',
-        },
-        {
-          name: 'colour',
-          value: '#188100',
-        },
-        {
-          name: 'dark',
-          value: '#343434',
-        },
-      ],
-    },
+setup((app) => {
+  app.use(Zoa);
+});
+
+export const parameters = {
+  controls: {
+    expanded: true,
+  },
+  docs: {
+    theme: theme,
+  },
+  backgrounds: {
+    default: 'light',
+    values: [
+      {
+        name: 'light',
+        value: '#ffffff',
+      },
+      {
+        name: 'colour',
+        value: '#188100',
+      },
+      {
+        name: 'dark',
+        value: '#343434',
+      },
+    ],
   },
 };
-
-export default preview;

@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaCheckbox from './Checkbox.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaCheckbox,
+  title: 'Components/Inputs/Checkbox',
   argTypes: {
     placeholder: {
       control: 'text',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Checkbox',
     },
     labelPosition: {
       control: 'select',
@@ -24,15 +24,15 @@ export default meta;
 const Base = {
   args: {
     placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Checkbox',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaCheckbox },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-checkbox v-bind="args"/>
         `,
   }),
 };

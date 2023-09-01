@@ -4,16 +4,19 @@
     :id="componentId"
   >
     <label
-      :for="subId('textbox')"
+      :for="subId('number')"
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}
     </label>
     <input
-      type="text"
+      type="number"
       :placeholder="placeholder"
-      :id="subId('textbox')"
+      :min="min"
+      :max="max"
+      :step="step"
+      :id="subId('number')"
       :class="$style.input"
       v-model="value"
     />
@@ -32,15 +35,27 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: 'Text',
+    default: 'Number',
   },
   placeholder: {
     type: String,
-    default: null,
+    default: 0,
   },
   delay: {
     type: Number,
     default: 200,
+  },
+  min: {
+    type: Number,
+    default: null,
+  },
+  max: {
+    type: Number,
+    default: null,
+  },
+  step: {
+    type: Number,
+    default: 0.1,
   },
 });
 
@@ -52,4 +67,8 @@ const { value } = useChangeEmits(emit, props);
 
 <style module lang="scss">
 @import '../inputs';
+
+.input:invalid {
+  border-color: $error-dark;
+}
 </style>

@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaNumber from './Number.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaNumber,
+  title: 'Components/Inputs/Number',
   argTypes: {
     placeholder: {
       control: 'text',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Number',
     },
     labelPosition: {
       control: 'select',
@@ -23,16 +23,15 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Number',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaNumber },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-number v-bind="args"/>
         `,
   }),
 };

@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaDropdown from './Dropdown.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaDropdown,
+  title: 'Components/Inputs/Dropdown',
   argTypes: {
     placeholder: {
       control: 'text',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Dropdown',
     },
     labelPosition: {
       control: 'select',
@@ -24,15 +24,16 @@ export default meta;
 const Base = {
   args: {
     placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Dropdown',
+    options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaDropdown },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-dropdown v-bind="args"/>
         `,
   }),
 };
