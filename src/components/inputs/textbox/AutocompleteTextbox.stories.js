@@ -1,15 +1,15 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaAutocompleteTextbox from './AutocompleteTextbox.vue';
 
 const meta = {
-  component: ZoaTextbox,
-  title: 'Components/Inputs/Textbox/Simple',
+  component: ZoaAutocompleteTextbox,
+  title: 'Components/Inputs/Textbox/Autocomplete',
   argTypes: {
     placeholder: {
       control: 'text',
     },
     label: {
       control: 'text',
-      default: 'Textbox',
+      default: 'Autocomplete Textbox',
     },
     labelPosition: {
       control: 'select',
@@ -24,15 +24,16 @@ export default meta;
 const Base = {
   args: {
     placeholder: 'Write something here...',
-    label: 'Textbox',
+    label: 'Autocomplete Textbox',
+    options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaAutocompleteTextbox },
     setup() {
       return { args };
     },
     template: `
-          <zoa-textbox v-bind="args"/>
+          <zoa-autocomplete-textbox v-bind="args"/>
         `,
   }),
 };
