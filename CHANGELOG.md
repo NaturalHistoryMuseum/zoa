@@ -1,3 +1,9 @@
+## v0.3.1 (2023-09-08)
+
+### Performance
+
+- import and register only specific icons
+
 ## v0.3.0 (2023-09-01)
 
 ### Feature
