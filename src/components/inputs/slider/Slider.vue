@@ -6,6 +6,7 @@
     <label
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
+      :for="subId('slider')"
     >
       {{ label }}
     </label>
@@ -15,8 +16,7 @@
         :class="[$style.track, $style['track--active']]"
         :style="{ right: `${100 - handlePosition.handle}%` }"
       ></span>
-      <label
-        :for="subId('slider')"
+      <span
         :class="[
           $style.valueLabel,
           $style[`valueLabel--${valueLabelPosition}`],
@@ -24,7 +24,7 @@
         :style="{ left: `${handlePosition.label}%` }"
         ref="valueLabel"
         tabindex="0"
-        >{{ value }}</label
+        >{{ value }}</span
       >
       <input
         type="range"
