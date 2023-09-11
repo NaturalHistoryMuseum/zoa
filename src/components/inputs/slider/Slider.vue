@@ -9,7 +9,7 @@
     >
       {{ label }}
     </label>
-    <div :class="$style.slider">
+    <div :class="$style.slider" @wheel="onScroll">
       <span :class="$style.track"></span>
       <span
         :class="[$style.track, $style['track--active']]"
@@ -43,8 +43,9 @@
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
+import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
 
 const props = defineProps({
   modelValue: {},
@@ -90,12 +91,69 @@ const { value } = useChangeEmits(emit, props);
 const slider = ref(null);
 const valueLabel = ref(null);
 
+const sliderFocus = useFocusWithin(slider);
+const labelFocus = useFocus(valueLabel);
+
 const fraction = computed(() => {
   return getFraction(value.value, props);
 });
 
 const handlePosition = computed(() => {
   return getHandlePosition(slider.value, fraction.value, valueLabel.value);
+});
+
+function stepUp() {
+  if (value.value === props.max) {
+    return;
+  }
+  let newValue = Number(value.value) + props.step;
+  if (newValue > props.max) {
+    console.log(newValue);
+    value.value = props.max;
+  } else {
+    value.value = newValue;
+  }
+}
+
+function stepDown() {
+  if (value.value === props.min) {
+    return;
+  }
+  let newValue = Number(value.value) - props.step;
+  if (newValue < props.min) {
+    value.value = props.min;
+  } else {
+    value.value = newValue;
+  }
+}
+
+function onScroll(event) {
+  if (event.wheelDelta > 0) {
+    stepUp();
+  } else if (event.wheelDelta < 0) {
+    stepDown();
+  }
+}
+
+onKeyStroke('ArrowDown', () => {
+  if (sliderFocus.focused.value || labelFocus.focused.value) {
+    stepDown();
+  }
+});
+onKeyStroke('ArrowLeft', () => {
+  if (sliderFocus.focused.value || labelFocus.focused.value) {
+    stepDown();
+  }
+});
+onKeyStroke('ArrowUp', () => {
+  if (sliderFocus.focused.value || labelFocus.focused.value) {
+    stepUp();
+  }
+});
+onKeyStroke('ArrowRight', () => {
+  if (sliderFocus.focused.value || labelFocus.focused.value) {
+    stepUp();
+  }
 });
 
 // set an initial value
