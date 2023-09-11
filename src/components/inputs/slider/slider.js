@@ -10,8 +10,8 @@ export function getHandlePosition(slider, fraction, label) {
   // track, accounting for the offset.
   try {
     const trackWidth = slider.clientWidth;
-    const handleWidth = 20; // set in CSS!
-    const manualOffset = 2; // by eye
+    const handleWidth = 24; // set in CSS; including border!
+    const manualOffset = 0; // by eye
 
     const labelWidth = label ? label.clientWidth : 0;
 

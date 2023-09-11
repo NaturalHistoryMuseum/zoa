@@ -16,6 +16,11 @@ const meta = {
       options: ['above', 'below', 'left', 'right', 'none'],
       default: 'above',
     },
+    valueLabelPosition: {
+      control: 'select',
+      options: ['above', 'below'],
+      default: 'below',
+    },
   },
 };
 
