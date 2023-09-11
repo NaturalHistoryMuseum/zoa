@@ -87,7 +87,12 @@ const handlePosition = computed(() => {
 });
 
 // set an initial value
-value.value = getInitialValue(props);
+value.value = getInitialValue(
+  props.min,
+  props.max,
+  props.step,
+  props.placeholder,
+);
 </script>
 
 <style module lang="scss">

@@ -143,8 +143,19 @@ const handleUpper = computed(() =>
 );
 
 // set initial values
-valueLower.value = getInitialValue(props) - props.step;
-valueUpper.value = getInitialValue(props) + props.step;
+const midpoint = getInitialValue(props.min, props.max, props.step, null);
+valueLower.value = getInitialValue(
+  props.min,
+  midpoint,
+  props.step,
+  props.placeholder,
+);
+valueUpper.value = getInitialValue(
+  midpoint,
+  props.max,
+  props.step,
+  props.placeholder,
+);
 
 watch(valueLower, (newValue) => {
   if (Number(newValue) >= Number(valueUpper.value)) {

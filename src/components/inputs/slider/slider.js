@@ -32,9 +32,13 @@ export function getHandlePosition(slider, fraction, label) {
   }
 }
 
-export function getInitialValue(props) {
-  return (
-    props.placeholder ||
-    (props.max - props.min) / 2 - (((props.max - props.min) / 2) % props.step)
-  );
+export function getInitialValue(min, max, step, placeholder) {
+  if (placeholder) {
+    return placeholder;
+  }
+  let range = max - min;
+  let exactMidpoint = range / 2;
+  let stepDeviation = exactMidpoint % step;
+  let stepMidpoint = exactMidpoint - stepDeviation;
+  return stepMidpoint + min;
 }
