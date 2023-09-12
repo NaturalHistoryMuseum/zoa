@@ -30,6 +30,7 @@
         :label="labelUpper"
         :label-position="labelsRight ? 'right' : 'left'"
         :placeholder-position="0.75"
+        :active-track-right="true"
       />
     </div>
   </div>

@@ -18,7 +18,7 @@
       <span :class="$style.track"></span>
       <span
         :class="[$style.track, $style['track--active']]"
-        :style="{ right: `${100 - handlePosition.handle}%` }"
+        :style="activeTrackStyle"
       ></span>
       <span
         :class="[
@@ -97,6 +97,10 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  activeTrackRight: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { componentId, subId } = useComponentId();
@@ -136,6 +140,14 @@ const valueLabelText = computed(() => {
     return _validMax.value;
   } else {
     return value.value;
+  }
+});
+
+const activeTrackStyle = computed(() => {
+  if (props.activeTrackRight) {
+    return { left: `${handlePosition.value.handle}%` };
+  } else {
+    return { right: `${100 - handlePosition.value.handle}%` };
   }
 });
 
