@@ -3,58 +3,35 @@
     :class="[$style.grid, $style[`grid--${labelPosition}`]]"
     :id="componentId"
   >
-    <label
+    <span
       v-if="label && labelPosition !== 'none'"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}
-    </label>
-    <div :class="$style.wrapper">
-      <div :class="$style.slider">
-        <span :class="$style.track"></span>
-        <span
-          :class="[$style.track, $style['track--active']]"
-          :style="{
-            left: `${handleLower.handle}%`,
-            right: `${100 - handleUpper.handle}%`,
-          }"
-        ></span>
-        <label
-          :for="subId('range-slider-lower')"
-          :class="$style.valueLabel"
-          :style="{ left: `${handleLower.label}%` }"
-          ref="labelLower"
-          >{{ valueLower }}</label
-        >
-        <label
-          :for="subId('range-slider-upper')"
-          :class="$style.valueLabel"
-          :style="{ left: `${handleUpper.label}%` }"
-          ref="labelUpper"
-          >{{ valueUpper }}</label
-        >
-        <input
-          type="range"
-          :min="min"
-          :max="max"
-          :step="step"
-          :id="subId('range-slider-lower')"
-          :class="$style.input"
-          v-model="valueLower"
-          ref="sliderLower"
-        />
-        <input
-          type="range"
-          :min="min"
-          :max="max"
-          :step="step"
-          :id="subId('range-slider-upper')"
-          :class="$style.input"
-          v-model="valueUpper"
-          ref="sliderUpper"
-        />
-      </div>
-      <span :class="$style.trackLabel">{{ valueUpper - valueLower }}</span>
+    </span>
+    <div>
+      <ZoaSlider
+        :min="min"
+        :max="max"
+        :valid-max="maxLower"
+        :step="step"
+        v-model="valueLower"
+        :label="labelLower"
+        :label-position="labelsRight ? 'right' : 'left'"
+        value-label-position="above"
+        placeholder-position="0.25"
+      />
+      <ZoaSlider
+        :min="min"
+        :valid-min="minUpper"
+        :max="max"
+        :step="step"
+        v-model="valueUpper"
+        :label="labelUpper"
+        :label-position="labelsRight ? 'right' : 'left'"
+        :placeholder-position="0.75"
+        :active-track-right="true"
+      />
     </div>
   </div>
 </template>
@@ -63,7 +40,7 @@
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
-import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
+import ZoaSlider from './Slider.vue';
 
 const props = defineProps({
   modelValue: {},
@@ -74,6 +51,18 @@ const props = defineProps({
   label: {
     type: String,
     default: 'Range',
+  },
+  labelLower: {
+    type: String,
+    default: 'Lower',
+  },
+  labelUpper: {
+    type: String,
+    default: 'Upper',
+  },
+  labelsRight: {
+    type: Boolean,
+    default: false,
   },
   delay: {
     type: Number,
@@ -102,11 +91,6 @@ const { componentId, subId } = useComponentId();
 const emit = defineEmits(['change', 'update:modelValue']);
 const { valueChanged } = useChangeEmits(emit, props);
 
-const sliderLower = ref(null);
-const sliderUpper = ref(null);
-const labelLower = ref(null);
-const labelUpper = ref(null);
-
 const valueLower = ref(null);
 const valueUpper = ref(null);
 
@@ -130,34 +114,6 @@ const range = computed(() => {
   return [lower, upper];
 });
 
-const fractionLower = computed(() => getFraction(valueLower.value, props));
-const fractionUpper = computed(() => getFraction(valueUpper.value, props));
-
-// the slider passed into this function doesn't really matter because it's just
-// to get the width (which should be the same for both)
-const handleLower = computed(() =>
-  getHandlePosition(sliderLower.value, fractionLower.value, labelLower.value),
-);
-const handleUpper = computed(() =>
-  getHandlePosition(sliderUpper.value, fractionUpper.value, labelUpper.value),
-);
-
-// set initial values
-valueLower.value = getInitialValue(props) - props.step;
-valueUpper.value = getInitialValue(props) + props.step;
-
-watch(valueLower, (newValue) => {
-  if (Number(newValue) >= Number(valueUpper.value)) {
-    valueLower.value = maxLower.value;
-  }
-});
-
-watch(valueUpper, (newValue) => {
-  if (Number(newValue) <= Number(valueLower.value)) {
-    valueUpper.value = minUpper.value;
-  }
-});
-
 watch(range, () => {
   valueChanged(range.value);
 });
@@ -166,73 +122,12 @@ watch(range, () => {
 <style module lang="scss">
 @import '../inputs';
 
-.input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  cursor: pointer;
-  background: transparent;
-  padding: 0;
-  outline: 0;
-  height: 10px;
-  border: none;
-  position: absolute;
-  pointer-events: none;
-
-  &::-webkit-slider-thumb,
-  &::-moz-range-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    background: $primary;
-    cursor: pointer;
-    border-radius: 100%;
-    z-index: 100;
-    pointer-events: all;
+.label {
+  &.label--above {
+    margin-bottom: -35px;
   }
-}
-
-.trackLabel {
-  background: white;
-  font-size: 0.8em;
-  text-align: center;
-  margin-top: -4px;
-}
-
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr minmax(auto, 30px);
-  align-items: center;
-  grid-gap: $h-pad;
-  height: 100%;
-}
-
-.slider {
-  position: relative;
-  height: 100%;
-}
-
-.track {
-  position: absolute;
-  top: 30%;
-  bottom: 30%;
-  left: 2px;
-  right: -2px;
-  background: $grey;
-
-  &.track--active {
-    background: $secondary;
+  &.label--below {
+    margin-top: -35px;
   }
-}
-
-.valueLabel {
-  position: absolute;
-  top: 1.5em;
-  font-size: 0.8em;
-  padding: $half-pad;
-  border: 1px solid $grey;
-  border-radius: $rounding;
-  background: white;
 }
 </style>

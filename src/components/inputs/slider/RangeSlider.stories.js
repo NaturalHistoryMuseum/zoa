@@ -16,6 +16,10 @@ const meta = {
       options: ['above', 'below', 'left', 'right', 'none'],
       default: 'above',
     },
+    labelsRight: {
+      control: 'boolean',
+      default: false,
+    },
   },
 };
 
