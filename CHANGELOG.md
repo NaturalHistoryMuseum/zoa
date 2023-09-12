@@ -1,3 +1,29 @@
+## v0.4.0 (2023-09-12)
+
+### Feature
+
+- add keyboard controls to slider
+- add value label to single slider
+
+### Fix
+
+- allow switching the active track colour to the right side
+- add a label for range slider and allow putting sublabels at right
+- show both sliders in the range slider
+- make valueLabel a span and reassociate the main label
+- set better initial values for the range slider
+
+### Chores/Misc
+
+- separate build workflows for dev/patch and main
+- build dist package
+- build dist package
+- add workflow to push releases to npm
+- build dist package
+- rename build workflow
+- build dist package
+- add workflow to build dist on push to any primary branch
+
 ## v0.3.1 (2023-09-08)
 
 ### Performance
