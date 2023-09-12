@@ -1,5 +1,5 @@
-import { openBlock as T, createElementBlock as S, normalizeClass as _, renderSlot as we, createTextVNode as Q, toDisplayString as D, ref as $, computed as A, unref as h, createCommentVNode as H, withDirectives as ee, createElementVNode as O, isRef as te, vModelText as se, watch as J, customRef as ft, getCurrentScope as mt, onScopeDispose as pt, Fragment as K, renderList as q, defineComponent as De, h as je, vModelSelect as bt, createVNode as G, createBlock as ge, withCtx as Te, normalizeStyle as He, mergeProps as ht } from "vue";
-import { parse as fe, icon as yt, config as Ye, text as gt, library as Tt } from "@fortawesome/fontawesome-svg-core";
+import { openBlock as T, createElementBlock as S, normalizeClass as _, renderSlot as we, createTextVNode as Q, toDisplayString as D, ref as $, computed as A, unref as h, createCommentVNode as H, withDirectives as ee, createElementVNode as O, isRef as te, vModelText as se, watch as J, customRef as mt, getCurrentScope as ft, onScopeDispose as pt, Fragment as K, renderList as q, defineComponent as De, h as je, vModelSelect as bt, createVNode as G, createBlock as ge, withCtx as Te, normalizeStyle as He, mergeProps as ht } from "vue";
+import { parse as me, icon as yt, config as Ye, text as gt, library as Tt } from "@fortawesome/fontawesome-svg-core";
 import { faCircleXmark as vt, faXmark as Et, faCircleInfo as St, faCircleExclamation as Ot, faCircleCheck as At, faCircleQuestion as Nt, faCheck as It, faCaretDown as $t } from "@fortawesome/free-solid-svg-icons";
 const Rt = "zoa__7U7z2__main", wt = {
   main: Rt,
@@ -80,12 +80,12 @@ const { now: ze } = Date, We = (e, t = 1, n) => {
     return b(Y);
   }, b = (E) => {
     s && clearTimeout(s), !(E <= 0) && (s = setTimeout(R, E));
-  }, f = (...E) => {
+  }, m = (...E) => {
     const [w, P] = d(), k = !!s;
     if (l = E, i = w, (P || !s) && b(t), P)
       return k ? y(w) : I(w);
   };
-  return f.cancel = p, f.flush = v, f;
+  return m.cancel = p, m.flush = v, m;
 };
 function j(e, t) {
   let n;
@@ -176,7 +176,7 @@ function Vt(e, t) {
     r.value = !0, a();
   };
   J(e, l, { flush: "sync" });
-  const s = typeof t == "function" ? t : t.get, i = typeof t == "function" ? void 0 : t.set, u = ft((d, y) => (o = d, a = y, {
+  const s = typeof t == "function" ? t : t.get, i = typeof t == "function" ? void 0 : t.set, u = mt((d, y) => (o = d, a = y, {
     get() {
       return r.value && (n = s(), r.value = !1), o(), n;
     },
@@ -187,7 +187,7 @@ function Vt(e, t) {
   return Object.isExtensible(u) && (u.trigger = l), u;
 }
 function jt(e) {
-  return mt() ? (pt(e), !0) : !1;
+  return ft() ? (pt(e), !0) : !1;
 }
 function Me(e) {
   return typeof e == "function" ? e() : h(e);
@@ -342,7 +342,7 @@ const qt = "zoa__u1jpB__input", Qt = "zoa__K4jZT__label", en = "zoa__wc4xP__grid
   options: nn,
   option: on,
   noOptions: an
-}, rn = ["id"], sn = ["for"], un = ["placeholder", "id"], cn = { key: 0 }, dn = ["onClick"], _n = ["value"], fn = {
+}, rn = ["id"], sn = ["for"], un = ["placeholder", "id"], cn = { key: 0 }, dn = ["onClick"], _n = ["value"], mn = {
   __name: "AutocompleteTextbox",
   props: {
     modelValue: {},
@@ -459,9 +459,9 @@ const qt = "zoa__u1jpB__input", Qt = "zoa__K4jZT__label", en = "zoa__wc4xP__grid
       ], 2)
     ], 10, rn));
   }
-}, mn = {
+}, fn = {
   $style: ln
-}, pn = /* @__PURE__ */ z(fn, [["__cssModules", mn]]);
+}, pn = /* @__PURE__ */ z(mn, [["__cssModules", fn]]);
 function Le(e, t) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -483,13 +483,13 @@ function x(e) {
   }
   return e;
 }
-function me(e) {
+function fe(e) {
   "@babel/helpers - typeof";
-  return me = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(t) {
+  return fe = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(t) {
     return typeof t;
   } : function(t) {
     return t && typeof Symbol == "function" && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-  }, me(e);
+  }, fe(e);
 }
 function U(e, t, n) {
   return t in e ? Object.defineProperty(e, t, {
@@ -553,26 +553,26 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, qe = { exports: {} };
 (function(e) {
   (function(t) {
-    var n = function(c, b, f) {
+    var n = function(c, b, m) {
       if (!u(b) || y(b) || p(b) || v(b) || i(b))
         return b;
       var E, w = 0, P = 0;
       if (d(b))
         for (E = [], P = b.length; w < P; w++)
-          E.push(n(c, b[w], f));
+          E.push(n(c, b[w], m));
       else {
         E = {};
         for (var k in b)
-          Object.prototype.hasOwnProperty.call(b, k) && (E[c(k, f)] = n(c, b[k], f));
+          Object.prototype.hasOwnProperty.call(b, k) && (E[c(k, m)] = n(c, b[k], m));
       }
       return E;
     }, o = function(c, b) {
       b = b || {};
-      var f = b.separator || "_", E = b.split || /(?=[A-Z])/;
-      return c.split(E).join(f);
+      var m = b.separator || "_", E = b.split || /(?=[A-Z])/;
+      return c.split(E).join(m);
     }, a = function(c) {
-      return I(c) ? c : (c = c.replace(/[\-_\s]+(.)?/g, function(b, f) {
-        return f ? f.toUpperCase() : "";
+      return I(c) ? c : (c = c.replace(/[\-_\s]+(.)?/g, function(b, m) {
+        return m ? m.toUpperCase() : "";
       }), c.substr(0, 1).toLowerCase() + c.substr(1));
     }, r = function(c) {
       var b = a(c);
@@ -594,9 +594,9 @@ var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
     }, I = function(c) {
       return c = c - 0, c === c;
     }, g = function(c, b) {
-      var f = b && "process" in b ? b.process : b;
-      return typeof f != "function" ? c : function(E, w) {
-        return f(E, c, w);
+      var m = b && "process" in b ? b.process : b;
+      return typeof m != "function" ? c : function(E, w) {
+        return m(E, c, w);
       };
     }, R = {
       camelize: a,
@@ -699,13 +699,13 @@ function $n(e) {
   });
 }
 function xe(e) {
-  if (e && me(e) === "object" && e.prefix && e.iconName && e.icon)
+  if (e && fe(e) === "object" && e.prefix && e.iconName && e.icon)
     return e;
-  if (fe.icon)
-    return fe.icon(e);
+  if (me.icon)
+    return me.icon(e);
   if (e === null)
     return null;
-  if (me(e) === "object" && e.prefix && e.iconName)
+  if (fe(e) === "object" && e.prefix && e.iconName)
     return e;
   if (Array.isArray(e) && e.length === 2)
     return {
@@ -836,7 +836,7 @@ var le = De({
     }), r = A(function() {
       return ae("classes", $n(t));
     }), l = A(function() {
-      return ae("transform", typeof t.transform == "string" ? fe.transform(t.transform) : t.transform);
+      return ae("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
     }), s = A(function() {
       return ae("mask", xe(t.mask));
     }), i = A(function() {
@@ -905,7 +905,7 @@ De({
     var o = n.attrs, a = Ye.familyPrefix, r = A(function() {
       return ae("classes", [].concat(Ae(t.counter ? ["".concat(a, "-layers-counter")] : []), Ae(t.position ? ["".concat(a, "-layers-").concat(t.position)] : [])));
     }), l = A(function() {
-      return ae("transform", typeof t.transform == "string" ? fe.transform(t.transform) : t.transform);
+      return ae("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
     }), s = A(function() {
       var u = gt(t.value.toString(), x(x({}, l.value), r.value)), d = u.abstract;
       return t.counter && (d[0].attributes.class = d[0].attributes.class.replace("fa-layers-text", "")), d[0];
@@ -1135,7 +1135,7 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
   }
 }, io = {
   $style: oo
-}, _e = /* @__PURE__ */ z(so, [["__cssModules", io]]), uo = "zoa__BWNey__input", co = "zoa__EwgZe__label", _o = "zoa__Xjves__grid", fo = {
+}, _e = /* @__PURE__ */ z(so, [["__cssModules", io]]), uo = "zoa__BWNey__input", co = "zoa__EwgZe__label", _o = "zoa__Xjves__grid", mo = {
   input: uo,
   label: co,
   "label--right": "zoa__GxE5U__label--right",
@@ -1146,7 +1146,7 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
   "grid--below": "zoa__pnjLn__grid--below",
   "grid--left": "zoa__utweT__grid--left",
   "grid--right": "zoa__E6CuQ__grid--right"
-}, mo = ["id"], po = ["for"], bo = ["placeholder", "min", "max", "step", "id"], ho = {
+}, fo = ["id"], po = ["for"], bo = ["placeholder", "min", "max", "step", "id"], ho = {
   __name: "DateSimple",
   props: {
     modelValue: {},
@@ -1203,10 +1203,10 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
       }, null, 10, bo), [
         [se, h(r)]
       ])
-    ], 10, mo));
+    ], 10, fo));
   }
 }, yo = {
-  $style: fo
+  $style: mo
 }, go = /* @__PURE__ */ z(ho, [["__cssModules", yo]]);
 function et(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
@@ -1226,7 +1226,7 @@ if (typeof navigator < "u") {
   const e = navigator;
   re = Array.isArray(e.languages) ? e.languages[0] : e.language;
 } else if (typeof process < "u") {
-  const e = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_aaf0e3d9-196e-4a8c-9477-71818f327a43", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_aaf0e3d9-196e-4a8c-9477-71818f327a43", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.3", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "688", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.7/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.0/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20230903.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16871", GITHUB_WORKFLOW: "Build dist", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", GITHUB_RUN_ID: "6162265650", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "2d43ba8c158979ec3d4a71ec7c22237550d675f9", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/build.yml@refs/heads/dev", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GOROOT_1_18_X64: "/opt/hostedtoolcache/go/1.18.10/x64", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_f1c2742c-5841-49d3-b742-edf27ac8f84b", INVOCATION_ID: "0282ef534197482abe01e22d434f8bb8", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.12/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "3", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "dev", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", STATS_NM: "true", npm_package_version: "0.3.1", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "2d43ba8c158979ec3d4a71ec7c22237550d675f9", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/dev", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_aaf0e3d9-196e-4a8c-9477-71818f327a43", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.10.0-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_aaf0e3d9-196e-4a8c-9477-71818f327a43", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_aaf0e3d9-196e-4a8c-9477-71818f327a43", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
+  const e = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_16addac8-9398-4697-ac22-f8b82738c634", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_16addac8-9398-4697-ac22-f8b82738c634", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.3", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "662", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.7/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.0/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20230903.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:17079", GITHUB_WORKFLOW: "Build dist", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", GITHUB_RUN_ID: "6162426287", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "f081e9976671f291b5c3036b66cba12c60d43a14", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/build.yml@refs/heads/main", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GOROOT_1_18_X64: "/opt/hostedtoolcache/go/1.18.10/x64", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_ff97f2e1-f2e6-47eb-89b7-0abbbd56f075", INVOCATION_ID: "e7309097c1fc48a0aa3f3b23a85d3d78", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.12/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "4", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 3", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "main", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.3.1", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "f081e9976671f291b5c3036b66cba12c60d43a14", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/main", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_16addac8-9398-4697-ac22-f8b82738c634", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.10.0-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_16addac8-9398-4697-ac22-f8b82738c634", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_16addac8-9398-4697-ac22-f8b82738c634", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
   re = e.LC_ALL || e.LC_MESSAGES || e.LANG || e.LANGUAGE;
 }
 re || (re = "en-US");
@@ -2195,13 +2195,13 @@ const ca = C, da = new ca({
   units: ["day", "month"]
 });
 var _a = da;
-const fa = C, ma = new fa({
+const ma = C, fa = new ma({
   /* prettier-ignore */
   //           $1                       $2
   template: "^(_DAY_)(?:_ORDINAL_)?[ -](_MONTHNAME_)$",
   units: ["day", "month"]
 });
-var pa = ma;
+var pa = fa;
 const ba = C, ha = new ba({
   /* prettier-ignore */
   //                                $1                   $2    $3              $4
@@ -2349,9 +2349,9 @@ const Ka = C, Xa = new Ka({
   units: ["year", null, "month", "day"]
 });
 var Za = Xa;
-const st = Wo, Ja = C, qa = ie, Qa = Zo, el = Qo, tl = la, nl = ua, ol = _a, al = pa, ll = ya, rl = va, sl = be, il = Oa, ul = Ia, cl = wa, dl = Ca, _l = za, fl = Ga, ml = Va, pl = Wa, bl = Za, B = new st();
+const st = Wo, Ja = C, qa = ie, Qa = Zo, el = Qo, tl = la, nl = ua, ol = _a, al = pa, ll = ya, rl = va, sl = be, il = Oa, ul = Ia, cl = wa, dl = Ca, _l = za, ml = Ga, fl = Va, pl = Wa, bl = Za, B = new st();
 B.addFormats([
-  fl,
+  ml,
   _l,
   // from most unambiguous and popular to least
   bl,
@@ -2361,7 +2361,7 @@ B.addFormats([
   rl,
   nl,
   pl,
-  ml,
+  fl,
   tl,
   cl,
   al,
@@ -2476,7 +2476,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
       l.value = !1;
     });
     const d = A(() => ({
-      year: f.value,
+      year: m.value,
       month: k.value,
       day: L.value
     })), y = A(() => Ue(
@@ -2488,46 +2488,46 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
       s.value.value = y.value, i.value = !1;
     }
     const v = $([]);
-    function I(m) {
-      i.value = !0, v.value = Sl(m.target.value);
+    function I(f) {
+      i.value = !0, v.value = Sl(f.target.value);
     }
     const g = We(I, 200);
-    function R(m) {
-      c.value = m.year, k.value = m.month, L.value = m.day, v.value = [];
+    function R(f) {
+      c.value = f.year, k.value = f.month, L.value = f.day, v.value = [];
     }
     const c = $(null), b = A(() => {
-      let m = 11;
-      return c.value && c.value >= 1e3 ? m = Math.floor(c.value / 10) * 10 : c.value && c.value < 1e3 && (m = c.value * 10), Array(10).fill(m).map((M, N) => M + N);
-    }), f = A(() => {
+      let f = 11;
+      return c.value && c.value >= 1e3 ? f = Math.floor(c.value / 10) * 10 : c.value && c.value < 1e3 && (f = c.value * 10), Array(10).fill(f).map((M, N) => M + N);
+    }), m = A(() => {
       if (!c.value)
         return null;
       if (c.value >= 1e3)
         return c.value;
-      let m = 10 ** (4 - c.value.toString().length);
-      return c.value * m;
-    }), E = A(() => f.value % 100 === 0 ? f.value % 400 === 0 : f.value % 4 === 0);
-    function w(m) {
-      return m.toString().padEnd(4, "0");
+      let f = 10 ** (4 - c.value.toString().length);
+      return c.value * f;
+    }), E = A(() => m.value % 100 === 0 ? m.value % 400 === 0 : m.value % 4 === 0);
+    function w(f) {
+      return f.toString().padEnd(4, "0");
     }
-    function P(m) {
-      c.value = m, L.value && L.value > Y.value && (L.value = Y.value);
+    function P(f) {
+      c.value = f, L.value && L.value > Y.value && (L.value = Y.value);
     }
     const k = $(null), ye = $($e.abbreviated_months), Y = A(() => [4, 6, 9, 11].includes(k.value) ? 30 : k.value === 2 ? E.value ? 29 : 28 : 31);
-    function ct(m) {
-      k.value = m, L.value && L.value > Y.value && (L.value = Y.value);
+    function ct(f) {
+      k.value = f, L.value && L.value > Y.value && (L.value = Y.value);
     }
-    const L = $(null), dt = A(() => Array(Y.value).fill(1).map((m, M) => M + 1));
-    function _t(m) {
-      L.value = m;
+    const L = $(null), dt = A(() => Array(Y.value).fill(1).map((f, M) => M + 1));
+    function _t(f) {
+      L.value = f;
     }
-    function Ue(m, M, N) {
+    function Ue(f, M, N) {
       const F = $e.abbreviated_months[M - 1];
-      return m && M && N ? `${N} ${F} ${m}` : m && M ? `${F} ${m}` : m && N ? `${N} ??? ${m}` : M && N ? `${N} ${F}` : m || (M ? F : N ? `day ${N}` : null);
+      return f && M && N ? `${N} ${F} ${f}` : f && M ? `${F} ${f}` : f && N ? `${N} ??? ${f}` : M && N ? `${N} ${F}` : f || (M ? F : N ? `day ${N}` : null);
     }
     return J(d, () => {
       p(), r(d.value);
-    }), (m, M) => (T(), S("div", {
-      class: _([m.$style.grid, m.$style[`grid--${e.labelPosition}`]]),
+    }), (f, M) => (T(), S("div", {
+      class: _([f.$style.grid, f.$style[`grid--${e.labelPosition}`]]),
       id: h(o),
       ref_key: "container",
       ref: u
@@ -2535,16 +2535,16 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
       e.label && e.labelPosition !== "none" ? (T(), S("label", {
         key: 0,
         for: h(a)("date"),
-        class: _([m.$style.label, m.$style[`label--${e.labelPosition}`]])
+        class: _([f.$style.label, f.$style[`label--${e.labelPosition}`]])
       }, D(e.label), 11, zl)) : H("", !0),
       O("div", {
-        class: _(m.$style.inputContainer)
+        class: _(f.$style.inputContainer)
       }, [
         O("input", {
           type: "text",
           placeholder: e.placeholder,
           id: h(a)("date"),
-          class: _([m.$style.input, i.value ? m.$style.editing : ""]),
+          class: _([f.$style.input, i.value ? f.$style.editing : ""]),
           onFocusin: M[0] || (M[0] = (N) => l.value = !0),
           ref_key: "displayBox",
           ref: s,
@@ -2552,19 +2552,19 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
         }, null, 42, Pl),
         l.value ? (T(), S("div", {
           key: 0,
-          class: _(m.$style.datePopup)
+          class: _(f.$style.datePopup)
         }, [
           v.value.length > 0 ? (T(), S("div", {
             key: 0,
-            class: _(m.$style.popupSection)
+            class: _(f.$style.popupSection)
           }, [
             (T(!0), S(K, null, q(v.value, (N) => (T(), S("span", {
               onClick: (F) => R(N),
-              class: _(m.$style.suggestion)
+              class: _(f.$style.suggestion)
             }, D(Ue(N.year, N.month, N.day)), 11, Ll))), 256))
           ], 2)) : H("", !0),
           O("div", {
-            class: _(m.$style.popupSection)
+            class: _(f.$style.popupSection)
           }, [
             G(_e, {
               label: "year",
@@ -2577,7 +2577,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
               max: "9999"
             }, null, 8, ["modelValue"]),
             O("div", {
-              class: _(m.$style.yearGrid)
+              class: _(f.$style.yearGrid)
             }, [
               (T(!0), S(K, null, q(b.value, (N) => (T(), ge(oe, {
                 size: "sm",
@@ -2591,7 +2591,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
             ], 2)
           ], 2),
           O("div", {
-            class: _(m.$style.popupSection)
+            class: _(f.$style.popupSection)
           }, [
             G(_e, {
               label: "month",
@@ -2604,7 +2604,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
               max: "12"
             }, null, 8, ["modelValue"]),
             O("div", {
-              class: _(m.$style.monthGrid)
+              class: _(f.$style.monthGrid)
             }, [
               (T(!0), S(K, null, q(ye.value, (N, F) => (T(), ge(oe, {
                 size: "sm",
@@ -2618,7 +2618,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
             ], 2)
           ], 2),
           O("div", {
-            class: _(m.$style.popupSection)
+            class: _(f.$style.popupSection)
           }, [
             G(_e, {
               label: "day",
@@ -2631,7 +2631,7 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
               max: Y.value
             }, null, 8, ["modelValue", "max"]),
             O("div", {
-              class: _(m.$style.dayGrid)
+              class: _(f.$style.dayGrid)
             }, [
               (T(!0), S(K, null, q(dt.value, (N) => (T(), ge(oe, {
                 size: "sm",
@@ -2750,62 +2750,62 @@ const Yl = "zoa__wKiUj__input", Wl = "zoa__wdDOR__label", Kl = "zoa__NU5xO__grid
     function R() {
       if (r.value === n.max)
         return;
-      let f = Number(r.value) + Number(n.step);
-      f > n.max ? r.value = n.max : r.value = f;
+      let m = Number(r.value) + Number(n.step);
+      m > n.max ? r.value = n.max : r.value = m;
     }
     function c() {
       if (r.value === n.min)
         return;
-      let f = Number(r.value) - Number(n.step);
-      f < n.min ? r.value = n.min : r.value = f;
+      let m = Number(r.value) - Number(n.step);
+      m < n.min ? r.value = n.min : r.value = m;
     }
-    function b(f) {
-      f.preventDefault(), f.wheelDelta > 0 ? R() : f.wheelDelta < 0 && c();
+    function b(m) {
+      m.preventDefault(), m.wheelDelta > 0 ? R() : m.wheelDelta < 0 && c();
     }
-    return Z("ArrowDown", (f) => {
-      f.preventDefault(), (d.focused.value || y.focused.value) && c();
-    }), Z("ArrowLeft", (f) => {
-      f.preventDefault(), (d.focused.value || y.focused.value) && c();
-    }), Z("ArrowUp", (f) => {
-      f.preventDefault(), (d.focused.value || y.focused.value) && R();
-    }), Z("ArrowRight", (f) => {
-      f.preventDefault(), (d.focused.value || y.focused.value) && R();
-    }), J(r, (f) => {
-      Number(f) >= Number(u.value) && (r.value = u.value), Number(f) <= Number(i.value) && (r.value = i.value);
+    return Z("ArrowDown", (m) => {
+      m.preventDefault(), (d.focused.value || y.focused.value) && c();
+    }), Z("ArrowLeft", (m) => {
+      m.preventDefault(), (d.focused.value || y.focused.value) && c();
+    }), Z("ArrowUp", (m) => {
+      m.preventDefault(), (d.focused.value || y.focused.value) && R();
+    }), Z("ArrowRight", (m) => {
+      m.preventDefault(), (d.focused.value || y.focused.value) && R();
+    }), J(r, (m) => {
+      Number(m) >= Number(u.value) && (r.value = u.value), Number(m) <= Number(i.value) && (r.value = i.value);
     }), r.value = jl(
       n.min,
       n.max,
       n.step,
       n.placeholder,
       n.placeholderPosition
-    ), (f, E) => (T(), S("div", {
+    ), (m, E) => (T(), S("div", {
       class: _([
-        f.$style.grid,
-        f.$style[`grid--${e.labelPosition}`],
-        f.$style[`wrapper--value-label-${e.valueLabelPosition}`]
+        m.$style.grid,
+        m.$style[`grid--${e.labelPosition}`],
+        m.$style[`wrapper--value-label-${e.valueLabelPosition}`]
       ]),
       id: h(o)
     }, [
       e.label && e.labelPosition !== "none" ? (T(), S("label", {
         key: 0,
-        class: _([f.$style.label, f.$style[`label--${e.labelPosition}`]]),
+        class: _([m.$style.label, m.$style[`label--${e.labelPosition}`]]),
         for: h(a)("slider")
       }, D(e.label), 11, er)) : H("", !0),
       O("div", {
-        class: _(f.$style.slider),
+        class: _(m.$style.slider),
         onWheel: b
       }, [
         O("span", {
-          class: _(f.$style.track)
+          class: _(m.$style.track)
         }, null, 2),
         O("span", {
-          class: _([f.$style.track, f.$style["track--active"]]),
+          class: _([m.$style.track, m.$style["track--active"]]),
           style: He(v.value)
         }, null, 6),
         O("span", {
           class: _([
-            f.$style.valueLabel,
-            f.$style[`valueLabel--${e.valueLabelPosition}`]
+            m.$style.valueLabel,
+            m.$style[`valueLabel--${e.valueLabelPosition}`]
           ]),
           style: He({ left: `${g.value.label}%` }),
           ref_key: "valueLabel",
@@ -2818,7 +2818,7 @@ const Yl = "zoa__wKiUj__input", Wl = "zoa__wdDOR__label", Kl = "zoa__NU5xO__grid
           max: e.max,
           step: e.step,
           id: h(a)("slider"),
-          class: _(f.$style.input),
+          class: _(m.$style.input),
           "onUpdate:modelValue": E[0] || (E[0] = (w) => te(r) ? r.value = w : null),
           ref_key: "slider",
           ref: l
@@ -2955,10 +2955,10 @@ function ut(e) {
     }
   }) };
 }
-const _r = "zoa__VAeTu__main", fr = "zoa__fVs2o__container", mr = "zoa__THVXY__header", pr = "zoa__paVgB__icon", br = {
+const _r = "zoa__VAeTu__main", mr = "zoa__fVs2o__container", fr = "zoa__THVXY__header", pr = "zoa__paVgB__icon", br = {
   main: _r,
-  container: fr,
-  header: mr,
+  container: mr,
+  header: fr,
   icon: pr,
   "kind--info": "zoa__ITcbz__kind--info",
   "kind--warning": "zoa__ePWkZ__kind--warning",
