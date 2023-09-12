@@ -1,26 +1,37 @@
 <template>
-  <div :class="$style.wrapper" :id="componentId">
-    <ZoaSlider
-      :min="min"
-      :max="max"
-      :valid-max="maxLower"
-      :step="step"
-      v-model="valueLower"
-      :label="labelLower"
-      label-position="left"
-      value-label-position="above"
-      placeholder-position="0.25"
-    />
-    <ZoaSlider
-      :min="min"
-      :valid-min="minUpper"
-      :max="max"
-      :step="step"
-      v-model="valueUpper"
-      :label="labelUpper"
-      label-position="left"
-      :placeholder-position="0.75"
-    />
+  <div
+    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :id="componentId"
+  >
+    <span
+      v-if="label && labelPosition !== 'none'"
+      :class="[$style.label, $style[`label--${labelPosition}`]]"
+    >
+      {{ label }}
+    </span>
+    <div>
+      <ZoaSlider
+        :min="min"
+        :max="max"
+        :valid-max="maxLower"
+        :step="step"
+        v-model="valueLower"
+        :label="labelLower"
+        :label-position="labelsRight ? 'right' : 'left'"
+        value-label-position="above"
+        placeholder-position="0.25"
+      />
+      <ZoaSlider
+        :min="min"
+        :valid-min="minUpper"
+        :max="max"
+        :step="step"
+        v-model="valueUpper"
+        :label="labelUpper"
+        :label-position="labelsRight ? 'right' : 'left'"
+        :placeholder-position="0.75"
+      />
+    </div>
   </div>
 </template>
 
@@ -47,6 +58,10 @@ const props = defineProps({
   labelUpper: {
     type: String,
     default: 'Upper',
+  },
+  labelsRight: {
+    type: Boolean,
+    default: false,
   },
   delay: {
     type: Number,
@@ -105,4 +120,13 @@ watch(range, () => {
 
 <style module lang="scss">
 @import '../inputs';
+
+.label {
+  &.label--above {
+    margin-bottom: -35px;
+  }
+  &.label--below {
+    margin-top: -35px;
+  }
+}
 </style>
