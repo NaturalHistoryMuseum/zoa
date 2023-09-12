@@ -1,6 +1,10 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="[
+      $style.grid,
+      $style[`grid--${labelPosition}`],
+      $style[`wrapper--value-label-${valueLabelPosition}`],
+    ]"
     :id="componentId"
   >
     <label
@@ -24,7 +28,7 @@
         :style="{ left: `${handlePosition.label}%` }"
         ref="valueLabel"
         tabindex="0"
-        >{{ value }}</span
+        >{{ valueLabelText }}</span
       >
       <input
         type="range"
@@ -65,6 +69,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  placeholderPosition: {
+    type: Number,
+    default: 0.5,
+  },
   min: {
     type: Number,
     default: 0,
@@ -81,6 +89,14 @@ const props = defineProps({
     type: String,
     default: 'below',
   },
+  validMin: {
+    type: Number,
+    default: null,
+  },
+  validMax: {
+    type: Number,
+    default: null,
+  },
 });
 
 const { componentId, subId } = useComponentId();
@@ -88,11 +104,40 @@ const { componentId, subId } = useComponentId();
 const emit = defineEmits(['change', 'update:modelValue']);
 const { value } = useChangeEmits(emit, props);
 
+// REFS
 const slider = ref(null);
 const valueLabel = ref(null);
 
+// PROP PROCESSING
+const _validMin = computed(() => {
+  // set validMin to the min if not set
+  if (!props.validMin) {
+    return Number(props.min);
+  }
+  return Math.max(Number(props.validMin), Number(props.min));
+});
+const _validMax = computed(() => {
+  // set validMax to the max if not set
+  if (!props.validMax) {
+    return Number(props.max);
+  }
+  return Math.min(Number(props.validMax), Number(props.max));
+});
+
+// STATE
 const sliderFocus = useFocusWithin(slider);
 const labelFocus = useFocus(valueLabel);
+
+const valueLabelText = computed(() => {
+  // prevents the label flickering when trying to move it beyond its bounds
+  if (value.value < _validMin.value) {
+    return _validMin.value;
+  } else if (value.value > _validMax.value) {
+    return _validMax.value;
+  } else {
+    return value.value;
+  }
+});
 
 const fraction = computed(() => {
   return getFraction(value.value, props);
@@ -102,13 +147,13 @@ const handlePosition = computed(() => {
   return getHandlePosition(slider.value, fraction.value, valueLabel.value);
 });
 
+// FUNCTIONS
 function stepUp() {
   if (value.value === props.max) {
     return;
   }
-  let newValue = Number(value.value) + props.step;
+  let newValue = Number(value.value) + Number(props.step);
   if (newValue > props.max) {
-    console.log(newValue);
     value.value = props.max;
   } else {
     value.value = newValue;
@@ -119,7 +164,7 @@ function stepDown() {
   if (value.value === props.min) {
     return;
   }
-  let newValue = Number(value.value) - props.step;
+  let newValue = Number(value.value) - Number(props.step);
   if (newValue < props.min) {
     value.value = props.min;
   } else {
@@ -128,6 +173,7 @@ function stepDown() {
 }
 
 function onScroll(event) {
+  event.preventDefault();
   if (event.wheelDelta > 0) {
     stepUp();
   } else if (event.wheelDelta < 0) {
@@ -135,24 +181,40 @@ function onScroll(event) {
   }
 }
 
-onKeyStroke('ArrowDown', () => {
+// KEYBINDINGS
+onKeyStroke('ArrowDown', (event) => {
+  event.preventDefault();
   if (sliderFocus.focused.value || labelFocus.focused.value) {
     stepDown();
   }
 });
-onKeyStroke('ArrowLeft', () => {
+onKeyStroke('ArrowLeft', (event) => {
+  event.preventDefault();
   if (sliderFocus.focused.value || labelFocus.focused.value) {
     stepDown();
   }
 });
-onKeyStroke('ArrowUp', () => {
+onKeyStroke('ArrowUp', (event) => {
+  event.preventDefault();
   if (sliderFocus.focused.value || labelFocus.focused.value) {
     stepUp();
   }
 });
-onKeyStroke('ArrowRight', () => {
+onKeyStroke('ArrowRight', (event) => {
+  event.preventDefault();
   if (sliderFocus.focused.value || labelFocus.focused.value) {
     stepUp();
+  }
+});
+
+// WATCHES
+watch(value, (newValue) => {
+  // don't let the value exceed the valid min/max
+  if (Number(newValue) >= Number(_validMax.value)) {
+    value.value = _validMax.value;
+  }
+  if (Number(newValue) <= Number(_validMin.value)) {
+    value.value = _validMin.value;
   }
 });
 
@@ -162,6 +224,7 @@ value.value = getInitialValue(
   props.max,
   props.step,
   props.placeholder,
+  props.placeholderPosition,
 );
 </script>
 
@@ -170,6 +233,14 @@ value.value = getInitialValue(
 
 $handleSize: 20px;
 $handleBorder: 2px;
+
+.wrapper--value-label-below {
+  margin-bottom: 35px;
+}
+
+.wrapper--value-label-above {
+  margin-top: 35px;
+}
 
 .input {
   appearance: none;
@@ -226,6 +297,7 @@ $handleBorder: 2px;
   border: 1px solid $grey;
   border-radius: $rounding;
   background: white;
+  height: 30px;
 
   &.valueLabel--below {
     top: $handleSize + ($handleBorder * 2) + 5px;
