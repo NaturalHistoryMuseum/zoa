@@ -6,13 +6,16 @@ on:
       - main
 
 jobs:
-  build-dist:
+  build-then-bump:
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
-    name: "Build dist"
+    name: "Build dist, bump version, create changelog"
     steps:
       - name: Check out
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
       - name: Install node
         uses: actions/setup-node@v3
         with:
@@ -26,16 +29,7 @@ jobs:
         with:
           add: 'dist'
           message: 'chore: build dist package'
-  bump-version:
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
-    runs-on: ubuntu-latest
-    name: "Bump version and create changelog"
-    steps:
-      - name: Check out
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          fetch-depth: 0
+          push: false
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
