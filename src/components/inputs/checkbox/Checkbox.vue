@@ -28,19 +28,30 @@ import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
-  modelValue: {},
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Boolean,
+  },
+  /**
+   * Text for the input label.
+   */
+  label: {
+    type: String,
+    default: 'Checkbox',
+  },
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
   labelPosition: {
     type: String,
     default: 'left',
   },
-  label: {
-    type: String,
-    default: 'Text',
-  },
-  placeholder: {
-    type: String,
-    default: null,
-  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 0,
@@ -49,7 +60,17 @@ const props = defineProps({
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {boolean} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { value } = useChangeEmits(emit, props);
 </script>
 

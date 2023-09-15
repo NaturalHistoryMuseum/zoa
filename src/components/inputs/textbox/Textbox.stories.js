@@ -4,17 +4,21 @@ const meta = {
   component: ZoaTextbox,
   title: 'Components/Inputs/Textbox/Simple',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Textbox',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A one-line textbox.',
+      },
     },
   },
 };
@@ -23,8 +27,9 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
     label: 'Textbox',
+    labelPosition: 'above',
+    placeholder: 'Write something here...',
   },
   render: (args) => ({
     components: { ZoaTextbox },

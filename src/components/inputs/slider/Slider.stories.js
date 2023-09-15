@@ -4,22 +4,28 @@ const meta = {
   component: ZoaSlider,
   title: 'Components/Inputs/Slider/Single',
   argTypes: {
-    placeholder: {
-      control: 'number',
-    },
-    label: {
-      control: 'text',
-      default: 'Slider',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
     },
     valueLabelPosition: {
       control: 'select',
       options: ['above', 'below'],
-      default: 'below',
+    },
+    activeTrackRight: {
+      control: 'boolean',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A slider component, returning a single value.',
+      },
     },
   },
 };
@@ -29,6 +35,9 @@ export default meta;
 const Base = {
   args: {
     label: 'Slider',
+    labelPosition: 'above',
+    valueLabelPosition: 'below',
+    activeTrackRight: false,
   },
   render: (args) => ({
     components: { ZoaSlider },

@@ -12,7 +12,8 @@
     </label>
     <div :class="$style.wrapper">
       <select :id="subId('dropdown')" :class="$style.input" v-model="value">
-        <option v-for="opt in dropdownOptions" value="opt.value">
+        <option :value="null">{{ placeholder }}</option>
+        <option v-for="opt in dropdownOptions" :value="opt.value">
           {{ opt.label }}
         </option>
       </select>
@@ -28,19 +29,44 @@ import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
-  modelValue: {},
-  labelPosition: {
+  /**
+   * @model
+   */
+  modelValue: {
     type: String,
-    default: 'above',
   },
+  /**
+   * Text for the input label.
+   */
   label: {
     type: String,
     default: 'Dropdown',
   },
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
+  labelPosition: {
+    type: String,
+    default: 'above',
+  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 0,
   },
+  /**
+   * Text to display in the blank input.
+   */
+  placeholder: {
+    type: String,
+    default: 'Please choose an option',
+  },
+  /**
+   * The options available to select. Each item can be a string, or an object with `label` and `value` keys.
+   */
   options: {
     type: Array,
   },
@@ -60,7 +86,17 @@ const dropdownOptions = computed(() => {
   return outputOptions;
 });
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {string} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { value } = useChangeEmits(emit, props);
 </script>
 

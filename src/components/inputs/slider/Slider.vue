@@ -52,51 +52,94 @@ import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
 import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
 
 const props = defineProps({
-  modelValue: {},
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Number,
+  },
+  /**
+   * Text for the input label.
+   */
+  label: {
+    type: String,
+    default: 'Range',
+  },
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
   labelPosition: {
     type: String,
     default: 'above',
   },
-  label: {
-    type: String,
-    default: 'Slider',
-  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 200,
   },
+  /**
+   * Number to set the slider at initially.
+   */
   placeholder: {
-    type: Number,
-    default: 0,
+    type: [Number, undefined],
+    default: null,
   },
-  placeholderPosition: {
-    type: Number,
-    default: 0.5,
-  },
+  /**
+   * The lowest number displayed on the slider.
+   */
   min: {
     type: Number,
     default: 0,
   },
+  /**
+   * The highest number displayed on the slider.
+   */
   max: {
     type: Number,
     default: 100,
   },
+  /**
+   * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place.
+   */
   step: {
     type: Number,
     default: 1,
   },
+  /**
+   * The fraction along the bar to set the value initially (as opposed to setting an explicit number); e.g. 0.5 sets an initial value halfway along the bar.
+   */
+  placeholderPosition: {
+    type: Number,
+    default: 0.5,
+  },
+  /**
+   * The position of the dynamic label displaying the current value (above or below the slider).
+   * @values above, below
+   */
   valueLabelPosition: {
     type: String,
     default: 'below',
   },
+  /**
+   * Do not allow values below this value; the handle will stop at this point, even if the `min` is lower than this.
+   */
   validMin: {
     type: Number,
     default: null,
   },
+  /**
+   * Do not allow values above this point; the handle will stop at this point, even if the `max` is higher than this.
+   */
   validMax: {
     type: Number,
     default: null,
   },
+  /**
+   * Highlight the track to the right of the handle rather than the left.
+   */
   activeTrackRight: {
     type: Boolean,
     default: false,
@@ -105,7 +148,17 @@ const props = defineProps({
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {number} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { value } = useChangeEmits(emit, props);
 
 // REFS

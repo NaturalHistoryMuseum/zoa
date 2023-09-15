@@ -43,52 +43,98 @@ import { computed, ref, watch } from 'vue';
 import ZoaSlider from './Slider.vue';
 
 const props = defineProps({
-  modelValue: {},
-  labelPosition: {
-    type: String,
-    default: 'above',
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Array,
   },
+  /**
+   * Text for the input label.
+   */
   label: {
     type: String,
     default: 'Range',
   },
-  labelLower: {
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
+  labelPosition: {
     type: String,
-    default: 'Lower',
+    default: 'above',
   },
-  labelUpper: {
-    type: String,
-    default: 'Upper',
-  },
-  labelsRight: {
-    type: Boolean,
-    default: false,
-  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 200,
   },
+  /**
+   * Number to set both sliders at initially.
+   */
   placeholder: {
     type: Number,
-    default: 0,
+    default: null,
   },
+  /**
+   * The lowest number displayed on both sliders (will only be accessible by the lower value slider).
+   */
   min: {
     type: Number,
     default: 0,
   },
+  /**
+   * The highest number displayed on both sliders (will only be accessible by the upper value slider).
+   */
   max: {
     type: Number,
     default: 100,
   },
+  /**
+   * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place. Also the minimum gap between the two values.
+   */
   step: {
     type: Number,
     default: 1,
+  },
+  /**
+   * The text label for the lower value slider.
+   */
+  labelLower: {
+    type: String,
+    default: 'Lower',
+  },
+  /**
+   * The text label for the upper value slider.
+   */
+  labelUpper: {
+    type: String,
+    default: 'Upper',
+  },
+  /**
+   * If true, place the slider text labels on the right rather than the left.
+   */
+  labelsRight: {
+    type: Boolean,
+    default: false,
   },
 });
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {Array} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { valueChanged } = useChangeEmits(emit, props);
 
 const valueLower = ref(null);
