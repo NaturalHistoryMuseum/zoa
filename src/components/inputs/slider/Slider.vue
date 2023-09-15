@@ -220,6 +220,10 @@ function getHandlePosition() {
     const trackWidth = slider.value.clientWidth;
     const handleWidth = 24; // set in CSS; including border!
 
+    // force update the inner text before the label width is calculated
+    if (valueLabel.value) {
+      valueLabel.value.innerText = valueLabelText.value;
+    }
     const labelWidth = valueLabel.value ? valueLabel.value.clientWidth : 0;
 
     const halfTrack = trackWidth / 2;
