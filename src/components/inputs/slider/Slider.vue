@@ -48,7 +48,6 @@
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
-import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
 import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
 
 const props = defineProps({
@@ -205,14 +204,52 @@ const activeTrackStyle = computed(() => {
 });
 
 const fraction = computed(() => {
-  return getFraction(value.value, props);
+  return (value.value - props.min) / (props.max - props.min);
 });
 
 const handlePosition = computed(() => {
-  return getHandlePosition(slider.value, fraction.value, valueLabel.value);
+  return getHandlePosition();
 });
 
 // FUNCTIONS
+function getHandlePosition() {
+  // the center of the slider is slightly offset to account for the size of the
+  // handle. this calculates the position of the middle of the handle along the
+  // track, accounting for the offset.
+  try {
+    const trackWidth = slider.value.clientWidth;
+    const handleWidth = 24; // set in CSS; including border!
+
+    const labelWidth = valueLabel.value ? valueLabel.value.clientWidth : 0;
+
+    const halfTrack = trackWidth / 2;
+    const currentPosition = fraction.value * trackWidth;
+    const centerOffset = (currentPosition - halfTrack) / halfTrack;
+    const offset = centerOffset * (handleWidth / 2);
+    const labelOffset = offset + labelWidth / 2;
+    const percentOffset = offset / trackWidth;
+    return {
+      handle: ((fraction.value - percentOffset) * 100).toFixed(2),
+      label: ((fraction.value - labelOffset / trackWidth) * 100).toFixed(2),
+    };
+  } catch {
+    // in case we can't get the clientWidth
+    const pos = fraction.value * 100;
+    return { handle: pos.toFixed(2), label: pos.toFixed(2) };
+  }
+}
+
+function getInitialValue() {
+  if (props.placeholder !== null && props.placeholder !== undefined) {
+    return props.placeholder;
+  }
+  let range = props.max - props.min;
+  let exactMidpoint = range / (1 / props.placeholderPosition);
+  let stepDeviation = exactMidpoint % props.step;
+  let stepMidpoint = exactMidpoint - stepDeviation;
+  return stepMidpoint + props.min;
+}
+
 function stepUp() {
   if (value.value === props.max) {
     return;
@@ -284,13 +321,7 @@ watch(value, (newValue) => {
 });
 
 // set an initial value
-value.value = getInitialValue(
-  props.min,
-  props.max,
-  props.step,
-  props.placeholder,
-  props.placeholderPosition,
-);
+value.value = getInitialValue();
 </script>
 
 <style module lang="scss">
