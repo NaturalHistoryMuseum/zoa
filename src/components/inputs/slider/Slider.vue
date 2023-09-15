@@ -48,55 +48,97 @@
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
-import { getFraction, getHandlePosition, getInitialValue } from './slider.js';
 import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
 
 const props = defineProps({
-  modelValue: {},
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Number,
+  },
+  /**
+   * Text for the input label.
+   */
+  label: {
+    type: String,
+    default: 'Range',
+  },
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
   labelPosition: {
     type: String,
     default: 'above',
   },
-  label: {
-    type: String,
-    default: 'Slider',
-  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 200,
   },
+  /**
+   * Number to set the slider at initially.
+   */
   placeholder: {
-    type: Number,
-    default: 0,
+    type: [Number, undefined],
+    default: null,
   },
-  placeholderPosition: {
-    type: Number,
-    default: 0.5,
-  },
+  /**
+   * The lowest number displayed on the slider.
+   */
   min: {
     type: Number,
     default: 0,
   },
+  /**
+   * The highest number displayed on the slider.
+   */
   max: {
     type: Number,
     default: 100,
   },
+  /**
+   * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place.
+   */
   step: {
     type: Number,
     default: 1,
   },
+  /**
+   * The fraction along the bar to set the value initially (as opposed to setting an explicit number); e.g. 0.5 sets an initial value halfway along the bar.
+   */
+  placeholderPosition: {
+    type: Number,
+    default: 0.5,
+  },
+  /**
+   * The position of the dynamic label displaying the current value (above or below the slider).
+   * @values above, below
+   */
   valueLabelPosition: {
     type: String,
     default: 'below',
   },
+  /**
+   * Do not allow values below this value; the handle will stop at this point, even if the `min` is lower than this.
+   */
   validMin: {
     type: Number,
     default: null,
   },
+  /**
+   * Do not allow values above this point; the handle will stop at this point, even if the `max` is higher than this.
+   */
   validMax: {
     type: Number,
     default: null,
   },
+  /**
+   * Highlight the track to the right of the handle rather than the left.
+   */
   activeTrackRight: {
     type: Boolean,
     default: false,
@@ -105,7 +147,17 @@ const props = defineProps({
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {number} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { value } = useChangeEmits(emit, props);
 
 // REFS
@@ -152,14 +204,56 @@ const activeTrackStyle = computed(() => {
 });
 
 const fraction = computed(() => {
-  return getFraction(value.value, props);
+  return (value.value - props.min) / (props.max - props.min);
 });
 
 const handlePosition = computed(() => {
-  return getHandlePosition(slider.value, fraction.value, valueLabel.value);
+  return getHandlePosition();
 });
 
 // FUNCTIONS
+function getHandlePosition() {
+  // the center of the slider is slightly offset to account for the size of the
+  // handle. this calculates the position of the middle of the handle along the
+  // track, accounting for the offset.
+  try {
+    const trackWidth = slider.value.clientWidth;
+    const handleWidth = 24; // set in CSS; including border!
+
+    // force update the inner text before the label width is calculated
+    if (valueLabel.value) {
+      valueLabel.value.innerText = valueLabelText.value;
+    }
+    const labelWidth = valueLabel.value ? valueLabel.value.clientWidth : 0;
+
+    const halfTrack = trackWidth / 2;
+    const currentPosition = fraction.value * trackWidth;
+    const centerOffset = (currentPosition - halfTrack) / halfTrack;
+    const offset = centerOffset * (handleWidth / 2);
+    const labelOffset = offset + labelWidth / 2;
+    const percentOffset = offset / trackWidth;
+    return {
+      handle: ((fraction.value - percentOffset) * 100).toFixed(2),
+      label: ((fraction.value - labelOffset / trackWidth) * 100).toFixed(2),
+    };
+  } catch {
+    // in case we can't get the clientWidth
+    const pos = fraction.value * 100;
+    return { handle: pos.toFixed(2), label: pos.toFixed(2) };
+  }
+}
+
+function getInitialValue() {
+  if (props.placeholder !== null && props.placeholder !== undefined) {
+    return props.placeholder;
+  }
+  let range = props.max - props.min;
+  let exactMidpoint = range / (1 / props.placeholderPosition);
+  let stepDeviation = exactMidpoint % props.step;
+  let stepMidpoint = exactMidpoint - stepDeviation;
+  return stepMidpoint + props.min;
+}
+
 function stepUp() {
   if (value.value === props.max) {
     return;
@@ -231,13 +325,7 @@ watch(value, (newValue) => {
 });
 
 // set an initial value
-value.value = getInitialValue(
-  props.min,
-  props.max,
-  props.step,
-  props.placeholder,
-  props.placeholderPosition,
-);
+value.value = getInitialValue();
 </script>
 
 <style module lang="scss">

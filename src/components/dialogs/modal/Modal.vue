@@ -12,6 +12,7 @@
         <h2>{{ header }}</h2>
       </div>
       <div :class="$style.content">
+        <!-- @slot The main content of the modal; overrides the message prop. -->
         <slot>
           {{ message }}
         </slot>
@@ -27,14 +28,24 @@ import FontAwesomeIcon from '../../../icons.js';
 import { ref } from 'vue';
 
 const props = defineProps({
+  /**
+   * The type of message being displayed.
+   * @values info, success, warning, error
+   */
   kind: {
     type: String,
     default: 'info',
   },
+  /**
+   * The header for the modal.
+   */
   header: {
     type: String,
     default: 'Here is an informational message.',
   },
+  /**
+   * The body of the modal. Overridden by the default slot.
+   */
   message: {
     type: String,
     default:
@@ -50,7 +61,16 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['opened', 'closed']);
+const emit = defineEmits([
+  /**
+   * Modal opened.
+   */
+  'opened',
+  /**
+   * Modal closed.
+   */
+  'closed',
+]);
 
 const { icon } = useKindIcon(props);
 const modal = ref(null);

@@ -2,6 +2,7 @@
   <button
     :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"
   >
+    <!-- @slot Text for the button; overrides the label prop. -->
     <slot>
       {{ label }}
     </slot>
@@ -10,14 +11,25 @@
 
 <script setup>
 const props = defineProps({
+  /**
+   * The text for the button; overridden by the default slot.
+   */
   label: {
     type: String,
     default: 'Button',
   },
+  /**
+   * The appearance class of the button.
+   * @values normal, primary
+   */
   kind: {
     type: String,
     default: 'normal',
   },
+  /**
+   * The size class of the button.
+   * @values sm, md
+   */
   size: {
     type: String,
     default: 'md',

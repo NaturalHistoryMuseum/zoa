@@ -7,10 +7,14 @@ const meta = {
     kind: {
       control: 'select',
       options: ['info', 'warning', 'success', 'error'],
-      default: 'normal',
     },
-    header: {
-      control: 'text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A flash dialog for displaying alert messages within the body of the page.',
+      },
     },
   },
 };

@@ -101,40 +101,56 @@ import datenames from 'date-names';
 import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
-  modelValue: {},
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Object,
+  },
+  /**
+   * Text for the input label.
+   */
+  label: {
+    type: String,
+    default: 'Date',
+  },
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
   labelPosition: {
     type: String,
     default: 'above',
   },
-  label: {
-    type: String,
-    default: 'Number',
-  },
-  placeholder: {
-    type: String,
-    default: null,
-  },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 200,
   },
-  min: {
+  /**
+   * Text to display in the blank input.
+   */
+  placeholder: {
     type: String,
     default: null,
-  },
-  max: {
-    type: String,
-    default: null,
-  },
-  step: {
-    type: String,
-    default: 'any',
   },
 });
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {object} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { valueChanged } = useChangeEmits(emit, props.delay);
 
 // STATE

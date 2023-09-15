@@ -4,17 +4,21 @@ const meta = {
   component: ZoaNumber,
   title: 'Components/Inputs/Number',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Number',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A number select component.',
+      },
     },
   },
 };
@@ -24,6 +28,7 @@ export default meta;
 const Base = {
   args: {
     label: 'Number',
+    labelPosition: 'above',
   },
   render: (args) => ({
     components: { ZoaNumber },

@@ -7,10 +7,17 @@ const meta = {
     kind: {
       control: 'select',
       options: ['normal', 'primary'],
-      default: 'normal',
     },
-    label: {
-      control: 'text',
+    size: {
+      control: 'select',
+      options: ['sm', 'md'],
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A button.',
+      },
     },
   },
 };
@@ -20,6 +27,7 @@ export default meta;
 const Base = {
   args: {
     label: 'Button',
+    size: 'md',
   },
   render: (args) => ({
     components: { ZoaButton },

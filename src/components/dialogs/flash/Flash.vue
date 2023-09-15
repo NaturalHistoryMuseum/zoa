@@ -5,6 +5,7 @@
       <h2>{{ header }}</h2>
     </div>
     <div :class="$style.content">
+      <!-- @slot The main content of the flash message; overrides the message prop. -->
       <slot>
         {{ message }}
       </slot>
@@ -17,14 +18,24 @@ import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
 
 const props = defineProps({
+  /**
+   * The type of message being displayed.
+   * @values info, success, warning, error
+   */
   kind: {
     type: String,
     default: 'info',
   },
+  /**
+   * The header for the flash message.
+   */
   header: {
     type: String,
     default: 'Here is an informational message.',
   },
+  /**
+   * The body of the flash message. Overridden by the default slot.
+   */
   message: {
     type: String,
     default:

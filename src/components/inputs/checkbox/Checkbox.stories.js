@@ -4,17 +4,21 @@ const meta = {
   component: ZoaCheckbox,
   title: 'Components/Inputs/Checkbox',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Checkbox',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A single checkbox with an optional label.',
+      },
     },
   },
 };
@@ -23,8 +27,8 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
     label: 'Checkbox',
+    labelPosition: 'left',
   },
   render: (args) => ({
     components: { ZoaCheckbox },
