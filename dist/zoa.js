@@ -1,13 +1,13 @@
-import { openBlock as T, createElementBlock as S, normalizeClass as _, renderSlot as we, createTextVNode as Q, toDisplayString as D, ref as $, computed as A, unref as h, createCommentVNode as H, withDirectives as ee, createElementVNode as O, isRef as te, vModelText as se, watch as J, customRef as mt, getCurrentScope as ft, onScopeDispose as pt, Fragment as K, renderList as q, defineComponent as De, h as je, vModelSelect as bt, createVNode as G, createBlock as ge, withCtx as Te, normalizeStyle as He, mergeProps as ht } from "vue";
-import { parse as me, icon as yt, config as Ye, text as gt, library as Tt } from "@fortawesome/fontawesome-svg-core";
-import { faCircleXmark as vt, faXmark as Et, faCircleInfo as St, faCircleExclamation as Ot, faCircleCheck as At, faCircleQuestion as Nt, faCheck as It, faCaretDown as $t } from "@fortawesome/free-solid-svg-icons";
+import { openBlock as v, createElementBlock as S, normalizeClass as _, renderSlot as Me, createTextVNode as ee, toDisplayString as D, ref as w, computed as A, unref as h, createCommentVNode as P, withDirectives as te, createElementVNode as E, isRef as ne, vModelText as ie, watch as q, customRef as ft, getCurrentScope as mt, onScopeDispose as pt, Fragment as X, renderList as Q, defineComponent as Ce, h as Ke, vModelSelect as bt, createVNode as G, createBlock as Te, withCtx as Ee, normalizeStyle as Le, mergeProps as ht } from "vue";
+import { parse as me, icon as yt, config as Xe, text as gt, library as vt } from "@fortawesome/fontawesome-svg-core";
+import { faCircleXmark as Tt, faXmark as Et, faCircleInfo as Ot, faCircleExclamation as St, faCircleCheck as At, faCircleQuestion as Nt, faCheck as It, faCaretDown as $t } from "@fortawesome/free-solid-svg-icons";
 const Rt = "zoa__7U7z2__main", wt = {
   main: Rt,
   "kind--normal": "zoa__wSMFS__kind--normal",
   "kind--primary": "zoa__MVt5D__kind--primary",
   "size--sm": "zoa__Fg-Hw__size--sm",
   "size--md": "zoa__We5yW__size--md"
-}, z = (e, t) => {
+}, L = (e, t) => {
   const n = e.__vccOpts || e;
   for (const [o, a] of t)
     n[o] = a;
@@ -15,90 +15,101 @@ const Rt = "zoa__7U7z2__main", wt = {
 }, Dt = {
   __name: "Button",
   props: {
+    /**
+     * The text for the button; overridden by the default slot.
+     */
     label: {
       type: String,
       default: "Button"
     },
+    /**
+     * The appearance class of the button.
+     * @values normal, primary
+     */
     kind: {
       type: String,
       default: "normal"
     },
+    /**
+     * The size class of the button.
+     * @values sm, md
+     */
     size: {
       type: String,
       default: "md"
     }
   },
   setup(e) {
-    return (t, n) => (T(), S("button", {
+    return (t, n) => (v(), S("button", {
       class: _([t.$style.main, t.$style[`kind--${e.kind}`], t.$style[`size--${e.size}`]])
     }, [
-      we(t.$slots, "default", {}, () => [
-        Q(D(e.label), 1)
+      Me(t.$slots, "default", {}, () => [
+        ee(D(e.label), 1)
       ])
     ], 2));
   }
 }, Mt = {
   $style: wt
-}, oe = /* @__PURE__ */ z(Dt, [["__cssModules", Mt]]);
+}, ae = /* @__PURE__ */ L(Dt, [["__cssModules", Mt]]);
 let Ct = (e = 21) => crypto.getRandomValues(new Uint8Array(e)).reduce((t, n) => (n &= 63, n < 36 ? t += n.toString(36) : n < 62 ? t += (n - 26).toString(36).toUpperCase() : n > 62 ? t += "-" : t += "_", t), "");
-function V() {
-  const e = $(Ct(6));
+function j() {
+  const e = w(Ct(6));
   function t(n) {
     return `${e.value}__${n}`;
   }
   return { componentId: e, subId: t };
 }
-const { now: ze } = Date, We = (e, t = 1, n) => {
+const { now: xe } = Date, Ze = (e, t = 1, n) => {
   t = Math.max(1, t);
   const o = (n == null ? void 0 : n.leading) ?? !1, a = (n == null ? void 0 : n.trailing) ?? !0, r = Math.max((n == null ? void 0 : n.maxWait) ?? 1 / 0, t);
   let l, s, i = 0, u = 0;
-  const d = () => {
-    const E = ze(), w = E - i, P = E - u, k = w >= t || P >= r;
-    return [E, k];
-  }, y = (E) => {
-    if (u = E, !l)
+  const f = () => {
+    const O = xe(), d = O - i, k = O - u, R = d >= t || k >= r;
+    return [O, R];
+  }, y = (O) => {
+    if (u = O, !l)
       return;
-    const w = l;
-    l = void 0, e.apply(void 0, w);
-  }, p = () => {
+    const d = l;
+    l = void 0, e.apply(void 0, d);
+  }, m = () => {
     b(0);
-  }, v = () => {
-    s && (p(), y(ze()));
-  }, I = (E) => {
-    if (u = E, o)
-      return y(E);
-  }, g = (E) => {
+  }, T = () => {
+    s && (m(), y(xe()));
+  }, I = (O) => {
+    if (u = O, o)
+      return y(O);
+  }, g = (O) => {
     if (a && l)
-      return y(E);
+      return y(O);
     l = void 0;
-  }, R = () => {
+  }, C = () => {
     s = void 0;
-    const [E, w] = d();
-    return w ? g(E) : c(E);
-  }, c = (E) => {
-    const w = E - i, P = E - u, k = t - w, ye = r - P, Y = Math.min(k, ye);
-    return b(Y);
-  }, b = (E) => {
-    s && clearTimeout(s), !(E <= 0) && (s = setTimeout(R, E));
-  }, m = (...E) => {
-    const [w, P] = d(), k = !!s;
-    if (l = E, i = w, (P || !s) && b(t), P)
-      return k ? y(w) : I(w);
+    const [O, d] = f();
+    return d ? g(O) : c(O);
+  }, c = (O) => {
+    const d = O - i, k = O - u, R = t - d, K = r - k, F = Math.min(R, K);
+    return b(F);
+  }, b = (O) => {
+    s && clearTimeout(s), !(O <= 0) && (s = setTimeout(C, O));
+  }, $ = (...O) => {
+    const [d, k] = f(), R = !!s;
+    if (l = O, i = d, (k || !s) && b(t), k)
+      return R ? y(d) : I(d);
   };
-  return m.cancel = p, m.flush = v, m;
+  return $.cancel = m, $.flush = T, $;
 };
-function j(e, t) {
+function Y(e, t) {
   let n;
   try {
     n = parseInt(t.delay) || 0;
   } catch {
     n = 0;
   }
-  const o = $(null);
+  const o = w(null);
   function a(i) {
     e("change", i);
   }
-  const r = We(a, n);
+  const r = Ze(a, n);
   function l(i) {
     e("update:modelValue", i), o.value = i, r(i);
   }
@@ -126,99 +137,127 @@ const kt = "zoa__qbf-G__input", Ut = "zoa__SIpST__label", Ht = "zoa__wOUkj__grid
 }, Pt = ["id"], Lt = ["for"], xt = ["placeholder", "id"], Gt = {
   __name: "Textbox",
   props: {
-    modelValue: {},
-    labelPosition: {
-      type: String,
-      default: "above"
+    /**
+     * @model
+     */
+    modelValue: {
+      type: String
     },
+    /**
+     * Text for the input label.
+     */
     label: {
       type: String,
       default: "Text"
     },
-    placeholder: {
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
+    labelPosition: {
       type: String,
-      default: null
+      default: "above"
     },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
+    },
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
+      type: [String, void 0],
+      default: null
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {string} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n);
-    return (l, s) => (T(), S("div", {
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n);
+    return (l, s) => (v(), S("div", {
       class: _([l.$style.grid, l.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("textbox"),
         class: _([l.$style.label, l.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, Lt)) : H("", !0),
-      ee(O("input", {
+      }, D(e.label), 11, Lt)) : P("", !0),
+      te(E("input", {
         type: "text",
         placeholder: e.placeholder,
         id: h(a)("textbox"),
         class: _(l.$style.input),
-        "onUpdate:modelValue": s[0] || (s[0] = (i) => te(r) ? r.value = i : null)
+        "onUpdate:modelValue": s[0] || (s[0] = (i) => ne(r) ? r.value = i : null)
       }, null, 10, xt), [
-        [se, h(r)]
+        [ie, h(r)]
       ])
     ], 10, Pt));
   }
 }, Bt = {
   $style: zt
-}, Ft = /* @__PURE__ */ z(Gt, [["__cssModules", Bt]]);
+}, Ft = /* @__PURE__ */ L(Gt, [["__cssModules", Bt]]);
 function Vt(e, t) {
   let n, o, a;
-  const r = $(!0), l = () => {
+  const r = w(!0), l = () => {
     r.value = !0, a();
   };
-  J(e, l, { flush: "sync" });
-  const s = typeof t == "function" ? t : t.get, i = typeof t == "function" ? void 0 : t.set, u = mt((d, y) => (o = d, a = y, {
+  q(e, l, { flush: "sync" });
+  const s = typeof t == "function" ? t : t.get, i = typeof t == "function" ? void 0 : t.set, u = ft((f, y) => (o = f, a = y, {
     get() {
       return r.value && (n = s(), r.value = !1), o(), n;
     },
-    set(p) {
-      i == null || i(p);
+    set(m) {
+      i == null || i(m);
     }
   }));
   return Object.isExtensible(u) && (u.trigger = l), u;
 }
 function jt(e) {
-  return ft() ? (pt(e), !0) : !1;
+  return mt() ? (pt(e), !0) : !1;
 }
-function Me(e) {
+function ke(e) {
   return typeof e == "function" ? e() : h(e);
 }
-const Ke = typeof window < "u" && typeof document < "u", Yt = Object.prototype.toString, Wt = (e) => Yt.call(e) === "[object Object]", Oe = () => {
+const Je = typeof window < "u" && typeof document < "u", Yt = Object.prototype.toString, Wt = (e) => Yt.call(e) === "[object Object]", Ne = () => {
 }, Kt = /* @__PURE__ */ Xt();
 function Xt() {
   var e;
-  return Ke && ((e = window == null ? void 0 : window.navigator) == null ? void 0 : e.userAgent) && /* @__PURE__ */ /iP(ad|hone|od)/.test(window.navigator.userAgent);
+  return Je && ((e = window == null ? void 0 : window.navigator) == null ? void 0 : e.userAgent) && /* @__PURE__ */ /iP(ad|hone|od)/.test(window.navigator.userAgent);
 }
-function X(e) {
+function Z(e) {
   var t;
-  const n = Me(e);
+  const n = ke(e);
   return (t = n == null ? void 0 : n.$el) != null ? t : n;
 }
-const pe = Ke ? window : void 0;
+const be = Je ? window : void 0;
 function W(...e) {
   let t, n, o, a;
-  if (typeof e[0] == "string" || Array.isArray(e[0]) ? ([n, o, a] = e, t = pe) : [t, n, o, a] = e, !t)
-    return Oe;
+  if (typeof e[0] == "string" || Array.isArray(e[0]) ? ([n, o, a] = e, t = be) : [t, n, o, a] = e, !t)
+    return Ne;
   Array.isArray(n) || (n = [n]), Array.isArray(o) || (o = [o]);
   const r = [], l = () => {
-    r.forEach((d) => d()), r.length = 0;
-  }, s = (d, y, p, v) => (d.addEventListener(y, p, v), () => d.removeEventListener(y, p, v)), i = J(
-    () => [X(t), Me(a)],
-    ([d, y]) => {
-      if (l(), !d)
+    r.forEach((f) => f()), r.length = 0;
+  }, s = (f, y, m, T) => (f.addEventListener(y, m, T), () => f.removeEventListener(y, m, T)), i = q(
+    () => [Z(t), ke(a)],
+    ([f, y]) => {
+      if (l(), !f)
         return;
-      const p = Wt(y) ? { ...y } : y;
+      const m = Wt(y) ? { ...y } : y;
       r.push(
-        ...n.flatMap((v) => o.map((I) => s(d, v, I, p)))
+        ...n.flatMap((T) => o.map((I) => s(f, T, I, m)))
       );
     },
     { immediate: !0, flush: "post" }
@@ -227,65 +266,65 @@ function W(...e) {
   };
   return jt(u), u;
 }
-let Pe = !1;
-function Xe(e, t, n = {}) {
-  const { window: o = pe, ignore: a = [], capture: r = !0, detectIframe: l = !1 } = n;
+let Ge = !1;
+function qe(e, t, n = {}) {
+  const { window: o = be, ignore: a = [], capture: r = !0, detectIframe: l = !1 } = n;
   if (!o)
     return;
-  Kt && !Pe && (Pe = !0, Array.from(o.document.body.children).forEach((p) => p.addEventListener("click", Oe)), o.document.documentElement.addEventListener("click", Oe));
+  Kt && !Ge && (Ge = !0, Array.from(o.document.body.children).forEach((m) => m.addEventListener("click", Ne)), o.document.documentElement.addEventListener("click", Ne));
   let s = !0;
-  const i = (p) => a.some((v) => {
-    if (typeof v == "string")
-      return Array.from(o.document.querySelectorAll(v)).some((I) => I === p.target || p.composedPath().includes(I));
+  const i = (m) => a.some((T) => {
+    if (typeof T == "string")
+      return Array.from(o.document.querySelectorAll(T)).some((I) => I === m.target || m.composedPath().includes(I));
     {
-      const I = X(v);
-      return I && (p.target === I || p.composedPath().includes(I));
+      const I = Z(T);
+      return I && (m.target === I || m.composedPath().includes(I));
     }
-  }), d = [
-    W(o, "click", (p) => {
-      const v = X(e);
-      if (!(!v || v === p.target || p.composedPath().includes(v))) {
-        if (p.detail === 0 && (s = !i(p)), !s) {
+  }), f = [
+    W(o, "click", (m) => {
+      const T = Z(e);
+      if (!(!T || T === m.target || m.composedPath().includes(T))) {
+        if (m.detail === 0 && (s = !i(m)), !s) {
           s = !0;
           return;
         }
-        t(p);
+        t(m);
       }
     }, { passive: !0, capture: r }),
-    W(o, "pointerdown", (p) => {
-      const v = X(e);
-      v && (s = !p.composedPath().includes(v) && !i(p));
+    W(o, "pointerdown", (m) => {
+      const T = Z(e);
+      T && (s = !m.composedPath().includes(T) && !i(m));
     }, { passive: !0 }),
-    l && W(o, "blur", (p) => {
+    l && W(o, "blur", (m) => {
       setTimeout(() => {
-        var v;
-        const I = X(e);
-        ((v = o.document.activeElement) == null ? void 0 : v.tagName) === "IFRAME" && !(I != null && I.contains(o.document.activeElement)) && t(p);
+        var T;
+        const I = Z(e);
+        ((T = o.document.activeElement) == null ? void 0 : T.tagName) === "IFRAME" && !(I != null && I.contains(o.document.activeElement)) && t(m);
       }, 0);
     })
   ].filter(Boolean);
-  return () => d.forEach((p) => p());
+  return () => f.forEach((m) => m());
 }
 function Zt(e) {
   return typeof e == "function" ? e : typeof e == "string" ? (t) => t.key === e : Array.isArray(e) ? (t) => e.includes(t.key) : () => !0;
 }
-function Z(...e) {
+function J(...e) {
   let t, n, o = {};
   e.length === 3 ? (t = e[0], n = e[1], o = e[2]) : e.length === 2 ? typeof e[1] == "object" ? (t = !0, n = e[0], o = e[1]) : (t = e[0], n = e[1]) : (t = !0, n = e[0]);
   const {
-    target: a = pe,
+    target: a = be,
     eventName: r = "keydown",
     passive: l = !1,
     dedupe: s = !1
   } = o, i = Zt(t);
-  return W(a, r, (d) => {
-    d.repeat && Me(s) || i(d) && n(d);
+  return W(a, r, (f) => {
+    f.repeat && ke(s) || i(f) && n(f);
   }, l);
 }
 function Jt(e = {}) {
   var t;
   const {
-    window: n = pe,
+    window: n = be,
     deep: o = !0
   } = e, a = (t = e.document) != null ? t : n == null ? void 0 : n.document, r = () => {
     var s;
@@ -302,8 +341,8 @@ function Jt(e = {}) {
     s.relatedTarget === null && l.trigger();
   }, !0), W(n, "focus", l.trigger, !0)), l;
 }
-function Ze(e, t = {}) {
-  const { initialValue: n = !1, focusVisible: o = !1 } = t, a = $(!1), r = A(() => X(e));
+function Qe(e, t = {}) {
+  const { initialValue: n = !1, focusVisible: o = !1 } = t, a = w(!1), r = A(() => Z(e));
   W(r, "focus", (s) => {
     var i, u;
     (!o || (u = (i = s.target).matches) != null && u.call(i, ":focus-visible")) && (a.value = !0);
@@ -315,7 +354,7 @@ function Ze(e, t = {}) {
       !s && a.value ? (i = r.value) == null || i.blur() : s && !a.value && ((u = r.value) == null || u.focus());
     }
   });
-  return J(
+  return q(
     r,
     () => {
       l.value = n;
@@ -323,8 +362,8 @@ function Ze(e, t = {}) {
     { immediate: !0, flush: "post" }
   ), { focused: l };
 }
-function Je(e, t = {}) {
-  const n = Jt(t), o = A(() => X(e));
+function et(e, t = {}) {
+  const n = Jt(t), o = A(() => Z(e));
   return { focused: A(() => o.value && n.value ? o.value.contains(n.value) : !1) };
 }
 const qt = "zoa__u1jpB__input", Qt = "zoa__K4jZT__label", en = "zoa__wc4xP__grid", tn = "zoa__0mMOV__wrapper", nn = "zoa__FvT7h__options", on = "zoa__hqIBJ__option", an = "zoa__V565X__noOptions", ln = {
@@ -342,127 +381,158 @@ const qt = "zoa__u1jpB__input", Qt = "zoa__K4jZT__label", en = "zoa__wc4xP__grid
   options: nn,
   option: on,
   noOptions: an
-}, rn = ["id"], sn = ["for"], un = ["placeholder", "id"], cn = { key: 0 }, dn = ["onClick"], _n = ["value"], mn = {
+}, rn = ["id"], sn = ["for"], un = ["placeholder", "id"], cn = { key: 0 }, dn = ["onClick"], _n = ["value"], fn = {
   __name: "AutocompleteTextbox",
   props: {
-    modelValue: {},
+    /**
+     * @model
+     */
+    modelValue: {
+      type: String
+    },
+    /**
+     * Text for the input label.
+     */
+    label: {
+      type: String,
+      default: "Autocomplete"
+    },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
     labelPosition: {
       type: String,
       default: "above"
     },
-    label: {
-      type: String,
-      default: "Text"
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
+      type: [String, void 0],
+      default: null
+    },
+    /**
+     * The options available to select. Each item can be a string, or an object with `label` and `value` keys.
+     */
     options: {
       type: Array
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {string} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n), l = A(() => {
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n), l = A(() => {
       let g = [];
-      return n.options.forEach((R) => {
-        typeof R == "object" ? g.push({ label: R.label, value: R.value }) : g.push({ label: R, value: R });
+      return n.options.forEach((C) => {
+        typeof C == "object" ? g.push({ label: C.label, value: C.value }) : g.push({ label: C, value: C });
       }), g;
-    }), s = $(null), i = $(null), u = $(null), d = $(!1), y = Ze(i), p = Je(u);
-    function v() {
+    }), s = w(null), i = w(null), u = w(null), f = w(!1), y = Qe(i), m = et(u);
+    function T() {
       try {
         s.value.blur(), i.value.blur(), u.value.blur();
       } catch {
       }
-      d.value = !1;
+      f.value = !1;
     }
-    Xe(s, () => {
-      d.value = !1;
-    }), Z("ArrowDown", () => {
+    qe(s, () => {
+      f.value = !1;
+    }), J("ArrowDown", () => {
       if (l.value.length !== 0) {
         if (y.focused.value)
           u.value.children[0].children[0].focus();
-        else if (p.focused.value) {
+        else if (m.focused.value) {
           const g = u.value.querySelector("li:focus");
           !g || !g.nextElementSibling ? u.value.children[0].children[0].focus() : g.nextElementSibling.focus();
         }
       }
-    }), Z("ArrowUp", () => {
-      if (l.value.length !== 0 && p.focused.value) {
+    }), J("ArrowUp", () => {
+      if (l.value.length !== 0 && m.focused.value) {
         const g = u.value.querySelector("li:focus");
         !g || !g.previousElementSibling ? i.value.focus() : g.previousElementSibling.focus();
       }
-    }), Z("Enter", () => {
-      if (p.focused.value) {
+    }), J("Enter", () => {
+      if (m.focused.value) {
         const g = u.value.querySelector("li:focus");
         g && I(g.querySelector("input").value);
       }
-      v();
+      T();
     });
     function I(g) {
-      r.value = g, v();
+      r.value = g, T();
     }
-    return (g, R) => (T(), S("div", {
+    return (g, C) => (v(), S("div", {
       class: _([g.$style.grid, g.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("textbox"),
         class: _([g.$style.label, g.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, sn)) : H("", !0),
-      O("div", {
+      }, D(e.label), 11, sn)) : P("", !0),
+      E("div", {
         class: _(g.$style.wrapper),
         ref_key: "container",
         ref: s
       }, [
-        ee(O("input", {
+        te(E("input", {
           type: "text",
           placeholder: e.placeholder,
           id: h(a)("textbox"),
           class: _(g.$style.input),
-          "onUpdate:modelValue": R[0] || (R[0] = (c) => te(r) ? r.value = c : null),
-          onFocusin: R[1] || (R[1] = (c) => d.value = !0),
+          "onUpdate:modelValue": C[0] || (C[0] = (c) => ne(r) ? r.value = c : null),
+          onFocusin: C[1] || (C[1] = (c) => f.value = !0),
           ref_key: "textbox",
           ref: i
         }, null, 42, un), [
-          [se, h(r)]
+          [ie, h(r)]
         ]),
-        d.value ? (T(), S("div", {
+        f.value ? (v(), S("div", {
           key: 0,
           class: _(g.$style.options),
           ref_key: "dropdown",
           ref: u
         }, [
-          l.value.length > 0 ? (T(), S("ul", cn, [
-            (T(!0), S(K, null, q(l.value, (c) => (T(), S("li", {
+          l.value.length > 0 ? (v(), S("ul", cn, [
+            (v(!0), S(X, null, Q(l.value, (c) => (v(), S("li", {
               class: _(g.$style.option),
               onClick: (b) => I(c.value),
               tabindex: "0"
             }, [
-              O("span", null, D(c.label), 1),
-              O("input", {
+              E("span", null, D(c.label), 1),
+              E("input", {
                 type: "hidden",
                 value: c.value
               }, null, 8, _n)
             ], 10, dn))), 256))
-          ])) : (T(), S("div", {
+          ])) : (v(), S("div", {
             key: 1,
             class: _(g.$style.noOptions)
           }, "No options found", 2))
-        ], 2)) : H("", !0)
+        ], 2)) : P("", !0)
       ], 2)
     ], 10, rn));
   }
-}, fn = {
+}, mn = {
   $style: ln
-}, pn = /* @__PURE__ */ z(mn, [["__cssModules", fn]]);
-function Le(e, t) {
+}, pn = /* @__PURE__ */ L(fn, [["__cssModules", mn]]);
+function Be(e, t) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -475,23 +545,23 @@ function Le(e, t) {
 function x(e) {
   for (var t = 1; t < arguments.length; t++) {
     var n = arguments[t] != null ? arguments[t] : {};
-    t % 2 ? Le(Object(n), !0).forEach(function(o) {
-      U(e, o, n[o]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : Le(Object(n)).forEach(function(o) {
+    t % 2 ? Be(Object(n), !0).forEach(function(o) {
+      z(e, o, n[o]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : Be(Object(n)).forEach(function(o) {
       Object.defineProperty(e, o, Object.getOwnPropertyDescriptor(n, o));
     });
   }
   return e;
 }
-function fe(e) {
+function pe(e) {
   "@babel/helpers - typeof";
-  return fe = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(t) {
+  return pe = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(t) {
     return typeof t;
   } : function(t) {
     return t && typeof Symbol == "function" && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-  }, fe(e);
+  }, pe(e);
 }
-function U(e, t, n) {
+function z(e, t, n) {
   return t in e ? Object.defineProperty(e, t, {
     value: n,
     enumerable: !0,
@@ -518,61 +588,61 @@ function hn(e, t) {
   }
   return n;
 }
-function Ae(e) {
-  return yn(e) || gn(e) || Tn(e) || vn();
+function Ie(e) {
+  return yn(e) || gn(e) || vn(e) || Tn();
 }
 function yn(e) {
   if (Array.isArray(e))
-    return Ne(e);
+    return $e(e);
 }
 function gn(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
-function Tn(e, t) {
+function vn(e, t) {
   if (e) {
     if (typeof e == "string")
-      return Ne(e, t);
+      return $e(e, t);
     var n = Object.prototype.toString.call(e).slice(8, -1);
     if (n === "Object" && e.constructor && (n = e.constructor.name), n === "Map" || n === "Set")
       return Array.from(e);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-      return Ne(e, t);
+      return $e(e, t);
   }
 }
-function Ne(e, t) {
+function $e(e, t) {
   (t == null || t > e.length) && (t = e.length);
   for (var n = 0, o = new Array(t); n < t; n++)
     o[n] = e[n];
   return o;
 }
-function vn() {
+function Tn() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, qe = { exports: {} };
+var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, tt = { exports: {} };
 (function(e) {
   (function(t) {
-    var n = function(c, b, m) {
-      if (!u(b) || y(b) || p(b) || v(b) || i(b))
+    var n = function(c, b, $) {
+      if (!u(b) || y(b) || m(b) || T(b) || i(b))
         return b;
-      var E, w = 0, P = 0;
-      if (d(b))
-        for (E = [], P = b.length; w < P; w++)
-          E.push(n(c, b[w], m));
+      var O, d = 0, k = 0;
+      if (f(b))
+        for (O = [], k = b.length; d < k; d++)
+          O.push(n(c, b[d], $));
       else {
-        E = {};
-        for (var k in b)
-          Object.prototype.hasOwnProperty.call(b, k) && (E[c(k, m)] = n(c, b[k], m));
+        O = {};
+        for (var R in b)
+          Object.prototype.hasOwnProperty.call(b, R) && (O[c(R, $)] = n(c, b[R], $));
       }
-      return E;
+      return O;
     }, o = function(c, b) {
       b = b || {};
-      var m = b.separator || "_", E = b.split || /(?=[A-Z])/;
-      return c.split(E).join(m);
+      var $ = b.separator || "_", O = b.split || /(?=[A-Z])/;
+      return c.split(O).join($);
     }, a = function(c) {
-      return I(c) ? c : (c = c.replace(/[\-_\s]+(.)?/g, function(b, m) {
-        return m ? m.toUpperCase() : "";
+      return I(c) ? c : (c = c.replace(/[\-_\s]+(.)?/g, function(b, $) {
+        return $ ? $.toUpperCase() : "";
       }), c.substr(0, 1).toLowerCase() + c.substr(1));
     }, r = function(c) {
       var b = a(c);
@@ -583,22 +653,22 @@ var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
       return typeof c == "function";
     }, u = function(c) {
       return c === Object(c);
-    }, d = function(c) {
+    }, f = function(c) {
       return s.call(c) == "[object Array]";
     }, y = function(c) {
       return s.call(c) == "[object Date]";
-    }, p = function(c) {
+    }, m = function(c) {
       return s.call(c) == "[object RegExp]";
-    }, v = function(c) {
+    }, T = function(c) {
       return s.call(c) == "[object Boolean]";
     }, I = function(c) {
       return c = c - 0, c === c;
     }, g = function(c, b) {
-      var m = b && "process" in b ? b.process : b;
-      return typeof m != "function" ? c : function(E, w) {
-        return m(E, c, w);
+      var $ = b && "process" in b ? b.process : b;
+      return typeof $ != "function" ? c : function(O, d) {
+        return $(O, c, d);
       };
-    }, R = {
+    }, C = {
       camelize: a,
       decamelize: l,
       pascalize: r,
@@ -616,17 +686,17 @@ var En = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
         return this.decamelizeKeys.apply(this, arguments);
       }
     };
-    e.exports ? e.exports = R : t.humps = R;
+    e.exports ? e.exports = C : t.humps = C;
   })(En);
-})(qe);
-var Sn = qe.exports, On = ["class", "style"];
+})(tt);
+var On = tt.exports, Sn = ["class", "style"];
 function An(e) {
   return e.split(";").map(function(t) {
     return t.trim();
   }).filter(function(t) {
     return t;
   }).reduce(function(t, n) {
-    var o = n.indexOf(":"), a = Sn.camelize(n.slice(0, o)), r = n.slice(o + 1).trim();
+    var o = n.indexOf(":"), a = On.camelize(n.slice(0, o)), r = n.slice(o + 1).trim();
     return t[a] = r, t;
   }, {});
 }
@@ -635,23 +705,23 @@ function Nn(e) {
     return t[n] = !0, t;
   }, {});
 }
-function Ce(e) {
+function Ue(e) {
   var t = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, n = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
   if (typeof e == "string")
     return e;
   var o = (e.children || []).map(function(i) {
-    return Ce(i);
+    return Ue(i);
   }), a = Object.keys(e.attributes || {}).reduce(function(i, u) {
-    var d = e.attributes[u];
+    var f = e.attributes[u];
     switch (u) {
       case "class":
-        i.class = Nn(d);
+        i.class = Nn(f);
         break;
       case "style":
-        i.style = An(d);
+        i.style = An(f);
         break;
       default:
-        i.attrs[u] = d;
+        i.attrs[u] = f;
     }
     return i;
   }, {
@@ -660,25 +730,25 @@ function Ce(e) {
     style: {}
   });
   n.class;
-  var r = n.style, l = r === void 0 ? {} : r, s = hn(n, On);
-  return je(e.tag, x(x(x({}, t), {}, {
+  var r = n.style, l = r === void 0 ? {} : r, s = hn(n, Sn);
+  return Ke(e.tag, x(x(x({}, t), {}, {
     class: a.class,
     style: x(x({}, a.style), l)
   }, a.attrs), s), o);
 }
-var Qe = !1;
+var nt = !1;
 try {
-  Qe = !0;
+  nt = !0;
 } catch {
 }
 function In() {
-  if (!Qe && console && typeof console.error == "function") {
+  if (!nt && console && typeof console.error == "function") {
     var e;
     (e = console).error.apply(e, arguments);
   }
 }
-function ae(e, t) {
-  return Array.isArray(t) && t.length > 0 || !Array.isArray(t) && t ? U({}, e, t) : {};
+function le(e, t) {
+  return Array.isArray(t) && t.length > 0 || !Array.isArray(t) && t ? z({}, e, t) : {};
 }
 function $n(e) {
   var t, n = (t = {
@@ -691,21 +761,21 @@ function $n(e) {
     "fa-flip": e.flip === !0,
     "fa-flip-horizontal": e.flip === "horizontal" || e.flip === "both",
     "fa-flip-vertical": e.flip === "vertical" || e.flip === "both"
-  }, U(t, "fa-".concat(e.size), e.size !== null), U(t, "fa-rotate-".concat(e.rotation), e.rotation !== null), U(t, "fa-pull-".concat(e.pull), e.pull !== null), U(t, "fa-swap-opacity", e.swapOpacity), U(t, "fa-bounce", e.bounce), U(t, "fa-shake", e.shake), U(t, "fa-beat", e.beat), U(t, "fa-fade", e.fade), U(t, "fa-beat-fade", e.beatFade), U(t, "fa-flash", e.flash), U(t, "fa-spin-pulse", e.spinPulse), U(t, "fa-spin-reverse", e.spinReverse), t);
+  }, z(t, "fa-".concat(e.size), e.size !== null), z(t, "fa-rotate-".concat(e.rotation), e.rotation !== null), z(t, "fa-pull-".concat(e.pull), e.pull !== null), z(t, "fa-swap-opacity", e.swapOpacity), z(t, "fa-bounce", e.bounce), z(t, "fa-shake", e.shake), z(t, "fa-beat", e.beat), z(t, "fa-fade", e.fade), z(t, "fa-beat-fade", e.beatFade), z(t, "fa-flash", e.flash), z(t, "fa-spin-pulse", e.spinPulse), z(t, "fa-spin-reverse", e.spinReverse), t);
   return Object.keys(n).map(function(o) {
     return n[o] ? o : null;
   }).filter(function(o) {
     return o;
   });
 }
-function xe(e) {
-  if (e && fe(e) === "object" && e.prefix && e.iconName && e.icon)
+function Fe(e) {
+  if (e && pe(e) === "object" && e.prefix && e.iconName && e.icon)
     return e;
   if (me.icon)
     return me.icon(e);
   if (e === null)
     return null;
-  if (fe(e) === "object" && e.prefix && e.iconName)
+  if (pe(e) === "object" && e.prefix && e.iconName)
     return e;
   if (Array.isArray(e) && e.length === 2)
     return {
@@ -718,7 +788,7 @@ function xe(e) {
       iconName: e
     };
 }
-var le = De({
+var re = Ce({
   name: "FontAwesomeIcon",
   props: {
     border: {
@@ -832,34 +902,34 @@ var le = De({
   },
   setup: function(t, n) {
     var o = n.attrs, a = A(function() {
-      return xe(t.icon);
+      return Fe(t.icon);
     }), r = A(function() {
-      return ae("classes", $n(t));
+      return le("classes", $n(t));
     }), l = A(function() {
-      return ae("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
+      return le("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
     }), s = A(function() {
-      return ae("mask", xe(t.mask));
+      return le("mask", Fe(t.mask));
     }), i = A(function() {
       return yt(a.value, x(x(x(x({}, r.value), l.value), s.value), {}, {
         symbol: t.symbol,
         title: t.title
       }));
     });
-    J(i, function(d) {
-      if (!d)
+    q(i, function(f) {
+      if (!f)
         return In("Could not find one or more icon(s)", a.value, s.value);
     }, {
       immediate: !0
     });
     var u = A(function() {
-      return i.value ? Ce(i.value.abstract[0], {}, o) : null;
+      return i.value ? Ue(i.value.abstract[0], {}, o) : null;
     });
     return function() {
       return u.value;
     };
   }
 });
-De({
+Ce({
   name: "FontAwesomeLayers",
   props: {
     fixedWidth: {
@@ -868,17 +938,17 @@ De({
     }
   },
   setup: function(t, n) {
-    var o = n.slots, a = Ye.familyPrefix, r = A(function() {
-      return ["".concat(a, "-layers")].concat(Ae(t.fixedWidth ? ["".concat(a, "-fw")] : []));
+    var o = n.slots, a = Xe.familyPrefix, r = A(function() {
+      return ["".concat(a, "-layers")].concat(Ie(t.fixedWidth ? ["".concat(a, "-fw")] : []));
     });
     return function() {
-      return je("div", {
+      return Ke("div", {
         class: r.value
       }, o.default ? o.default() : []);
     };
   }
 });
-De({
+Ce({
   name: "FontAwesomeLayersText",
   props: {
     value: {
@@ -902,26 +972,26 @@ De({
     }
   },
   setup: function(t, n) {
-    var o = n.attrs, a = Ye.familyPrefix, r = A(function() {
-      return ae("classes", [].concat(Ae(t.counter ? ["".concat(a, "-layers-counter")] : []), Ae(t.position ? ["".concat(a, "-layers-").concat(t.position)] : [])));
+    var o = n.attrs, a = Xe.familyPrefix, r = A(function() {
+      return le("classes", [].concat(Ie(t.counter ? ["".concat(a, "-layers-counter")] : []), Ie(t.position ? ["".concat(a, "-layers-").concat(t.position)] : [])));
     }), l = A(function() {
-      return ae("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
+      return le("transform", typeof t.transform == "string" ? me.transform(t.transform) : t.transform);
     }), s = A(function() {
-      var u = gt(t.value.toString(), x(x({}, l.value), r.value)), d = u.abstract;
-      return t.counter && (d[0].attributes.class = d[0].attributes.class.replace("fa-layers-text", "")), d[0];
+      var u = gt(t.value.toString(), x(x({}, l.value), r.value)), f = u.abstract;
+      return t.counter && (f[0].attributes.class = f[0].attributes.class.replace("fa-layers-text", "")), f[0];
     }), i = A(function() {
-      return Ce(s.value, {}, o);
+      return Ue(s.value, {}, o);
     });
     return function() {
       return i.value;
     };
   }
 });
-Tt.add(
-  vt,
+vt.add(
+  Tt,
   Et,
-  St,
   Ot,
+  St,
   At,
   Nt,
   It,
@@ -940,186 +1010,282 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
   "grid--right": "zoa__Clcgi__grid--right",
   wrapper: Mn,
   arrow: Cn
-}, Un = ["id"], Hn = ["for"], zn = ["id"], Pn = { value: "opt.value" }, Ln = {
+}, Un = ["id"], Hn = ["for"], zn = ["id"], Pn = { value: null }, Ln = ["value"], xn = {
   __name: "Dropdown",
   props: {
-    modelValue: {},
-    labelPosition: {
-      type: String,
-      default: "above"
+    /**
+     * @model
+     */
+    modelValue: {
+      type: String
     },
+    /**
+     * Text for the input label.
+     */
     label: {
       type: String,
       default: "Dropdown"
     },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
+    labelPosition: {
+      type: String,
+      default: "above"
+    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 0
     },
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
+      type: String,
+      default: "Please choose an option"
+    },
+    /**
+     * The options available to select. Each item can be a string, or an object with `label` and `value` keys.
+     */
     options: {
       type: Array
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {string} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), r = A(() => {
+    const n = e, { componentId: o, subId: a } = j(), r = A(() => {
       let s = [];
       return n.options.forEach((i) => {
         typeof i == "object" ? s.push({ label: i.label, value: i.value }) : s.push({ label: i, value: i });
       }), s;
-    }), { value: l } = j(t, n);
-    return (s, i) => (T(), S("div", {
+    }), { value: l } = Y(t, n);
+    return (s, i) => (v(), S("div", {
       class: _([s.$style.grid, s.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("dropdown"),
         class: _([s.$style.label, s.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, Hn)) : H("", !0),
-      O("div", {
+      }, D(e.label), 11, Hn)) : P("", !0),
+      E("div", {
         class: _(s.$style.wrapper)
       }, [
-        ee(O("select", {
+        te(E("select", {
           id: h(a)("dropdown"),
           class: _(s.$style.input),
-          "onUpdate:modelValue": i[0] || (i[0] = (u) => te(l) ? l.value = u : null)
+          "onUpdate:modelValue": i[0] || (i[0] = (u) => ne(l) ? l.value = u : null)
         }, [
-          (T(!0), S(K, null, q(r.value, (u) => (T(), S("option", Pn, D(u.label), 1))), 256))
+          E("option", Pn, D(e.placeholder), 1),
+          (v(!0), S(X, null, Q(r.value, (u) => (v(), S("option", {
+            value: u.value
+          }, D(u.label), 9, Ln))), 256))
         ], 10, zn), [
           [bt, h(l)]
         ]),
-        G(h(le), {
+        G(h(re), {
           icon: "fa-solid fa-caret-down",
           class: _(s.$style.arrow)
         }, null, 8, ["class"])
       ], 2)
     ], 10, Un));
   }
-}, xn = {
+}, Gn = {
   $style: kn
-}, Gn = /* @__PURE__ */ z(Ln, [["__cssModules", xn]]), Bn = "zoa__EjsEt__input", Fn = "zoa__A3qeJ__label", Vn = "zoa__J-EVV__grid", jn = "zoa__3vUBH__defaultCheckbox", Yn = "zoa__uHbf1__checkbox", Wn = "zoa__6OoQN__check", Kn = {
-  input: Bn,
-  label: Fn,
+}, Bn = /* @__PURE__ */ L(xn, [["__cssModules", Gn]]), Fn = "zoa__EjsEt__input", Vn = "zoa__A3qeJ__label", jn = "zoa__J-EVV__grid", Yn = "zoa__3vUBH__defaultCheckbox", Wn = "zoa__uHbf1__checkbox", Kn = "zoa__6OoQN__check", Xn = {
+  input: Fn,
+  label: Vn,
   "label--right": "zoa__pku0V__label--right",
   "label--below": "zoa__U-wXq__label--below",
   "label--above": "zoa__bglwu__label--above",
-  grid: Vn,
+  grid: jn,
   "grid--above": "zoa__xWwl6__grid--above",
   "grid--below": "zoa__MxvdG__grid--below",
   "grid--left": "zoa__ePg1o__grid--left",
   "grid--right": "zoa__dovWb__grid--right",
-  defaultCheckbox: jn,
-  checkbox: Yn,
-  check: Wn
-}, Xn = ["id", "for"], Zn = ["id"], Jn = {
+  defaultCheckbox: Yn,
+  checkbox: Wn,
+  check: Kn
+}, Zn = ["id", "for"], Jn = ["id"], qn = {
   __name: "Checkbox",
   props: {
-    modelValue: {},
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Boolean
+    },
+    /**
+     * Text for the input label.
+     */
+    label: {
+      type: String,
+      default: "Checkbox"
+    },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
     labelPosition: {
       type: String,
       default: "left"
     },
-    label: {
-      type: String,
-      default: "Text"
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 0
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {boolean} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n);
-    return (l, s) => (T(), S("label", {
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n);
+    return (l, s) => (v(), S("label", {
       id: h(o),
       for: h(a)("checkbox"),
       class: _([l.$style.grid, l.$style[`grid--${e.labelPosition}`]])
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("span", {
+      e.label && e.labelPosition !== "none" ? (v(), S("span", {
         key: 0,
         class: _([l.$style.label, l.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 3)) : H("", !0),
-      O("input", {
+      }, D(e.label), 3)) : P("", !0),
+      E("input", {
         type: "checkbox",
         id: h(a)("checkbox"),
         class: _(l.$style.defaultCheckbox),
         onChange: s[0] || (s[0] = (...i) => h(r) && h(r)(...i))
-      }, null, 42, Zn),
-      O("span", {
+      }, null, 42, Jn),
+      E("span", {
         class: _(l.$style.checkbox)
       }, [
-        G(h(le), {
+        G(h(re), {
           icon: "fa-solid fa-check",
           class: _(l.$style.check)
         }, null, 8, ["class"])
       ], 2)
-    ], 10, Xn));
+    ], 10, Zn));
   }
-}, qn = {
-  $style: Kn
-}, Qn = /* @__PURE__ */ z(Jn, [["__cssModules", qn]]), eo = "zoa__79mQo__input", to = "zoa__WTN5H__label", no = "zoa__DqiKb__grid", oo = {
-  input: eo,
-  label: to,
+}, Qn = {
+  $style: Xn
+}, eo = /* @__PURE__ */ L(qn, [["__cssModules", Qn]]), to = "zoa__79mQo__input", no = "zoa__WTN5H__label", oo = "zoa__DqiKb__grid", ao = {
+  input: to,
+  label: no,
   "label--right": "zoa__iMSda__label--right",
   "label--below": "zoa__r6OsR__label--below",
   "label--above": "zoa__iXvOz__label--above",
-  grid: no,
+  grid: oo,
   "grid--above": "zoa__9WSIP__grid--above",
   "grid--below": "zoa__iK09A__grid--below",
   "grid--left": "zoa__KhHio__grid--left",
   "grid--right": "zoa__M6mbm__grid--right"
-}, ao = ["id"], lo = ["for"], ro = ["placeholder", "min", "max", "step", "id"], so = {
+}, lo = ["id"], ro = ["for"], so = ["placeholder", "min", "max", "step", "id"], io = {
   __name: "Number",
   props: {
-    modelValue: {},
-    labelPosition: {
-      type: String,
-      default: "above"
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Number
     },
+    /**
+     * Text for the input label.
+     */
     label: {
       type: String,
       default: "Number"
     },
-    placeholder: {
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
+    labelPosition: {
       type: String,
-      default: 0
+      default: "above"
     },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
+      type: Number,
+      default: 0
+    },
+    /**
+     * The lowest valid number.
+     */
     min: {
       type: Number,
       default: null
     },
+    /**
+     * The highest valid number.
+     */
     max: {
       type: Number,
       default: null
     },
+    /**
+     * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place.
+     */
     step: {
       type: Number,
-      default: 0.1
+      default: 1
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {number} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n);
-    return (l, s) => (T(), S("div", {
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n);
+    return (l, s) => (v(), S("div", {
       class: _([l.$style.grid, l.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("number"),
         class: _([l.$style.label, l.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, lo)) : H("", !0),
-      ee(O("input", {
+      }, D(e.label), 11, ro)) : P("", !0),
+      te(E("input", {
         type: "number",
         placeholder: e.placeholder,
         min: e.min,
@@ -1127,71 +1293,108 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
         step: e.step,
         id: h(a)("number"),
         class: _(l.$style.input),
-        "onUpdate:modelValue": s[0] || (s[0] = (i) => te(r) ? r.value = i : null)
-      }, null, 10, ro), [
-        [se, h(r)]
+        "onUpdate:modelValue": s[0] || (s[0] = (i) => ne(r) ? r.value = i : null)
+      }, null, 10, so), [
+        [ie, h(r)]
       ])
-    ], 10, ao));
+    ], 10, lo));
   }
-}, io = {
-  $style: oo
-}, _e = /* @__PURE__ */ z(so, [["__cssModules", io]]), uo = "zoa__BWNey__input", co = "zoa__EwgZe__label", _o = "zoa__Xjves__grid", mo = {
-  input: uo,
-  label: co,
+}, uo = {
+  $style: ao
+}, fe = /* @__PURE__ */ L(io, [["__cssModules", uo]]), co = "zoa__BWNey__input", _o = "zoa__EwgZe__label", fo = "zoa__Xjves__grid", mo = {
+  input: co,
+  label: _o,
   "label--right": "zoa__GxE5U__label--right",
   "label--below": "zoa__K1mOk__label--below",
   "label--above": "zoa__33h7g__label--above",
-  grid: _o,
+  grid: fo,
   "grid--above": "zoa__caz05__grid--above",
   "grid--below": "zoa__pnjLn__grid--below",
   "grid--left": "zoa__utweT__grid--left",
   "grid--right": "zoa__E6CuQ__grid--right"
-}, fo = ["id"], po = ["for"], bo = ["placeholder", "min", "max", "step", "id"], ho = {
+}, po = ["id"], bo = ["for"], ho = ["placeholder", "min", "max", "step", "id"], yo = {
   __name: "DateSimple",
   props: {
-    modelValue: {},
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Object
+    },
+    /**
+     * Text for the input label.
+     */
+    label: {
+      type: String,
+      default: "Date"
+    },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
     labelPosition: {
       type: String,
       default: "above"
     },
-    label: {
-      type: String,
-      default: "Number"
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
+      type: String,
+      default: null
+    },
+    /**
+     * The earliest accepted date, in yyyy-mm-dd format.
+     */
     min: {
       type: String,
       default: null
     },
+    /**
+     * The latest accepted date, in yyyy-mm-dd format.
+     */
     max: {
       type: String,
       default: null
     },
+    /**
+     * The increment size (in days) from the minimum date; e.g. 2 would make every other day valid. `'any'` allows all values.
+     */
     step: {
-      type: String,
+      type: [String, Number],
       default: "any"
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {string} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n);
-    return (l, s) => (T(), S("div", {
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n);
+    return (l, s) => (v(), S("div", {
       class: _([l.$style.grid, l.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("date"),
         class: _([l.$style.label, l.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, po)) : H("", !0),
-      ee(O("input", {
+      }, D(e.label), 11, bo)) : P("", !0),
+      te(E("input", {
         type: "date",
         placeholder: e.placeholder,
         min: e.min,
@@ -1199,16 +1402,16 @@ const Rn = "zoa__c-K88__input", wn = "zoa__XFR4x__label", Dn = "zoa__csc-y__grid
         step: e.step,
         id: h(a)("date"),
         class: _(l.$style.input),
-        "onUpdate:modelValue": s[0] || (s[0] = (i) => te(r) ? r.value = i : null)
-      }, null, 10, bo), [
-        [se, h(r)]
+        "onUpdate:modelValue": s[0] || (s[0] = (i) => ne(r) ? r.value = i : null)
+      }, null, 10, ho), [
+        [ie, h(r)]
       ])
-    ], 10, fo));
+    ], 10, po));
   }
-}, yo = {
+}, go = {
   $style: mo
-}, go = /* @__PURE__ */ z(ho, [["__cssModules", yo]]);
-function et(e) {
+}, vo = /* @__PURE__ */ L(yo, [["__cssModules", go]]);
+function ot(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
 function To(e) {
@@ -1219,25 +1422,25 @@ function To(e) {
     return "en-US";
   }
 }
-var vo = To;
-const Eo = vo;
-let re;
+var Eo = To;
+const Oo = Eo;
+let se;
 if (typeof navigator < "u") {
   const e = navigator;
-  re = Array.isArray(e.languages) ? e.languages[0] : e.language;
+  se = Array.isArray(e.languages) ? e.languages[0] : e.language;
 } else if (typeof process < "u") {
-  const e = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_bac6b1a1-5cc3-4320-8897-c50ad66870d2", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_bac6b1a1-5cc3-4320-8897-c50ad66870d2", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.3", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "675", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.7/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.0/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20230903.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16833", GITHUB_WORKFLOW: "Bump version", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", GITHUB_RUN_ID: "6162916962", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "dd681e360615f88e88cd07282e17f4f692244f6a", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/bump.yml@refs/heads/main", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GOROOT_1_18_X64: "/opt/hostedtoolcache/go/1.18.10/x64", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_db22d2e8-1f98-4e1c-8ce8-4fbcae9ae829", INVOCATION_ID: "c3044c2a5700458196cef7b3ec77cf64", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.12/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "17", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "main", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", STATS_NM: "true", npm_package_version: "0.4.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "dd681e360615f88e88cd07282e17f4f692244f6a", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/main", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_bac6b1a1-5cc3-4320-8897-c50ad66870d2", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.10.0-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_bac6b1a1-5cc3-4320-8897-c50ad66870d2", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_bac6b1a1-5cc3-4320-8897-c50ad66870d2", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
-  re = e.LC_ALL || e.LC_MESSAGES || e.LANG || e.LANGUAGE;
+  const e = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_98cc499d-f92e-42d1-9811-466f6839f12f", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_98cc499d-f92e-42d1-9811-466f6839f12f", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.3", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "ginger/docs", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "573", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.8/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.1/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20230911.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:17680", GITHUB_WORKFLOW: "Build dist (dev/patch)", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", GITHUB_RUN_ID: "6198005739", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "0fbcd993e349ce6831af2d1ab787cbb45d31c4fc", GITHUB_BASE_REF: "dev", ImageOS: "ubuntu22", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/build.yml@refs/heads/dev", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GOROOT_1_18_X64: "/opt/hostedtoolcache/go/1.18.10/x64", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_e5cfa129-afdf-4b52-b1cb-f5743760adea", INVOCATION_ID: "6ad63a20824b462daee8e7d5afa1b392", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.13/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "9", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "dev", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.4.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "0fbcd993e349ce6831af2d1ab787cbb45d31c4fc", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/dev", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_98cc499d-f92e-42d1-9811-466f6839f12f", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "pull_request", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.10.0-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_98cc499d-f92e-42d1-9811-466f6839f12f", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_98cc499d-f92e-42d1-9811-466f6839f12f", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
+  se = e.LC_ALL || e.LC_MESSAGES || e.LANG || e.LANGUAGE;
 }
-re || (re = "en-US");
-var be = Eo(re);
-const tt = {};
+se || (se = "en-US");
+var he = Oo(se);
+const at = {};
 for (let e = 1; e < 100; e++) {
   const t = (e < 9 ? "0" : "") + e;
-  tt[t] = e + (e > 51 ? 1900 : 2e3);
+  at[t] = e + (e > 51 ? 1900 : 2e3);
 }
-var So = tt;
-const Oo = {
+var So = at;
+const Ao = {
   "Eastern Daylight Time": -240,
   "Eastern Standard Time": -300,
   "Central Daylight Time": -300,
@@ -1607,10 +1810,10 @@ const Oo = {
   Z: 0
   // Zulu Time (Coordinated Universal Time)
 };
-var ke = Oo;
-const Ao = So, No = ke, Io = {
-  zone: No,
-  year: Ao,
+var He = Ao;
+const No = So, Io = He, $o = {
+  zone: Io,
+  year: No,
   meridiem: { am: 0, pm: 12, "a.m.": 0, "p.m.": 12 },
   month: {
     january: 1,
@@ -1655,11 +1858,11 @@ const Ao = So, No = ke, Io = {
   },
   digit: {}
 };
-var $o = Io;
-const Ro = ke, nt = {
+var Ro = $o;
+const wo = He, lt = {
   MONTHNAME: "january|february|march|april|may|june|july|august|september|october|november|december|jan\\.?|feb\\.?|mar\\.?|apr\\.?|may\\.?|jun\\.?|jul\\.?|aug\\.?|sep\\.?|oct\\.?|nov\\.?|dec\\.?",
   DAYNAME: "sunday|monday|tuesday|wednesday|thursday|friday|saturday|sun\\.?|mon\\.?|tue\\.?|wed\\.?|thu\\.?|fri\\.?|sat\\.?",
-  ZONE: "\\(?(" + Object.keys(Ro).join("|") + ")\\)?",
+  ZONE: "\\(?(" + Object.keys(wo).join("|") + ")\\)?",
   MERIDIEM: "[ap]\\.?m?\\.?",
   ORDINAL: "st|nd|rd|th|\\.",
   YEAR: "[1-9]\\d{3}|\\d{2}",
@@ -1674,8 +1877,8 @@ const Ro = ke, nt = {
   SEC: "[0-5]\\d|60",
   MS: "\\d{9}|\\d{6}|\\d{1,3}",
   SPACE: "[\\s,-]"
-}, wo = {
-  ...nt,
+}, Do = {
+  ...lt,
   YEAR: "*{4}|*{2}",
   MONTH: "*{1,2}",
   MONTH2: "*{2}",
@@ -1688,8 +1891,8 @@ const Ro = ke, nt = {
   SEC: "*{2}",
   MS: "*{9}|*{6}|*{3}"
 };
-var Do = { latn: nt, other: wo };
-const ot = {
+var Mo = { latn: lt, other: Do };
+const rt = {
   arab: 1632,
   arabext: 1776,
   bali: 6992,
@@ -1709,7 +1912,7 @@ const ot = {
   telu: 3174,
   thai: 3664,
   tibt: 3872
-}, at = "[０１２３４５６７８９〇一二三四五六七八九\\d]", Ie = {
+}, st = "[０１２３４５６７８９〇一二三四五六七八九\\d]", Re = {
   0: 0,
   1: 1,
   2: 2,
@@ -1740,25 +1943,25 @@ const ot = {
   七: 7,
   八: 8,
   九: 9
-}, ue = {};
-function Mo(e) {
-  if (ue[e])
-    return ue[e];
+}, ce = {};
+function Co(e) {
+  if (ce[e])
+    return ce[e];
   if (e === "fullwide" || e === "hanidec")
-    return { group: at, lookup: { ...Ie } };
-  const t = ot[e];
+    return { group: st, lookup: { ...Re } };
+  const t = rt[e];
   if (!t)
-    return { group: "\\d", lookup: { ...Ie } };
+    return { group: "\\d", lookup: { ...Re } };
   const n = String.fromCharCode(t), o = String.fromCharCode(t + 9), a = {};
   for (let r = 0; r < 10; r++)
     a[String.fromCharCode(t + r)] = r;
-  return ue[e] = {
+  return ce[e] = {
     group: `[${n}-${o}]`,
     lookup: a
-  }, ue[e];
+  }, ce[e];
 }
-var lt = { chineseGroup: at, defaultLookup: Ie, startCodes: ot, buildDigits: Mo };
-const Co = [
+var it = { chineseGroup: st, defaultLookup: Re, startCodes: rt, buildDigits: Co };
+const ko = [
   "year",
   "month",
   "day",
@@ -1767,23 +1970,23 @@ const Co = [
   "second",
   "millisecond"
 ];
-var ko = Co;
-const Uo = $o, { latn: Ho, other: ve } = Do, { buildDigits: zo } = lt, Ge = be, Po = ko, Ee = {};
-let Lo = class rt {
+var Uo = ko;
+const Ho = Ro, { latn: zo, other: Oe } = Mo, { buildDigits: Po } = it, Ve = he, Lo = Uo, Se = {};
+let xo = class ut {
   /**
    * Get a singleton instance with the given locale
    * @param {String} locale such as en, en-US, es, fr-FR, etc.
    * @returns {LocaleHelper}
    */
-  static factory(t = Ge) {
-    return Ee[t.toLowerCase()] || (Ee[t.toLowerCase()] = new rt(t)), Ee[t.toLowerCase()];
+  static factory(t = Ve) {
+    return Se[t.toLowerCase()] || (Se[t.toLowerCase()] = new ut(t)), Se[t.toLowerCase()];
   }
   /**
    * Create a new instance with the given locale
    * @param {String} locale such as en, en-US, es, fr-FR, etc.
    */
-  constructor(t = Ge) {
-    this.locale = t, this.lookups = { ...Uo }, this.vars = { ...Ho };
+  constructor(t = Ve) {
+    this.locale = t, this.lookups = { ...Ho }, this.vars = { ...zo };
     const n = new Intl.NumberFormat(this.locale);
     this.numberingSystem = n.resolvedOptions().numberingSystem, this.build();
   }
@@ -1812,10 +2015,10 @@ let Lo = class rt {
    * Build lookups for digits
    */
   buildNumbers() {
-    const t = this.numberingSystem, { group: n, lookup: o } = zo(t);
+    const t = this.numberingSystem, { group: n, lookup: o } = Po(t);
     this.lookups.digit = o;
-    for (const a in ve)
-      ve.hasOwnProperty(a) && (this.vars[a] = ve[a].replace(/\*/g, n));
+    for (const a in Oe)
+      Oe.hasOwnProperty(a) && (this.vars[a] = Oe[a].replace(/\*/g, n));
   }
   /**
    * Build lookup for month names
@@ -1866,8 +2069,8 @@ let Lo = class rt {
     for (const l of o) {
       const s = Intl.DateTimeFormat(this.locale, { weekday: l });
       for (let i = 0; i < 7; i++) {
-        let d = s.formatToParts(t[i]).find(n).value.toLowerCase();
-        l === "short" ? (d = d.replace(/\.$/, ""), a.push(`${d}\\.?`)) : a.push(d), r[d] = i;
+        let f = s.formatToParts(t[i]).find(n).value.toLowerCase();
+        l === "short" ? (f = f.replace(/\.$/, ""), a.push(`${f}\\.?`)) : a.push(f), r[f] = i;
       }
     }
     this.vars.DAYNAME = a.join("|"), this.lookups.dayname = r;
@@ -1908,7 +2111,7 @@ let Lo = class rt {
    */
   castObject(t) {
     const n = {};
-    return Po.forEach((o) => {
+    return Lo.forEach((o) => {
       o in t && (n[o] = this.toInt(t[o]));
     }), typeof t.offset == "string" ? n.offset = this.offsetToMinutes(t.offset) : typeof t.offset == "number" && (n.offset = t.offset), n;
   }
@@ -1939,9 +2142,9 @@ let Lo = class rt {
     return new RegExp(n, "i");
   }
 };
-var ie = Lo;
-const Be = ie, ce = be;
-let xo = class {
+var ue = xo;
+const je = ue, de = he;
+let Go = class {
   /**
    * Given a definition, create a parsable format
    * @param {Object} definition  The format definition
@@ -1973,8 +2176,8 @@ let xo = class {
    * @param {String} locale  The language locale such as en-US, pt-BR, zh, es, etc.
    * @returns {RegExp}  A RegExp that matches when this format is recognized
    */
-  getRegExp(t = ce) {
-    return this.template ? (this.regexByLocale[t] || (this.regexByLocale[t] = Be.factory(t).compile(
+  getRegExp(t = de) {
+    return this.template ? (this.regexByLocale[t] || (this.regexByLocale[t] = je.factory(t).compile(
       this.template
     )), this.regexByLocale[t]) : this.matcher;
   }
@@ -1984,7 +2187,7 @@ let xo = class {
    * @param {String} locale  The language locale such as en-US, pt-BR, zh, es, etc.
    * @returns {Array|null}  Array of matches or null on non-match
    */
-  getMatches(t, n = ce) {
+  getMatches(t, n = de) {
     return t.match(this.getRegExp(n));
   }
   /**
@@ -1993,8 +2196,8 @@ let xo = class {
    * @param {String} locale  The language locale such as en-US, pt-BR, zh, es, etc.
    * @returns {Object}  Object which may contain year, month, day, hour, minute, second, millisecond, offset, invalid
    */
-  toDateTime(t, n = ce) {
-    const o = Be.factory(n);
+  toDateTime(t, n = de) {
+    const o = je.factory(n);
     if (this.units)
       return o.getObject(this.units, t);
     const a = this.handler(t, n);
@@ -2006,7 +2209,7 @@ let xo = class {
    * @param {String} locale  The language locale such as en-US, pt-BR, zh, es, etc.
    * @returns {Object|null}  Null if format can't handle this string, Object for result or error
    */
-  attempt(t, n = ce) {
+  attempt(t, n = de) {
     t = String(t).trim();
     const o = this.getMatches(t, n);
     if (o) {
@@ -2024,8 +2227,8 @@ let xo = class {
     return /* @__PURE__ */ new Date();
   }
 };
-var C = xo;
-function Go(e, t) {
+var U = Go;
+function Bo(e, t) {
   return function(o, a = t) {
     const r = e.attempt(o, a);
     if (r.invalid)
@@ -2034,15 +2237,15 @@ function Go(e, t) {
     return typeof r.day == "number" && l.setUTCDate(r.day), typeof r.year == "number" && l.setUTCFullYear(r.year), typeof r.month == "number" && l.setUTCMonth(r.month - 1), l.setUTCHours(r.hour || 0), l.setUTCMinutes(r.minute || 0), l.setUTCSeconds(r.second || 0), l.setUTCMilliseconds(r.millisecond || 0), typeof r.offset == "number" ? new Date(l - r.offset * 60 * 1e3) : l;
   };
 }
-var Bo = Go;
-function Fo(e) {
+var Fo = Bo;
+function Vo(e) {
   return function(n, o) {
     return n instanceof Date ? n : typeof n == "number" ? new Date(n) : e(n, o);
   };
 }
-var Vo = Fo;
-const Se = be, Fe = Bo, jo = Vo;
-let Yo = class {
+var jo = Vo;
+const Ae = he, Ye = Fo, Yo = jo;
+let Wo = class {
   /**
    * Initialize an object with an empty array of registered formats
    */
@@ -2086,7 +2289,7 @@ let Yo = class {
    * @param {String} locale  The name of the locale
    * @returns {Object}
    */
-  attempt(t, n = Se) {
+  attempt(t, n = Ae) {
     for (const a of this.formats) {
       if (Array.isArray(a.locales) && a.locales.length > 0 && !a.locales.includes(new Intl.Locale(n).baseName))
         continue;
@@ -2102,20 +2305,20 @@ let Yo = class {
    * @param {String} locale  The default locale it should use
    * @returns {Function}
    */
-  exportAsFunction(t = Se) {
-    return Fe(this, t);
+  exportAsFunction(t = Ae) {
+    return Ye(this, t);
   }
   /**
    * Export this parser as a single function that takes a string or Date
    * @param {String} locale  The default locale it should use
    * @returns {Function}
    */
-  exportAsFunctionAny(t = Se) {
-    return jo(Fe(this, t));
+  exportAsFunctionAny(t = Ae) {
+    return Yo(Ye(this, t));
   }
 };
-var Wo = Yo;
-const Ko = C, Xo = new Ko({
+var Ko = Wo;
+const Xo = U, Zo = new Xo({
   template: "^@(\\d+)$",
   handler: function(e) {
     const t = parseInt(e[1], 10), n = new Date(t * 1e3);
@@ -2129,8 +2332,8 @@ const Ko = C, Xo = new Ko({
     };
   }
 });
-var Zo = Xo;
-const Jo = C, qo = new Jo({
+var Jo = Zo;
+const qo = U, Qo = new qo({
   matcher: /^\/Date\((\d+)([+-]\d{4})?\)\/$/,
   handler: function(e) {
     const t = parseInt(e[1], 10), n = new Date(t);
@@ -2146,8 +2349,8 @@ const Jo = C, qo = new Jo({
     };
   }
 });
-var Qo = qo;
-const ea = {
+var ea = Qo;
+const ta = {
   y: "year",
   M: "month",
   d: "day",
@@ -2157,13 +2360,13 @@ const ea = {
   s: "second",
   ms: "millisecond"
 };
-var ta = ea;
-const na = C, oa = ta, aa = new na({
+var na = ta;
+const oa = U, aa = na, la = new oa({
   /* prettier-ignore */
   //          $1          $2        $3                                                                                   $4
   matcher: /^(\+|-|in|) ?([\d.]+) ?(years?|months?|weeks?|days?|hours?|minutes?|seconds?|milliseconds?|ms|s|m|h|w|d|M|y)( ago)?$/i,
   handler: function([, e, t, n, o]) {
-    t = parseFloat(t), n.length <= 2 ? n = oa[n] : (n = n.replace(/s$/, ""), n = n.toLowerCase()), n === "week" && (n = "day", t *= 7), (e === "-" || o) && (t *= -1);
+    t = parseFloat(t), n.length <= 2 ? n = aa[n] : (n = n.replace(/s$/, ""), n = n.toLowerCase()), n === "week" && (n = "day", t *= 7), (e === "-" || o) && (t *= -1);
     const a = this.now();
     return n === "millisecond" ? a.setUTCMilliseconds(a.getUTCMilliseconds() + t) : n === "second" ? a.setUTCSeconds(a.getUTCSeconds() + t) : n === "minute" ? a.setUTCMinutes(a.getUTCMinutes() + t) : n === "hour" ? a.setUTCHours(a.getUTCHours() + t) : n === "day" ? a.setUTCDate(a.getUTCDate() + t) : n === "month" ? a.setUTCMonth(a.getUTCMonth() + t) : n === "year" && a.setUTCFullYear(a.getUTCFullYear() + t), {
       year: a.getUTCFullYear(),
@@ -2176,54 +2379,54 @@ const na = C, oa = ta, aa = new na({
     };
   }
 });
-var la = aa;
-const ra = C, sa = ie, { chineseGroup: de } = lt;
-let ne;
-const ia = new ra({
+var ra = la;
+const sa = U, ia = ue, { chineseGroup: _e } = it;
+let oe;
+const ua = new sa({
   /* prettier-ignore */
   //           $1                         $2                  $3
-  template: `^(${de}{4}|${de}{2})\\s*年\\s*(${de}{1,2})\\s*月\\s*(${de}{1,2})\\s*日$`,
+  template: `^(${_e}{4}|${_e}{2})\\s*年\\s*(${_e}{1,2})\\s*月\\s*(${_e}{1,2})\\s*日$`,
   handler: function([, e, t, n]) {
-    return ne || (ne = new sa("zh"), ne.numberingSystem = "hanidec", ne.buildNumbers()), ne.castObject({ year: e, month: t, day: n });
+    return oe || (oe = new ia("zh"), oe.numberingSystem = "hanidec", oe.buildNumbers()), oe.castObject({ year: e, month: t, day: n });
   }
 });
-var ua = ia;
-const ca = C, da = new ca({
+var ca = ua;
+const da = U, _a = new da({
   /* prettier-ignore */
   //           $1            $2
   template: "^(_DAY_)[\\/. ](_MONTH_)$",
   units: ["day", "month"]
 });
-var _a = da;
-const ma = C, fa = new ma({
+var fa = _a;
+const ma = U, pa = new ma({
   /* prettier-ignore */
   //           $1                       $2
   template: "^(_DAY_)(?:_ORDINAL_)?[ -](_MONTHNAME_)$",
   units: ["day", "month"]
 });
-var pa = fa;
-const ba = C, ha = new ba({
+var ba = pa;
+const ha = U, ya = new ha({
   /* prettier-ignore */
   //                                $1                   $2    $3              $4
   template: "^(?:(?:_DAYNAME_),? )?(_DAY_)(?:_ORDINAL_)?([ -])(_MONTHNAME_)\\2(_YEAR_)$",
   units: ["day", null, "month", "year"]
 });
-var ya = ha;
-const ga = C, Ta = new ga({
+var ga = ya;
+const va = U, Ta = new va({
   /* prettier-ignore */
   //           $1     $2        $3          $4
   template: "^(_DAY_)([\\/. -])(_MONTH_)\\2(_YEAR_)$",
   units: ["day", null, "month", "year"]
 });
-var va = Ta;
-const Ea = C, Sa = new Ea({
+var Ea = Ta;
+const Oa = U, Sa = new Oa({
   /* prettier-ignore */
   //           $1                 $2
   template: "^(_MONTH_)(?:[\\/-])(_DAY_)$",
   units: ["month", "day"]
 });
-var Oa = Sa;
-const Aa = C, Na = new Aa({
+var Aa = Sa;
+const Na = U, Ia = new Na({
   /* prettier-ignore */
   //           $1       $2      $3        $4
   template: "^(_MONTH_)([\\/-])(_DAY_)\\2(_YEAR_)$",
@@ -2264,22 +2467,22 @@ const Aa = C, Na = new Aa({
     // Samoa
   ]
 });
-var Ia = Na;
-const $a = C, Ra = new $a({
+var $a = Ia;
+const Ra = U, wa = new Ra({
   /* prettier-ignore */
   //                                $1             $2
   template: "^(?:(?:_DAYNAME_),? )?(_MONTHNAME_)? (_DAY_)(?:_ORDINAL_)?$",
   units: ["month", "day"]
 });
-var wa = Ra;
-const Da = C, Ma = new Da({
+var Da = wa;
+const Ma = U, Ca = new Ma({
   /* prettier-ignore */
   //                                $1             $2                      $3
   template: "^(?:(?:_DAYNAME_),? )?(_MONTHNAME_)? (_DAY_)(?:_ORDINAL_)?,? (_YEAR_)$",
   units: ["month", "day", "year"]
 });
-var Ca = Ma;
-const ka = ie, Ua = C, Ha = new Ua({
+var ka = Ca;
+const Ua = ue, Ha = U, za = new Ha({
   /* prettier-ignore */
   //           $1                               $2                 $3           $4                 $5
   template: "^(.*?)_SPACE_*(?:at|on|T|)_SPACE_*(_H12_|_H24_)(?:\\:(_MIN_)(?:\\:(_SEC_))?)?_SPACE_*(_MERIDIEM_)$",
@@ -2287,7 +2490,7 @@ const ka = ie, Ua = C, Ha = new Ua({
     let [, n, o, a, r, l] = e, s = {};
     if (n && (s = this.parser.attempt(n, t), s.invalid))
       return null;
-    const i = ka.factory(t);
+    const i = Ua.factory(t);
     if (l) {
       const u = i.lookups.meridiem[l.toLowerCase()] || 0;
       o = parseFloat(o), o === 12 ? o = u : o > 12 && u === 12 ? o += 0 : o += u;
@@ -2295,8 +2498,8 @@ const ka = ie, Ua = C, Ha = new Ua({
     return s.hour = o, a && (s.minute = a), r && (s.second = r), s;
   }
 });
-var za = Ha;
-const Pa = ie, La = C, Ve = ke, xa = new La({
+var Pa = za;
+const La = ue, xa = U, We = He, Ga = new xa({
   /* prettier-ignore */
   //           $1                               $2        $3           $4              $5                                $6                 $7
   template: "^(.*?)_SPACE_*(?:at|on|T|)_SPACE_*(_H24_)\\:(_MIN_)(?:\\:(_SEC_)(?:[\\.,](_MS_))?)?_SPACE_*(?:GMT)?_SPACE_*(_OFFSET_)?_SPACE_*(_ZONE_)?$",
@@ -2304,17 +2507,17 @@ const Pa = ie, La = C, Ve = ke, xa = new La({
     let [, n, o, a, r, l, s, i] = e, u = {};
     if (n && (u = this.parser.attempt(n, t), u.invalid))
       return u;
-    if (u.hour = o, u.minute = a, r && (u.second = r), l && l.length > 3 ? u.millisecond = l.slice(0, 3) : l && (u.millisecond = l), i && !s && i in Ve)
-      u.offset = Ve[i];
+    if (u.hour = o, u.minute = a, r && (u.second = r), l && l.length > 3 ? u.millisecond = l.slice(0, 3) : l && (u.millisecond = l), i && !s && i in We)
+      u.offset = We[i];
     else if (s) {
-      const d = Pa.factory(t);
-      u.offset = d.offsetToMinutes(s);
+      const f = La.factory(t);
+      u.offset = f.offsetToMinutes(s);
     }
     return u;
   }
 });
-var Ga = xa;
-const Ba = C, Fa = new Ba({
+var Ba = Ga;
+const Fa = U, Va = new Fa({
   matcher: /^(now|today|tomorrow|yesterday)/i,
   handler: function(e) {
     const t = this.now(), n = e[1].toLowerCase();
@@ -2334,52 +2537,52 @@ const Ba = C, Fa = new Ba({
     return n === "now" && (o.hour = t.getUTCHours(), o.minute = t.getUTCMinutes(), o.second = t.getUTCSeconds(), o.millisecond = t.getUTCMilliseconds()), o;
   }
 });
-var Va = Fa;
-const ja = C, Ya = new ja({
+var ja = Va;
+const Ya = U, Wa = new Ya({
   /* prettier-ignore */
   //                         $1            $2      $3      $4      $5      $6         $7
   template: "^(?:_DAYNAME_) (_MONTHNAME_) (_DAY_) (_H24_):(_MIN_):(_SEC_) (_OFFSET_) (_YEAR_)$",
   units: ["month", "day", "hour", "minute", "second", "offset", "year"]
 });
-var Wa = Ya;
-const Ka = C, Xa = new Ka({
+var Ka = Wa;
+const Xa = U, Za = new Xa({
   /* prettier-ignore */
   //           $1      $2  $3          $4
   template: "^(_YEAR_)(-?)(_MONTH_)\\2(_DAY_)$",
   units: ["year", null, "month", "day"]
 });
-var Za = Xa;
-const st = Wo, Ja = C, qa = ie, Qa = Zo, el = Qo, tl = la, nl = ua, ol = _a, al = pa, ll = ya, rl = va, sl = be, il = Oa, ul = Ia, cl = wa, dl = Ca, _l = za, ml = Ga, fl = Va, pl = Wa, bl = Za, B = new st();
+var Ja = Za;
+const ct = Ko, qa = U, Qa = ue, el = Jo, tl = ea, nl = ra, ol = ca, al = fa, ll = ba, rl = ga, sl = Ea, il = he, ul = Aa, cl = $a, dl = Da, _l = ka, fl = Pa, ml = Ba, pl = ja, bl = Ka, hl = Ja, B = new ct();
 B.addFormats([
   ml,
-  _l,
-  // from most unambiguous and popular to least
-  bl,
-  ll,
-  dl,
-  ul,
-  rl,
-  nl,
-  pl,
   fl,
-  tl,
+  // from most unambiguous and popular to least
+  hl,
+  rl,
+  _l,
   cl,
-  al,
-  il,
+  sl,
   ol,
-  Qa,
-  el
+  bl,
+  pl,
+  nl,
+  dl,
+  ll,
+  ul,
+  al,
+  el,
+  tl
 ]);
-B.Parser = st;
-B.Format = Ja;
-B.LocaleHelper = qa;
-B.defaultLocale = sl;
+B.Parser = ct;
+B.Format = qa;
+B.LocaleHelper = Qa;
+B.defaultLocale = il;
 B.fromString = Date.fromString = B.exportAsFunction();
 B.fromAny = Date.fromAny = B.exportAsFunctionAny();
 typeof window < "u" && (window.anyDateParser = B);
-var he = B;
-const hl = /* @__PURE__ */ et(he);
-var yl = {
+var ye = B;
+const yl = /* @__PURE__ */ ot(ye);
+var gl = {
   __locale: "en",
   days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   abbreviated_days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
@@ -2387,25 +2590,25 @@ var yl = {
   abbreviated_months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   am: "AM",
   pm: "PM"
-}, gl = yl;
-const $e = /* @__PURE__ */ et(gl), Tl = new RegExp(
-  `(${$e.abbreviated_months.map((e) => e.toLowerCase()).join("|")})`
-), vl = new he.Format({
+}, vl = gl;
+const we = /* @__PURE__ */ ot(vl), Tl = new RegExp(
+  `(${we.abbreviated_months.map((e) => e.toLowerCase()).join("|")})`
+), El = new ye.Format({
   matcher: /^'?(\d{2}|\d{4})$/,
   units: ["year"]
-}), El = new he.Format({
+}), Ol = new ye.Format({
   matcher: /^(\d{1,2})\D*'?(\d{2}|\d{4})$/,
   units: ["month", "year"]
-}), it = new he.Parser();
-it.addFormats([vl, El]);
+}), dt = new ye.Parser();
+dt.addFormats([El, Ol]);
 function Sl(e) {
   e = e.trim();
   let t = [], n;
-  return n = it.attempt(e), n.invalid || t.push({
+  return n = dt.attempt(e), n.invalid || t.push({
     year: n.year,
     month: n.month,
     day: n.day
-  }), n = hl.attempt(e), n.invalid || t.push({
+  }), n = yl.attempt(e), n.invalid || t.push({
     year: n.year,
     month: n.month,
     day: n.day
@@ -2417,156 +2620,172 @@ function Sl(e) {
     });
   }), t;
 }
-const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid", Il = "zoa__zCutL__inputContainer", $l = "zoa__DBAOk__datePopup", Rl = "zoa__e8GS9__popupSection", wl = "zoa__tN5Fw__yearGrid", Dl = "zoa__Z8UyZ__monthGrid", Ml = "zoa__6Tknh__dayGrid", Cl = "zoa__oPUQ-__editing", kl = "zoa__GtJv-__suggestion", Ul = {
-  input: Ol,
-  label: Al,
+const Al = "zoa__T01c0__input", Nl = "zoa__Zrad1__label", Il = "zoa__-K9Da__grid", $l = "zoa__zCutL__inputContainer", Rl = "zoa__DBAOk__datePopup", wl = "zoa__e8GS9__popupSection", Dl = "zoa__tN5Fw__yearGrid", Ml = "zoa__Z8UyZ__monthGrid", Cl = "zoa__6Tknh__dayGrid", kl = "zoa__oPUQ-__editing", Ul = "zoa__GtJv-__suggestion", Hl = {
+  input: Al,
+  label: Nl,
   "label--right": "zoa__SxVfB__label--right",
   "label--below": "zoa__YLIdi__label--below",
   "label--above": "zoa__E7ufb__label--above",
-  grid: Nl,
+  grid: Il,
   "grid--above": "zoa__KeVwr__grid--above",
   "grid--below": "zoa__KyL5-__grid--below",
   "grid--left": "zoa__Ytl98__grid--left",
   "grid--right": "zoa__KxP7T__grid--right",
-  inputContainer: Il,
-  datePopup: $l,
-  popupSection: Rl,
-  yearGrid: wl,
-  monthGrid: Dl,
-  dayGrid: Ml,
-  editing: Cl,
-  suggestion: kl
-}, Hl = ["id"], zl = ["for"], Pl = ["placeholder", "id"], Ll = ["onClick"], xl = {
+  inputContainer: $l,
+  datePopup: Rl,
+  popupSection: wl,
+  yearGrid: Dl,
+  monthGrid: Ml,
+  dayGrid: Cl,
+  editing: kl,
+  suggestion: Ul
+}, zl = ["id"], Pl = ["for"], Ll = ["placeholder", "id"], xl = ["onClick"], Gl = {
   __name: "DateAmbiguous",
   props: {
-    modelValue: {},
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Object
+    },
+    /**
+     * Text for the input label.
+     */
+    label: {
+      type: String,
+      default: "Date"
+    },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
     labelPosition: {
       type: String,
       default: "above"
     },
-    label: {
-      type: String,
-      default: "Number"
-    },
-    placeholder: {
-      type: String,
-      default: null
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
-    min: {
+    /**
+     * Text to display in the blank input.
+     */
+    placeholder: {
       type: String,
       default: null
-    },
-    max: {
-      type: String,
-      default: null
-    },
-    step: {
-      type: String,
-      default: "any"
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {object} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { valueChanged: r } = j(t, n.delay), l = $(!1), s = $(null), i = $(!1), u = $(null);
-    Xe(u, () => {
+    const n = e, { componentId: o, subId: a } = j(), { valueChanged: r } = Y(t, n.delay), l = w(!1), s = w(null), i = w(!1), u = w(null);
+    qe(u, () => {
       l.value = !1;
     });
-    const d = A(() => ({
-      year: m.value,
-      month: k.value,
-      day: L.value
-    })), y = A(() => Ue(
-      d.value.year,
-      d.value.month,
-      d.value.day
+    const f = A(() => ({
+      year: $.value,
+      month: R.value,
+      day: H.value
+    })), y = A(() => Pe(
+      f.value.year,
+      f.value.month,
+      f.value.day
     ));
-    function p() {
+    function m() {
       s.value.value = y.value, i.value = !1;
     }
-    const v = $([]);
-    function I(f) {
-      i.value = !0, v.value = Sl(f.target.value);
+    const T = w([]);
+    function I(p) {
+      i.value = !0, T.value = Sl(p.target.value);
     }
-    const g = We(I, 200);
-    function R(f) {
-      c.value = f.year, k.value = f.month, L.value = f.day, v.value = [];
+    const g = Ze(I, 200);
+    function C(p) {
+      c.value = p.year, R.value = p.month, H.value = p.day, T.value = [];
     }
-    const c = $(null), b = A(() => {
-      let f = 11;
-      return c.value && c.value >= 1e3 ? f = Math.floor(c.value / 10) * 10 : c.value && c.value < 1e3 && (f = c.value * 10), Array(10).fill(f).map((M, N) => M + N);
-    }), m = A(() => {
+    const c = w(null), b = A(() => {
+      let p = 11;
+      return c.value && c.value >= 1e3 ? p = Math.floor(c.value / 10) * 10 : c.value && c.value < 1e3 && (p = c.value * 10), Array(10).fill(p).map((M, N) => M + N);
+    }), $ = A(() => {
       if (!c.value)
         return null;
       if (c.value >= 1e3)
         return c.value;
-      let f = 10 ** (4 - c.value.toString().length);
-      return c.value * f;
-    }), E = A(() => m.value % 100 === 0 ? m.value % 400 === 0 : m.value % 4 === 0);
-    function w(f) {
-      return f.toString().padEnd(4, "0");
+      let p = 10 ** (4 - c.value.toString().length);
+      return c.value * p;
+    }), O = A(() => $.value % 100 === 0 ? $.value % 400 === 0 : $.value % 4 === 0);
+    function d(p) {
+      return p.toString().padEnd(4, "0");
     }
-    function P(f) {
-      c.value = f, L.value && L.value > Y.value && (L.value = Y.value);
+    function k(p) {
+      c.value = p, H.value && H.value > F.value && (H.value = F.value);
     }
-    const k = $(null), ye = $($e.abbreviated_months), Y = A(() => [4, 6, 9, 11].includes(k.value) ? 30 : k.value === 2 ? E.value ? 29 : 28 : 31);
-    function ct(f) {
-      k.value = f, L.value && L.value > Y.value && (L.value = Y.value);
+    const R = w(null), K = w(we.abbreviated_months), F = A(() => [4, 6, 9, 11].includes(R.value) ? 30 : R.value === 2 ? O.value ? 29 : 28 : 31);
+    function ze(p) {
+      R.value = p, H.value && H.value > F.value && (H.value = F.value);
     }
-    const L = $(null), dt = A(() => Array(Y.value).fill(1).map((f, M) => M + 1));
-    function _t(f) {
-      L.value = f;
+    const H = w(null), ge = A(() => Array(F.value).fill(1).map((p, M) => M + 1));
+    function ve(p) {
+      H.value = p;
     }
-    function Ue(f, M, N) {
-      const F = $e.abbreviated_months[M - 1];
-      return f && M && N ? `${N} ${F} ${f}` : f && M ? `${F} ${f}` : f && N ? `${N} ??? ${f}` : M && N ? `${N} ${F}` : f || (M ? F : N ? `day ${N}` : null);
+    function Pe(p, M, N) {
+      const V = we.abbreviated_months[M - 1];
+      return p && M && N ? `${N} ${V} ${p}` : p && M ? `${V} ${p}` : p && N ? `${N} ??? ${p}` : M && N ? `${N} ${V}` : p || (M ? V : N ? `day ${N}` : null);
     }
-    return J(d, () => {
-      p(), r(d.value);
-    }), (f, M) => (T(), S("div", {
-      class: _([f.$style.grid, f.$style[`grid--${e.labelPosition}`]]),
+    return q(f, () => {
+      m(), r(f.value);
+    }), (p, M) => (v(), S("div", {
+      class: _([p.$style.grid, p.$style[`grid--${e.labelPosition}`]]),
       id: h(o),
       ref_key: "container",
       ref: u
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
         for: h(a)("date"),
-        class: _([f.$style.label, f.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 11, zl)) : H("", !0),
-      O("div", {
-        class: _(f.$style.inputContainer)
+        class: _([p.$style.label, p.$style[`label--${e.labelPosition}`]])
+      }, D(e.label), 11, Pl)) : P("", !0),
+      E("div", {
+        class: _(p.$style.inputContainer)
       }, [
-        O("input", {
+        E("input", {
           type: "text",
           placeholder: e.placeholder,
           id: h(a)("date"),
-          class: _([f.$style.input, i.value ? f.$style.editing : ""]),
+          class: _([p.$style.input, i.value ? p.$style.editing : ""]),
           onFocusin: M[0] || (M[0] = (N) => l.value = !0),
           ref_key: "displayBox",
           ref: s,
           onInput: M[1] || (M[1] = (...N) => h(g) && h(g)(...N))
-        }, null, 42, Pl),
-        l.value ? (T(), S("div", {
+        }, null, 42, Ll),
+        l.value ? (v(), S("div", {
           key: 0,
-          class: _(f.$style.datePopup)
+          class: _(p.$style.datePopup)
         }, [
-          v.value.length > 0 ? (T(), S("div", {
+          T.value.length > 0 ? (v(), S("div", {
             key: 0,
-            class: _(f.$style.popupSection)
+            class: _(p.$style.popupSection)
           }, [
-            (T(!0), S(K, null, q(v.value, (N) => (T(), S("span", {
-              onClick: (F) => R(N),
-              class: _(f.$style.suggestion)
-            }, D(Ue(N.year, N.month, N.day)), 11, Ll))), 256))
-          ], 2)) : H("", !0),
-          O("div", {
-            class: _(f.$style.popupSection)
+            (v(!0), S(X, null, Q(T.value, (N) => (v(), S("span", {
+              onClick: (V) => C(N),
+              class: _(p.$style.suggestion)
+            }, D(Pe(N.year, N.month, N.day)), 11, xl))), 256))
+          ], 2)) : P("", !0),
+          E("div", {
+            class: _(p.$style.popupSection)
           }, [
-            G(_e, {
+            G(fe, {
               label: "year",
               "label-position": "left",
               step: "1",
@@ -2576,370 +2795,461 @@ const Ol = "zoa__T01c0__input", Al = "zoa__Zrad1__label", Nl = "zoa__-K9Da__grid
               min: "0",
               max: "9999"
             }, null, 8, ["modelValue"]),
-            O("div", {
-              class: _(f.$style.yearGrid)
+            E("div", {
+              class: _(p.$style.yearGrid)
             }, [
-              (T(!0), S(K, null, q(b.value, (N) => (T(), ge(oe, {
+              (v(!0), S(X, null, Q(b.value, (N) => (v(), Te(ae, {
                 size: "sm",
-                onClick: (F) => P(N)
+                onClick: (V) => k(N)
               }, {
-                default: Te(() => [
-                  Q(D(w(N)), 1)
+                default: Ee(() => [
+                  ee(D(d(N)), 1)
                 ]),
                 _: 2
               }, 1032, ["onClick"]))), 256))
             ], 2)
           ], 2),
-          O("div", {
-            class: _(f.$style.popupSection)
+          E("div", {
+            class: _(p.$style.popupSection)
           }, [
-            G(_e, {
+            G(fe, {
               label: "month",
               "label-position": "left",
               step: "1",
               placeholder: "01",
-              modelValue: k.value,
-              "onUpdate:modelValue": M[3] || (M[3] = (N) => k.value = N),
+              modelValue: R.value,
+              "onUpdate:modelValue": M[3] || (M[3] = (N) => R.value = N),
               min: "1",
               max: "12"
             }, null, 8, ["modelValue"]),
-            O("div", {
-              class: _(f.$style.monthGrid)
+            E("div", {
+              class: _(p.$style.monthGrid)
             }, [
-              (T(!0), S(K, null, q(ye.value, (N, F) => (T(), ge(oe, {
+              (v(!0), S(X, null, Q(K.value, (N, V) => (v(), Te(ae, {
                 size: "sm",
-                onClick: (kr) => ct(F + 1)
+                onClick: (Mr) => ze(V + 1)
               }, {
-                default: Te(() => [
-                  Q(D(N), 1)
+                default: Ee(() => [
+                  ee(D(N), 1)
                 ]),
                 _: 2
               }, 1032, ["onClick"]))), 256))
             ], 2)
           ], 2),
-          O("div", {
-            class: _(f.$style.popupSection)
+          E("div", {
+            class: _(p.$style.popupSection)
           }, [
-            G(_e, {
+            G(fe, {
               label: "day",
               "label-position": "left",
               step: "1",
               placeholder: "01",
-              modelValue: L.value,
-              "onUpdate:modelValue": M[4] || (M[4] = (N) => L.value = N),
+              modelValue: H.value,
+              "onUpdate:modelValue": M[4] || (M[4] = (N) => H.value = N),
               min: "1",
-              max: Y.value
+              max: F.value
             }, null, 8, ["modelValue", "max"]),
-            O("div", {
-              class: _(f.$style.dayGrid)
+            E("div", {
+              class: _(p.$style.dayGrid)
             }, [
-              (T(!0), S(K, null, q(dt.value, (N) => (T(), ge(oe, {
+              (v(!0), S(X, null, Q(ge.value, (N) => (v(), Te(ae, {
                 size: "sm",
-                onClick: (F) => _t(N)
+                onClick: (V) => ve(N)
               }, {
-                default: Te(() => [
-                  Q(D(N), 1)
+                default: Ee(() => [
+                  ee(D(N), 1)
                 ]),
                 _: 2
               }, 1032, ["onClick"]))), 256))
             ], 2)
           ], 2)
-        ], 2)) : H("", !0)
+        ], 2)) : P("", !0)
       ], 2)
-    ], 10, Hl));
+    ], 10, zl));
   }
-}, Gl = {
-  $style: Ul
-}, Bl = /* @__PURE__ */ z(xl, [["__cssModules", Gl]]);
-function Fl(e, t) {
-  return (e - t.min) / (t.max - t.min);
-}
-function Vl(e, t, n) {
-  try {
-    const o = e.clientWidth, a = 24, r = n ? n.clientWidth : 0, l = o / 2, u = (t * o - l) / l * (a / 2), d = u + r / 2, y = u / o;
-    return {
-      handle: ((t - y) * 100).toFixed(2),
-      label: ((t - d / o) * 100).toFixed(2)
-    };
-  } catch {
-    const o = t * 100;
-    return { handle: o.toFixed(2), label: o.toFixed(2) };
-  }
-}
-function jl(e, t, n, o = null, a = 0.5) {
-  if (o)
-    return o;
-  let l = (t - e) / (1 / a), s = l % n;
-  return l - s + e;
-}
-const Yl = "zoa__wKiUj__input", Wl = "zoa__wdDOR__label", Kl = "zoa__NU5xO__grid", Xl = "zoa__faDBS__slider", Zl = "zoa__pxPuS__track", Jl = "zoa__YIkY8__valueLabel", ql = {
-  input: Yl,
-  label: Wl,
+}, Bl = {
+  $style: Hl
+}, Fl = /* @__PURE__ */ L(Gl, [["__cssModules", Bl]]), Vl = "zoa__wKiUj__input", jl = "zoa__wdDOR__label", Yl = "zoa__NU5xO__grid", Wl = "zoa__faDBS__slider", Kl = "zoa__pxPuS__track", Xl = "zoa__YIkY8__valueLabel", Zl = {
+  input: Vl,
+  label: jl,
   "label--right": "zoa__-ofKG__label--right",
   "label--below": "zoa__0HdYJ__label--below",
   "label--above": "zoa__PM4XH__label--above",
-  grid: Kl,
+  grid: Yl,
   "grid--above": "zoa__mmKWI__grid--above",
   "grid--below": "zoa__6m720__grid--below",
   "grid--left": "zoa__y6mEj__grid--left",
   "grid--right": "zoa__-c8cX__grid--right",
   "wrapper--value-label-below": "zoa__3DNmv__wrapper--value-label-below",
   "wrapper--value-label-above": "zoa__7bdFW__wrapper--value-label-above",
-  slider: Xl,
-  track: Zl,
+  slider: Wl,
+  track: Kl,
   "track--active": "zoa__q61Yj__track--active",
-  valueLabel: Jl,
+  valueLabel: Xl,
   "valueLabel--below": "zoa__LNFdb__valueLabel--below",
   "valueLabel--above": "zoa__xDqQu__valueLabel--above"
-}, Ql = ["id"], er = ["for"], tr = ["min", "max", "step", "id"], nr = {
+}, Jl = ["id"], ql = ["for"], Ql = ["min", "max", "step", "id"], er = {
   __name: "Slider",
   props: {
-    modelValue: {},
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Number
+    },
+    /**
+     * Text for the input label.
+     */
+    label: {
+      type: String,
+      default: "Range"
+    },
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
     labelPosition: {
       type: String,
       default: "above"
     },
-    label: {
-      type: String,
-      default: "Slider"
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
+    /**
+     * Number to set the slider at initially.
+     */
     placeholder: {
-      type: Number,
-      default: 0
+      type: [Number, void 0],
+      default: null
     },
-    placeholderPosition: {
-      type: Number,
-      default: 0.5
-    },
+    /**
+     * The lowest number displayed on the slider.
+     */
     min: {
       type: Number,
       default: 0
     },
+    /**
+     * The highest number displayed on the slider.
+     */
     max: {
       type: Number,
       default: 100
     },
+    /**
+     * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place.
+     */
     step: {
       type: Number,
       default: 1
     },
+    /**
+     * The fraction along the bar to set the value initially (as opposed to setting an explicit number); e.g. 0.5 sets an initial value halfway along the bar.
+     */
+    placeholderPosition: {
+      type: Number,
+      default: 0.5
+    },
+    /**
+     * The position of the dynamic label displaying the current value (above or below the slider).
+     * @values above, below
+     */
     valueLabelPosition: {
       type: String,
       default: "below"
     },
+    /**
+     * Do not allow values below this value; the handle will stop at this point, even if the `min` is lower than this.
+     */
     validMin: {
       type: Number,
       default: null
     },
+    /**
+     * Do not allow values above this point; the handle will stop at this point, even if the `max` is higher than this.
+     */
     validMax: {
       type: Number,
       default: null
     },
+    /**
+     * Highlight the track to the right of the handle rather than the left.
+     */
     activeTrackRight: {
       type: Boolean,
       default: !1
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {number} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { value: r } = j(t, n), l = $(null), s = $(null), i = A(() => n.validMin ? Math.max(Number(n.validMin), Number(n.min)) : Number(n.min)), u = A(() => n.validMax ? Math.min(Number(n.validMax), Number(n.max)) : Number(n.max)), d = Je(l), y = Ze(s), p = A(() => r.value < i.value ? i.value : r.value > u.value ? u.value : r.value), v = A(() => n.activeTrackRight ? { left: `${g.value.handle}%` } : { right: `${100 - g.value.handle}%` }), I = A(() => Fl(r.value, n)), g = A(() => Vl(l.value, I.value, s.value));
-    function R() {
-      if (r.value === n.max)
-        return;
-      let m = Number(r.value) + Number(n.step);
-      m > n.max ? r.value = n.max : r.value = m;
+    const n = e, { componentId: o, subId: a } = j(), { value: r } = Y(t, n), l = w(null), s = w(null), i = A(() => n.validMin ? Math.max(Number(n.validMin), Number(n.min)) : Number(n.min)), u = A(() => n.validMax ? Math.min(Number(n.validMax), Number(n.max)) : Number(n.max)), f = et(l), y = Qe(s), m = A(() => r.value < i.value ? i.value : r.value > u.value ? u.value : r.value), T = A(() => n.activeTrackRight ? { left: `${g.value.handle}%` } : { right: `${100 - g.value.handle}%` }), I = A(() => (r.value - n.min) / (n.max - n.min)), g = A(() => C());
+    function C() {
+      try {
+        const d = l.value.clientWidth, k = 24;
+        s.value && (s.value.innerText = m.value);
+        const R = s.value ? s.value.clientWidth : 0, K = d / 2, H = (I.value * d - K) / K * (k / 2), ge = H + R / 2, ve = H / d;
+        return {
+          handle: ((I.value - ve) * 100).toFixed(2),
+          label: ((I.value - ge / d) * 100).toFixed(2)
+        };
+      } catch {
+        const d = I.value * 100;
+        return { handle: d.toFixed(2), label: d.toFixed(2) };
+      }
     }
     function c() {
+      if (n.placeholder !== null && n.placeholder !== void 0)
+        return n.placeholder;
+      let k = (n.max - n.min) / (1 / n.placeholderPosition), R = k % n.step;
+      return k - R + n.min;
+    }
+    function b() {
+      if (r.value === n.max)
+        return;
+      let d = Number(r.value) + Number(n.step);
+      d > n.max ? r.value = n.max : r.value = d;
+    }
+    function $() {
       if (r.value === n.min)
         return;
-      let m = Number(r.value) - Number(n.step);
-      m < n.min ? r.value = n.min : r.value = m;
+      let d = Number(r.value) - Number(n.step);
+      d < n.min ? r.value = n.min : r.value = d;
     }
-    function b(m) {
-      m.preventDefault(), m.wheelDelta > 0 ? R() : m.wheelDelta < 0 && c();
+    function O(d) {
+      d.preventDefault(), d.wheelDelta > 0 ? b() : d.wheelDelta < 0 && $();
     }
-    return Z("ArrowDown", (m) => {
-      m.preventDefault(), (d.focused.value || y.focused.value) && c();
-    }), Z("ArrowLeft", (m) => {
-      m.preventDefault(), (d.focused.value || y.focused.value) && c();
-    }), Z("ArrowUp", (m) => {
-      m.preventDefault(), (d.focused.value || y.focused.value) && R();
-    }), Z("ArrowRight", (m) => {
-      m.preventDefault(), (d.focused.value || y.focused.value) && R();
-    }), J(r, (m) => {
-      Number(m) >= Number(u.value) && (r.value = u.value), Number(m) <= Number(i.value) && (r.value = i.value);
-    }), r.value = jl(
-      n.min,
-      n.max,
-      n.step,
-      n.placeholder,
-      n.placeholderPosition
-    ), (m, E) => (T(), S("div", {
+    return J("ArrowDown", (d) => {
+      d.preventDefault(), (f.focused.value || y.focused.value) && $();
+    }), J("ArrowLeft", (d) => {
+      d.preventDefault(), (f.focused.value || y.focused.value) && $();
+    }), J("ArrowUp", (d) => {
+      d.preventDefault(), (f.focused.value || y.focused.value) && b();
+    }), J("ArrowRight", (d) => {
+      d.preventDefault(), (f.focused.value || y.focused.value) && b();
+    }), q(r, (d) => {
+      Number(d) >= Number(u.value) && (r.value = u.value), Number(d) <= Number(i.value) && (r.value = i.value);
+    }), r.value = c(), (d, k) => (v(), S("div", {
       class: _([
-        m.$style.grid,
-        m.$style[`grid--${e.labelPosition}`],
-        m.$style[`wrapper--value-label-${e.valueLabelPosition}`]
+        d.$style.grid,
+        d.$style[`grid--${e.labelPosition}`],
+        d.$style[`wrapper--value-label-${e.valueLabelPosition}`]
       ]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("label", {
+      e.label && e.labelPosition !== "none" ? (v(), S("label", {
         key: 0,
-        class: _([m.$style.label, m.$style[`label--${e.labelPosition}`]]),
+        class: _([d.$style.label, d.$style[`label--${e.labelPosition}`]]),
         for: h(a)("slider")
-      }, D(e.label), 11, er)) : H("", !0),
-      O("div", {
-        class: _(m.$style.slider),
-        onWheel: b
+      }, D(e.label), 11, ql)) : P("", !0),
+      E("div", {
+        class: _(d.$style.slider),
+        onWheel: O
       }, [
-        O("span", {
-          class: _(m.$style.track)
+        E("span", {
+          class: _(d.$style.track)
         }, null, 2),
-        O("span", {
-          class: _([m.$style.track, m.$style["track--active"]]),
-          style: He(v.value)
+        E("span", {
+          class: _([d.$style.track, d.$style["track--active"]]),
+          style: Le(T.value)
         }, null, 6),
-        O("span", {
+        E("span", {
           class: _([
-            m.$style.valueLabel,
-            m.$style[`valueLabel--${e.valueLabelPosition}`]
+            d.$style.valueLabel,
+            d.$style[`valueLabel--${e.valueLabelPosition}`]
           ]),
-          style: He({ left: `${g.value.label}%` }),
+          style: Le({ left: `${g.value.label}%` }),
           ref_key: "valueLabel",
           ref: s,
           tabindex: "0"
-        }, D(p.value), 7),
-        ee(O("input", {
+        }, D(m.value), 7),
+        te(E("input", {
           type: "range",
           min: e.min,
           max: e.max,
           step: e.step,
           id: h(a)("slider"),
-          class: _(m.$style.input),
-          "onUpdate:modelValue": E[0] || (E[0] = (w) => te(r) ? r.value = w : null),
+          class: _(d.$style.input),
+          "onUpdate:modelValue": k[0] || (k[0] = (R) => ne(r) ? r.value = R : null),
           ref_key: "slider",
           ref: l
-        }, null, 10, tr), [
-          [se, h(r)]
+        }, null, 10, Ql), [
+          [ie, h(r)]
         ])
       ], 34)
-    ], 10, Ql));
+    ], 10, Jl));
   }
-}, or = {
-  $style: ql
-}, Re = /* @__PURE__ */ z(nr, [["__cssModules", or]]), ar = "zoa__O86-F__input", lr = "zoa__0YsN9__label", rr = "zoa__SiTNx__grid", sr = {
-  input: ar,
-  label: lr,
+}, tr = {
+  $style: Zl
+}, De = /* @__PURE__ */ L(er, [["__cssModules", tr]]), nr = "zoa__O86-F__input", or = "zoa__0YsN9__label", ar = "zoa__SiTNx__grid", lr = {
+  input: nr,
+  label: or,
   "label--right": "zoa__pjeV2__label--right",
   "label--below": "zoa__12bIu__label--below",
   "label--above": "zoa__sjy2f__label--above",
-  grid: rr,
+  grid: ar,
   "grid--above": "zoa__8N5XC__grid--above",
   "grid--below": "zoa__X9vRI__grid--below",
   "grid--left": "zoa__unXPL__grid--left",
   "grid--right": "zoa__WXVvK__grid--right"
-}, ir = ["id"], ur = {
+}, rr = ["id"], sr = {
   __name: "RangeSlider",
   props: {
-    modelValue: {},
-    labelPosition: {
-      type: String,
-      default: "above"
+    /**
+     * @model
+     */
+    modelValue: {
+      type: Array
     },
+    /**
+     * Text for the input label.
+     */
     label: {
       type: String,
       default: "Range"
     },
-    labelLower: {
+    /**
+     * Position of the input label (or none).
+     * @values left, right, above, below, none
+     */
+    labelPosition: {
       type: String,
-      default: "Lower"
+      default: "above"
     },
-    labelUpper: {
-      type: String,
-      default: "Upper"
-    },
-    labelsRight: {
-      type: Boolean,
-      default: !1
-    },
+    /**
+     * Debounce delay for the `change` event, in ms.
+     */
     delay: {
       type: Number,
       default: 200
     },
+    /**
+     * Number to set both sliders at initially.
+     */
     placeholder: {
       type: Number,
-      default: 0
+      default: null
     },
+    /**
+     * The lowest number displayed on both sliders (will only be accessible by the lower value slider).
+     */
     min: {
       type: Number,
       default: 0
     },
+    /**
+     * The highest number displayed on both sliders (will only be accessible by the upper value slider).
+     */
     max: {
       type: Number,
       default: 100
     },
+    /**
+     * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place. Also the minimum gap between the two values.
+     */
     step: {
       type: Number,
       default: 1
+    },
+    /**
+     * The text label for the lower value slider.
+     */
+    labelLower: {
+      type: String,
+      default: "Lower"
+    },
+    /**
+     * The text label for the upper value slider.
+     */
+    labelUpper: {
+      type: String,
+      default: "Upper"
+    },
+    /**
+     * If true, place the slider text labels on the right rather than the left.
+     */
+    labelsRight: {
+      type: Boolean,
+      default: !1
     }
   },
-  emits: ["change", "update:modelValue"],
+  emits: [
+    /**
+     * Emitted when the value changes; debounced if the delay prop is > 0.
+     * @arg {Array} newValue the new value
+     */
+    "change",
+    /**
+     * @ignore
+     */
+    "update:modelValue"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { componentId: o, subId: a } = V(), { valueChanged: r } = j(t, n), l = $(null), s = $(null), i = A(() => Math.max(
+    const n = e, { componentId: o, subId: a } = j(), { valueChanged: r } = Y(t, n), l = w(null), s = w(null), i = A(() => Math.max(
       Number(s.value) - Number(n.step),
       Number(n.min)
     )), u = A(() => Math.min(
       Number(l.value) + Number(n.step),
       Number(n.max)
-    )), d = A(() => {
-      const y = Math.min(l.value, i.value), p = Math.max(s.value, u.value);
-      return [y, p];
+    )), f = A(() => {
+      const y = Math.min(l.value, i.value), m = Math.max(s.value, u.value);
+      return [y, m];
     });
-    return J(d, () => {
-      r(d.value);
-    }), (y, p) => (T(), S("div", {
+    return q(f, () => {
+      r(f.value);
+    }), (y, m) => (v(), S("div", {
       class: _([y.$style.grid, y.$style[`grid--${e.labelPosition}`]]),
       id: h(o)
     }, [
-      e.label && e.labelPosition !== "none" ? (T(), S("span", {
+      e.label && e.labelPosition !== "none" ? (v(), S("span", {
         key: 0,
         class: _([y.$style.label, y.$style[`label--${e.labelPosition}`]])
-      }, D(e.label), 3)) : H("", !0),
-      O("div", null, [
-        G(Re, {
+      }, D(e.label), 3)) : P("", !0),
+      E("div", null, [
+        G(De, {
           min: e.min,
           max: e.max,
           "valid-max": i.value,
           step: e.step,
           modelValue: l.value,
-          "onUpdate:modelValue": p[0] || (p[0] = (v) => l.value = v),
+          "onUpdate:modelValue": m[0] || (m[0] = (T) => l.value = T),
           label: e.labelLower,
           "label-position": e.labelsRight ? "right" : "left",
           "value-label-position": "above",
           "placeholder-position": "0.25"
         }, null, 8, ["min", "max", "valid-max", "step", "modelValue", "label", "label-position"]),
-        G(Re, {
+        G(De, {
           min: e.min,
           "valid-min": u.value,
           max: e.max,
           step: e.step,
           modelValue: s.value,
-          "onUpdate:modelValue": p[1] || (p[1] = (v) => s.value = v),
+          "onUpdate:modelValue": m[1] || (m[1] = (T) => s.value = T),
           label: e.labelUpper,
           "label-position": e.labelsRight ? "right" : "left",
           "placeholder-position": 0.75,
           "active-track-right": !0
         }, null, 8, ["min", "valid-min", "max", "step", "modelValue", "label", "label-position"])
       ])
-    ], 10, ir));
+    ], 10, rr));
   }
-}, cr = {
-  $style: sr
-}, dr = /* @__PURE__ */ z(ur, [["__cssModules", cr]]);
-function ut(e) {
+}, ir = {
+  $style: lr
+}, ur = /* @__PURE__ */ L(sr, [["__cssModules", ir]]);
+function _t(e) {
   return { icon: A(() => {
     switch (e.kind) {
       case "info":
@@ -2955,79 +3265,99 @@ function ut(e) {
     }
   }) };
 }
-const _r = "zoa__VAeTu__main", mr = "zoa__fVs2o__container", fr = "zoa__THVXY__header", pr = "zoa__paVgB__icon", br = {
-  main: _r,
-  container: mr,
-  header: fr,
-  icon: pr,
+const cr = "zoa__VAeTu__main", dr = "zoa__fVs2o__container", _r = "zoa__THVXY__header", fr = "zoa__paVgB__icon", mr = {
+  main: cr,
+  container: dr,
+  header: _r,
+  icon: fr,
   "kind--info": "zoa__ITcbz__kind--info",
   "kind--warning": "zoa__ePWkZ__kind--warning",
   "kind--error": "zoa__uCNxg__kind--error",
   "kind--success": "zoa__QTxj6__kind--success"
-}, hr = {
+}, pr = {
   __name: "Flash",
   props: {
+    /**
+     * The type of message being displayed.
+     * @values info, success, warning, error
+     */
     kind: {
       type: String,
       default: "info"
     },
+    /**
+     * The header for the flash message.
+     */
     header: {
       type: String,
       default: "Here is an informational message."
     },
+    /**
+     * The body of the flash message. Overridden by the default slot.
+     */
     message: {
       type: String,
       default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum."
     }
   },
   setup(e) {
-    const t = e, { icon: n } = ut(t);
-    return (o, a) => (T(), S("div", {
+    const t = e, { icon: n } = _t(t);
+    return (o, a) => (v(), S("div", {
       class: _([o.$style.main, o.$style.container, o.$style[`kind--${e.kind}`]])
     }, [
-      O("div", {
+      E("div", {
         class: _(o.$style.header)
       }, [
-        G(h(le), {
+        G(h(re), {
           icon: ["fa-solid", h(n)],
           class: _(o.$style.icon)
         }, null, 8, ["icon", "class"]),
-        O("h2", null, D(e.header), 1)
+        E("h2", null, D(e.header), 1)
       ], 2),
-      O("div", {
+      E("div", {
         class: _(o.$style.content)
       }, [
-        we(o.$slots, "default", {}, () => [
-          Q(D(e.message), 1)
+        Me(o.$slots, "default", {}, () => [
+          ee(D(e.message), 1)
         ])
       ], 2)
     ], 2));
   }
-}, yr = {
-  $style: br
-}, gr = /* @__PURE__ */ z(hr, [["__cssModules", yr]]), Tr = "zoa__-6BJv__main", vr = "zoa__JzwYn__container", Er = "zoa__Fn9SR__header", Sr = "zoa__G4zlh__icon", Or = "zoa__KdMNq__form", Ar = "zoa__PyVzA__close", Nr = "zoa__YKx2f__content", Ir = {
-  main: Tr,
-  container: vr,
-  header: Er,
-  icon: Sr,
+}, br = {
+  $style: mr
+}, hr = /* @__PURE__ */ L(pr, [["__cssModules", br]]), yr = "zoa__-6BJv__main", gr = "zoa__JzwYn__container", vr = "zoa__Fn9SR__header", Tr = "zoa__G4zlh__icon", Er = "zoa__KdMNq__form", Or = "zoa__PyVzA__close", Sr = "zoa__YKx2f__content", Ar = {
+  main: yr,
+  container: gr,
+  header: vr,
+  icon: Tr,
   "kind--info": "zoa__dJXHY__kind--info",
   "kind--warning": "zoa__GLN89__kind--warning",
   "kind--error": "zoa__3HPxn__kind--error",
   "kind--success": "zoa__O1vse__kind--success",
-  form: Or,
-  close: Ar,
-  content: Nr
-}, $r = {
+  form: Er,
+  close: Or,
+  content: Sr
+}, Nr = {
   __name: "Modal",
   props: {
+    /**
+     * The type of message being displayed.
+     * @values info, success, warning, error
+     */
     kind: {
       type: String,
       default: "info"
     },
+    /**
+     * The header for the modal.
+     */
     header: {
       type: String,
       default: "Here is an informational message."
     },
+    /**
+     * The body of the modal. Overridden by the default slot.
+     */
     message: {
       type: String,
       default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum."
@@ -3039,93 +3369,102 @@ const _r = "zoa__VAeTu__main", mr = "zoa__fVs2o__container", fr = "zoa__THVXY__h
       })
     }
   },
-  emits: ["opened", "closed"],
+  emits: [
+    /**
+     * Modal opened.
+     */
+    "opened",
+    /**
+     * Modal closed.
+     */
+    "closed"
+  ],
   setup(e, { emit: t }) {
-    const n = e, { icon: o } = ut(n), a = $(null);
+    const n = e, { icon: o } = _t(n), a = w(null);
     function r() {
       a.value.show(), t("opened");
     }
-    return (l, s) => (T(), S(K, null, [
-      G(h(oe), ht(e.buttonArgs, { onClick: r }), null, 16),
-      O("dialog", {
+    return (l, s) => (v(), S(X, null, [
+      G(h(ae), ht(e.buttonArgs, { onClick: r }), null, 16),
+      E("dialog", {
         ref_key: "modal",
         ref: a,
         class: _([l.$style.main, l.$style[`kind--${e.kind}`]])
       }, [
-        O("div", {
+        E("div", {
           class: _(l.$style.container)
         }, [
-          O("form", {
+          E("form", {
             method: "dialog",
             class: _(l.$style.form),
             onSubmit: s[0] || (s[0] = (i) => t("closed"))
           }, [
-            O("button", {
+            E("button", {
               class: _(l.$style.close)
             }, [
-              G(h(le), { icon: "fa-solid fa-xmark" })
+              G(h(re), { icon: "fa-solid fa-xmark" })
             ], 2)
           ], 34),
-          O("div", {
+          E("div", {
             class: _(l.$style.header)
           }, [
-            G(h(le), {
+            G(h(re), {
               icon: ["fa-solid", h(o)],
               class: _(l.$style.icon)
             }, null, 8, ["icon", "class"]),
-            O("h2", null, D(e.header), 1)
+            E("h2", null, D(e.header), 1)
           ], 2),
-          O("div", {
+          E("div", {
             class: _(l.$style.content)
           }, [
-            we(l.$slots, "default", {}, () => [
-              Q(D(e.message), 1)
+            Me(l.$slots, "default", {}, () => [
+              ee(D(e.message), 1)
             ])
           ], 2)
         ], 2)
       ], 2)
     ], 64));
   }
-}, Rr = {
-  $style: Ir
-}, wr = /* @__PURE__ */ z($r, [["__cssModules", Rr]]), Dr = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}, Ir = {
+  $style: Ar
+}, $r = /* @__PURE__ */ L(Nr, [["__cssModules", Ir]]), Rr = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   ZoaAutocompleteTextbox: pn,
-  ZoaButton: oe,
-  ZoaCheckbox: Qn,
-  ZoaDateAmbiguous: Bl,
-  ZoaDateSimple: go,
-  ZoaDropdown: Gn,
-  ZoaFlash: gr,
-  ZoaModal: wr,
-  ZoaNumber: _e,
-  ZoaRangeSlider: dr,
-  ZoaSlider: Re,
+  ZoaButton: ae,
+  ZoaCheckbox: eo,
+  ZoaDateAmbiguous: Fl,
+  ZoaDateSimple: vo,
+  ZoaDropdown: Bn,
+  ZoaFlash: hr,
+  ZoaModal: $r,
+  ZoaNumber: fe,
+  ZoaRangeSlider: ur,
+  ZoaSlider: De,
   ZoaTextbox: Ft
-}, Symbol.toStringTag, { value: "Module" })), Mr = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g");
-function Cr(e) {
-  return e.replace(Mr, (t, n) => (n ? "-" : "") + t.toLowerCase());
+}, Symbol.toStringTag, { value: "Module" })), wr = new RegExp("[A-Z]+(?![a-z])|[A-Z]", "g");
+function Dr(e) {
+  return e.replace(wr, (t, n) => (n ? "-" : "") + t.toLowerCase());
 }
-const xr = {
+const Pr = {
   install(e, t) {
-    Object.entries(Dr).forEach((n) => {
-      const o = Cr(n[0]);
+    Object.entries(Rr).forEach((n) => {
+      const o = Dr(n[0]);
       e.component(o, n[1]);
     });
   }
 };
 export {
-  xr as Zoa,
+  Pr as Zoa,
   pn as ZoaAutocompleteTextbox,
-  oe as ZoaButton,
-  Qn as ZoaCheckbox,
-  Bl as ZoaDateAmbiguous,
-  go as ZoaDateSimple,
-  Gn as ZoaDropdown,
-  gr as ZoaFlash,
-  wr as ZoaModal,
-  _e as ZoaNumber,
-  dr as ZoaRangeSlider,
-  Re as ZoaSlider,
+  ae as ZoaButton,
+  eo as ZoaCheckbox,
+  Fl as ZoaDateAmbiguous,
+  vo as ZoaDateSimple,
+  Bn as ZoaDropdown,
+  hr as ZoaFlash,
+  $r as ZoaModal,
+  fe as ZoaNumber,
+  ur as ZoaRangeSlider,
+  De as ZoaSlider,
   Ft as ZoaTextbox
 };
