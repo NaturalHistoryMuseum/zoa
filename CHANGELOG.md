@@ -1,3 +1,28 @@
+## v0.4.1 (2023-09-15)
+
+### Fix
+
+- force update label text before calculating width
+
+### Refactor
+
+- move slider.js functions into vue file
+
+### Docs
+
+- add docstrings for inputs
+- add docstrings for dialogs
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+- update storybook to 7.4.1
+- merge build and bump jobs so they run sequentially
+- remove permissions block from npm publish workflow
+- build dist package
+- add registry url to npm publish workflow
+
 ## v0.4.0 (2023-09-12)
 
 ### Feature
