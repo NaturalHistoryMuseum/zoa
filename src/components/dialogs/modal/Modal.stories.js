@@ -7,10 +7,13 @@ const meta = {
     kind: {
       control: 'select',
       options: ['info', 'warning', 'success', 'error'],
-      default: 'normal',
     },
-    header: {
-      control: 'text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A modal dialog for displaying pop-up alert messages.',
+      },
     },
   },
 };

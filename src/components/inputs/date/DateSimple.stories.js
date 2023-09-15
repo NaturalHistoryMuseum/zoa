@@ -4,17 +4,21 @@ const meta = {
   component: ZoaDateSimple,
   title: 'Components/Inputs/Date/Simple Date',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Date',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A standard date picker.',
+      },
     },
   },
 };

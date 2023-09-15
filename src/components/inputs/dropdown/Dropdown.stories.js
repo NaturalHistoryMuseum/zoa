@@ -4,17 +4,22 @@ const meta = {
   component: ZoaDropdown,
   title: 'Components/Inputs/Dropdown',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Dropdown',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A dropdown/select component. Options can be passed in as a mixed list of strings or objects with `label` and `value` keys.',
+      },
     },
   },
 };
@@ -23,8 +28,8 @@ export default meta;
 
 const Base = {
   args: {
-    placeholder: 'Write something here...',
     label: 'Dropdown',
+    labelPosition: 'above',
     options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
   },
   render: (args) => ({

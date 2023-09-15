@@ -4,17 +4,22 @@ const meta = {
   component: ZoaAutocompleteTextbox,
   title: 'Components/Inputs/Textbox/Autocomplete',
   argTypes: {
-    placeholder: {
-      control: 'text',
-    },
-    label: {
-      control: 'text',
-      default: 'Autocomplete Textbox',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A textbox with dropdown options. The text entered into the box is the returned value; options are supplied from outside of the component, and users can choose whether or not to click them.',
+      },
     },
   },
 };
@@ -23,8 +28,9 @@ export default meta;
 
 const Base = {
   args: {
+    label: 'Autocomplete',
+    labelPosition: 'above',
     placeholder: 'Write something here...',
-    label: 'Autocomplete Textbox',
     options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
   },
   render: (args) => ({

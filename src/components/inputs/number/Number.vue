@@ -28,40 +28,77 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
-  modelValue: {},
-  labelPosition: {
-    type: String,
-    default: 'above',
+  /**
+   * @model
+   */
+  modelValue: {
+    type: Number,
   },
+  /**
+   * Text for the input label.
+   */
   label: {
     type: String,
     default: 'Number',
   },
-  placeholder: {
+  /**
+   * Position of the input label (or none).
+   * @values left, right, above, below, none
+   */
+  labelPosition: {
     type: String,
-    default: 0,
+    default: 'above',
   },
+  /**
+   * Debounce delay for the `change` event, in ms.
+   */
   delay: {
     type: Number,
     default: 200,
   },
+  /**
+   * Text to display in the blank input.
+   */
+  placeholder: {
+    type: Number,
+    default: 0,
+  },
+  /**
+   * The lowest valid number.
+   */
   min: {
     type: Number,
     default: null,
   },
+  /**
+   * The highest valid number.
+   */
   max: {
     type: Number,
     default: null,
   },
+  /**
+   * The granularity of accepted values; e.g. 1 allows any integer and 0.1 allows floats to one decimal place.
+   */
   step: {
     type: Number,
-    default: 0.1,
+    default: 1,
   },
 });
 
 const { componentId, subId } = useComponentId();
 
-const emit = defineEmits(['change', 'update:modelValue']);
+const emit = defineEmits([
+  /**
+   * Emitted when the value changes; debounced if the delay prop is > 0.
+   * @arg {number} newValue the new value
+   */
+  'change',
+  /**
+   * @ignore
+   */
+  'update:modelValue',
+]);
 const { value } = useChangeEmits(emit, props);
 </script>
 

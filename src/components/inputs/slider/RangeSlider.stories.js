@@ -4,21 +4,25 @@ const meta = {
   component: ZoaRangeSlider,
   title: 'Components/Inputs/Slider/Range',
   argTypes: {
-    placeholder: {
-      control: 'number',
-    },
-    label: {
-      control: 'text',
-      default: 'Range',
+    'update:modelValue': {
+      table: {
+        disable: true,
+      },
     },
     labelPosition: {
       control: 'select',
       options: ['above', 'below', 'left', 'right', 'none'],
-      default: 'above',
     },
     labelsRight: {
       control: 'boolean',
-      default: false,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A component with two sliders representing a lower and upper value. Returns the values as an array.',
+      },
     },
   },
 };
@@ -28,6 +32,8 @@ export default meta;
 const Base = {
   args: {
     label: 'Range',
+    labelPosition: 'above',
+    labelsRight: false,
   },
   render: (args) => ({
     components: { ZoaRangeSlider },
