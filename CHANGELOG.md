@@ -1,3 +1,19 @@
+## v0.5.0 (2023-09-18)
+
+### Feature
+
+- add keyboard navigation for ambiguous date
+- add keyboard navigation for checkbox
+
+### Fix
+
+- use number for placeholderPosition
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+
 ## v0.4.1 (2023-09-15)
 
 ### Fix
