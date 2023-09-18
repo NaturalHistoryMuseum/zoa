@@ -3,6 +3,8 @@
     :id="componentId"
     :for="subId('checkbox')"
     :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    tabindex="0"
+    ref="checkbox"
   >
     <span
       v-if="label && labelPosition !== 'none'"
@@ -14,7 +16,7 @@
       type="checkbox"
       :id="subId('checkbox')"
       :class="$style.defaultCheckbox"
-      @change="value"
+      v-model="value"
     />
     <span :class="$style.checkbox">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -26,6 +28,8 @@
 import { useComponentId } from '../../utils/compid.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
+import { useFocusWithin, onKeyStroke } from '@vueuse/core';
+import { ref } from 'vue';
 
 const props = defineProps({
   /**
@@ -33,6 +37,7 @@ const props = defineProps({
    */
   modelValue: {
     type: Boolean,
+    default: undefined,
   },
   /**
    * Text for the input label.
@@ -72,6 +77,15 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+const checkbox = ref(null);
+const focus = useFocusWithin(checkbox);
+
+onKeyStroke('Enter', () => {
+  if (focus.focused.value) {
+    value.value = !value.value;
+  }
+});
 </script>
 
 <style module lang="scss">
