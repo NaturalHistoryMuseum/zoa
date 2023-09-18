@@ -1,3 +1,13 @@
+## v0.5.1 (2023-09-18)
+
+### Build System(s)
+
+- use npm as package manager
+
+### Chores/Misc
+
+- build dist package
+
 ## v0.5.0 (2023-09-18)
 
 ### Feature
