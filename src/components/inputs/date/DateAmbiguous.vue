@@ -17,7 +17,6 @@
         :placeholder="placeholder"
         :id="subId('date')"
         :class="[$style.input, editing ? $style.editing : '']"
-        @focusin="focused = true"
         ref="displayBox"
         @input="parseInput"
       />
@@ -26,7 +25,9 @@
           <span
             v-for="dt in guessedDates"
             @click="setDate(dt)"
+            @keydown.enter="setDate(dt)"
             :class="$style.suggestion"
+            tabindex="0"
             >{{ formatDate(dt.year, dt.month, dt.day) }}</span
           >
         </div>
@@ -34,17 +35,17 @@
           <ZoaNumber
             label="year"
             label-position="left"
-            step="1"
-            placeholder="1900"
+            :placeholder="1900"
             v-model="rawYear"
-            min="0"
-            max="9999"
+            :min="0"
+            :max="9999"
           />
-          <div :class="$style.yearGrid">
+          <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
             <ZoaButton
               v-for="opt in yearOptions"
               size="sm"
               @click="setYear(opt)"
+              tabindex="-1"
               >{{ padYear(opt) }}
             </ZoaButton>
           </div>
@@ -53,17 +54,17 @@
           <ZoaNumber
             label="month"
             label-position="left"
-            step="1"
-            placeholder="01"
+            :placeholder="1"
             v-model="month"
-            min="1"
-            max="12"
+            :min="1"
+            :max="12"
           />
-          <div :class="$style.monthGrid">
+          <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
             <ZoaButton
               v-for="(opt, ix) in monthOptions"
               size="sm"
               @click="setMonth(ix + 1)"
+              tabindex="-1"
               >{{ opt }}
             </ZoaButton>
           </div>
@@ -72,14 +73,18 @@
           <ZoaNumber
             label="day"
             label-position="left"
-            step="1"
-            placeholder="01"
+            :placeholder="1"
             v-model="day"
-            min="1"
+            :min="1"
             :max="monthDays"
           />
-          <div :class="$style.dayGrid">
-            <ZoaButton v-for="opt in dayOptions" size="sm" @click="setDay(opt)">
+          <div :class="$style.dayGrid" tabindex="0" ref="dayBtns">
+            <ZoaButton
+              v-for="opt in dayOptions"
+              size="sm"
+              @click="setDay(opt)"
+              tabindex="-1"
+            >
               {{ opt }}
             </ZoaButton>
           </div>
@@ -98,7 +103,7 @@ import ZoaButton from '../button/Button.vue';
 import { parseDate } from '../../utils/dates.js';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
-import { onClickOutside } from '@vueuse/core';
+import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
 
 const props = defineProps({
   /**
@@ -154,13 +159,87 @@ const emit = defineEmits([
 const { valueChanged } = useChangeEmits(emit, props.delay);
 
 // STATE
-const focused = ref(false);
 const displayBox = ref(null);
 const editing = ref(false);
 const container = ref(null);
 
-onClickOutside(container, () => {
-  focused.value = false;
+const { focused } = useFocusWithin(container);
+
+// YEAR/MONTH/DAY BUTTONS
+const yearBtns = ref(null);
+const monthBtns = ref(null);
+const dayBtns = ref(null);
+
+const yearBtnsFocus = useFocus(yearBtns);
+const yearBtnsFocusWithin = useFocusWithin(yearBtns);
+const monthBtnsFocus = useFocus(monthBtns);
+const monthBtnsFocusWithin = useFocusWithin(monthBtns);
+const dayBtnsFocus = useFocus(dayBtns);
+const dayBtnsFocusWithin = useFocusWithin(dayBtns);
+
+const focusedContainer = computed(() => {
+  let buttonContainer;
+  if (yearBtnsFocus.focused.value) {
+    buttonContainer = yearBtns.value;
+  } else if (monthBtnsFocus.focused.value) {
+    buttonContainer = monthBtns.value;
+  } else if (dayBtnsFocus.focused.value) {
+    buttonContainer = dayBtns.value;
+  }
+  return buttonContainer;
+});
+
+const focusedButtons = computed(() => {
+  let buttonContainer;
+  if (yearBtnsFocusWithin.focused.value) {
+    buttonContainer = yearBtns.value;
+  } else if (monthBtnsFocusWithin.focused.value) {
+    buttonContainer = monthBtns.value;
+  } else if (dayBtnsFocusWithin.focused.value) {
+    buttonContainer = dayBtns.value;
+  }
+  return buttonContainer;
+});
+
+onKeyStroke('Enter', () => {
+  if (!focusedContainer) {
+    return;
+  }
+  focusedContainer.value.children[0].focus();
+});
+
+onKeyStroke('ArrowLeft', () => {
+  if (!focusedButtons.value) {
+    return;
+  }
+  const selectedElement = focusedButtons.value.querySelector('button:focus');
+  if (!selectedElement || !selectedElement.previousElementSibling) {
+    focusedButtons.value.children[
+      focusedButtons.value.children.length - 1
+    ].focus();
+  } else {
+    selectedElement.previousElementSibling.focus();
+  }
+});
+
+onKeyStroke('ArrowRight', () => {
+  if (!focusedButtons.value) {
+    return;
+  }
+  const selectedElement = focusedButtons.value.querySelector('button:focus');
+  if (!selectedElement || !selectedElement.nextElementSibling) {
+    focusedButtons.value.children[0].focus();
+  } else {
+    selectedElement.nextElementSibling.focus();
+  }
+});
+
+// OTHER KEYBINDINGS
+onKeyStroke('Escape', () => {
+  const selectedElement = container.value.querySelector('*:focus');
+  if (selectedElement) {
+    selectedElement.blur();
+  }
 });
 
 // THE MAIN DATE
