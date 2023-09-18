@@ -19,7 +19,7 @@
         :label="labelLower"
         :label-position="labelsRight ? 'right' : 'left'"
         value-label-position="above"
-        placeholder-position="0.25"
+        :placeholder-position="0.25"
       />
       <ZoaSlider
         :min="min"
