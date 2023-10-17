@@ -17,6 +17,8 @@
       :id="subId('checkbox')"
       :class="$style.defaultCheckbox"
       v-model="value"
+      :name="name"
+      :value="checkValue || label"
     />
     <span :class="$style.checkbox">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -60,6 +62,21 @@ const props = defineProps({
   delay: {
     type: Number,
     default: 0,
+  },
+  /**
+   * An optional name for the checkbox; useful if making a group.
+   */
+  name: {
+    type: [String, null],
+    default: null,
+  },
+  /**
+   * An optional alternative value for the checkbox to return. If not specified,
+   * the label value will be used.
+   */
+  checkValue: {
+    type: [String, null],
+    default: null,
   },
 });
 
