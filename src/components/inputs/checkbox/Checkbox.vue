@@ -109,13 +109,21 @@ onKeyStroke('Enter', () => {
 @import '../inputs';
 
 .grid {
-  width: min-content;
   justify-items: center;
 
-  &.grid--left,
-  &.grid--right {
-    grid-template-columns: min-content min-content;
+  &.grid--left {
+    grid-template-columns: auto min-content;
   }
+  &.grid--right {
+    grid-template-columns: min-content auto;
+  }
+}
+
+.label--right {
+  justify-self: left;
+}
+.label--left {
+  justify-self: right;
 }
 
 .defaultCheckbox {
