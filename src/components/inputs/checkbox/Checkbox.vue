@@ -4,7 +4,7 @@
     :for="subId('checkbox')"
     :class="[$style.grid, $style[`grid--${labelPosition}`]]"
     tabindex="0"
-    ref="checkbox"
+    ref="checkboxContainer"
   >
     <span
       v-if="label && labelPosition !== 'none'"
@@ -18,7 +18,8 @@
       :class="$style.defaultCheckbox"
       v-model="value"
       :name="name"
-      :value="checkValue || label"
+      :value="_checkValue"
+      ref="checkboxInput"
     />
     <span :class="$style.checkbox">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -31,7 +32,7 @@ import { useComponentId } from '../../utils/compid.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref } from 'vue';
+import { ref, computed, isProxy, toRaw } from 'vue';
 
 const props = defineProps({
   /**
@@ -95,12 +96,34 @@ const emit = defineEmits([
 ]);
 const { value } = useChangeEmits(emit, props);
 
-const checkbox = ref(null);
-const focus = useFocusWithin(checkbox);
+const checkboxContainer = ref(null);
+const checkboxInput = ref(null);
+const focus = useFocusWithin(checkboxContainer);
 
-onKeyStroke('Enter', () => {
+// for convenience and consistency
+const _checkValue = computed(() => {
+  return props.checkValue || props.label;
+});
+
+onKeyStroke(' ', () => {
   if (focus.focused.value) {
-    value.value = !value.value;
+    // if the same v-model is set on a group of checkboxes, they return an array
+    // of their _checkValue values instead of a single boolean. There may be a
+    // better way to check for this.
+    let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
+    if (Array.isArray(currentValue)) {
+      // if it's currently unchecked, we want to check it, and vice versa
+      let check = !checkboxInput.value.checked;
+      // double-check the value isn't on there already
+      currentValue = currentValue.filter((v) => v !== _checkValue.value);
+      if (check) {
+        currentValue.push(_checkValue.value);
+      }
+      value.value = currentValue;
+      checkboxInput.value.checked = check;
+    } else {
+      value.value = !value.value;
+    }
   }
 });
 </script>
