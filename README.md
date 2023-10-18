@@ -2,6 +2,7 @@
 
 UI components for the Data Portal team.
 
+**NB: Zoa is in alpha and is subject to frequent API changes with no prior notification or appropriate semantic version change.**
 
 ## Installation
 

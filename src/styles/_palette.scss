@@ -1,8 +1,9 @@
 $primary: var(--zoa-palette-primary, #c9f708);
 $secondary: var(--zoa-palette-secondary, #f2bab0);
-$dark: var(--zoa-palette-dark, #651604);
+$tertiary: var(--zoa-palette-tertiary, #651604);
 $grey: var(--zoa-palette-grey, #87999e);
 $light: var(--zoa-palette-light, #f3f3f3);
+$dark: var(--zoa-palette-dark, #0c0c0c);
 
 $primary-a: var(--zoa-palette-primary-a, #cef821);
 $primary-b: var(--zoa-palette-primary-b, #b5de07);
@@ -10,14 +11,17 @@ $primary-b: var(--zoa-palette-primary-b, #b5de07);
 $secondary-a: var(--zoa-palette-secondary-a, #f3c1b8);
 $secondary-b: var(--zoa-palette-secondary-b, #ec9b8c);
 
-$dark-a: var(--zoa-palette-dark-a, #8c1e06);
-$dark-b: var(--zoa-palette-dark-b, #5b1404);
+$tertiary-a: var(--zoa-palette-tertiary-a, #8c1e06);
+$tertiary-b: var(--zoa-palette-tertiary-b, #5b1404);
 
 $grey-a: var(--zoa-palette-grey-a, #93a3a8);
 $grey-b: var(--zoa-palette-grey-b, #778b91);
 
 $light-a: var(--zoa-palette-light-a, #f4f4f4);
 $light-b: var(--zoa-palette-light-b, #dbdbdb);
+
+$dark-a: var(--zoa-palette-light-a, #0e0e0e);
+$dark-b: var(--zoa-palette-light-b, #000000);
 
 $info-light: var(--zoa-palette-info-light, #e6fdfd);
 $info-dark: var(--zoa-palette-info-dark, #0dedf7);
