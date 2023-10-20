@@ -109,7 +109,7 @@ const props = defineProps({
    */
   label: {
     type: String,
-    default: 'Autocomplete',
+    default: 'Multiselect',
   },
   /**
    * Position of the input label (or none).
