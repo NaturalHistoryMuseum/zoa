@@ -413,6 +413,10 @@ ul.optlist {
   & > .optlist label {
     padding-left: calc($h-pad * 2);
   }
+
+  .selectAll + & {
+    border-top: none;
+  }
 }
 
 .selectAll > *,
