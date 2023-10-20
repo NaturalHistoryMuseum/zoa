@@ -368,6 +368,9 @@ function selectGroup(groupName) {
   width: 100%;
   margin-top: 2px;
   font-size: 0.9em;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ul.optlist {
