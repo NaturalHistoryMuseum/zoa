@@ -32,7 +32,7 @@
         <font-awesome-icon
           icon="fa-solid fa-caret-down"
           :class="$style.arrow"
-          @click="focused = !focused"
+          @click="toggleFocus"
         />
       </div>
       <div :class="$style.options" v-if="focused" ref="dropdown">
@@ -54,6 +54,7 @@
               :check-value="opt.value"
               :name="subId('checkboxes')"
               v-model="value"
+              v-if="opt.ix >= lowerVisible && opt.ix <= upperVisible"
             />
           </li>
           <li
@@ -72,6 +73,7 @@
                   :check-value="opt.value"
                   :name="subId('checkboxes')"
                   v-model="value"
+                  v-if="opt.ix >= lowerVisible && opt.ix <= upperVisible"
                 />
               </li>
             </ul>
@@ -92,6 +94,7 @@ import {
   onKeyStroke,
   useFocusWithin,
   useFocus,
+  useScroll,
 } from '@vueuse/core';
 import FontAwesomeIcon from '../../../icons.js';
 import ZoaCheckbox from '../checkbox/Checkbox.vue';
@@ -240,13 +243,60 @@ const groupedOptions = computed(() => {
       outputOptions.root.push(opt);
     }
   });
-  return outputOptions;
+  let ix = 0;
+  let orderedOutputOptions = { root: [], groups: {} };
+  outputOptions.root.forEach((o) => {
+    ix += 1;
+    o.ix = ix;
+    orderedOutputOptions.root.push(o);
+  });
+  Object.entries(outputOptions.groups).forEach((g) => {
+    orderedOutputOptions.groups[g[0]] = [];
+    g[1].forEach((o) => {
+      ix += 1;
+      o.ix = ix;
+      orderedOutputOptions.groups[g[0]].push(o);
+    });
+  });
+  return orderedOutputOptions;
 });
 
 // elements
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
+
+// scrolling
+const { y } = useScroll(dropdown);
+const scrollY = computed(() => {
+  // y from useScroll doesn't reset when the dropdown element is reloaded until
+  // the user starts scrolling, which is obviously not ideal. Using scrollTop
+  // alone/directly doesn't update quickly/often enough, so we have to combine.
+  if (
+    !dropdown.value ||
+    (dropdown.value && y.value !== dropdown.value.scrollTop)
+  ) {
+    return 0;
+  }
+  return y.value;
+});
+const optionHeight = 40; // set in CSS as height of .option
+const buffer = 10; // how many items either side of the visible items should be loaded
+const dropdownHeight = computed(() => {
+  try {
+    return dropdown.value.clientHeight;
+  } catch {
+    return 500;
+  }
+});
+const lowerVisible = computed(() => {
+  // doesn't matter if it's < n options
+  return Math.floor(scrollY.value / optionHeight) - buffer;
+});
+const upperVisible = computed(() => {
+  // doesn't matter if it's > n options
+  return Math.ceil((scrollY.value + dropdownHeight.value) / optionHeight);
+});
 
 // focus and keyboard navigation
 const focused = ref(false);
@@ -271,8 +321,12 @@ function unfocus() {
   focused.value = false;
 }
 
+function toggleFocus() {
+  focused.value ? unfocus() : startFocus();
+}
+
 onClickOutside(container, () => {
-  focused.value = false;
+  unfocus();
 });
 
 onKeyStroke('ArrowDown', () => {
@@ -395,10 +449,14 @@ ul.optlist {
     cursor: pointer;
   }
 
-  &.option:not(.selectAll) > * {
-    &:hover,
-    &:focus {
-      background: $secondary;
+  &.option {
+    height: 40px; // if this is changed, also change optionHeight const above
+
+    &:not(.selectAll) > * {
+      &:hover,
+      &:focus {
+        background: $secondary;
+      }
     }
   }
 }
