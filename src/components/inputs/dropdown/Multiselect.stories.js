@@ -75,5 +75,6 @@ export const Many = {
       }
       return opt;
     }),
+    enableSearch: true,
   },
 };

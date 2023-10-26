@@ -44,6 +44,13 @@
               v-model="selectAll"
             />
           </li>
+          <li :class="[$style.selectAll, $style.listItem, $style.option]">
+            <ZoaCheckbox
+              label="Select visible"
+              label-position="right"
+              v-model="selectVisible"
+            />
+          </li>
           <li
             v-for="opt in groupedOptions.root"
             :class="[$style.listItem, $style.option]"
@@ -163,6 +170,13 @@ const props = defineProps({
     type: Number,
     default: 200,
   },
+  /**
+   * Enables an internal list filtering based on the search value. Disable if implementing an external filter using the emit.
+   */
+  enableSearch: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { componentId, subId } = useComponentId();
@@ -233,18 +247,31 @@ const dropdownOptions = computed(() => {
 });
 
 const groupedOptions = computed(() => {
+  const doSearch = props.enableSearch && search.value;
+  const searchString = doSearch ? search.value.toLowerCase() : null;
+  const checkMatch = (txt) => {
+    return doSearch ? txt.toLowerCase().includes(searchString) : true;
+  };
+
   let outputOptions = { root: [], groups: {} };
   dropdownOptions.value.forEach((opt) => {
     if (opt.group) {
       let group = outputOptions.groups[opt.group] || [];
-      group.push(opt);
-      outputOptions.groups[opt.group] = group;
+      let groupMatches = checkMatch(opt.group);
+      let optMatches = checkMatch(opt.value) || checkMatch(opt.label);
+      if (groupMatches || optMatches) {
+        group.push(opt);
+        outputOptions.groups[opt.group] = group;
+      }
     } else {
-      outputOptions.root.push(opt);
+      if (checkMatch(opt.value) || checkMatch(opt.label)) {
+        outputOptions.root.push(opt);
+      }
     }
   });
-  let ix = 0;
+
   let orderedOutputOptions = { root: [], groups: {} };
+  let ix = 2; // just for showing/hiding elements based on scroll position; starts at 2 to accomodate selectAll/selectVisible
   outputOptions.root.forEach((o) => {
     ix += 1;
     o.ix = ix;
@@ -377,6 +404,9 @@ onKeyStroke('Enter', () => {
 });
 
 // select/deselect multiple checkboxes at once
+/**
+ * On checking, selects all options (visible and invisible).
+ */
 const selectAll = computed({
   get() {
     const options = dropdownOptions.value;
@@ -395,6 +425,39 @@ const selectAll = computed({
   },
 });
 
+/**
+ * On checking, selects all VISIBLE options.
+ */
+const selectVisible = computed({
+  get() {
+    let options = groupedOptions.value.root.map((o) => o.value);
+    Object.values(groupedOptions.value.groups).forEach((g) => {
+      options = options.concat(g.map((o) => o.value));
+    });
+    if (value.value.length < options.length) {
+      return false;
+    }
+    const unchecked = options.filter((o) => !value.value.includes(o));
+    return unchecked.length === 0;
+  },
+  set(toggleValue) {
+    let options = groupedOptions.value.root.map((o) => o.value);
+    Object.values(groupedOptions.value.groups).forEach((g) => {
+      options = options.concat(g.map((o) => o.value));
+    });
+    if (toggleValue) {
+      const unchecked = options.filter((o) => !value.value.includes(o));
+      value.value = value.value.concat(unchecked);
+    } else {
+      value.value = value.value.filter((o) => !options.includes(o));
+    }
+  },
+});
+
+/**
+ * Selects all VISIBLE group options.
+ * @param groupName
+ */
 function selectGroup(groupName) {
   const group = groupedOptions.value.groups[groupName].map((o) => o.value);
   const unchecked = group.filter((o) => !value.value.includes(o));
