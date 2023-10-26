@@ -106,6 +106,7 @@ import {
 import FontAwesomeIcon from '../../../icons.js';
 import ZoaCheckbox from '../checkbox/Checkbox.vue';
 import { debounce } from 'dettle';
+import { fuzzySearch } from 'levenshtein-search';
 
 const props = defineProps({
   /**
@@ -250,7 +251,9 @@ const groupedOptions = computed(() => {
   const doSearch = props.enableSearch && search.value;
   const searchString = doSearch ? search.value.toLowerCase() : null;
   const checkMatch = (txt) => {
-    return doSearch ? txt.toLowerCase().includes(searchString) : true;
+    return doSearch
+      ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
+      : true;
   };
 
   let outputOptions = { root: [], groups: {} };
