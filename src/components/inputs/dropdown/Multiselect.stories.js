@@ -56,7 +56,10 @@ export const Default = {
   ...Base,
 };
 
-const groups = ['root', 'Group 1', 'Group 2', 'Group 3'];
+const groups = ['root'];
+[...Array(200).keys()].forEach((i) => {
+  groups.push(`Group ${i + 1}`);
+});
 
 export const Many = {
   ...Base,

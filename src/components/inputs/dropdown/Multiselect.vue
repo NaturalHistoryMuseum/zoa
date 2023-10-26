@@ -252,6 +252,7 @@ const groupedOptions = computed(() => {
   });
   Object.entries(outputOptions.groups).forEach((g) => {
     orderedOutputOptions.groups[g[0]] = [];
+    ix += 1; // add an extra space for the group header
     g[1].forEach((o) => {
       ix += 1;
       o.ix = ix;
