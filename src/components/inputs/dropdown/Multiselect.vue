@@ -522,10 +522,14 @@ ul.optlist {
         background: $secondary;
       }
     }
+
+    & > label {
+      height: 100%;
+    }
   }
 }
 
-.selectAll {
+.selectAll + .selectAll {
   border-bottom: 2px solid $primary;
 }
 
