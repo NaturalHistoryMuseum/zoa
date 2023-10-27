@@ -206,18 +206,19 @@ if (!Array.isArray(value)) {
 }
 
 // searching
-function _emitSearch(searchTerm) {
-  emit('search', searchTerm);
-}
-
-const emitSearch = debounce(_emitSearch, props.searchDelay);
 const _search = ref(null);
+const emitSearch = debounce((searchTerm) => {
+  emit('search', searchTerm);
+}, props.searchDelay);
+const updateSearch = debounce((searchTerm) => {
+  _search.value = searchTerm;
+}, props.searchDelay);
 const search = computed({
   get() {
     return _search.value;
   },
   set(searchTerm) {
-    _search.value = searchTerm;
+    updateSearch(searchTerm);
     emitSearch(searchTerm);
   },
 });
