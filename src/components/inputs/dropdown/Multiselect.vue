@@ -240,10 +240,34 @@ const dropdownOptions = computed(() => {
         label: o.label || o.value,
         value: o.value || o.label,
         group: o.group || null,
+        order: o.order || null,
       });
     } else {
       outputOptions.push({ label: o, value: o, group: null });
     }
+  });
+  outputOptions.sort((a, b) => {
+    let groupSort;
+    if (a.group === b.group) {
+      groupSort = 0;
+    } else if (!a.group || !b.group) {
+      groupSort = !a.group ? -1 : 1;
+    } else {
+      groupSort = a.group.localeCompare(b.group);
+    }
+
+    let orderSort = 0;
+    if (a.order || b.order) {
+      orderSort = a.order && b.order ? a.order - b.order : a.order ? 1 : -1;
+    }
+
+    let labelSort = a.label.localeCompare(b.label);
+
+    return groupSort !== 0
+      ? groupSort
+      : orderSort !== 0
+      ? orderSort
+      : labelSort;
   });
   return outputOptions;
 });
