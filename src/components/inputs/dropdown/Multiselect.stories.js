@@ -67,7 +67,7 @@ export const Many = {
     label: 'Many Options',
     options: [...Array(300).keys()].map((i) => {
       let opt = {
-        value: nanoid(5),
+        value: nanoid(Math.ceil(Math.random() * 100)),
       };
       const group = groups[Math.floor(Math.random() * groups.length)];
       if (group !== 'root') {
