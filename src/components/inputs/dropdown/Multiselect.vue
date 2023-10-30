@@ -36,7 +36,7 @@
         />
       </div>
       <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
+        <ul v-if="allOptions.length > 0" :class="$style.optlist">
           <li :class="[$style.selectAll, $style.listItem, $style.option]">
             <ZoaCheckbox
               label="Select all"
@@ -44,46 +44,36 @@
               v-model="selectAll"
             />
           </li>
-          <li :class="[$style.selectAll, $style.listItem, $style.option]">
+          <li
+            :class="[$style.selectAll, $style.listItem, $style.option]"
+            v-if="!!_search"
+          >
             <ZoaCheckbox
-              label="Select visible"
+              label="Select all results"
               label-position="right"
               v-model="selectVisible"
             />
           </li>
           <li
-            v-for="opt in groupedOptions.root"
-            :class="[$style.listItem, $style.option]"
+            v-for="item in visibleItems"
+            :class="[
+              $style.listItem,
+              item.kind === 'group' ? $style.subgroup : $style.option,
+            ]"
           >
-            <ZoaCheckbox
-              :label="opt.label"
-              label-position="right"
-              :check-value="opt.value"
-              :name="subId('checkboxes')"
-              v-model="value"
-              v-if="opt.ix >= lowerVisible && opt.ix <= upperVisible"
-            />
-          </li>
-          <li
-            v-for="(options, group) in groupedOptions.groups"
-            :class="[$style.listItem, $style.subgroup]"
-          >
-            <div @click="selectGroup(group)">{{ group }}</div>
-            <ul :class="$style.optlist">
-              <li
-                v-for="opt in options"
-                :class="[$style.listItem, $style.option]"
-              >
-                <ZoaCheckbox
-                  :label="opt.label"
-                  label-position="right"
-                  :check-value="opt.value"
-                  :name="subId('checkboxes')"
-                  v-model="value"
-                  v-if="opt.ix >= lowerVisible && opt.ix <= upperVisible"
-                />
-              </li>
-            </ul>
+            <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
+              {{ item.label }}
+            </div>
+            <div v-else>
+              <ZoaCheckbox
+                :label="item.label"
+                label-position="right"
+                :check-value="item.value"
+                :name="subId('checkboxes')"
+                v-model="value"
+                v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
+              />
+            </div>
           </li>
         </ul>
         <div :class="$style.noOptions" v-else>No options found</div>
@@ -232,7 +222,7 @@ const itemString = computed(() => {
   return props.itemName;
 });
 
-const dropdownOptions = computed(() => {
+const allOptions = computed(() => {
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
@@ -272,49 +262,56 @@ const dropdownOptions = computed(() => {
   return outputOptions;
 });
 
-const groupedOptions = computed(() => {
+const visibleItems = computed(() => {
   const doSearch = props.enableSearch && search.value;
   const searchString = doSearch ? search.value.toLowerCase() : null;
   const checkMatch = (txt) => {
-    return doSearch
+    return txt
       ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
-      : true;
+      : false;
   };
 
-  let outputOptions = { root: [], groups: {} };
-  dropdownOptions.value.forEach((opt) => {
-    if (opt.group) {
-      let group = outputOptions.groups[opt.group] || [];
-      let groupMatches = checkMatch(opt.group);
-      let optMatches = checkMatch(opt.value) || checkMatch(opt.label);
-      if (groupMatches || optMatches) {
-        group.push(opt);
-        outputOptions.groups[opt.group] = group;
-      }
-    } else {
-      if (checkMatch(opt.value) || checkMatch(opt.label)) {
-        outputOptions.root.push(opt);
-      }
-    }
-  });
-
-  let orderedOutputOptions = { root: [], groups: {} };
-  let ix = 2; // just for showing/hiding elements based on scroll position; starts at 2 to accomodate selectAll/selectVisible
-  outputOptions.root.forEach((o) => {
-    ix += 1;
-    o.ix = ix;
-    orderedOutputOptions.root.push(o);
-  });
-  Object.entries(outputOptions.groups).forEach((g) => {
-    orderedOutputOptions.groups[g[0]] = [];
-    ix += 1; // add an extra space for the group header
-    g[1].forEach((o) => {
-      ix += 1;
-      o.ix = ix;
-      orderedOutputOptions.groups[g[0]].push(o);
+  let filteredOptions;
+  if (doSearch) {
+    filteredOptions = allOptions.value.filter((o) => {
+      return checkMatch(o.group) || checkMatch(o.label) || checkMatch(o.value);
     });
+  } else {
+    filteredOptions = allOptions.value;
+  }
+
+  let items = [];
+  let grouped = Object.entries(
+    Object.groupBy(filteredOptions, ({ group }) => group),
+  );
+  let ix = searchString ? 2 : 1; // skip the multiselect checkboxes
+  grouped.forEach((g) => {
+    let groupName = g[0];
+    let groupOptions = g[1];
+    if (groupName && groupName !== 'null') {
+      items.push({
+        ix: ix,
+        kind: 'group',
+        label: groupName,
+        value: groupName,
+        group: groupName,
+      });
+      ix += 1;
+    }
+    items = items.concat(
+      groupOptions.map((o, i) => {
+        return {
+          ix: ix + i,
+          kind: 'option',
+          label: o.label,
+          value: o.value,
+          group: o.group,
+        };
+      }),
+    );
+    ix += groupOptions.length;
   });
-  return orderedOutputOptions;
+  return items;
 });
 
 // elements
@@ -386,7 +383,7 @@ onClickOutside(container, () => {
 });
 
 onKeyStroke('ArrowDown', () => {
-  if (dropdownOptions.value.length === 0) {
+  if (allOptions.value.length === 0) {
     return;
   }
   if (textboxFocus.focused.value) {
@@ -408,7 +405,7 @@ onKeyStroke('ArrowDown', () => {
 });
 
 onKeyStroke('ArrowUp', () => {
-  if (dropdownOptions.value.length === 0) {
+  if (allOptions.value.length === 0) {
     return;
   }
   if (dropdownFocus.focused.value) {
@@ -437,7 +434,7 @@ onKeyStroke('Enter', () => {
  */
 const selectAll = computed({
   get() {
-    const options = dropdownOptions.value;
+    const options = allOptions.value;
     if (value.value.length !== options.length) {
       return false;
     }
@@ -446,7 +443,7 @@ const selectAll = computed({
   },
   set(toggleValue) {
     if (toggleValue) {
-      value.value = dropdownOptions.value.map((o) => o.value);
+      value.value = allOptions.value.map((o) => o.value);
     } else {
       value.value = [];
     }
@@ -458,10 +455,9 @@ const selectAll = computed({
  */
 const selectVisible = computed({
   get() {
-    let options = groupedOptions.value.root.map((o) => o.value);
-    Object.values(groupedOptions.value.groups).forEach((g) => {
-      options = options.concat(g.map((o) => o.value));
-    });
+    let options = visibleItems.value
+      .filter((i) => i.kind === 'option')
+      .map((o) => o.value);
     if (value.value.length < options.length) {
       return false;
     }
@@ -469,10 +465,9 @@ const selectVisible = computed({
     return unchecked.length === 0;
   },
   set(toggleValue) {
-    let options = groupedOptions.value.root.map((o) => o.value);
-    Object.values(groupedOptions.value.groups).forEach((g) => {
-      options = options.concat(g.map((o) => o.value));
-    });
+    let options = visibleItems.value
+      .filter((i) => i.kind === 'option')
+      .map((o) => o.value);
     if (toggleValue) {
       const unchecked = options.filter((o) => !value.value.includes(o));
       value.value = value.value.concat(unchecked);
@@ -487,7 +482,9 @@ const selectVisible = computed({
  * @param groupName
  */
 function selectGroup(groupName) {
-  const group = groupedOptions.value.groups[groupName].map((o) => o.value);
+  const group = visibleItems.value
+    .filter((o) => o.kind === 'option' && o.group === groupName)
+    .map((o) => o.value);
   const unchecked = group.filter((o) => !value.value.includes(o));
   if (unchecked.length > 0) {
     unchecked.forEach((o) => {
@@ -557,8 +554,8 @@ ul.optlist {
   }
 }
 
-.selectAll + .selectAll {
-  border-bottom: 2px solid $primary;
+.selectAll + .option:not(.selectAll) {
+  border-top: 2px solid $primary;
 }
 
 .subgroup {
@@ -566,10 +563,6 @@ ul.optlist {
 
   & > .optlist label {
     padding-left: calc($h-pad * 2);
-  }
-
-  .selectAll + & {
-    border-top: none;
   }
 }
 
