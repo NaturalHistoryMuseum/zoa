@@ -100,10 +100,10 @@ import { useChangeEmits } from '../common.js';
 import { ref, computed, watch } from 'vue';
 import ZoaNumber from '../number/Number.vue';
 import ZoaButton from '../button/Button.vue';
-import { parseDate } from '../../utils/dates.js';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
 import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
+const dateUtils = () => import('../../utils/dates.js');
 
 const props = defineProps({
   /**
@@ -268,7 +268,9 @@ const guessedDates = ref([]);
 
 function _parseInput(event) {
   editing.value = true;
-  guessedDates.value = parseDate(event.target.value);
+  dateUtils().then((du) => {
+    guessedDates.value = du.parseDate(event.target.value);
+  });
 }
 
 const parseInput = debounce(_parseInput, 200);

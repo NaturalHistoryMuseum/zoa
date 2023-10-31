@@ -2,7 +2,7 @@ import ZoaDropdown from './Dropdown.vue';
 
 const meta = {
   component: ZoaDropdown,
-  title: 'Components/Inputs/Dropdown',
+  title: 'Components/Inputs/Select/Dropdown',
   argTypes: {
     'update:modelValue': {
       table: {

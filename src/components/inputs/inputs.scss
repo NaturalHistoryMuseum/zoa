@@ -5,10 +5,15 @@
 .input {
   -webkit-appearance: none;
   background: white;
+  color: $dark;
   border: 1px solid $grey;
   border-radius: $rounding;
   padding: $padding;
   width: 100%;
+
+  &:disabled {
+    color: $grey;
+  }
 }
 
 .label {
