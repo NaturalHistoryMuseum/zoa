@@ -51,11 +51,11 @@
             <ZoaCheckbox
               label="Select all results"
               label-position="right"
-              v-model="selectVisible"
+              v-model="selectFiltered"
             />
           </li>
           <li
-            v-for="item in visibleItems"
+            v-for="item in filteredItems"
             :class="[
               $style.listItem,
               item.kind === 'group' ? $style.subgroup : $style.option,
@@ -262,7 +262,7 @@ const allOptions = computed(() => {
   return outputOptions;
 });
 
-const visibleItems = computed(() => {
+const filteredItems = computed(() => {
   const doSearch = props.enableSearch && search.value;
   const searchString = doSearch ? search.value.toLowerCase() : null;
   const checkMatch = (txt) => {
@@ -430,7 +430,7 @@ onKeyStroke('Enter', () => {
 
 // select/deselect multiple checkboxes at once
 /**
- * On checking, selects all options (visible and invisible).
+ * On checking, selects all options (the full unfiltered list).
  */
 const selectAll = computed({
   get() {
@@ -451,11 +451,11 @@ const selectAll = computed({
 });
 
 /**
- * On checking, selects all VISIBLE options.
+ * On checking, selects all FILTERED options.
  */
-const selectVisible = computed({
+const selectFiltered = computed({
   get() {
-    let options = visibleItems.value
+    let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
     if (value.value.length < options.length) {
@@ -465,7 +465,7 @@ const selectVisible = computed({
     return unchecked.length === 0;
   },
   set(toggleValue) {
-    let options = visibleItems.value
+    let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
     if (toggleValue) {
@@ -478,11 +478,11 @@ const selectVisible = computed({
 });
 
 /**
- * Selects all VISIBLE group options.
+ * Selects all FILTERED group options.
  * @param groupName
  */
 function selectGroup(groupName) {
-  const group = visibleItems.value
+  const group = filteredItems.value
     .filter((o) => o.kind === 'option' && o.group === groupName)
     .map((o) => o.value);
   const unchecked = group.filter((o) => !value.value.includes(o));
@@ -539,7 +539,7 @@ ul.optlist {
   }
 
   &.option {
-    height: 40px; // if this is changed, also change optionHeight const above
+    min-height: 40px; // if this is changed, also change optionHeight const above
 
     &:not(.selectAll) > * {
       &:hover,
