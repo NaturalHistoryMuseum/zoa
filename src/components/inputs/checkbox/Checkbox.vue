@@ -39,8 +39,8 @@ const props = defineProps({
    * @model
    */
   modelValue: {
-    type: Boolean,
-    default: undefined,
+    type: [Boolean, Array],
+    default: false,
   },
   /**
    * Text for the input label.

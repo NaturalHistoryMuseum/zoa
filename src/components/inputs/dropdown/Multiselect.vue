@@ -32,12 +32,16 @@
         <font-awesome-icon
           icon="fa-solid fa-caret-down"
           :class="$style.arrow"
-          @click="focused = !focused"
+          @click="toggleFocus"
         />
       </div>
       <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
-          <li :class="[$style.selectAll, $style.listItem, $style.option]">
+        <ul v-if="allOptions.length > 0" :class="$style.optlist">
+          <li
+            title="Select all"
+            :class="[$style.selectAll, $style.listItem, $style.option]"
+            :style="{ height: `${itemHeight}px` }"
+          >
             <ZoaCheckbox
               label="Select all"
               label-position="right"
@@ -45,36 +49,39 @@
             />
           </li>
           <li
-            v-for="opt in groupedOptions.root"
-            :class="[$style.listItem, $style.option]"
+            title="Select results"
+            :class="[$style.selectAll, $style.listItem, $style.option]"
+            :style="{ height: `${itemHeight}px` }"
+            v-if="!!_search"
           >
             <ZoaCheckbox
-              :label="opt.label"
+              label="Select results"
               label-position="right"
-              :check-value="opt.value"
-              :name="subId('checkboxes')"
-              v-model="value"
+              v-model="selectFiltered"
             />
           </li>
           <li
-            v-for="(options, group) in groupedOptions.groups"
-            :class="[$style.listItem, $style.subgroup]"
+            v-for="item in filteredItems"
+            :title="item.label"
+            :class="[
+              $style.listItem,
+              item.kind === 'group' ? $style.subgroup : $style.option,
+            ]"
+            :style="{ height: `${itemHeight}px` }"
           >
-            <div @click="selectGroup(group)">{{ group }}</div>
-            <ul :class="$style.optlist">
-              <li
-                v-for="opt in options"
-                :class="[$style.listItem, $style.option]"
-              >
-                <ZoaCheckbox
-                  :label="opt.label"
-                  label-position="right"
-                  :check-value="opt.value"
-                  :name="subId('checkboxes')"
-                  v-model="value"
-                />
-              </li>
-            </ul>
+            <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
+              {{ item.label }}
+            </div>
+            <div v-else>
+              <ZoaCheckbox
+                :label="item.label"
+                label-position="right"
+                :check-value="item.value"
+                :name="subId('checkboxes')"
+                v-model="value"
+                v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
+              />
+            </div>
           </li>
         </ul>
         <div :class="$style.noOptions" v-else>No options found</div>
@@ -92,10 +99,12 @@ import {
   onKeyStroke,
   useFocusWithin,
   useFocus,
+  useScroll,
 } from '@vueuse/core';
 import FontAwesomeIcon from '../../../icons.js';
 import ZoaCheckbox from '../checkbox/Checkbox.vue';
 import { debounce } from 'dettle';
+import { fuzzySearch } from 'levenshtein-search';
 
 const props = defineProps({
   /**
@@ -109,7 +118,7 @@ const props = defineProps({
    */
   label: {
     type: String,
-    default: 'Autocomplete',
+    default: 'Multiselect',
   },
   /**
    * Position of the input label (or none).
@@ -160,6 +169,20 @@ const props = defineProps({
     type: Number,
     default: 200,
   },
+  /**
+   * Enables an internal list filtering based on the search value. Disable if implementing an external filter using the emit.
+   */
+  enableSearch: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * Override the height (in px) of each list item. May be necessary if font family or size is changed from the default.
+   */
+  itemHeight: {
+    type: Number,
+    default: 38,
+  },
 });
 
 const { componentId, subId } = useComponentId();
@@ -188,18 +211,19 @@ if (!Array.isArray(value)) {
 }
 
 // searching
-function _emitSearch(searchTerm) {
-  emit('search', searchTerm);
-}
-
-const emitSearch = debounce(_emitSearch, props.searchDelay);
 const _search = ref(null);
+const emitSearch = debounce((searchTerm) => {
+  emit('search', searchTerm);
+}, props.searchDelay);
+const updateSearch = debounce((searchTerm) => {
+  _search.value = searchTerm;
+}, props.searchDelay);
 const search = computed({
   get() {
     return _search.value;
   },
   set(searchTerm) {
-    _search.value = searchTerm;
+    updateSearch(searchTerm);
     emitSearch(searchTerm);
   },
 });
@@ -213,7 +237,7 @@ const itemString = computed(() => {
   return props.itemName;
 });
 
-const dropdownOptions = computed(() => {
+const allOptions = computed(() => {
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
@@ -221,32 +245,125 @@ const dropdownOptions = computed(() => {
         label: o.label || o.value,
         value: o.value || o.label,
         group: o.group || null,
+        order: o.order || null,
       });
     } else {
       outputOptions.push({ label: o, value: o, group: null });
     }
   });
+  outputOptions.sort((a, b) => {
+    let groupSort;
+    if (a.group === b.group) {
+      groupSort = 0;
+    } else if (!a.group || !b.group) {
+      groupSort = !a.group ? -1 : 1;
+    } else {
+      groupSort = a.group.localeCompare(b.group);
+    }
+
+    let orderSort = 0;
+    if (a.order || b.order) {
+      orderSort = a.order && b.order ? a.order - b.order : a.order ? 1 : -1;
+    }
+
+    let labelSort = a.label.localeCompare(b.label);
+
+    return groupSort !== 0
+      ? groupSort
+      : orderSort !== 0
+      ? orderSort
+      : labelSort;
+  });
   return outputOptions;
 });
 
-const groupedOptions = computed(() => {
-  let outputOptions = { root: [], groups: {} };
-  dropdownOptions.value.forEach((opt) => {
-    if (opt.group) {
-      let group = outputOptions.groups[opt.group] || [];
-      group.push(opt);
-      outputOptions.groups[opt.group] = group;
-    } else {
-      outputOptions.root.push(opt);
+const filteredItems = computed(() => {
+  const doSearch = props.enableSearch && search.value;
+  const searchString = doSearch ? search.value.toLowerCase() : null;
+  const checkMatch = (txt) => {
+    return txt
+      ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
+      : false;
+  };
+
+  let filteredOptions;
+  if (doSearch) {
+    filteredOptions = allOptions.value.filter((o) => {
+      return checkMatch(o.group) || checkMatch(o.label) || checkMatch(o.value);
+    });
+  } else {
+    filteredOptions = allOptions.value;
+  }
+
+  let items = [];
+  let grouped = Object.entries(
+    Object.groupBy(filteredOptions, ({ group }) => group),
+  );
+  let ix = searchString ? 2 : 1; // skip the multiselect checkboxes
+  grouped.forEach((g) => {
+    let groupName = g[0];
+    let groupOptions = g[1];
+    if (groupName && groupName !== 'null') {
+      items.push({
+        ix: ix,
+        kind: 'group',
+        label: groupName,
+        value: groupName,
+        group: groupName,
+      });
+      ix += 1;
     }
+    items = items.concat(
+      groupOptions.map((o, i) => {
+        return {
+          ix: ix + i,
+          kind: 'option',
+          label: o.label,
+          value: o.value,
+          group: o.group,
+        };
+      }),
+    );
+    ix += groupOptions.length;
   });
-  return outputOptions;
+  return items;
 });
 
 // elements
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
+
+// scrolling
+const { y } = useScroll(dropdown);
+const scrollY = computed(() => {
+  // y from useScroll doesn't reset when the dropdown element is reloaded until
+  // the user starts scrolling, which is obviously not ideal. Using scrollTop
+  // alone/directly doesn't update quickly/often enough, so we have to combine.
+  if (
+    !dropdown.value ||
+    (dropdown.value && y.value !== dropdown.value.scrollTop)
+  ) {
+    return 0;
+  }
+  return y.value;
+});
+const buffer = 10; // how many items either side of the visible items should be loaded
+const dropdownHeight = computed(() => {
+  try {
+    return dropdown.value.clientHeight;
+  } catch {
+    return 500;
+  }
+});
+const lowerVisible = computed(() => {
+  // doesn't matter if it's < n options
+  return Math.floor(scrollY.value / props.itemHeight) - buffer;
+});
+const upperVisible = computed(() => {
+  // doesn't matter if it's > n options
+  return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
+});
 
 // focus and keyboard navigation
 const focused = ref(false);
@@ -271,12 +388,16 @@ function unfocus() {
   focused.value = false;
 }
 
+function toggleFocus() {
+  focused.value ? unfocus() : startFocus();
+}
+
 onClickOutside(container, () => {
-  focused.value = false;
+  unfocus();
 });
 
 onKeyStroke('ArrowDown', () => {
-  if (dropdownOptions.value.length === 0) {
+  if (allOptions.value.length === 0) {
     return;
   }
   if (textboxFocus.focused.value) {
@@ -298,7 +419,7 @@ onKeyStroke('ArrowDown', () => {
 });
 
 onKeyStroke('ArrowUp', () => {
-  if (dropdownOptions.value.length === 0) {
+  if (allOptions.value.length === 0) {
     return;
   }
   if (dropdownFocus.focused.value) {
@@ -322,9 +443,12 @@ onKeyStroke('Enter', () => {
 });
 
 // select/deselect multiple checkboxes at once
+/**
+ * On checking, selects all options (the full unfiltered list).
+ */
 const selectAll = computed({
   get() {
-    const options = dropdownOptions.value;
+    const options = allOptions.value;
     if (value.value.length !== options.length) {
       return false;
     }
@@ -333,15 +457,48 @@ const selectAll = computed({
   },
   set(toggleValue) {
     if (toggleValue) {
-      value.value = dropdownOptions.value.map((o) => o.value);
+      value.value = allOptions.value.map((o) => o.value);
     } else {
       value.value = [];
     }
   },
 });
 
+/**
+ * On checking, selects all FILTERED options.
+ */
+const selectFiltered = computed({
+  get() {
+    let options = filteredItems.value
+      .filter((i) => i.kind === 'option')
+      .map((o) => o.value);
+    if (value.value.length < options.length) {
+      return false;
+    }
+    const unchecked = options.filter((o) => !value.value.includes(o));
+    return unchecked.length === 0;
+  },
+  set(toggleValue) {
+    let options = filteredItems.value
+      .filter((i) => i.kind === 'option')
+      .map((o) => o.value);
+    if (toggleValue) {
+      const unchecked = options.filter((o) => !value.value.includes(o));
+      value.value = value.value.concat(unchecked);
+    } else {
+      value.value = value.value.filter((o) => !options.includes(o));
+    }
+  },
+});
+
+/**
+ * Selects all FILTERED group options.
+ * @param groupName
+ */
 function selectGroup(groupName) {
-  const group = groupedOptions.value.groups[groupName].map((o) => o.value);
+  const group = filteredItems.value
+    .filter((o) => o.kind === 'option' && o.group === groupName)
+    .map((o) => o.value);
   const unchecked = group.filter((o) => !value.value.includes(o));
   if (unchecked.length > 0) {
     unchecked.forEach((o) => {
@@ -368,6 +525,9 @@ function selectGroup(groupName) {
   width: 100%;
   margin-top: 2px;
   font-size: 0.9em;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ul.optlist {
@@ -392,16 +552,30 @@ ul.optlist {
     cursor: pointer;
   }
 
-  &.option:not(.selectAll) > * {
-    &:hover,
-    &:focus {
-      background: $secondary;
+  &.option {
+    &:not(.selectAll) > * {
+      &:hover,
+      &:focus {
+        background: $secondary;
+      }
     }
+
+    & label {
+      height: 100%;
+    }
+  }
+
+  &.option label > span:first-child,
+  &.subgroup > div {
+    width: 100%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
-.selectAll {
-  border-bottom: 2px solid $primary;
+.selectAll + .option:not(.selectAll) {
+  border-top: 2px solid $primary;
 }
 
 .subgroup {

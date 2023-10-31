@@ -1,4 +1,5 @@
 import ZoaMultiselect from './Multiselect.vue';
+import { nanoid } from 'nanoid';
 
 const meta = {
   component: ZoaMultiselect,
@@ -53,4 +54,27 @@ const Base = {
 
 export const Default = {
   ...Base,
+};
+
+const groups = ['root'];
+[...Array(200).keys()].forEach((i) => {
+  groups.push(`Group ${i + 1}`);
+});
+
+export const Many = {
+  ...Base,
+  args: {
+    label: 'Many Options',
+    options: [...Array(300).keys()].map((i) => {
+      let opt = {
+        value: nanoid(Math.ceil(Math.random() * 100)),
+      };
+      const group = groups[Math.floor(Math.random() * groups.length)];
+      if (group !== 'root') {
+        opt['group'] = group;
+      }
+      return opt;
+    }),
+    enableSearch: true,
+  },
 };
