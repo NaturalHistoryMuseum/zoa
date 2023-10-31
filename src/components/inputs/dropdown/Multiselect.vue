@@ -37,7 +37,11 @@
       </div>
       <div :class="$style.options" v-if="focused" ref="dropdown">
         <ul v-if="allOptions.length > 0" :class="$style.optlist">
-          <li :class="[$style.selectAll, $style.listItem, $style.option]">
+          <li
+            title="Select all"
+            :class="[$style.selectAll, $style.listItem, $style.option]"
+            :style="{ height: `${itemHeight}px` }"
+          >
             <ZoaCheckbox
               label="Select all"
               label-position="right"
@@ -45,21 +49,25 @@
             />
           </li>
           <li
+            title="Select results"
             :class="[$style.selectAll, $style.listItem, $style.option]"
+            :style="{ height: `${itemHeight}px` }"
             v-if="!!_search"
           >
             <ZoaCheckbox
-              label="Select all results"
+              label="Select results"
               label-position="right"
               v-model="selectFiltered"
             />
           </li>
           <li
             v-for="item in filteredItems"
+            :title="item.label"
             :class="[
               $style.listItem,
               item.kind === 'group' ? $style.subgroup : $style.option,
             ]"
+            :style="{ height: `${itemHeight}px` }"
           >
             <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
               {{ item.label }}
@@ -167,6 +175,13 @@ const props = defineProps({
   enableSearch: {
     type: Boolean,
     default: false,
+  },
+  /**
+   * Override the height (in px) of each list item. May be necessary if font family or size is changed from the default.
+   */
+  itemHeight: {
+    type: Number,
+    default: 38,
   },
 });
 
@@ -333,7 +348,6 @@ const scrollY = computed(() => {
   }
   return y.value;
 });
-const optionHeight = 40; // set in CSS as height of .option
 const buffer = 10; // how many items either side of the visible items should be loaded
 const dropdownHeight = computed(() => {
   try {
@@ -344,11 +358,11 @@ const dropdownHeight = computed(() => {
 });
 const lowerVisible = computed(() => {
   // doesn't matter if it's < n options
-  return Math.floor(scrollY.value / optionHeight) - buffer;
+  return Math.floor(scrollY.value / props.itemHeight) - buffer;
 });
 const upperVisible = computed(() => {
   // doesn't matter if it's > n options
-  return Math.ceil((scrollY.value + dropdownHeight.value) / optionHeight);
+  return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
 });
 
 // focus and keyboard navigation
@@ -539,8 +553,6 @@ ul.optlist {
   }
 
   &.option {
-    min-height: 40px; // if this is changed, also change optionHeight const above
-
     &:not(.selectAll) > * {
       &:hover,
       &:focus {
@@ -548,9 +560,17 @@ ul.optlist {
       }
     }
 
-    & > label {
+    & label {
       height: 100%;
     }
+  }
+
+  &.option label > span:first-child,
+  &.subgroup > div {
+    width: 100%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
