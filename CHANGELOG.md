@@ -1,3 +1,60 @@
+## v0.6.0 (2023-10-31)
+
+### Feature
+
+- sort dropdown items (by group, order, then label)
+- implement basic fuzzy search for multiselect
+- implement crude filtering for multiselect
+- add multiselect component
+- add name and value to checkbox
+
+### Fix
+
+- force all options to be single-line and truncate strings
+- add extra space for the group header by increasing ix
+- add array to value types for checkbox
+- set correct default label
+- toggle checkbox on space, not enter, and make it work in a group
+
+### Refactor
+
+- distinguish between visible and filtered
+- remove nesting and render options as a single list
+
+### Performance
+
+- lazy-load date utils
+- debounce updating the search term
+- load a subset of multiselect options at once for large lists
+
+### Docs
+
+- randomise length of option names
+- add notice about alpha status and frequent changes
+
+### Style
+
+- remove border on top group if no ungrouped items
+- set maximum height for dropdown
+- explicitly define the input text colour
+- rename "dark" to "tertiary" and add new neutral dark
+
+### Build System(s)
+
+- add rollup visualiser
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+- regenerate package-lock.json
+- build dist package
+
+### Minor UI Changes
+
+- remove extra selectAll border and make labels fit li height
+- stop checkbox label wrapping unnecessarily
+
 ## v0.5.1 (2023-09-18)
 
 ### Build System(s)
