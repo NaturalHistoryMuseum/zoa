@@ -1,6 +1,0 @@
-import{Z as a}from"./AutocompleteTextbox-7cb8fbf8.js";import"./vue.esm-bundler-759d8a4a.js";import"./common-ade8d041.js";import"./index-b9f4cbeb.js";import"./_plugin-vue_export-helper-c27b6911.js";const u={component:a,title:"Components/Inputs/Textbox/Autocomplete",argTypes:{"update:modelValue":{table:{disable:!0}},labelPosition:{control:"select",options:["above","below","left","right","none"]}},parameters:{docs:{description:{component:"A textbox with dropdown options. The text entered into the box is the returned value; options are supplied from outside of the component, and users can choose whether or not to click them."}}}},s={args:{label:"Autocomplete",labelPosition:"above",placeholder:"Write something here...",options:["Option 1","Option 2",{label:"Option 3",value:"opt3"}]},render:n=>({components:{ZoaAutocompleteTextbox:a},setup(){return{args:n}},template:`
-          <zoa-autocomplete-textbox v-bind="args"/>
-        `})},e={...s};var o,t,r;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
-  ...Base
-}`,...(r=(t=e.parameters)==null?void 0:t.docs)==null?void 0:r.source}}};const d=["Default"];export{e as Default,d as __namedExportsOrder,u as default};
-//# sourceMappingURL=AutocompleteTextbox.stories-b67a3080.js.map
