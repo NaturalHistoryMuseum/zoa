@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
   >
     <span
@@ -41,6 +41,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
 import ZoaSlider from './Slider.vue';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -48,6 +49,13 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -123,6 +131,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**

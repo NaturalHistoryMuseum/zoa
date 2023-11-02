@@ -1,6 +1,12 @@
 <template>
   <button
-    :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"
+    :class="
+      addPropClasses([
+        $style.main,
+        $style[`kind--${kind}`],
+        $style[`size--${size}`],
+      ])
+    "
   >
     <!-- @slot Text for the button; overrides the label prop. -->
     <slot>
@@ -10,7 +16,16 @@
 </template>
 
 <script setup>
+import { usePropClasses } from '../../utils/classes.js';
+
 const props = defineProps({
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
+  },
   /**
    * The text for the button; overridden by the default slot.
    */
@@ -35,6 +50,8 @@ const props = defineProps({
     default: 'md',
   },
 });
+
+const { addPropClasses } = usePropClasses(props);
 </script>
 
 <style module lang="scss">

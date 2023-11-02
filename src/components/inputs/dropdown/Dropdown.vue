@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
   >
     <label
@@ -27,6 +27,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { computed } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -34,6 +35,13 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -73,6 +81,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const dropdownOptions = computed(() => {
   let outputOptions = [];

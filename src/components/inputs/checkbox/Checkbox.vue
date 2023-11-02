@@ -2,7 +2,7 @@
   <label
     :id="componentId"
     :for="subId('checkbox')"
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     tabindex="0"
     ref="checkboxContainer"
   >
@@ -33,6 +33,7 @@ import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
 import { ref, computed, isProxy, toRaw } from 'vue';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -41,6 +42,13 @@ const props = defineProps({
   modelValue: {
     type: [Boolean, Array],
     default: undefined,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -82,6 +90,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**

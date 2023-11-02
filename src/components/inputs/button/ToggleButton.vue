@@ -4,6 +4,7 @@
     :for="subId('toggle')"
     tabindex="0"
     ref="checkboxContainer"
+    :class="addPropClasses([])"
   >
     <input
       type="checkbox"
@@ -30,6 +31,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
 import { ref, computed, isProxy, toRaw } from 'vue';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -38,6 +40,13 @@ const props = defineProps({
   modelValue: {
     type: [Boolean, Array],
     default: undefined,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -87,6 +96,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**
