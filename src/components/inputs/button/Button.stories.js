@@ -2,7 +2,7 @@ import ZoaButton from './Button.vue';
 
 const meta = {
   component: ZoaButton,
-  title: 'Components/Inputs/Button',
+  title: 'Components/Inputs/Button/Button',
   argTypes: {
     kind: {
       control: 'select',
