@@ -6,7 +6,7 @@ const meta = {
   argTypes: {
     kind: {
       control: 'select',
-      options: ['normal', 'primary'],
+      options: ['normal', 'primary', 'alt'],
     },
     size: {
       control: 'select',

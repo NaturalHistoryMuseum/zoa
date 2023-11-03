@@ -79,7 +79,7 @@ const props = defineProps({
   },
   /**
    * The appearance class of the button.
-   * @values normal, primary
+   * @values normal, primary, alt
    */
   kind: {
     type: String,
@@ -168,6 +168,7 @@ onKeyStroke('Enter', () => {
 
 .kind--normal {
   background-color: $secondary;
+  color: $secondary-text;
 
   &:hover,
   &:focus,
@@ -176,22 +177,37 @@ onKeyStroke('Enter', () => {
   }
 
   .checkbox:checked + & {
-    background-color: $primary;
+    background-color: $secondary-b;
   }
 }
 
 .kind--primary {
   background-color: $primary;
+  color: $primary-text;
 
   &:hover,
   &:focus,
   &:active {
     background-color: $primary-b;
-    color: black;
   }
 
   .checkbox:checked + & {
-    background-color: $secondary;
+    background-color: $primary-b;
+  }
+}
+
+.kind--alt {
+  background-color: $tertiary;
+  color: $tertiary-text;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $tertiary-b;
+  }
+
+  .checkbox:checked + & {
+    background-color: $tertiary-b;
   }
 }
 
