@@ -366,10 +366,16 @@ const dropdownHeight = computed(() => {
   }
 });
 const lowerVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return 0;
+  }
   // doesn't matter if it's < n options
   return Math.floor(scrollY.value / props.itemHeight) - buffer;
 });
 const upperVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return filteredItems.value.length + buffer;
+  }
   // doesn't matter if it's > n options
   return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
 });
