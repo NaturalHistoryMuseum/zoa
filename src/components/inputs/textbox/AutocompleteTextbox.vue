@@ -5,7 +5,7 @@
   >
     <label
       :for="subId('textbox')"
-      v-if="label && labelPosition !== 'none'"
+      v-if="label"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}
