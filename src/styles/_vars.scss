@@ -3,6 +3,9 @@ $h-pad: var(--zoa-pad-h, 16px);
 $padding: $v-pad $h-pad;
 $half-pad: calc($v-pad / 2) calc($h-pad / 2);
 $box-padding: 20px;
+$label-v-gap: var(--zoa-label-gap-v, 2px);
+$label-h-gap: var(--zoa-label-gap-h, $h-pad);
+$label-gap: $label-v-gap $label-h-gap;
 
 $rounding: var(--zoa-rounding, 10px);
 
