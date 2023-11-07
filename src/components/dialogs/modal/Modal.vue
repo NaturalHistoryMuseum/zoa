@@ -1,6 +1,9 @@
 <template>
   <ZoaButton v-bind="buttonArgs" @click="openModal" />
-  <dialog ref="modal" :class="[$style.main, $style[`kind--${kind}`]]">
+  <dialog
+    ref="modal"
+    :class="addPropClasses([$style.main, $style[`kind--${kind}`]])"
+  >
     <div :class="$style.container">
       <form method="dialog" :class="$style.form" @submit="emit('closed')">
         <button :class="$style.close">
@@ -26,8 +29,16 @@ import { ZoaButton } from '../../index.js';
 import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { ref } from 'vue';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
+  },
   /**
    * The type of message being displayed.
    * @values info, success, warning, error
@@ -73,6 +84,7 @@ const emit = defineEmits([
 ]);
 
 const { icon } = useKindIcon(props);
+const { addPropClasses } = usePropClasses(props);
 const modal = ref(null);
 
 function openModal() {

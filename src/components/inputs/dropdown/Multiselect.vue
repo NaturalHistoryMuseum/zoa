@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
   >
     <label
@@ -92,6 +92,7 @@
 
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
+import { usePropClasses } from '../../utils/classes.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
 import {
@@ -112,6 +113,13 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -186,6 +194,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**
@@ -357,10 +366,16 @@ const dropdownHeight = computed(() => {
   }
 });
 const lowerVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return 0;
+  }
   // doesn't matter if it's < n options
   return Math.floor(scrollY.value / props.itemHeight) - buffer;
 });
 const upperVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return filteredItems.value.length + buffer;
+  }
   // doesn't matter if it's > n options
   return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
 });

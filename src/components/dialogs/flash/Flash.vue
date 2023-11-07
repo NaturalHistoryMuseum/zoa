@@ -1,5 +1,9 @@
 <template>
-  <div :class="[$style.main, $style.container, $style[`kind--${kind}`]]">
+  <div
+    :class="
+      addPropClasses([$style.main, $style.container, $style[`kind--${kind}`]])
+    "
+  >
     <div :class="$style.header">
       <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
       <h2>{{ header }}</h2>
@@ -16,8 +20,16 @@
 <script setup>
 import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
+  },
   /**
    * The type of message being displayed.
    * @values info, success, warning, error
@@ -44,6 +56,7 @@ const props = defineProps({
 });
 
 const { icon } = useKindIcon(props);
+const { addPropClasses } = usePropClasses(props);
 </script>
 
 <style module lang="scss">

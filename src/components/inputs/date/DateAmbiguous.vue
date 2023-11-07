@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
     ref="container"
   >
@@ -103,6 +103,7 @@ import ZoaButton from '../button/Button.vue';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
 import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
+import { usePropClasses } from '../../utils/classes.js';
 const dateUtils = () => import('../../utils/dates.js');
 
 const props = defineProps({
@@ -111,6 +112,13 @@ const props = defineProps({
    */
   modelValue: {
     type: Object,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -144,6 +152,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**

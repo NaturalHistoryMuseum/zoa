@@ -34,7 +34,7 @@
 .grid {
   display: grid;
   align-items: center;
-  gap: $padding;
+  gap: $label-gap;
 
   &.grid--above,
   &.grid--below {

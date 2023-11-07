@@ -1,10 +1,12 @@
 <template>
   <div
-    :class="[
-      $style.grid,
-      $style[`grid--${labelPosition}`],
-      $style[`wrapper--value-label-${valueLabelPosition}`],
-    ]"
+    :class="
+      addPropClasses([
+        $style.grid,
+        $style[`grid--${labelPosition}`],
+        $style[`wrapper--value-label-${valueLabelPosition}`],
+      ])
+    "
     :id="componentId"
   >
     <label
@@ -49,6 +51,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
 import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
+import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -56,6 +59,13 @@ const props = defineProps({
    */
   modelValue: {
     type: Number,
+  },
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
   },
   /**
    * Text for the input label.
@@ -146,6 +156,7 @@ const props = defineProps({
 });
 
 const { componentId, subId } = useComponentId();
+const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
   /**
