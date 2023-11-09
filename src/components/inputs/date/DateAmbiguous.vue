@@ -419,29 +419,23 @@ watch(returnDate, () => {
 
 .datePopup {
   position: absolute;
-  max-width: 530px;
+  min-width: 250px;
+  max-width: 350px;
   background: white;
   border: 1px solid $grey;
   border-radius: $rounding;
   top: 100%;
-  left: $h-pad;
-  right: $h-pad;
+  left: 0;
   margin-top: $v-pad;
   padding: $padding;
+  z-index: 9999;
 }
 
 .popupSection {
   display: grid;
   align-items: start;
-
-  @include media-from('lg') {
-    grid-template-columns: 35% 1fr;
-  }
-  @include media-less-than('lg') {
-    padding-bottom: 1em;
-  }
   gap: 1em 2em;
-  padding: $padding;
+  padding: $v-pad $h-pad 1em;
 
   &:not(:last-child) {
     border-bottom: 1px solid $grey;
