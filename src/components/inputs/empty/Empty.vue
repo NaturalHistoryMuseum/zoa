@@ -4,34 +4,22 @@
     :id="componentId"
   >
     <label
-      :for="subId('textbox')"
       v-if="label"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}
     </label>
-    <input
-      type="text"
-      :placeholder="placeholder"
-      :id="subId('textbox')"
-      :class="$style.input"
-      v-model="value"
-    />
+    <div :class="gridClass || $style.emptyGrid">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
-import { useChangeEmits } from '../common.js';
 import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
-  /**
-   * @model
-   */
-  modelValue: {
-    type: String,
-  },
   /**
    * Additional class(es) to add to the root element.
    */
@@ -44,7 +32,7 @@ const props = defineProps({
    */
   label: {
     type: String,
-    default: 'Text',
+    default: 'Empty',
   },
   /**
    * Position of the input label (or none).
@@ -54,39 +42,21 @@ const props = defineProps({
     type: String,
     default: 'above',
   },
-  /**
-   * Debounce delay for the `change` event, in ms.
-   */
-  delay: {
-    type: Number,
-    default: 200,
-  },
-  /**
-   * Text to display in the blank input.
-   */
-  placeholder: {
-    type: [String, undefined],
+  gridClass: {
+    type: [String, null],
     default: null,
   },
 });
 
 const { componentId, subId } = useComponentId();
 const { addPropClasses } = usePropClasses(props);
-
-const emit = defineEmits([
-  /**
-   * Emitted when the value changes; debounced if the delay prop is > 0.
-   * @arg {string} newValue the new value
-   */
-  'change',
-  /**
-   * @ignore
-   */
-  'update:modelValue',
-]);
-const { value } = useChangeEmits(emit, props);
 </script>
 
 <style module lang="scss">
 @import '../inputs';
+
+.emptyGrid {
+  display: grid;
+  grid-auto-flow: column;
+}
 </style>

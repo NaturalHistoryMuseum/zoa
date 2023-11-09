@@ -6,7 +6,7 @@
   >
     <label
       :for="subId('date')"
-      v-if="label && labelPosition !== 'none'"
+      v-if="label"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}

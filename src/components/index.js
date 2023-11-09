@@ -10,6 +10,7 @@ export { default as ZoaDateSimple } from './inputs/date/DateSimple.vue';
 export { default as ZoaDateAmbiguous } from './inputs/date/DateAmbiguous.vue';
 export { default as ZoaSlider } from './inputs/slider/Slider.vue';
 export { default as ZoaRangeSlider } from './inputs/slider/RangeSlider.vue';
+export { default as ZoaEmpty } from './inputs/empty/Empty.vue';
 
 export { default as ZoaFlash } from './dialogs/flash/Flash.vue';
 export { default as ZoaModal } from './dialogs/modal/Modal.vue';
