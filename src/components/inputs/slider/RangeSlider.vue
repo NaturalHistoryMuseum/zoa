@@ -1,39 +1,34 @@
 <template>
-  <div
+  <ZoaEmpty
     :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
+    :label="label"
+    :label-position="labelPosition"
+    :grid-class="[$style.wrapper]"
   >
-    <span
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </span>
-    <div>
-      <ZoaSlider
-        :min="min"
-        :max="max"
-        :valid-max="maxLower"
-        :step="step"
-        v-model="valueLower"
-        :label="labelLower"
-        :label-position="labelsRight ? 'right' : 'left'"
-        value-label-position="above"
-        :placeholder-position="0.25"
-      />
-      <ZoaSlider
-        :min="min"
-        :valid-min="minUpper"
-        :max="max"
-        :step="step"
-        v-model="valueUpper"
-        :label="labelUpper"
-        :label-position="labelsRight ? 'right' : 'left'"
-        :placeholder-position="0.75"
-        :active-track-right="true"
-      />
-    </div>
-  </div>
+    <ZoaSlider
+      :min="min"
+      :max="max"
+      :valid-max="maxLower"
+      :step="step"
+      v-model="valueLower"
+      :label="labelLower"
+      :label-position="labelsRight ? 'right' : 'left'"
+      value-label-position="above"
+      :placeholder-position="0.25"
+    />
+    <ZoaSlider
+      :min="min"
+      :valid-min="minUpper"
+      :max="max"
+      :step="step"
+      v-model="valueUpper"
+      :label="labelUpper"
+      :label-position="labelsRight ? 'right' : 'left'"
+      :placeholder-position="0.75"
+      :active-track-right="true"
+    />
+  </ZoaEmpty>
 </template>
 
 <script setup>
@@ -41,6 +36,7 @@ import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, ref, watch } from 'vue';
 import ZoaSlider from './Slider.vue';
+import ZoaEmpty from '../empty/Empty.vue';
 import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
@@ -177,12 +173,19 @@ watch(range, () => {
 <style module lang="scss">
 @import '../inputs';
 
-.label {
-  &.label--above {
+.grid--above {
+  & > fieldset > legend {
     margin-bottom: -35px;
   }
-  &.label--below {
+}
+.grid--below {
+  & > fieldset > legend {
     margin-top: -35px;
   }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
 </style>
