@@ -1,30 +1,32 @@
 <template>
-  <label
+  <div
     :id="componentId"
-    :for="subId('checkbox')"
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    tabindex="0"
     ref="checkboxContainer"
+    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
   >
-    <span
+    <label
+      :for="subId('checkbox')"
+      tabindex="0"
       v-if="label"
       :class="[$style.label, $style[`label--${labelPosition}`]]"
     >
       {{ label }}
-    </span>
-    <input
-      type="checkbox"
-      :id="subId('checkbox')"
-      :class="$style.defaultCheckbox"
-      v-model="value"
-      :name="name"
-      :value="_checkValue"
-      ref="checkboxInput"
-    />
-    <span :class="$style.checkbox">
-      <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
-    </span>
-  </label>
+    </label>
+    <div @click="toggleValue">
+      <input
+        type="checkbox"
+        :id="subId('checkbox')"
+        :class="$style.defaultCheckbox"
+        v-model="value"
+        :name="name"
+        :value="_checkValue"
+        ref="checkboxInput"
+      />
+      <span :class="$style.checkbox">
+        <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
+      </span>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -114,25 +116,29 @@ const _checkValue = computed(() => {
   return props.checkValue || props.label;
 });
 
+function toggleValue() {
+  // if the same v-model is set on a group of checkboxes, they return an array
+  // of their _checkValue values instead of a single boolean. There may be a
+  // better way to check for this.
+  let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
+  if (Array.isArray(currentValue)) {
+    // if it's currently unchecked, we want to check it, and vice versa
+    let check = !checkboxInput.value.checked;
+    // double-check the value isn't on there already
+    currentValue = currentValue.filter((v) => v !== _checkValue.value);
+    if (check) {
+      currentValue.push(_checkValue.value);
+    }
+    value.value = currentValue;
+    checkboxInput.value.checked = check;
+  } else {
+    value.value = !value.value;
+  }
+}
+
 onKeyStroke(' ', () => {
   if (focus.focused.value) {
-    // if the same v-model is set on a group of checkboxes, they return an array
-    // of their _checkValue values instead of a single boolean. There may be a
-    // better way to check for this.
-    let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
-    if (Array.isArray(currentValue)) {
-      // if it's currently unchecked, we want to check it, and vice versa
-      let check = !checkboxInput.value.checked;
-      // double-check the value isn't on there already
-      currentValue = currentValue.filter((v) => v !== _checkValue.value);
-      if (check) {
-        currentValue.push(_checkValue.value);
-      }
-      value.value = currentValue;
-      checkboxInput.value.checked = check;
-    } else {
-      value.value = !value.value;
-    }
+    toggleValue();
   }
 });
 </script>
@@ -174,6 +180,7 @@ onKeyStroke(' ', () => {
   border: 1px solid $grey;
   border-radius: $rounding;
   position: relative;
+  display: block;
 
   .defaultCheckbox:checked ~ & {
     background: $primary-a;
