@@ -3,15 +3,17 @@
     :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
     :id="componentId"
   >
-    <label
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="gridClass || $style.emptyGrid">
-      <slot />
-    </div>
+    <fieldset :class="$style.fieldset">
+      <legend
+        v-if="label"
+        :class="[$style.label, $style[`label--${labelPosition}`]]"
+      >
+        {{ label }}
+      </legend>
+      <div :class="gridClass || $style.emptyGrid">
+        <slot />
+      </div>
+    </fieldset>
   </div>
 </template>
 
@@ -54,6 +56,11 @@ const { addPropClasses } = usePropClasses(props);
 
 <style module lang="scss">
 @import '../inputs';
+
+.fieldset {
+  border: none;
+  display: contents;
+}
 
 .emptyGrid {
   display: grid;
