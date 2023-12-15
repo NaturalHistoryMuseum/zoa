@@ -1,14 +1,20 @@
 <template>
-  <input
-    type="number"
-    :placeholder="placeholder"
-    :min="min"
-    :max="max"
-    :step="step"
-    :id="inputId"
-    :class="$style.input"
-    v-model="value"
-  />
+  <div
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
+    <input
+      type="number"
+      :placeholder="placeholder"
+      :min="min"
+      :max="max"
+      :step="step"
+      :id="inputId"
+      :class="$style.input"
+      v-model="value"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -60,6 +66,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**

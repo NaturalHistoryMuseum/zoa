@@ -27,6 +27,7 @@ const Base = {
   args: {
     label: 'Range',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 200,
     placeholder: null,
     min: 0,
@@ -46,6 +47,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder, min, max, step, labelsRight,
                            labelUpper, labelLower}"
       />

@@ -1,5 +1,9 @@
 <template>
-  <div :class="$style.wrapper">
+  <div
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <select :id="inputId" :class="$style.input" v-model="value">
       <option :value="null">{{ placeholder }}</option>
       <option v-for="opt in dropdownOptions" :value="opt.value">
@@ -47,6 +51,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const dropdownOptions = computed(() => {
   let outputOptions = [];
@@ -84,7 +90,7 @@ const { value } = useChangeEmits(emit, props);
   cursor: pointer;
 }
 
-.wrapper {
+.inputWrapper {
   position: relative;
 
   & > .arrow {

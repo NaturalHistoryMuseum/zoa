@@ -22,6 +22,7 @@ const Base = {
   args: {
     label: 'Autocomplete',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 200,
     placeholder: 'Write something here...',
     options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
@@ -36,6 +37,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder, options}"
       />
         `,

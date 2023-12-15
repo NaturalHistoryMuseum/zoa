@@ -22,6 +22,7 @@ const Base = {
     class: '',
     label: 'Checkbox',
     labelPosition: 'right',
+    help: 'Some example help text.',
     delay: 0,
     name: 'checkboxGroup',
     checkValue: 'chkbx',
@@ -36,6 +37,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, name, checkValue}"
       />
     `,

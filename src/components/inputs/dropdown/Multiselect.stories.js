@@ -23,6 +23,7 @@ const Base = {
   args: {
     label: 'Multiselect',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 0,
     placeholder: 'select option',
     options: [
@@ -50,6 +51,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
       />
     `,
@@ -70,6 +72,7 @@ export const Many = {
   args: {
     label: 'Many Options',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 0,
     placeholder: 'select option',
     options: [...Array(300).keys()].map((i) => {

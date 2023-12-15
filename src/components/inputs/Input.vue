@@ -12,9 +12,10 @@
           :label="label"
           :label-position="labelPosition"
           :tabbable="zoaInput.tabLabel"
+          :help="help"
         />
         <div
-          :class="gridClass || $style.emptyGrid"
+          :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
           v-if="ZoaInputComponent == null"
         >
           <slot />
@@ -29,6 +30,7 @@
         :label="label"
         :label-position="labelPosition"
         :tabbable="zoaInput.tabLabel"
+        :help="help"
       />
       <zoa-input-component v-bind="options" v-model="value" />
     </template>
@@ -41,6 +43,7 @@ import { useChangeEmits } from './common.js';
 import { computed, provide, ref } from 'vue';
 import { usePropClasses } from '../utils/classes.js';
 import ZoaLabel from './_parts/Label.vue';
+import ZoaHelp from './_parts/Help.vue';
 import zoaInputConfig from './zoaInputs.js';
 
 const props = defineProps({
@@ -78,7 +81,7 @@ const props = defineProps({
    */
   labelPosition: {
     type: String,
-    default: 'left',
+    default: 'above',
   },
   /**
    * Parameters passed to the input.
@@ -97,6 +100,13 @@ const props = defineProps({
     type: [String, Array, null],
     default: null,
   },
+  /**
+   * Help text.
+   */
+  help: {
+    type: [String, null],
+    default: null,
+  },
 });
 
 const zoaInput = computed(() => {
@@ -111,7 +121,9 @@ const ZoaInputComponent = computed(() => {
 });
 
 const { componentId, subId } = useComponentId();
-const inputId = subId(props.zoaType);
+const inputId = subId('input');
+const labelId = subId('label');
+const helpId = subId('help');
 
 const rootClassKeys = computed(() => {
   let _keys = [
@@ -145,27 +157,108 @@ const { value } = useChangeEmits(emit, props);
 
 const rootContainer = ref(null);
 
-// provide
-provide('label', props.label);
+// PROVIDE
+// any provided variables that need to be reactive, e.g. props, should be
+// wrapped in computed properties; if not, only the initial value will be passed
+const _label = computed(() => {
+  return props.label;
+});
+const _labelPosition = computed(() => {
+  return props.labelPosition;
+});
+const _helpId = computed(() => {
+  return props.help ? helpId : null;
+});
+provide('label', _label);
+provide('labelPosition', _labelPosition);
 provide('componentId', componentId);
 provide('subId', subId); // this *sort of* works
 provide('inputId', inputId);
+provide('labelId', labelId);
+provide('helpId', _helpId);
 provide('rootContainer', rootContainer);
 </script>
 
 <style module lang="scss">
 @import 'inputs';
 
+.rootWrapper {
+  display: grid;
+  align-items: center;
+  gap: $label-gap;
+  grid-template-rows: auto;
+
+  &.rootWrapper--above,
+  &.rootWrapper--below {
+    grid-template-columns: 1fr auto;
+  }
+
+  &.rootWrapper--above {
+    grid-template-areas:
+      'label help'
+      'input input';
+  }
+
+  &.rootWrapper--below {
+    grid-template-areas:
+      'input input'
+      'label help';
+  }
+
+  &.rootWrapper--left {
+    grid-template-columns: auto auto 1fr;
+    grid-template-areas: 'label help input';
+  }
+
+  &.rootWrapper--right {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: 'input label help';
+  }
+}
+
 .checkbox {
   &.rootWrapper {
     justify-items: center;
 
+    &.rootWrapper--above,
+    &.rootWrapper--below {
+      grid-template-columns: 1fr auto 1fr;
+
+      & > *:first-child {
+        // label
+        padding: 0;
+      }
+
+      & > *:nth-child(2):not(:last-child) {
+        //help
+        padding: 0;
+        justify-self: left;
+      }
+    }
+
+    &.rootWrapper--above {
+      grid-template-areas:
+        '. label help'
+        'input input input';
+    }
+
+    &.rootWrapper--below {
+      grid-template-areas:
+        'input input input'
+        '. label help';
+    }
+
     &.rootWrapper--left {
-      grid-template-columns: auto min-content;
+      grid-template-columns: auto min-content min-content;
     }
 
     &.rootWrapper--right {
-      grid-template-columns: min-content auto;
+      grid-template-columns: min-content auto 1fr;
+
+      & > *:nth-child(2):not(:last-child) {
+        // help
+        justify-self: left;
+      }
     }
   }
 }

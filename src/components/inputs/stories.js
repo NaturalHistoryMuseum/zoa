@@ -31,6 +31,15 @@ export const argTypes = {
       category: 'Root props',
     },
   },
+  help: {
+    control: 'text',
+    description:
+      'Help text to show in a tooltip when hovering over the "?" icon.',
+    table: {
+      type: { summary: 'string' },
+      category: 'Root props',
+    },
+  },
   'v-model': {
     table: {
       category: 'Output',

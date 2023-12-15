@@ -1,5 +1,9 @@
 <template>
-  <div :class="$style.inputContainer">
+  <div
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <input
       type="text"
       :placeholder="placeholder"
@@ -113,6 +117,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -373,7 +379,7 @@ watch(returnDate, () => {
 <style module lang="scss">
 @import '../inputs';
 
-.inputContainer {
+.inputWrapper {
   position: relative;
 }
 

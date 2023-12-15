@@ -1,5 +1,10 @@
 <template>
-  <div @click="toggleValue">
+  <div
+    @click="toggleValue"
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <input
       type="checkbox"
       :id="inputId"
@@ -54,7 +59,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
-const subId = inject('subId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -75,7 +81,7 @@ const checkboxInput = ref(null);
 
 const label = inject('label');
 const _checkValue = computed(() => {
-  return props.checkValue || label;
+  return props.checkValue || label.value;
 });
 
 function toggleValue() {

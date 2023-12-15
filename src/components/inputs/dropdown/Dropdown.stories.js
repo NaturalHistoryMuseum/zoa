@@ -23,6 +23,7 @@ const Base = {
     class: '',
     label: 'Dropdown',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 0,
     placeholder: 'select an option',
     options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
@@ -37,6 +38,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder, options}"
       />
     `,

@@ -1,5 +1,10 @@
 <template>
-  <div :class="$style.wrapper" ref="container">
+  <div
+    :class="$style.inputWrapper"
+    ref="container"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <div :class="$style.textboxWrapper">
       <input
         type="text"
@@ -161,6 +166,8 @@ const props = defineProps({
 
 const inputId = inject('inputId');
 const subId = inject('subId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -494,7 +501,7 @@ function selectGroup(groupName) {
 <style module lang="scss">
 @import '../inputs';
 
-.wrapper {
+.inputWrapper {
   position: relative;
 }
 

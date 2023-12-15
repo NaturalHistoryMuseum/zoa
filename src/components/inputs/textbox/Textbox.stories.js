@@ -22,6 +22,7 @@ const Base = {
     class: '',
     label: 'Textbox',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 200,
     placeholder: 'Write something here...',
   },
@@ -35,6 +36,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder}"
       />
     `,

@@ -22,6 +22,7 @@ const Base = {
     class: '',
     label: 'Date',
     labelPosition: 'above',
+    help: 'Some example help text.',
     delay: 200,
     placeholder: 'placeholder',
     min: null,
@@ -38,6 +39,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :options="{delay, placeholder, min, max, step}"
       />
         `,

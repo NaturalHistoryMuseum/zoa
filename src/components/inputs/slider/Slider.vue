@@ -1,5 +1,10 @@
 <template>
-  <div :class="$style.slider" @wheel="onScroll">
+  <div
+    :class="$style.inputWrapper"
+    @wheel="onScroll"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <span :class="$style.track"></span>
     <span
       :class="[$style.track, $style['track--active']]"
@@ -111,6 +116,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -326,7 +333,7 @@ $handleBorder: 2px;
   }
 }
 
-.slider {
+.inputWrapper {
   position: relative;
   height: $handleSize + ($handleBorder * 2);
 }

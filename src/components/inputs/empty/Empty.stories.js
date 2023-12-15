@@ -49,6 +49,7 @@ const Base = {
     class: '',
     label: 'Empty',
     labelPosition: 'above',
+    help: 'Some example help text.',
     gridClass: '',
   },
   render: (args) => ({
@@ -61,6 +62,7 @@ const Base = {
                  :class="rootClass"
                  :label="label"
                  :label-position="labelPosition"
+                 :help="help"
                  :grid-class="gridClass"
       >
         <zoa-input zoa-type="checkbox" label-position="below" label="option 1"/>

@@ -1,5 +1,10 @@
 <template>
-  <div :class="$style.wrapper" ref="container">
+  <div
+    :class="$style.inputWrapper"
+    ref="container"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <input
       type="text"
       :placeholder="placeholder"
@@ -68,6 +73,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -167,7 +174,7 @@ function setOption(text) {
 <style module lang="scss">
 @import '../inputs';
 
-.wrapper {
+.inputWrapper {
   position: relative;
 }
 

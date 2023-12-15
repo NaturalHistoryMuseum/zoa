@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
+  >
     <zoa-input
       zoa-type="slider"
       :label="labelLower"
@@ -102,6 +106,8 @@ const props = defineProps({
 });
 
 const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
