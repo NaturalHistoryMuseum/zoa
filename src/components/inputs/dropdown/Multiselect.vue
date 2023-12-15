@@ -1,100 +1,88 @@
 <template>
-  <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
-  >
-    <label
-      :for="subId('textbox')"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.wrapper" ref="container">
-      <div :class="$style.textboxWrapper">
-        <input
-          type="text"
-          :placeholder="placeholder"
-          :id="subId('search')"
-          :class="$style.input"
-          v-model="search"
-          v-show="focused"
-          ref="textbox"
-        />
-        <div
-          :class="$style.input"
-          tabindex="0"
-          v-show="!focused"
-          @focusin="startFocus"
+  <div :class="$style.wrapper" ref="container">
+    <div :class="$style.textboxWrapper">
+      <input
+        type="text"
+        :placeholder="placeholder"
+        :id="inputId"
+        :class="$style.input"
+        v-model="search"
+        v-show="focused"
+        ref="textbox"
+      />
+      <div
+        :class="$style.input"
+        tabindex="0"
+        v-show="!focused"
+        @focusin="startFocus"
+      >
+        {{ value ? value.length : 0 }} {{ itemString }} selected
+      </div>
+      <font-awesome-icon
+        icon="fa-solid fa-caret-down"
+        :class="$style.arrow"
+        @click="toggleFocus"
+      />
+    </div>
+    <div :class="$style.options" v-if="focused" ref="dropdown">
+      <ul v-if="allOptions.length > 0" :class="$style.optlist">
+        <li
+          title="Select all"
+          :class="[$style.selectAll, $style.listItem, $style.option]"
+          :style="{ height: `${itemHeight}px` }"
         >
-          {{ value ? value.length : 0 }} {{ itemString }} selected
-        </div>
-        <font-awesome-icon
-          icon="fa-solid fa-caret-down"
-          :class="$style.arrow"
-          @click="toggleFocus"
-        />
-      </div>
-      <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul v-if="allOptions.length > 0" :class="$style.optlist">
-          <li
-            title="Select all"
-            :class="[$style.selectAll, $style.listItem, $style.option]"
-            :style="{ height: `${itemHeight}px` }"
-          >
-            <ZoaCheckbox
-              label="Select all"
+          <zoa-input
+            zoa-type="checkbox"
+            label="Select all"
+            label-position="right"
+            v-model="selectAll"
+          />
+        </li>
+        <li
+          title="Select results"
+          :class="[$style.selectAll, $style.listItem, $style.option]"
+          :style="{ height: `${itemHeight}px` }"
+          v-if="!!_search"
+        >
+          <zoa-input
+            zoa-type="checkbox"
+            label="Select results"
+            label-position="right"
+            v-model="selectFiltered"
+          />
+        </li>
+        <li
+          v-for="item in filteredItems"
+          :title="item.label"
+          :class="[
+            $style.listItem,
+            item.kind === 'group' ? $style.subgroup : $style.option,
+          ]"
+          :style="{ height: `${itemHeight}px` }"
+        >
+          <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
+            {{ item.label }}
+          </div>
+          <div v-else>
+            <zoa-input
+              zoa-type="checkbox"
+              :label="item.label"
               label-position="right"
-              v-model="selectAll"
+              :options="{ checkValue: item.value, name: subId('checkboxes') }"
+              v-model="value"
+              v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
             />
-          </li>
-          <li
-            title="Select results"
-            :class="[$style.selectAll, $style.listItem, $style.option]"
-            :style="{ height: `${itemHeight}px` }"
-            v-if="!!_search"
-          >
-            <ZoaCheckbox
-              label="Select results"
-              label-position="right"
-              v-model="selectFiltered"
-            />
-          </li>
-          <li
-            v-for="item in filteredItems"
-            :title="item.label"
-            :class="[
-              $style.listItem,
-              item.kind === 'group' ? $style.subgroup : $style.option,
-            ]"
-            :style="{ height: `${itemHeight}px` }"
-          >
-            <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
-              {{ item.label }}
-            </div>
-            <div v-else>
-              <ZoaCheckbox
-                :label="item.label"
-                label-position="right"
-                :check-value="item.value"
-                :name="subId('checkboxes')"
-                v-model="value"
-                v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
-              />
-            </div>
-          </li>
-        </ul>
-        <div :class="$style.noOptions" v-else>No options found</div>
-      </div>
+          </div>
+        </li>
+      </ul>
+      <div :class="$style.noOptions" v-else>No options found</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
-import { usePropClasses } from '../../utils/classes.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref } from 'vue';
 import {
   onClickOutside,
   onKeyStroke,
@@ -103,7 +91,7 @@ import {
   useScroll,
 } from '@vueuse/core';
 import FontAwesomeIcon from '../../../icons.js';
-import ZoaCheckbox from '../checkbox/Checkbox.vue';
+import { ZoaInput } from '../../index.js';
 import { debounce } from 'dettle';
 import { fuzzySearch } from 'levenshtein-search';
 
@@ -113,28 +101,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Multiselect',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -193,8 +159,8 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
+const subId = inject('subId');
 
 const emit = defineEmits([
   /**

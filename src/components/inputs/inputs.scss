@@ -20,6 +20,14 @@
   @include header-font;
   font-size: 0.9em;
 
+  &.label--right {
+    justify-self: left;
+  }
+
+  &.label--left {
+    justify-self: right;
+  }
+
   &.label--right,
   &.label--below {
     order: 2;
@@ -41,21 +49,21 @@
   }
 }
 
-.grid {
+.rootWrapper {
   display: grid;
   align-items: center;
   gap: $label-gap;
 
-  &.grid--above,
-  &.grid--below {
+  &.rootWrapper--above,
+  &.rootWrapper--below {
     grid-template-rows: auto auto;
   }
 
-  &.grid--left {
+  &.rootWrapper--left {
     grid-template-columns: auto 1fr;
   }
 
-  &.grid--right {
+  &.rootWrapper--right {
     grid-template-columns: 1fr auto;
   }
 }

@@ -1,20 +1,12 @@
 import ZoaMultiselect from './Multiselect.vue';
 import { nanoid } from 'nanoid';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaMultiselect,
   title: 'Components/Inputs/Select/Multiselect',
-  argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
-  },
+  argTypes,
   parameters: {
     docs: {
       description: {
@@ -31,6 +23,8 @@ const Base = {
   args: {
     label: 'Multiselect',
     labelPosition: 'above',
+    delay: 0,
+    placeholder: 'select option',
     options: [
       'Option 1',
       {
@@ -40,15 +34,25 @@ const Base = {
       { label: 'Option 3', value: 'opt3', group: 'Subgroup' },
       { label: 'Option 4', group: 'Subgroup' },
     ],
+    itemName: 'item',
+    itemNamePlural: '',
+    searchDelay: 200,
+    enableSearch: false,
+    itemHeight: 38,
   },
   render: (args) => ({
     components: { ZoaMultiselect },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-multiselect v-bind="args"/>
-        `,
+      <zoa-input zoa-type="multiselect"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
+      />
+    `,
   }),
 };
 
@@ -65,6 +69,9 @@ export const Many = {
   ...Base,
   args: {
     label: 'Many Options',
+    labelPosition: 'above',
+    delay: 0,
+    placeholder: 'select option',
     options: [...Array(300).keys()].map((i) => {
       let opt = {
         value: nanoid(Math.ceil(Math.random() * 100)),
@@ -75,6 +82,10 @@ export const Many = {
       }
       return opt;
     }),
+    itemName: 'datum',
+    itemNamePlural: 'data',
+    searchDelay: 200,
     enableSearch: true,
+    itemHeight: 38,
   },
 };

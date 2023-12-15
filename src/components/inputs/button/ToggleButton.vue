@@ -126,7 +126,6 @@ function toggle() {
   // better way to check for this.
   let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
   if (Array.isArray(currentValue)) {
-    console.log('array');
     // if it's currently unchecked, we want to check it, and vice versa
     let check = !checkboxInput.value.checked;
     // double-check the value isn't on there already

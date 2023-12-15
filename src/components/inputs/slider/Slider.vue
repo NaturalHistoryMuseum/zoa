@@ -1,57 +1,34 @@
 <template>
-  <div
-    :class="
-      addPropClasses([
-        $style.grid,
-        $style[`grid--${labelPosition}`],
-        $style[`wrapper--value-label-${valueLabelPosition}`],
-      ])
-    "
-    :id="componentId"
-  >
-    <label
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-      :for="subId('slider')"
+  <div :class="$style.slider" @wheel="onScroll">
+    <span :class="$style.track"></span>
+    <span
+      :class="[$style.track, $style['track--active']]"
+      :style="activeTrackStyle"
+    ></span>
+    <span
+      :class="[$style.valueLabel, $style[`valueLabel--${valueLabelPosition}`]]"
+      :style="{ left: `${handlePosition.label}%` }"
+      ref="valueLabel"
+      tabindex="0"
+      >{{ valueLabelText }}</span
     >
-      {{ label }}
-    </label>
-    <div :class="$style.slider" @wheel="onScroll">
-      <span :class="$style.track"></span>
-      <span
-        :class="[$style.track, $style['track--active']]"
-        :style="activeTrackStyle"
-      ></span>
-      <span
-        :class="[
-          $style.valueLabel,
-          $style[`valueLabel--${valueLabelPosition}`],
-        ]"
-        :style="{ left: `${handlePosition.label}%` }"
-        ref="valueLabel"
-        tabindex="0"
-        >{{ valueLabelText }}</span
-      >
-      <input
-        type="range"
-        :min="min"
-        :max="max"
-        :step="step"
-        :id="subId('slider')"
-        :class="$style.input"
-        v-model="value"
-        ref="slider"
-      />
-    </div>
+    <input
+      type="range"
+      :min="min"
+      :max="max"
+      :step="step"
+      :id="inputId"
+      :class="$style.input"
+      v-model="value"
+      ref="slider"
+    />
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
-import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -59,28 +36,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Number,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Range',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -155,8 +110,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
 
 const emit = defineEmits([
   /**
@@ -344,14 +298,6 @@ value.value = getInitialValue();
 
 $handleSize: 20px;
 $handleBorder: 2px;
-
-.wrapper--value-label-below {
-  margin-bottom: 35px;
-}
-
-.wrapper--value-label-above {
-  margin-top: 35px;
-}
 
 .input {
   appearance: none;

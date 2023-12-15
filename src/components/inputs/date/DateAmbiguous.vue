@@ -1,93 +1,77 @@
 <template>
-  <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
-    ref="container"
-  >
-    <label
-      :for="subId('date')"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.inputContainer">
-      <input
-        type="text"
-        :placeholder="placeholder"
-        :id="subId('date')"
-        :class="[$style.input, editing ? $style.editing : '']"
-        ref="displayBox"
-        @input="parseInput"
-      />
-      <div v-if="focused" :class="$style.datePopup">
-        <div :class="$style.popupSection" v-if="guessedDates.length > 0">
-          <span
-            v-for="dt in guessedDates"
-            @click="setDate(dt)"
-            @keydown.enter="setDate(dt)"
-            :class="$style.suggestion"
-            tabindex="0"
-            >{{ formatDate(dt.year, dt.month, dt.day) }}</span
+  <div :class="$style.inputContainer">
+    <input
+      type="text"
+      :placeholder="placeholder"
+      :id="inputId"
+      :class="[$style.input, editing ? $style.editing : '']"
+      ref="displayBox"
+      @input="parseInput"
+    />
+    <div v-if="focused" :class="$style.datePopup">
+      <div :class="$style.popupSection" v-if="guessedDates.length > 0">
+        <span
+          v-for="dt in guessedDates"
+          @click="setDate(dt)"
+          @keydown.enter="setDate(dt)"
+          :class="$style.suggestion"
+          tabindex="0"
+          >{{ formatDate(dt.year, dt.month, dt.day) }}</span
+        >
+      </div>
+      <div :class="$style.popupSection">
+        <zoa-input
+          zoa-type="number"
+          label="year"
+          label-position="left"
+          :options="{ placeholder: 1900, min: 0, max: 9999 }"
+          v-model="rawYear"
+        />
+        <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
+          <zoa-button
+            v-for="opt in yearOptions"
+            size="sm"
+            @click="setYear(opt)"
+            tabindex="-1"
+            >{{ padYear(opt) }}
+          </zoa-button>
+        </div>
+      </div>
+      <div :class="$style.popupSection">
+        <zoa-input
+          zoa-type="number"
+          label="month"
+          label-position="left"
+          :options="{ placeholder: 1, min: 1, max: 12 }"
+          v-model="month"
+        />
+        <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
+          <zoa-button
+            v-for="(opt, ix) in monthOptions"
+            size="sm"
+            @click="setMonth(ix + 1)"
+            tabindex="-1"
+            >{{ opt }}
+          </zoa-button>
+        </div>
+      </div>
+      <div :class="$style.popupSection">
+        <zoa-input
+          zoa-type="number"
+          label="day"
+          label-position="left"
+          :options="{ placeholder: 1, min: 1, max: monthDays }"
+          v-model="day"
+        />
+        <div :class="$style.dayGrid" tabindex="0" ref="dayBtns">
+          <zoa-button
+            v-for="opt in dayOptions"
+            size="sm"
+            @click="setDay(opt)"
+            tabindex="-1"
           >
-        </div>
-        <div :class="$style.popupSection">
-          <ZoaNumber
-            label="year"
-            label-position="left"
-            :placeholder="1900"
-            v-model="rawYear"
-            :min="0"
-            :max="9999"
-          />
-          <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
-            <ZoaButton
-              v-for="opt in yearOptions"
-              size="sm"
-              @click="setYear(opt)"
-              tabindex="-1"
-              >{{ padYear(opt) }}
-            </ZoaButton>
-          </div>
-        </div>
-        <div :class="$style.popupSection">
-          <ZoaNumber
-            label="month"
-            label-position="left"
-            :placeholder="1"
-            v-model="month"
-            :min="1"
-            :max="12"
-          />
-          <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
-            <ZoaButton
-              v-for="(opt, ix) in monthOptions"
-              size="sm"
-              @click="setMonth(ix + 1)"
-              tabindex="-1"
-              >{{ opt }}
-            </ZoaButton>
-          </div>
-        </div>
-        <div :class="$style.popupSection">
-          <ZoaNumber
-            label="day"
-            label-position="left"
-            :placeholder="1"
-            v-model="day"
-            :min="1"
-            :max="monthDays"
-          />
-          <div :class="$style.dayGrid" tabindex="0" ref="dayBtns">
-            <ZoaButton
-              v-for="opt in dayOptions"
-              size="sm"
-              @click="setDay(opt)"
-              tabindex="-1"
-            >
-              {{ opt }}
-            </ZoaButton>
-          </div>
+            {{ opt }}
+          </zoa-button>
         </div>
       </div>
     </div>
@@ -95,15 +79,14 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { ref, computed, watch } from 'vue';
-import ZoaNumber from '../number/Number.vue';
+import { ref, computed, watch, inject } from 'vue';
+import { ZoaInput } from '../../index.js';
 import ZoaButton from '../button/Button.vue';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
 import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
-import { usePropClasses } from '../../utils/classes.js';
+
 const dateUtils = () => import('../../utils/dates.js');
 
 const props = defineProps({
@@ -112,28 +95,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Object,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Date',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -151,8 +112,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
 
 const emit = defineEmits([
   /**
@@ -170,9 +130,9 @@ const { valueChanged } = useChangeEmits(emit, props.delay);
 // STATE
 const displayBox = ref(null);
 const editing = ref(false);
-const container = ref(null);
+const rootContainer = inject('rootContainer');
 
-const { focused } = useFocusWithin(container);
+const { focused } = useFocusWithin(rootContainer);
 
 // YEAR/MONTH/DAY BUTTONS
 const yearBtns = ref(null);
@@ -245,7 +205,7 @@ onKeyStroke('ArrowRight', () => {
 
 // OTHER KEYBINDINGS
 onKeyStroke('Escape', () => {
-  const selectedElement = container.value.querySelector('*:focus');
+  const selectedElement = rootContainer.value.querySelector('*:focus');
   if (selectedElement) {
     selectedElement.blur();
   }

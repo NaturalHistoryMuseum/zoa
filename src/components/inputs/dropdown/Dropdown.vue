@@ -1,30 +1,18 @@
 <template>
-  <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
-  >
-    <label
-      :for="subId('dropdown')"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.wrapper">
-      <select :id="subId('dropdown')" :class="$style.input" v-model="value">
-        <option :value="null">{{ placeholder }}</option>
-        <option v-for="opt in dropdownOptions" :value="opt.value">
-          {{ opt.label }}
-        </option>
-      </select>
-      <font-awesome-icon icon="fa-solid fa-caret-down" :class="$style.arrow" />
-    </div>
+  <div :class="$style.wrapper">
+    <select :id="inputId" :class="$style.input" v-model="value">
+      <option :value="null">{{ placeholder }}</option>
+      <option v-for="opt in dropdownOptions" :value="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
+    <font-awesome-icon icon="fa-solid fa-caret-down" :class="$style.arrow" />
   </div>
 </template>
 
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { usePropClasses } from '../../utils/classes.js';
@@ -35,28 +23,6 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Dropdown',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -80,8 +46,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
 
 const dropdownOptions = computed(() => {
   let outputOptions = [];

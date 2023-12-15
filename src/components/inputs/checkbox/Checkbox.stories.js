@@ -1,19 +1,11 @@
 import ZoaCheckbox from './Checkbox.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaCheckbox,
   title: 'Components/Inputs/Checkbox',
-  argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
-  },
+  argTypes,
   parameters: {
     docs: {
       description: {
@@ -27,17 +19,26 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Checkbox',
-    labelPosition: 'left',
+    labelPosition: 'right',
+    delay: 0,
+    name: 'checkboxGroup',
+    checkValue: 'chkbx',
   },
   render: (args) => ({
-    components: { ZoaCheckbox },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-checkbox v-bind="args"/>
-        `,
+      <zoa-input zoa-type="checkbox"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, name, checkValue}"
+      />
+    `,
   }),
 };
 

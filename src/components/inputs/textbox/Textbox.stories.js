@@ -1,19 +1,11 @@
 import ZoaTextbox from './Textbox.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaTextbox,
   title: 'Components/Inputs/Textbox/Simple',
-  argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
-  },
+  argTypes,
   parameters: {
     docs: {
       description: {
@@ -27,18 +19,25 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Textbox',
     labelPosition: 'above',
+    delay: 200,
     placeholder: 'Write something here...',
   },
   render: (args) => ({
-    components: { ZoaTextbox },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-textbox v-bind="args"/>
-        `,
+      <zoa-input zoa-type="textbox"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, placeholder}"
+      />
+    `,
   }),
 };
 

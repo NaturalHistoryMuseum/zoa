@@ -1,41 +1,25 @@
 <template>
-  <div
-    :id="componentId"
-    ref="checkboxContainer"
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-  >
-    <label
-      :for="subId('checkbox')"
-      tabindex="0"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div @click="toggleValue">
-      <input
-        type="checkbox"
-        :id="subId('checkbox')"
-        :class="$style.defaultCheckbox"
-        v-model="value"
-        :name="name"
-        :value="_checkValue"
-        ref="checkboxInput"
-      />
-      <span :class="$style.checkbox">
-        <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
-      </span>
-    </div>
+  <div @click="toggleValue">
+    <input
+      type="checkbox"
+      :id="inputId"
+      :class="$style.defaultCheckbox"
+      v-model="value"
+      :name="name"
+      :value="_checkValue"
+      ref="checkboxInput"
+    />
+    <span :class="$style.checkbox">
+      <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
+    </span>
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref, computed, isProxy, toRaw } from 'vue';
-import { usePropClasses } from '../../utils/classes.js';
+import { ref, computed, isProxy, toRaw, inject } from 'vue';
 
 const props = defineProps({
   /**
@@ -44,28 +28,6 @@ const props = defineProps({
   modelValue: {
     type: [Boolean, Array],
     default: undefined,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Checkbox',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'left',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -91,8 +53,8 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
+const subId = inject('subId');
 
 const emit = defineEmits([
   /**
@@ -107,13 +69,13 @@ const emit = defineEmits([
 ]);
 const { value } = useChangeEmits(emit, props);
 
-const checkboxContainer = ref(null);
+const rootContainer = inject('rootContainer');
+const focus = useFocusWithin(rootContainer);
 const checkboxInput = ref(null);
-const focus = useFocusWithin(checkboxContainer);
 
-// for convenience and consistency
+const label = inject('label');
 const _checkValue = computed(() => {
-  return props.checkValue || props.label;
+  return props.checkValue || label;
 });
 
 function toggleValue() {
@@ -146,30 +108,8 @@ onKeyStroke(' ', () => {
 <style module lang="scss">
 @import '../inputs';
 
-.grid {
-  justify-items: center;
-
-  &.grid--left {
-    grid-template-columns: auto min-content;
-  }
-  &.grid--right {
-    grid-template-columns: min-content auto;
-  }
-}
-
-.label--right {
-  justify-self: left;
-}
-.label--left {
-  justify-self: right;
-}
-
 .defaultCheckbox {
   display: none;
-}
-
-.label {
-  cursor: pointer;
 }
 
 .checkbox {

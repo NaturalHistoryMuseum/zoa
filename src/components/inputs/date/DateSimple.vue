@@ -1,32 +1,21 @@
 <template>
-  <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
-  >
-    <label
-      :for="subId('date')"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <input
-      type="date"
-      :placeholder="placeholder"
-      :min="min"
-      :max="max"
-      :step="step"
-      :id="subId('date')"
-      :class="$style.input"
-      v-model="value"
-    />
-  </div>
+  <input
+    type="date"
+    :placeholder="placeholder"
+    :min="min"
+    :max="max"
+    :step="step"
+    :id="inputId"
+    :class="$style.input"
+    v-model="value"
+  />
 </template>
 
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { usePropClasses } from '../../utils/classes.js';
+import { inject } from 'vue';
 
 const props = defineProps({
   /**
@@ -34,28 +23,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Object,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Date',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -94,8 +61,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
 
 const emit = defineEmits([
   /**

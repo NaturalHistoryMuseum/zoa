@@ -1,19 +1,11 @@
 import ZoaDateSimple from './DateSimple.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaDateSimple,
   title: 'Components/Inputs/Date/Simple Date',
-  argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
-  },
+  argTypes,
   parameters: {
     docs: {
       description: {
@@ -27,15 +19,27 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Date',
+    labelPosition: 'above',
+    delay: 200,
+    placeholder: 'placeholder',
+    min: null,
+    max: null,
+    step: 'any',
   },
   render: (args) => ({
-    components: { ZoaDateSimple },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-date-simple v-bind="args"/>
+      <zoa-input zoa-type="date-simple"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, placeholder, min, max, step}"
+      />
         `,
   }),
 };

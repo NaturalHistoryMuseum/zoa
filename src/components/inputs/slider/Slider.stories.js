@@ -1,18 +1,12 @@
 import ZoaSlider from './Slider.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaSlider,
   title: 'Components/Inputs/Slider/Single',
   argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
+    ...argTypes,
     valueLabelPosition: {
       control: 'select',
       options: ['above', 'below'],
@@ -36,17 +30,32 @@ const Base = {
   args: {
     label: 'Slider',
     labelPosition: 'above',
+    delay: 200,
+    placeholder: null,
+    min: 0,
+    max: 100,
+    step: 1,
+    placeholderPosition: 0.5,
+    validMin: null,
+    validMax: null,
     valueLabelPosition: 'below',
     activeTrackRight: false,
   },
   render: (args) => ({
-    components: { ZoaSlider },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-slider v-bind="args"/>
-        `,
+      <zoa-input zoa-type="slider"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, placeholder, min, max, step,
+                           placeholderPosition, validMin, validMax,
+                           activeTrackRight, valueLabelPosition}"
+      />
+    `,
   }),
 };
 

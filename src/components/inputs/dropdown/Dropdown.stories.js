@@ -1,19 +1,11 @@
 import ZoaDropdown from './Dropdown.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaDropdown,
   title: 'Components/Inputs/Select/Dropdown',
-  argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
-  },
+  argTypes,
   parameters: {
     docs: {
       description: {
@@ -28,18 +20,26 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Dropdown',
     labelPosition: 'above',
+    delay: 0,
+    placeholder: 'select an option',
     options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
   },
   render: (args) => ({
-    components: { ZoaDropdown },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-dropdown v-bind="args"/>
-        `,
+      <zoa-input zoa-type="dropdown"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :options="{delay, placeholder, options}"
+      />
+    `,
   }),
 };
 

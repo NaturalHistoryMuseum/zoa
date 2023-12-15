@@ -1,43 +1,40 @@
 <template>
-  <ZoaEmpty
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
-    :label="label"
-    :label-position="labelPosition"
-    :grid-class="[$style.wrapper]"
-  >
-    <ZoaSlider
-      :min="min"
-      :max="max"
-      :valid-max="maxLower"
-      :step="step"
-      v-model="valueLower"
+  <div>
+    <zoa-input
+      zoa-type="slider"
       :label="labelLower"
       :label-position="labelsRight ? 'right' : 'left'"
-      value-label-position="above"
-      :placeholder-position="0.25"
+      :options="{
+        min,
+        max,
+        step,
+        validMax: maxLower,
+        valueLabelPosition: 'above',
+        placeholderPosition: 0.25,
+      }"
+      v-model="valueLower"
     />
-    <ZoaSlider
-      :min="min"
-      :valid-min="minUpper"
-      :max="max"
-      :step="step"
-      v-model="valueUpper"
+    <zoa-input
+      zoa-type="slider"
       :label="labelUpper"
       :label-position="labelsRight ? 'right' : 'left'"
-      :placeholder-position="0.75"
-      :active-track-right="true"
+      :options="{
+        min,
+        max,
+        step,
+        validMin: minUpper,
+        placeholderPosition: 0.75,
+        activeTrackRight: true,
+      }"
+      v-model="valueUpper"
     />
-  </ZoaEmpty>
+  </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref, watch } from 'vue';
-import ZoaSlider from './Slider.vue';
-import ZoaEmpty from '../empty/Empty.vue';
-import { usePropClasses } from '../../utils/classes.js';
+import { computed, inject, ref, watch } from 'vue';
+import { ZoaInput } from '../../index.js';
 
 const props = defineProps({
   /**
@@ -45,28 +42,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Range',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -126,8 +101,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
 
 const emit = defineEmits([
   /**
@@ -172,20 +146,4 @@ watch(range, () => {
 
 <style module lang="scss">
 @import '../inputs';
-
-.grid--above {
-  & > fieldset > legend {
-    margin-bottom: -35px;
-  }
-}
-.grid--below {
-  & > fieldset > legend {
-    margin-top: -35px;
-  }
-}
-
-.wrapper {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-}
 </style>
