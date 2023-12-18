@@ -9,7 +9,7 @@
     />
     <div
       v-show="showText"
-      :class="[$style.popup, $style[`popup--${labelPosition}`]]"
+      :class="[$style.popup, $style[`popup--${position}`]]"
       :id="helpId"
       role="tooltip"
     >
@@ -28,6 +28,10 @@ import { onKeyStroke, useElementHover } from '@vueuse/core';
 const props = defineProps({
   text: {
     type: String,
+  },
+  position: {
+    type: String,
+    default: 'right',
   },
 });
 
@@ -54,10 +58,11 @@ onKeyStroke('Escape', () => (showText.value = false));
 .main {
   position: relative;
   grid-area: help;
+  width: min-content;
 
   &.main--above,
   &.main--below {
-    padding: 0 $h-pad;
+    padding: 0;
   }
 }
 
@@ -75,8 +80,6 @@ onKeyStroke('Escape', () => (showText.value = false));
   width: max-content;
   max-width: 350px;
 
-  &.popup--above,
-  &.popup--below,
   &.popup--right {
     right: 0;
   }

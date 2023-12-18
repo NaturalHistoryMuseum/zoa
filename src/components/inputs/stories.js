@@ -40,6 +40,15 @@ export const argTypes = {
       category: 'Root props',
     },
   },
+  helpPosition: {
+    control: 'select',
+    description: 'Position of the help text.',
+    options: ['left', 'right'],
+    table: {
+      type: { summary: 'string' },
+      category: 'Root props',
+    },
+  },
   'v-model': {
     table: {
       category: 'Output',

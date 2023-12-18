@@ -15,11 +15,9 @@
   >
     {{ label }}
   </legend>
-  <zoa-help v-if="help" :text="help" />
 </template>
 
 <script setup>
-import ZoaHelp from './Help.vue';
 import { inject } from 'vue';
 
 const props = defineProps({
@@ -40,10 +38,6 @@ const props = defineProps({
   tabbable: {
     type: Boolean,
     default: false,
-  },
-  help: {
-    type: [String, null],
-    default: null,
   },
 });
 

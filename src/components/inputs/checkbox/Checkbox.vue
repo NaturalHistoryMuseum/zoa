@@ -146,4 +146,8 @@ onKeyStroke(' ', () => {
   left: 0;
   margin: auto;
 }
+
+.inputWrapper {
+  justify-self: center;
+}
 </style>

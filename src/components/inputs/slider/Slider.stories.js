@@ -31,6 +31,7 @@ const Base = {
     label: 'Slider',
     labelPosition: 'above',
     help: 'Some example help text.',
+    helpPosition: 'right',
     delay: 200,
     placeholder: null,
     min: 0,
@@ -53,6 +54,7 @@ const Base = {
                  :label="label"
                  :label-position="labelPosition"
                  :help="help"
+                 :help-position="helpPosition"
                  :options="{delay, placeholder, min, max, step,
                            placeholderPosition, validMin, validMax,
                            activeTrackRight, valueLabelPosition}"

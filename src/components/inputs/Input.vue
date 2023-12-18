@@ -12,8 +12,8 @@
           :label="label"
           :label-position="labelPosition"
           :tabbable="zoaInput.tabLabel"
-          :help="help"
         />
+        <zoa-help v-if="help" :text="help" :position="helpPosition" />
         <div
           :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
           v-if="ZoaInputComponent == null"
@@ -32,6 +32,7 @@
         :tabbable="zoaInput.tabLabel"
         :help="help"
       />
+      <zoa-help v-if="help" :text="help" :position="helpPosition" />
       <zoa-input-component v-bind="options" v-model="value" />
     </template>
   </div>
@@ -107,6 +108,14 @@ const props = defineProps({
     type: [String, null],
     default: null,
   },
+  /**
+   * Position of the help popup.
+   * @values left, right
+   */
+  helpPosition: {
+    type: String,
+    default: 'right',
+  },
 });
 
 const zoaInput = computed(() => {
@@ -131,6 +140,9 @@ const rootClassKeys = computed(() => {
     `rootWrapper--${props.labelPosition}`,
     props.zoaType,
   ];
+  if (!!props.help) {
+    _keys.push('rootWrapper--help');
+  }
   if (zoaInput.value.wrapperProps) {
     zoaInput.value.wrapperProps.forEach((p) => {
       if (props.options[p] != null) {
@@ -188,76 +200,122 @@ provide('rootContainer', rootContainer);
   gap: $label-gap;
   grid-template-rows: auto;
 
-  &.rootWrapper--above,
-  &.rootWrapper--below {
-    grid-template-columns: 1fr auto;
-  }
-
+  // because sometimes the label is a <legend> and that has to be directly under
+  // the <fieldset> element, we can't group the label and help, so we end up
+  // with... this
   &.rootWrapper--above {
     grid-template-areas:
-      'label help'
-      'input input';
+      'label'
+      'input';
+    grid-template-columns: 1fr;
+
+    &.rootWrapper--help {
+      grid-template-areas:
+        'label help'
+        'input input';
+      grid-template-columns: 1fr auto;
+    }
   }
 
   &.rootWrapper--below {
     grid-template-areas:
-      'input input'
-      'label help';
+      'input'
+      'label';
+    grid-template-columns: 1fr;
+
+    &.rootWrapper--help {
+      grid-template-areas:
+        'input input'
+        'label help';
+      grid-template-columns: 1fr auto;
+    }
   }
 
   &.rootWrapper--left {
-    grid-template-columns: auto auto 1fr;
-    grid-template-areas: 'label help input';
+    grid-template-areas: 'label input';
+    grid-template-columns: auto 1fr;
+
+    &.rootWrapper--help {
+      grid-template-areas: 'label input help';
+      grid-template-columns: auto 1fr auto;
+    }
   }
 
   &.rootWrapper--right {
-    grid-template-columns: 1fr auto auto;
-    grid-template-areas: 'input label help';
+    grid-template-areas: 'input label';
+    grid-template-columns: 1fr auto;
+
+    &.rootWrapper--help {
+      grid-template-areas: 'input label help';
+      grid-template-columns: 1fr auto auto;
+    }
+  }
+
+  &.rootWrapper--none {
+    grid-template-areas: 'input';
+    grid-template-columns: 1fr;
+
+    &.rootWrapper--help {
+      grid-template-areas: 'input help';
+      grid-template-columns: 1fr auto;
+    }
   }
 }
 
 .checkbox {
   &.rootWrapper {
-    justify-items: center;
-
-    &.rootWrapper--above,
-    &.rootWrapper--below {
-      grid-template-columns: 1fr auto 1fr;
-
-      & > *:first-child {
-        // label
-        padding: 0;
-      }
-
-      & > *:nth-child(2):not(:last-child) {
-        //help
-        padding: 0;
-        justify-self: left;
-      }
-    }
+    width: auto;
 
     &.rootWrapper--above {
-      grid-template-areas:
-        '. label help'
-        'input input input';
+      & > label {
+        padding: 0;
+        justify-self: center;
+      }
+
+      &.rootWrapper--help {
+        grid-template-areas:
+          '. label help'
+          '. input .';
+        grid-template-columns: 1fr auto 1fr;
+      }
     }
 
     &.rootWrapper--below {
-      grid-template-areas:
-        'input input input'
-        '. label help';
+      & > label {
+        padding: 0;
+        justify-self: center;
+      }
+
+      &.rootWrapper--help {
+        grid-template-areas:
+          '. input .'
+          '. label help';
+        grid-template-columns: 1fr auto 1fr;
+      }
     }
 
     &.rootWrapper--left {
-      grid-template-columns: auto min-content min-content;
+      grid-template-areas: 'label input .';
+      grid-template-columns: auto auto 1fr;
+
+      &.rootWrapper--help {
+        grid-template-areas: 'label input help';
+      }
     }
 
     &.rootWrapper--right {
-      grid-template-columns: min-content auto 1fr;
+      grid-template-areas: 'input label .';
+      grid-template-columns: auto auto 1fr;
 
-      & > *:nth-child(2):not(:last-child) {
-        // help
-        justify-self: left;
+      &.rootWrapper--help {
+        grid-template-areas: 'input label help';
+      }
+    }
+
+    &.rootWrapper--none {
+      &.rootWrapper--help {
+        grid-template-areas: 'input help';
+        grid-template-columns: auto 1fr;
       }
     }
   }

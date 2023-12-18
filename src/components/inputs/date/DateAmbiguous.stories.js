@@ -24,6 +24,7 @@ const Base = {
     label: 'Date',
     labelPosition: 'above',
     help: 'Some example help text.',
+    helpPosition: 'right',
     delay: 200,
     placeholder: 'placeholder',
   },
@@ -38,6 +39,7 @@ const Base = {
                  :label="label"
                  :label-position="labelPosition"
                  :help="help"
+                 :help-position="helpPosition"
                  :options="{delay, placeholder}"
       />
     `,
