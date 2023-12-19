@@ -78,6 +78,11 @@
           </zoa-button>
         </div>
       </div>
+      <div :class="$style.popupSection">
+        <small :class="$style.dateRange">
+          {{ returnDate.earliest }} to {{ returnDate.latest }}
+        </small>
+      </div>
     </div>
   </div>
 </template>
@@ -223,6 +228,12 @@ const returnDate = computed(() => {
     year: year.value,
     month: month.value,
     day: day.value,
+    earliest: `${year.value || '0000'}-${month.value || '01'}-${
+      day.value || '01'
+    }`,
+    latest: `${year.value || '9999'}-${month.value || '12'}-${
+      day.value || monthDays.value
+    }`,
   };
 });
 const displayDate = computed(() => {
@@ -437,5 +448,10 @@ watch(returnDate, () => {
 .suggestion {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.dateRange {
+  width: 100%;
+  text-align: center;
 }
 </style>
