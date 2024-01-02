@@ -27,6 +27,8 @@ const Base = {
     helpPosition: 'right',
     delay: 200,
     placeholder: 'placeholder',
+    min: '0000-01-01',
+    max: 'today',
   },
   render: (args) => ({
     components: { ZoaInput },
@@ -40,7 +42,7 @@ const Base = {
                  :label-position="labelPosition"
                  :help="help"
                  :help-position="helpPosition"
-                 :options="{delay, placeholder}"
+                 :options="{delay, placeholder, min, max}"
       />
     `,
   }),

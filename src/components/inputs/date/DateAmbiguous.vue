@@ -24,20 +24,43 @@
         >
       </div>
       <div :class="$style.popupSection">
-        <zoa-input
-          zoa-type="number"
-          label="year"
-          label-position="left"
-          :options="{ placeholder: 1900, min: 0, max: 9999 }"
-          v-model="rawYear"
-        />
+        <zoa-input label="year" :grid-class="$style.yearParts">
+          <zoa-input
+            zoa-type="number"
+            label="millenium"
+            label-position="none"
+            :options="{ placeholder: 0, min: 0, max: 9 }"
+            v-model="yearParts.millenium"
+          />
+          <zoa-input
+            zoa-type="number"
+            label="century"
+            label-position="none"
+            :options="{ placeholder: 0, min: 0, max: 9 }"
+            v-model="yearParts.century"
+          />
+          <zoa-input
+            zoa-type="number"
+            label="decade"
+            label-position="none"
+            :options="{ placeholder: 0, min: 0, max: 9 }"
+            v-model="yearParts.decade"
+          />
+          <zoa-input
+            zoa-type="number"
+            label="year"
+            label-position="none"
+            :options="{ placeholder: 0, min: 0, max: 9 }"
+            v-model="yearParts.year"
+          />
+        </zoa-input>
         <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
           <zoa-button
             v-for="opt in yearOptions"
             size="sm"
             @click="setYear(opt)"
             tabindex="-1"
-            >{{ padYear(opt) }}
+            >{{ formatYear(opt) }}
           </zoa-button>
         </div>
       </div>
@@ -45,17 +68,16 @@
         <zoa-input
           zoa-type="number"
           label="month"
-          label-position="left"
           :options="{ placeholder: 1, min: 1, max: 12 }"
           v-model="month"
         />
         <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
           <zoa-button
-            v-for="(opt, ix) in monthOptions"
+            v-for="opt in monthOptions"
             size="sm"
-            @click="setMonth(ix + 1)"
+            @click="month = opt[1]"
             tabindex="-1"
-            >{{ opt }}
+            >{{ opt[0] }}
           </zoa-button>
         </div>
       </div>
@@ -63,7 +85,6 @@
         <zoa-input
           zoa-type="number"
           label="day"
-          label-position="left"
           :options="{ placeholder: 1, min: 1, max: monthDays }"
           v-model="day"
         />
@@ -71,7 +92,7 @@
           <zoa-button
             v-for="opt in dayOptions"
             size="sm"
-            @click="setDay(opt)"
+            @click="day = opt"
             tabindex="-1"
           >
             {{ opt }}
@@ -119,6 +140,20 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /**
+   * The earliest accepted date, in yyyy-mm-dd format (or 'today').
+   */
+  min: {
+    type: String,
+    default: '1582-01-01',
+  },
+  /**
+   * The latest accepted date, in yyyy-mm-dd format (or 'today').
+   */
+  max: {
+    type: String,
+    default: 'today',
+  },
 });
 
 const inputId = inject('inputId');
@@ -137,6 +172,40 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { valueChanged } = useChangeEmits(emit, props.delay);
+
+// PROP PROCESSING
+const minDate = computed(() => {
+  let _minDate;
+  try {
+    _minDate = new Date(
+      props.min === 'today' ? Date.now() : Date.parse(props.min),
+    );
+  } catch {
+    _minDate = new Date(0, 0, 1);
+  }
+  return {
+    year: _minDate.getFullYear(),
+    month: _minDate.getMonth() + 1,
+    day: _minDate.getDate(),
+    date: _minDate,
+  };
+});
+const maxDate = computed(() => {
+  let _maxDate;
+  try {
+    _maxDate = new Date(
+      props.max === 'today' ? Date.now() : Date.parse(props.max),
+    );
+  } catch {
+    _maxDate = new Date(9999, 11, 31);
+  }
+  return {
+    year: _maxDate.getFullYear(),
+    month: _maxDate.getMonth() + 1,
+    day: _maxDate.getDate(),
+    date: _maxDate,
+  };
+});
 
 // STATE
 const displayBox = ref(null);
@@ -181,6 +250,7 @@ const focusedButtons = computed(() => {
   return buttonContainer;
 });
 
+// KEYBINDINGS
 onKeyStroke('Enter', () => {
   if (!focusedContainer) {
     return;
@@ -214,7 +284,6 @@ onKeyStroke('ArrowRight', () => {
   }
 });
 
-// OTHER KEYBINDINGS
 onKeyStroke('Escape', () => {
   const selectedElement = rootContainer.value.querySelector('*:focus');
   if (selectedElement) {
@@ -228,14 +297,11 @@ const returnDate = computed(() => {
     year: year.value,
     month: month.value,
     day: day.value,
-    earliest: `${year.value || '0000'}-${month.value || '01'}-${
-      day.value || '01'
-    }`,
-    latest: `${year.value || '9999'}-${month.value || '12'}-${
-      day.value || monthDays.value
-    }`,
+    earliest: `${currentRange.value.lower.year}-${currentRange.value.lower.month}-${currentRange.value.lower.day}`,
+    latest: `${currentRange.value.upper.year}-${currentRange.value.upper.month}-${currentRange.value.upper.day}`,
   };
 });
+
 const displayDate = computed(() => {
   return formatDate(
     returnDate.value.year,
@@ -243,6 +309,131 @@ const displayDate = computed(() => {
     returnDate.value.day,
   );
 });
+
+const currentRange = computed(() => {
+  let lowerYear;
+  let upperYear;
+  if (!yearDefined.value) {
+    lowerYear = minDate.value.year;
+    upperYear = maxDate.value.year;
+  } else {
+    let digits =
+      Math.max(
+        ..._yearPartKeys.map((k, ix) => {
+          return isNaN(parseInt(yearParts.value[k])) ? -1 : ix;
+        }),
+      ) + 1;
+    const scale = 10 ** (4 - digits);
+    const currentYear = getPartialYear(yearParts.value, 4);
+    const minYear = Math.floor(minDate.value.year / scale) * scale;
+    const maxYear = Math.floor(maxDate.value.year / scale) * scale;
+
+    if (currentYear < minYear || currentYear > maxYear) {
+      lowerYear = minDate.value.year;
+      upperYear = maxDate.value.year;
+    } else if (currentYear === minYear) {
+      lowerYear = minDate.value.year;
+      upperYear = currentYear + scale - 1;
+    } else if (currentYear === maxYear) {
+      lowerYear = currentYear;
+      upperYear = maxDate.value.year;
+    } else {
+      lowerYear = currentYear;
+      upperYear = currentYear + scale - 1;
+    }
+  }
+
+  const isMinYear = lowerYear === minDate.value.year;
+  const isMaxYear = upperYear === maxDate.value.year;
+  const lowerMonth = isMinYear
+    ? Math.max(minDate.value.month, _month.value || 1)
+    : _month.value || 1;
+  const upperMonth = isMaxYear
+    ? Math.min(maxDate.value.month, _month.value || 12)
+    : _month.value || 12;
+  const isMinMonth = lowerMonth === minDate.value.month;
+  const isMaxMonth = upperMonth === maxDate.value.month;
+
+  let lowerDay = _day.value || 1;
+  let upperDay = _day.value || getMonthDays(upperMonth);
+  lowerDay =
+    isMinYear && isMinMonth ? Math.max(lowerDay, minDate.value.day) : lowerDay;
+  upperDay =
+    isMaxYear && isMaxMonth ? Math.min(upperDay, maxDate.value.day) : upperDay;
+  if (lowerYear === upperYear && lowerMonth === upperMonth) {
+    if (isMaxYear && isMaxMonth && lowerDay > upperDay) {
+      lowerDay = 1;
+    }
+    if (isMinYear && isMinMonth && upperDay < lowerDay) {
+      upperDay = getMonthDays(upperMonth);
+    }
+  }
+
+  return {
+    lower: {
+      year: lowerYear,
+      month: lowerMonth,
+      day: lowerDay,
+      isMinYear,
+      isMinMonth,
+    },
+    upper: {
+      year: upperYear,
+      month: upperMonth,
+      day: upperDay,
+      isMaxYear,
+      isMaxMonth,
+    },
+  };
+});
+
+function validate(y, m, d) {
+  const nullYear = isNaN(parseInt(y));
+  const nullMonth = isNaN(parseInt(m));
+  const nullDay = isNaN(parseInt(d));
+  const basicValidMonth = nullMonth || (m <= 12 && m >= 1);
+  const basicValidDay = nullDay || d <= getMonthDays(m);
+
+  if (
+    nullYear ||
+    (y > currentRange.value.lower.year && y < currentRange.value.upper.year)
+  ) {
+    return {
+      year: true,
+      month: basicValidMonth,
+      day: basicValidDay,
+    };
+  }
+  if (y < currentRange.value.lower.year || y > currentRange.value.upper.year) {
+    return {
+      year: false,
+      month: basicValidMonth,
+      day: basicValidDay,
+    };
+  }
+
+  let validMonth = basicValidMonth;
+  let validDay = basicValidDay;
+  if (y === currentRange.value.lower.year) {
+    validMonth =
+      validMonth && (nullMonth || m >= currentRange.value.lower.month);
+    if (m === currentRange.value.lower.month) {
+      validDay = validDay && (nullDay || d >= currentRange.value.lower.day);
+    }
+  }
+  if (y === currentRange.value.upper.year) {
+    validMonth =
+      validMonth && (nullMonth || m <= currentRange.value.upper.month);
+    if (m === currentRange.value.upper.month) {
+      validDay = validDay && (nullDay || d <= currentRange.value.upper.day);
+    }
+  }
+  return {
+    year: true,
+    month: validMonth,
+    day: validDay,
+  };
+}
 
 function refreshDisplay() {
   displayBox.value.value = displayDate.value;
@@ -262,38 +453,96 @@ function _parseInput(event) {
 const parseInput = debounce(_parseInput, 200);
 
 function setDate(date) {
-  rawYear.value = date.year;
+  yearParts.value = yearToParts(date.year);
   month.value = date.month;
   day.value = date.day;
   guessedDates.value = [];
 }
 
 // YEAR
-const rawYear = ref(null);
-
-const yearOptions = computed(() => {
-  let starter = 11;
-  if (rawYear.value && rawYear.value >= 1000) {
-    starter = Math.floor(rawYear.value / 10) * 10;
-  } else if (rawYear.value && rawYear.value < 1000) {
-    starter = rawYear.value * 10;
-  }
-  return Array(10)
-    .fill(starter)
-    .map((i, ix) => {
-      return i + ix;
-    });
-});
-
 const year = computed(() => {
-  if (!rawYear.value) {
+  if (!yearDefined.value) {
     return null;
   }
-  if (rawYear.value >= 1000) {
-    return rawYear.value;
+  const yr = getPartialYear(yearParts.value, 4);
+  const validated = validate(yr, month.value, day.value);
+  if (!validated.year) {
+    return null;
   }
-  let multiplier = 10 ** (4 - rawYear.value.toString().length);
-  return rawYear.value * multiplier;
+  return yr;
+});
+
+const yearParts = ref({
+  millenium: null,
+  century: null,
+  decade: null,
+  year: null,
+});
+// the keys *should* stay in the correct order, but just in case
+const _yearPartKeys = ['millenium', 'century', 'decade', 'year'];
+
+const yearDefined = computed(() => {
+  return Object.values(yearParts.value).some((x) => !isNaN(parseInt(x)));
+});
+
+const yearOptions = computed(() => {
+  const lowerYear = yearToParts(currentRange.value.lower.year);
+  if (
+    minDate.value.year === maxDate.value.year &&
+    isNaN(parseInt(yearParts.value.year))
+  ) {
+    return [lowerYear];
+  } else if (currentRange.value.lower.year === currentRange.value.upper.year) {
+    return [
+      {
+        millenium: null,
+        century: null,
+        decade: null,
+        year: null,
+      },
+    ];
+  }
+  const upperYear = yearToParts(currentRange.value.upper.year);
+
+  let key;
+  let keyIx;
+  let base = {};
+  if (!yearDefined.value) {
+    // if all year parts empty, find where min/max first differ
+    _yearPartKeys.forEach((k, ix) => {
+      if (lowerYear[k] === upperYear[k]) {
+        base[k] = lowerYear[k];
+      } else if (key == null) {
+        key = k;
+        keyIx = ix;
+      }
+    });
+  } else {
+    // otherwise find the last defined part and add one
+    keyIx =
+      Math.max(
+        ..._yearPartKeys.map((k, ix) => {
+          base[k] = yearParts.value[k];
+          return isNaN(parseInt(yearParts.value[k])) ? -1 : ix;
+        }),
+      ) + 1;
+    key = _yearPartKeys[keyIx];
+  }
+
+  const lowerBound = getPartialYear(lowerYear, keyIx + 1);
+  const upperBound = getPartialYear(upperYear, keyIx + 1);
+
+  return Array(10)
+    .fill(0)
+    .map((i, ix) => {
+      let opt = { ...base };
+      opt[key] = i + ix;
+      return opt;
+    })
+    .filter((opt) => {
+      const partialYear = getPartialYear(opt, keyIx + 1);
+      return partialYear >= lowerBound && partialYear <= upperBound;
+    });
 });
 
 const leapYear = computed(() => {
@@ -305,52 +554,144 @@ const leapYear = computed(() => {
   return year.value % 4 === 0;
 });
 
-function padYear(opt) {
-  return opt.toString().padEnd(4, '0');
+function formatYear(yrParts) {
+  if (Object.values(yrParts).every((p) => p == null)) {
+    return 'clear';
+  }
+  return _yearPartKeys
+    .map((x) => {
+      return yrParts[x] || 0;
+    })
+    .join('');
+}
+
+function getPartialYear(yrParts, digitCount) {
+  return _yearPartKeys.slice(0, digitCount).reduce((p, c, ix) => {
+    let v = yrParts[c] || 0;
+    return p + v * 10 ** (3 - ix);
+  }, 0);
+}
+
+function yearToParts(yr) {
+  return {
+    millenium: Math.floor(yr / 1000),
+    century: Math.floor((yr % 1000) / 100),
+    decade: Math.floor((yr % 100) / 10),
+    year: Math.floor(yr % 10),
+  };
 }
 
 function setYear(opt) {
-  rawYear.value = opt;
-  if (day.value && day.value > monthDays.value) {
-    day.value = monthDays.value;
+  yearParts.value = opt;
+  const lastDefined = Math.max(
+    ..._yearPartKeys.map((k, ix) =>
+      isNaN(parseInt(yearParts.value[k])) ? -1 : ix,
+    ),
+  );
+  if (lastDefined === 3) {
+    let valid = validate(year.value, month.value, day.value);
+    if (!valid.month || !valid.day) {
+      month.value = null;
+      day.value = null;
+    }
   }
 }
 
 // MONTH
-const month = ref(null);
+const _month = ref(null);
+const month = computed({
+  get() {
+    const valid = validate(year.value, _month.value, day.value);
+    return valid.month ? _month.value : null;
+  },
+  set(v) {
+    _month.value = isNaN(parseInt(v)) ? null : v;
+    if (day.value && day.value > monthDays.value) {
+      day.value = monthDays.value;
+    }
+  },
+});
 
-const monthOptions = ref(datenames.abbreviated_months);
+const monthOptions = computed(() => {
+  let options = datenames.abbreviated_months.map((m, ix) => [m, ix + 1]);
+  const yr = year.value
+    ? year.value
+    : minDate.value.year === maxDate.value.year
+    ? minDate.value.year
+    : null;
+  if (yr === minDate.value.year) {
+    options = options.slice(minDate.value.month - 1, options.length);
+  }
+  if (yr === maxDate.value.year) {
+    const rem = 12 - options.length;
+    options = options.slice(0, maxDate.value.month - rem);
+  }
+  return options;
+});
 
 const monthDays = computed(() => {
+  return getMonthDays(month.value);
+});
+
+function getMonthDays(monthIx1) {
+  // monthIx1 is 1-based index of month, i.e. jan is 1 and dec is 12
   const thirty = [4, 6, 9, 11];
-  if (thirty.includes(month.value)) {
+  if (thirty.includes(monthIx1)) {
     return 30;
   }
-  if (month.value === 2) {
+  if (monthIx1 === 2) {
     return leapYear.value ? 29 : 28;
   }
   return 31;
-});
-
-function setMonth(opt) {
-  month.value = opt;
-  if (day.value && day.value > monthDays.value) {
-    day.value = monthDays.value;
-  }
 }
 
 // DAY
-const day = ref(null);
-
-const dayOptions = computed(() => {
-  return Array(monthDays.value)
-    .fill(1)
-    .map((_, ix) => ix + 1);
+const _day = ref(null);
+const day = computed({
+  get() {
+    const valid = validate(year.value, _month.value, _day.value);
+    return valid.month && valid.day ? _day.value : null;
+  },
+  set(v) {
+    _day.value = isNaN(parseInt(v)) ? null : v;
+  },
 });
 
-function setDay(opt) {
-  day.value = opt;
-}
+const dayOptions = computed(() => {
+  const yr = year.value
+    ? year.value
+    : minDate.value.year === maxDate.value.year
+    ? minDate.value.year
+    : null;
+  const mnth = month.value
+    ? month.value
+    : minDate.value.year === maxDate.value.year &&
+      minDate.value.month === maxDate.value.month
+    ? minDate.value.month
+    : null;
+  const mnthDays = getMonthDays(mnth);
+
+  let options = Array(mnthDays)
+    .fill(1)
+    .map((_, ix) => ix + 1);
+
+  if (
+    yr === minDate.value.year &&
+    !isNaN(parseInt(mnth)) &&
+    mnth <= minDate.value.month
+  ) {
+    options = options.slice(minDate.value.day - 1);
+  }
+  if (
+    yr === maxDate.value.year &&
+    !isNaN(parseInt(mnth)) &&
+    mnth >= maxDate.value.month
+  ) {
+    const rem = mnthDays - options.length;
+    options = options.slice(0, maxDate.value.day - rem);
+  }
+  return options;
+});
 
 // UTILS
 function formatDate(y, m, d) {
@@ -453,5 +794,22 @@ watch(returnDate, () => {
 .dateRange {
   width: 100%;
   text-align: center;
+}
+
+.yearParts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+
+  // thanks w3 schools
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 }
 </style>
