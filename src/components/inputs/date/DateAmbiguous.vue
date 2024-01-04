@@ -525,14 +525,16 @@ const yearOptions = computed(() => {
   let base = {};
   if (!yearDefined.value) {
     // if all year parts empty, find where min/max first differ
-    _yearPartKeys.forEach((k, ix) => {
+    for (let i = 0; i < _yearPartKeys.length; i++) {
+      let k = _yearPartKeys[i];
       if (lowerYear[k] === upperYear[k]) {
         base[k] = lowerYear[k];
       } else if (key == null) {
         key = k;
-        keyIx = ix;
+        keyIx = i;
+        break;
       }
-    });
+    }
   } else {
     // otherwise find the last defined part and add one
     keyIx =
