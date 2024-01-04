@@ -95,7 +95,7 @@
             @click="day = opt"
             tabindex="-1"
           >
-            {{ opt }}
+            {{ opt || 'clear' }}
           </zoa-button>
         </div>
       </div>
@@ -503,20 +503,19 @@ const yearDefined = computed(() => {
 
 const yearOptions = computed(() => {
   const lowerYear = yearToParts(currentRange.value.lower.year);
+  const clear = {
+    millenium: null,
+    century: null,
+    decade: null,
+    year: null,
+  };
   if (
     minDate.value.year === maxDate.value.year &&
     isNaN(parseInt(yearParts.value.year))
   ) {
     return [lowerYear];
   } else if (currentRange.value.lower.year === currentRange.value.upper.year) {
-    return [
-      {
-        millenium: null,
-        century: null,
-        decade: null,
-        year: null,
-      },
-    ];
+    return [clear];
   }
   const upperYear = yearToParts(currentRange.value.upper.year);
 
@@ -550,7 +549,7 @@ const yearOptions = computed(() => {
   const lowerBound = getPartialYear(lowerYear, keyIx + 1);
   const upperBound = getPartialYear(upperYear, keyIx + 1);
 
-  return Array(10)
+  let yearOpts = Array(10)
     .fill(0)
     .map((i, ix) => {
       let opt = { ...base };
@@ -561,6 +560,10 @@ const yearOptions = computed(() => {
       const partialYear = getPartialYear(opt, keyIx + 1);
       return partialYear >= lowerBound && partialYear <= upperBound;
     });
+  if (yearDefined.value) {
+    yearOpts.push(clear);
+  }
+  return yearOpts;
 });
 
 const leapYear = computed(() => {
@@ -644,6 +647,9 @@ const monthOptions = computed(() => {
     const rem = 12 - options.length;
     options = options.slice(0, maxDate.value.month - rem);
   }
+  if (_month.value) {
+    options.push(['clear', null]);
+  }
   return options;
 });
 
@@ -708,6 +714,9 @@ const dayOptions = computed(() => {
     const rem = mnthDays - options.length;
     options = options.slice(0, maxDate.value.day - rem);
   }
+  if (_day.value) {
+    options.push(null);
+  }
   return options;
 });
 
@@ -756,7 +765,7 @@ watch(returnDate, () => {
 .datePopup {
   position: absolute;
   min-width: 250px;
-  max-width: 350px;
+  max-width: 380px;
   background: white;
   border: 1px solid $grey;
   border-radius: $rounding;
@@ -781,21 +790,18 @@ watch(returnDate, () => {
 .yearGrid {
   display: flex;
   flex-wrap: wrap;
-  //grid-template-columns: repeat(5, 1fr);
   gap: 5px;
 }
 
 .monthGrid {
   display: flex;
   flex-wrap: wrap;
-  //grid-template-columns: repeat(6, 1fr);
   gap: 5px;
 }
 
 .dayGrid {
   display: flex;
   flex-wrap: wrap;
-  //grid-template-columns: repeat(10, 1fr);
   gap: 5px;
 }
 
