@@ -301,8 +301,20 @@ const returnDate = computed(() => {
     year: year.value,
     month: month.value,
     day: day.value,
-    earliest: `${currentRange.value.lower.year}-${currentRange.value.lower.month}-${currentRange.value.lower.day}`,
-    latest: `${currentRange.value.upper.year}-${currentRange.value.upper.month}-${currentRange.value.upper.day}`,
+    earliest: `${currentRange.value.lower.year
+      .toString()
+      .padStart(4, '0')}-${currentRange.value.lower.month
+      .toString()
+      .padStart(2, '0')}-${currentRange.value.lower.day
+      .toString()
+      .padStart(2, '0')}`,
+    latest: `${currentRange.value.upper.year
+      .toString()
+      .padStart(4, '0')}-${currentRange.value.upper.month
+      .toString()
+      .padStart(2, '0')}-${currentRange.value.upper.day
+      .toString()
+      .padStart(2, '0')}`,
   };
 });
 
