@@ -178,15 +178,17 @@ const minDate = computed(() => {
   let _minDate;
   try {
     _minDate = new Date(
-      props.min === 'today' ? Date.now() : Date.parse(props.min),
+      props.min === 'today'
+        ? Date.now()
+        : Date.parse(props.min || '0000-01-01'),
     );
   } catch {
     _minDate = new Date(0, 0, 1);
   }
   return {
-    year: _minDate.getFullYear(),
-    month: _minDate.getMonth() + 1,
-    day: _minDate.getDate(),
+    year: _minDate.getUTCFullYear(),
+    month: _minDate.getUTCMonth() + 1,
+    day: _minDate.getUTCDate(),
     date: _minDate,
   };
 });
@@ -194,15 +196,17 @@ const maxDate = computed(() => {
   let _maxDate;
   try {
     _maxDate = new Date(
-      props.max === 'today' ? Date.now() : Date.parse(props.max),
+      props.max === 'today'
+        ? Date.now()
+        : Date.parse(props.max || '9999-12-31'),
     );
   } catch {
     _maxDate = new Date(9999, 11, 31);
   }
   return {
-    year: _maxDate.getFullYear(),
-    month: _maxDate.getMonth() + 1,
-    day: _maxDate.getDate(),
+    year: _maxDate.getUTCFullYear(),
+    month: _maxDate.getUTCMonth() + 1,
+    day: _maxDate.getUTCDate(),
     date: _maxDate,
   };
 });
