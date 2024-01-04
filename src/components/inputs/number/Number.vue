@@ -13,13 +13,14 @@
       :id="inputId"
       :class="$style.input"
       v-model="value"
+      ref="target"
     />
   </div>
 </template>
 
 <script setup>
 import { useChangeEmits } from '../common.js';
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 
 const props = defineProps({
   /**
@@ -81,6 +82,14 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const target = ref(null);
+
+// EXPOSE
+defineExpose({
+  target,
+});
 </script>
 
 <style module lang="scss">

@@ -211,18 +211,23 @@ const maxDate = computed(() => {
   };
 });
 
-// STATE
+// ELEMENTS
 const displayBox = ref(null);
-const editing = ref(false);
 const rootContainer = inject('rootContainer');
-
-const { focused } = useFocusWithin(rootContainer);
-
-// YEAR/MONTH/DAY BUTTONS
 const yearBtns = ref(null);
 const monthBtns = ref(null);
 const dayBtns = ref(null);
 
+// STATE
+const editing = ref(false);
+const { focused } = useFocusWithin(rootContainer);
+
+// EXPOSE
+defineExpose({
+  target: displayBox,
+});
+
+// YEAR/MONTH/DAY BUTTONS
 const yearBtnsFocus = useFocus(yearBtns);
 const yearBtnsFocusWithin = useFocusWithin(yearBtns);
 const monthBtnsFocus = useFocus(monthBtns);

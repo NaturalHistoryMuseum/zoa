@@ -192,7 +192,7 @@ if (!Array.isArray(value)) {
   value.value = [];
 }
 
-// searching
+// SEARCH
 const _search = ref(null);
 const emitSearch = debounce((searchTerm) => {
   emit('search', searchTerm);
@@ -210,7 +210,7 @@ const search = computed({
   },
 });
 
-// processed props
+// PROP PROCESSING
 const itemString = computed(() => {
   const isPlural = value.value ? value.value.length !== 1 : true;
   if (isPlural) {
@@ -311,12 +311,17 @@ const filteredItems = computed(() => {
   return items;
 });
 
-// elements
+// ELEMENTS
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
 
-// scrolling
+// EXPOSE
+defineExpose({
+  target: textbox,
+});
+
+// SCROLLING
 const { y } = useScroll(dropdown);
 const scrollY = computed(() => {
   // y from useScroll doesn't reset when the dropdown element is reloaded until
@@ -353,7 +358,7 @@ const upperVisible = computed(() => {
   return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
 });
 
-// focus and keyboard navigation
+// FOCUS
 const focused = ref(false);
 const textboxFocus = useFocus(textbox);
 const dropdownFocus = useFocusWithin(dropdown);
@@ -384,6 +389,7 @@ onClickOutside(container, () => {
   unfocus();
 });
 
+// KEYBINDINGS
 onKeyStroke('ArrowDown', () => {
   if (allOptions.value.length === 0) {
     return;

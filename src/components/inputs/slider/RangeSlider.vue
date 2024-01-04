@@ -17,6 +17,7 @@
         placeholderPosition: 0.25,
       }"
       v-model="valueLower"
+      ref="lowerTrack"
     />
     <zoa-input
       zoa-type="slider"
@@ -31,6 +32,7 @@
         activeTrackRight: true,
       }"
       v-model="valueUpper"
+      ref="upperTrack"
     />
   </div>
 </template>
@@ -121,6 +123,28 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { valueChanged } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const trackLower = ref(null);
+const trackUpper = ref(null);
+
+// EXPOSE
+const target = computed(() => {
+  if (trackLower.value) {
+    return trackLower.value.target;
+  }
+});
+const elements = computed(() => {
+  if (trackLower.value && trackUpper.value) {
+    return [trackLower.value.target, trackUpper.value.target];
+  } else {
+    return [];
+  }
+});
+defineExpose({
+  target,
+  elements,
+});
 
 const valueLower = ref(null);
 const valueUpper = ref(null);

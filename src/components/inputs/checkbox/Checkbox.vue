@@ -75,9 +75,17 @@ const emit = defineEmits([
 ]);
 const { value } = useChangeEmits(emit, props);
 
+// ELEMENTS
 const rootContainer = inject('rootContainer');
-const focus = useFocusWithin(rootContainer);
 const checkboxInput = ref(null);
+
+// STATE
+const focus = useFocusWithin(rootContainer);
+
+// EXPOSE
+defineExpose({
+  target: checkboxInput,
+});
 
 const label = inject('label');
 const _checkValue = computed(() => {

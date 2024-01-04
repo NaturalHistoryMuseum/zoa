@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
 import { computed, inject, ref } from 'vue';
 import {
@@ -41,7 +40,6 @@ import {
   useFocusWithin,
   useFocus,
 } from '@vueuse/core';
-import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -101,10 +99,15 @@ const dropdownOptions = computed(() => {
   return outputOptions;
 });
 
-// elements
+// ELEMENTS
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
+
+// EXPOSE
+defineExpose({
+  target: textbox,
+});
 
 const focused = ref(false);
 const textboxFocus = useFocus(textbox);

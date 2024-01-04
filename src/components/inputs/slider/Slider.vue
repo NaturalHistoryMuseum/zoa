@@ -132,9 +132,14 @@ const emit = defineEmits([
 ]);
 const { value } = useChangeEmits(emit, props);
 
-// REFS
+// ELEMENTS
 const slider = ref(null);
 const valueLabel = ref(null);
+
+// EXPOSE
+defineExpose({
+  target: slider,
+});
 
 // PROP PROCESSING
 const _validMin = computed(() => {

@@ -4,7 +4,7 @@
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
-    <select :id="inputId" :class="$style.input" v-model="value">
+    <select :id="inputId" :class="$style.input" v-model="value" ref="target">
       <option :value="null">{{ placeholder }}</option>
       <option v-for="opt in dropdownOptions" :value="opt.value">
         {{ opt.label }}
@@ -15,11 +15,9 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
-import { computed, inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
-import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -78,6 +76,14 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const target = ref(null);
+
+// EXPOSE
+defineExpose({
+  target,
+});
 </script>
 
 <style module lang="scss">

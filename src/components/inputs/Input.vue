@@ -20,7 +20,12 @@
         >
           <slot />
         </div>
-        <zoa-input-component v-bind="options" v-model="value" v-else />
+        <zoa-input-component
+          v-bind="options"
+          v-model="value"
+          ref="inputComponent"
+          v-else
+        />
       </fieldset>
     </template>
     <template v-else>
@@ -33,7 +38,11 @@
         :help="help"
       />
       <zoa-help v-if="help" :text="help" :position="helpPosition" />
-      <zoa-input-component v-bind="options" v-model="value" />
+      <zoa-input-component
+        v-bind="options"
+        v-model="value"
+        ref="inputComponent"
+      />
     </template>
   </div>
 </template>
@@ -189,6 +198,38 @@ provide('inputId', inputId);
 provide('labelId', labelId);
 provide('helpId', _helpId);
 provide('rootContainer', rootContainer);
+
+const inputComponent = ref(null);
+function focus() {
+  if (inputComponent.value) {
+    inputComponent.value.target.focus();
+  }
+}
+function blur() {
+  if (inputComponent.value) {
+    inputComponent.value.target.blur();
+  }
+}
+const target = computed(() => {
+  // the primary target, e.g. the input
+  if (inputComponent.value) {
+    return inputComponent.value.target;
+  }
+});
+const elements = computed(() => {
+  // any other elements that might need to be exposed
+  if (inputComponent.value && inputComponent.value.elements) {
+    return inputComponent.value.elements;
+  } else {
+    return {};
+  }
+});
+defineExpose({
+  focus,
+  blur,
+  target,
+  elements,
+});
 </script>
 
 <style module lang="scss">
