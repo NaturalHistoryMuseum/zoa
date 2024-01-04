@@ -31,6 +31,7 @@
             label-position="none"
             :options="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.millenium"
+            ref="yrM"
           />
           <zoa-input
             zoa-type="number"
@@ -38,6 +39,7 @@
             label-position="none"
             :options="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.century"
+            ref="yrC"
           />
           <zoa-input
             zoa-type="number"
@@ -45,6 +47,7 @@
             label-position="none"
             :options="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.decade"
+            ref="yrD"
           />
           <zoa-input
             zoa-type="number"
@@ -52,6 +55,7 @@
             label-position="none"
             :options="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.year"
+            ref="yrY"
           />
         </zoa-input>
         <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
@@ -110,7 +114,7 @@
 
 <script setup>
 import { useChangeEmits } from '../common.js';
-import { ref, computed, watch, inject } from 'vue';
+import { ref, computed, watch, inject, onMounted, watchEffect } from 'vue';
 import { ZoaInput } from '../../index.js';
 import ZoaButton from '../button/Button.vue';
 import { debounce } from 'dettle';
@@ -217,6 +221,10 @@ const rootContainer = inject('rootContainer');
 const yearBtns = ref(null);
 const monthBtns = ref(null);
 const dayBtns = ref(null);
+const yrM = ref(null);
+const yrC = ref(null);
+const yrD = ref(null);
+const yrY = ref(null);
 
 // STATE
 const editing = ref(false);
@@ -298,6 +306,25 @@ onKeyStroke('Escape', () => {
   if (selectedElement) {
     selectedElement.blur();
   }
+});
+
+// add keyup event listeners to the year boxes to auto move to next/prev
+function addListener(boxRef, nextBoxRef, prevBoxRef) {
+  if (boxRef.value) {
+    boxRef.value.target.onkeyup = (e) => {
+      if (/^[0-9]$/.test(e.key) && nextBoxRef) {
+        nextBoxRef.value.focus();
+      } else if (e.key === 'Backspace' && prevBoxRef) {
+        prevBoxRef.value.focus();
+      }
+    };
+  }
+}
+watchEffect(() => {
+  addListener(yrM, yrC, null);
+  addListener(yrC, yrD, yrM);
+  addListener(yrD, yrY, yrC);
+  addListener(yrY, null, yrD);
 });
 
 // THE MAIN DATE
