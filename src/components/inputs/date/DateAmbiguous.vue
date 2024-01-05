@@ -551,17 +551,15 @@ const yearOptions = computed(() => {
   }
   const upperYear = yearToParts(currentRange.value.upper.year);
 
-  let key;
   let keyIx;
-  let base = {};
+  let base = { ...clear };
   if (!yearDefined.value) {
     // if all year parts empty, find where min/max first differ
     for (let i = 0; i < _yearPartKeys.length; i++) {
       let k = _yearPartKeys[i];
       if (lowerYear[k] === upperYear[k]) {
         base[k] = lowerYear[k];
-      } else if (key == null) {
-        key = k;
+      } else if (keyIx == null) {
         keyIx = i;
         break;
       }
@@ -575,23 +573,32 @@ const yearOptions = computed(() => {
           return isNaN(parseInt(yearParts.value[k])) ? -1 : ix;
         }),
       ) + 1;
-    key = _yearPartKeys[keyIx];
   }
 
-  const lowerBound = getPartialYear(lowerYear, keyIx + 1);
-  const upperBound = getPartialYear(upperYear, keyIx + 1);
+  function getOptsForYearPart(yearPartIx) {
+    let key = _yearPartKeys[yearPartIx];
+    const lowerBound = getPartialYear(lowerYear, yearPartIx + 1);
+    const upperBound = getPartialYear(upperYear, yearPartIx + 1);
 
-  let yearOpts = Array(10)
-    .fill(0)
-    .map((i, ix) => {
-      let opt = { ...base };
-      opt[key] = i + ix;
-      return opt;
-    })
-    .filter((opt) => {
-      const partialYear = getPartialYear(opt, keyIx + 1);
-      return partialYear >= lowerBound && partialYear <= upperBound;
-    });
+    return Array(10)
+      .fill(0)
+      .map((i, ix) => {
+        let opt = { ...base };
+        opt[key] = i + ix;
+        return opt;
+      })
+      .filter((opt) => {
+        const partialYear = getPartialYear(opt, yearPartIx + 1);
+        return partialYear >= lowerBound && partialYear <= upperBound;
+      });
+  }
+
+  let yearOpts = getOptsForYearPart(keyIx);
+  if (yearOpts.length === 1 && keyIx < 3) {
+    // skip this level if there's only one option
+    base = { ...yearOpts[0] };
+    yearOpts = getOptsForYearPart(keyIx + 1);
+  }
   if (yearDefined.value) {
     yearOpts.push(clear);
   }
