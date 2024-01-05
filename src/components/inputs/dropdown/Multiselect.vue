@@ -443,7 +443,7 @@ onKeyStroke('Enter', () => {
 const selectAll = computed({
   get() {
     const options = allOptions.value;
-    if (value.value.length !== options.length) {
+    if (value.value == null || value.value.length !== options.length) {
       return false;
     }
     const unchecked = options.filter((o) => !value.value.includes(o.value));
@@ -466,7 +466,7 @@ const selectFiltered = computed({
     let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
-    if (value.value.length < options.length) {
+    if (value.value == null || value.value.length < options.length) {
       return false;
     }
     const unchecked = options.filter((o) => !value.value.includes(o));
@@ -477,10 +477,11 @@ const selectFiltered = computed({
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
     if (toggleValue) {
-      const unchecked = options.filter((o) => !value.value.includes(o));
-      value.value = value.value.concat(unchecked);
+      const checked = value.value ? value.value : [];
+      const unchecked = options.filter((o) => !checked.includes(o));
+      value.value = checked.concat(unchecked);
     } else {
-      value.value = value.value.filter((o) => !options.includes(o));
+      value.value = checked.filter((o) => !options.includes(o));
     }
   },
 });
@@ -493,6 +494,7 @@ function selectGroup(groupName) {
   const group = filteredItems.value
     .filter((o) => o.kind === 'option' && o.group === groupName)
     .map((o) => o.value);
+  value.value = value.value ? value.value : []; // double check it's not null
   const unchecked = group.filter((o) => !value.value.includes(o));
   if (unchecked.length > 0) {
     unchecked.forEach((o) => {

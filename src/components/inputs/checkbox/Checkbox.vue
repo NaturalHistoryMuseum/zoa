@@ -10,7 +10,7 @@
       :id="inputId"
       :class="$style.defaultCheckbox"
       v-model="value"
-      :name="name"
+      :name="name ? name : null"
       :value="_checkValue"
       ref="checkboxInput"
     />
@@ -42,7 +42,8 @@ const props = defineProps({
     default: 0,
   },
   /**
-   * An optional name for the checkbox; useful if making a group.
+   * An optional name for the checkbox; if this is set, the checkbox will return
+   * the checkValue/label instead of a boolean.
    */
   name: {
     type: [String, null],
@@ -94,10 +95,14 @@ const _checkValue = computed(() => {
 
 function toggleValue() {
   // if the same v-model is set on a group of checkboxes, they return an array
-  // of their _checkValue values instead of a single boolean. There may be a
-  // better way to check for this.
+  // of their _checkValue values instead of a single boolean.
   let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
-  if (Array.isArray(currentValue)) {
+  if (props.name) {
+    if (!Array.isArray(currentValue)) {
+      // make sure it's an array
+      value.value = [];
+      currentValue = [];
+    }
     // if it's currently unchecked, we want to check it, and vice versa
     let check = !checkboxInput.value.checked;
     // double-check the value isn't on there already

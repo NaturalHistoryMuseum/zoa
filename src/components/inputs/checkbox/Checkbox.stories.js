@@ -25,7 +25,7 @@ const Base = {
     help: 'Some example help text.',
     helpPosition: 'right',
     delay: 0,
-    name: 'checkboxGroup',
+    name: '',
     checkValue: 'chkbx',
   },
   render: (args) => ({
