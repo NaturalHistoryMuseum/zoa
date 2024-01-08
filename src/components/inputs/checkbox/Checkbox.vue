@@ -8,7 +8,7 @@
       type="checkbox"
       :id="inputId"
       :class="$style.defaultCheckbox"
-      v-model="value"
+      v-model="checked"
       :name="name ? name : null"
       :value="_checkValue"
       ref="checkboxInput"
@@ -23,7 +23,7 @@
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref, computed, isProxy, toRaw, inject } from 'vue';
+import { ref, computed, inject } from 'vue';
 
 const props = defineProps({
   /**
@@ -73,7 +73,7 @@ const emit = defineEmits([
    */
   'update:modelValue',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, valueChanged } = useChangeEmits(emit, props);
 
 // ELEMENTS
 const rootContainer = inject('rootContainer');
@@ -92,27 +92,33 @@ const _checkValue = computed(() => {
   return props.checkValue || label.value;
 });
 
+const checked = computed({
+  get() {
+    if (props.name) {
+      return value.value || [];
+    } else {
+      return value.value || false;
+    }
+  },
+  set(newValue) {
+    valueChanged(newValue);
+  },
+});
+
 function toggleValue() {
   // if the same v-model is set on a group of checkboxes, they return an array
   // of their _checkValue values instead of a single boolean.
-  let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
   if (props.name) {
-    if (!Array.isArray(currentValue)) {
-      // make sure it's an array
-      value.value = [];
-      currentValue = [];
-    }
     // if it's currently unchecked, we want to check it, and vice versa
-    let check = !checkboxInput.value.checked;
+    let check = !checked.value.includes(_checkValue.value);
     // double-check the value isn't on there already
-    currentValue = currentValue.filter((v) => v !== _checkValue.value);
+    let currentValue = checked.value.filter((v) => v !== _checkValue.value);
     if (check) {
       currentValue.push(_checkValue.value);
     }
-    value.value = currentValue;
-    checkboxInput.value.checked = check;
+    checked.value = currentValue;
   } else {
-    value.value = !value.value;
+    checked.value = !checked.value;
   }
 }
 
