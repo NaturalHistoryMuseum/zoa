@@ -476,9 +476,9 @@ const selectFiltered = computed({
     let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
+    const checked = value.value ? value.value : [];
+    const unchecked = options.filter((o) => !checked.includes(o));
     if (toggleValue) {
-      const checked = value.value ? value.value : [];
-      const unchecked = options.filter((o) => !checked.includes(o));
       value.value = checked.concat(unchecked);
     } else {
       value.value = checked.filter((o) => !options.includes(o));
