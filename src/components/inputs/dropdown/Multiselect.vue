@@ -534,8 +534,6 @@ ul.optlist {
 }
 
 .listItem {
-  cursor: pointer;
-
   &:first-child {
     border-radius: $rounding $rounding 0 0;
   }
@@ -546,7 +544,6 @@ ul.optlist {
 
   & > * {
     padding: $padding;
-    cursor: pointer;
   }
 
   &.option {
