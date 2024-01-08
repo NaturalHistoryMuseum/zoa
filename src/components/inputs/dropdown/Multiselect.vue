@@ -524,6 +524,7 @@ function selectGroup(groupName) {
   max-height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  z-index: 9999;
 }
 
 ul.optlist {
