@@ -1,6 +1,5 @@
 <template>
   <div
-    @click="toggleValue"
     :class="$style.inputWrapper"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
@@ -14,7 +13,7 @@
       :value="_checkValue"
       ref="checkboxInput"
     />
-    <span :class="$style.checkbox">
+    <span :class="$style.checkbox" @click="toggleValue">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
     </span>
   </div>
