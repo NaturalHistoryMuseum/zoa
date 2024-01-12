@@ -1,3 +1,65 @@
+## v0.7.0 (2024-01-12)
+
+### Feature
+
+- add order for dropdown options
+- skip level of year options if there's only one option
+- move between year part boxes automatically on typing
+- expose target element(s) on input components
+- add clear button to y/m/d options
+- add min/max date options to ambiguous date
+- add earliest/latest date estimates to ambiguous date
+- add help icon with tooltip
+- add "empty" input for positioning multiple inputs under one label
+- add class prop to all components
+- add toggle button
+
+### Fix
+
+- remove misleading pointer hands
+- add high z-index for multiselect popup
+- use computed wrapper value for checkbox to avoid nulls
+- define checked before it's used
+- move toggle function onto checkbox from wrapper
+- handle multiselect value = null, use array if checkbox name is set
+- break loop after first different digit
+- pad earliest/latest date parts to avoid ambiguity
+- use utc date parts for min/max
+- improve layout for no label, enable changing help popup position
+- use fieldset for empty input
+- export empty input
+- make labels available to screen readers even if not shown
+- show all items if the list is short
+- set initial checkbox modelValue to undefined
+
+### Refactor
+
+- major refactor to use single input component
+- use zoa-empty to structure range slider
+- rearrange checkbox elements to match structure of other inputs
+
+### Docs
+
+- update readme
+
+### Build System(s)
+
+- replace hash with component name in css modules
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+- build dist package
+- build dist package
+- build dist package
+
+### Minor UI Changes
+
+- make the dropdown for ambiguous date smaller and left aligned
+- move labels closer vertically and make gap configurable separately
+- change tertiary colour, add text colour vars, add alt button type
+
 ## v0.6.0 (2023-10-31)
 
 ### Feature
