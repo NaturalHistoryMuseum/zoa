@@ -1,28 +1,23 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
-    :id="componentId"
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <label
-      :for="subId('textbox')"
-      v-if="label && labelPosition !== 'none'"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
     <input
       type="text"
       :placeholder="placeholder"
-      :id="subId('textbox')"
+      :id="inputId"
       :class="$style.input"
       v-model="value"
+      ref="target"
     />
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
+import { inject, ref } from 'vue';
 
 const props = defineProps({
   /**
@@ -30,21 +25,6 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Text',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -62,7 +42,9 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
+const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -76,6 +58,14 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const target = ref(null);
+
+// EXPOSE
+defineExpose({
+  target,
+});
 </script>
 
 <style module lang="scss">

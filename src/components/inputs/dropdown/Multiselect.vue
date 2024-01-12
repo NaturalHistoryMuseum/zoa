@@ -1,99 +1,93 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
-    :id="componentId"
+    :class="$style.inputWrapper"
+    ref="container"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <label
-      :for="subId('textbox')"
-      v-if="label && labelPosition !== 'none'"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.wrapper" ref="container">
-      <div :class="$style.textboxWrapper">
-        <input
-          type="text"
-          :placeholder="placeholder"
-          :id="subId('search')"
-          :class="$style.input"
-          v-model="search"
-          v-show="focused"
-          ref="textbox"
-        />
-        <div
-          :class="$style.input"
-          tabindex="0"
-          v-show="!focused"
-          @focusin="startFocus"
+    <div :class="$style.textboxWrapper">
+      <input
+        type="text"
+        :placeholder="placeholder"
+        :id="inputId"
+        :class="$style.input"
+        v-model="search"
+        v-show="focused"
+        ref="textbox"
+      />
+      <div
+        :class="$style.input"
+        tabindex="0"
+        v-show="!focused"
+        @focusin="startFocus"
+      >
+        {{ value ? value.length : 0 }} {{ itemString }} selected
+      </div>
+      <font-awesome-icon
+        icon="fa-solid fa-caret-down"
+        :class="$style.arrow"
+        @click="toggleFocus"
+      />
+    </div>
+    <div :class="$style.options" v-if="focused" ref="dropdown">
+      <ul v-if="allOptions.length > 0" :class="$style.optlist">
+        <li
+          title="Select all"
+          :class="[$style.selectAll, $style.listItem, $style.option]"
+          :style="{ height: `${itemHeight}px` }"
         >
-          {{ value ? value.length : 0 }} {{ itemString }} selected
-        </div>
-        <font-awesome-icon
-          icon="fa-solid fa-caret-down"
-          :class="$style.arrow"
-          @click="toggleFocus"
-        />
-      </div>
-      <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul v-if="allOptions.length > 0" :class="$style.optlist">
-          <li
-            title="Select all"
-            :class="[$style.selectAll, $style.listItem, $style.option]"
-            :style="{ height: `${itemHeight}px` }"
-          >
-            <ZoaCheckbox
-              label="Select all"
+          <zoa-input
+            zoa-type="checkbox"
+            label="Select all"
+            label-position="right"
+            v-model="selectAll"
+          />
+        </li>
+        <li
+          title="Select results"
+          :class="[$style.selectAll, $style.listItem, $style.option]"
+          :style="{ height: `${itemHeight}px` }"
+          v-if="!!_search"
+        >
+          <zoa-input
+            zoa-type="checkbox"
+            label="Select results"
+            label-position="right"
+            v-model="selectFiltered"
+          />
+        </li>
+        <li
+          v-for="item in filteredItems"
+          :title="item.label"
+          :class="[
+            $style.listItem,
+            item.kind === 'group' ? $style.subgroup : $style.option,
+          ]"
+          :style="{ height: `${itemHeight}px` }"
+        >
+          <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
+            {{ item.label }}
+          </div>
+          <div v-else>
+            <zoa-input
+              zoa-type="checkbox"
+              :label="item.label"
               label-position="right"
-              v-model="selectAll"
+              :options="{ checkValue: item.value, name: subId('checkboxes') }"
+              v-model="value"
+              v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
             />
-          </li>
-          <li
-            title="Select results"
-            :class="[$style.selectAll, $style.listItem, $style.option]"
-            :style="{ height: `${itemHeight}px` }"
-            v-if="!!_search"
-          >
-            <ZoaCheckbox
-              label="Select results"
-              label-position="right"
-              v-model="selectFiltered"
-            />
-          </li>
-          <li
-            v-for="item in filteredItems"
-            :title="item.label"
-            :class="[
-              $style.listItem,
-              item.kind === 'group' ? $style.subgroup : $style.option,
-            ]"
-            :style="{ height: `${itemHeight}px` }"
-          >
-            <div @click="selectGroup(item.group)" v-if="item.kind === 'group'">
-              {{ item.label }}
-            </div>
-            <div v-else>
-              <ZoaCheckbox
-                :label="item.label"
-                label-position="right"
-                :check-value="item.value"
-                :name="subId('checkboxes')"
-                v-model="value"
-                v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
-              />
-            </div>
-          </li>
-        </ul>
-        <div :class="$style.noOptions" v-else>No options found</div>
-      </div>
+          </div>
+        </li>
+      </ul>
+      <div :class="$style.noOptions" v-else>No options found</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref } from 'vue';
 import {
   onClickOutside,
   onKeyStroke,
@@ -102,7 +96,7 @@ import {
   useScroll,
 } from '@vueuse/core';
 import FontAwesomeIcon from '../../../icons.js';
-import ZoaCheckbox from '../checkbox/Checkbox.vue';
+import { ZoaInput } from '../../index.js';
 import { debounce } from 'dettle';
 import { fuzzySearch } from 'levenshtein-search';
 
@@ -112,21 +106,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Multiselect',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -185,7 +164,10 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
+const inputId = inject('inputId');
+const subId = inject('subId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -210,7 +192,7 @@ if (!Array.isArray(value)) {
   value.value = [];
 }
 
-// searching
+// SEARCH
 const _search = ref(null);
 const emitSearch = debounce((searchTerm) => {
   emit('search', searchTerm);
@@ -228,7 +210,7 @@ const search = computed({
   },
 });
 
-// processed props
+// PROP PROCESSING
 const itemString = computed(() => {
   const isPlural = value.value ? value.value.length !== 1 : true;
   if (isPlural) {
@@ -329,12 +311,17 @@ const filteredItems = computed(() => {
   return items;
 });
 
-// elements
+// ELEMENTS
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
 
-// scrolling
+// EXPOSE
+defineExpose({
+  target: textbox,
+});
+
+// SCROLLING
 const { y } = useScroll(dropdown);
 const scrollY = computed(() => {
   // y from useScroll doesn't reset when the dropdown element is reloaded until
@@ -357,15 +344,21 @@ const dropdownHeight = computed(() => {
   }
 });
 const lowerVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return 0;
+  }
   // doesn't matter if it's < n options
   return Math.floor(scrollY.value / props.itemHeight) - buffer;
 });
 const upperVisible = computed(() => {
+  if (filteredItems.value.length < buffer * 2) {
+    return filteredItems.value.length + buffer;
+  }
   // doesn't matter if it's > n options
   return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
 });
 
-// focus and keyboard navigation
+// FOCUS
 const focused = ref(false);
 const textboxFocus = useFocus(textbox);
 const dropdownFocus = useFocusWithin(dropdown);
@@ -396,6 +389,7 @@ onClickOutside(container, () => {
   unfocus();
 });
 
+// KEYBINDINGS
 onKeyStroke('ArrowDown', () => {
   if (allOptions.value.length === 0) {
     return;
@@ -449,7 +443,7 @@ onKeyStroke('Enter', () => {
 const selectAll = computed({
   get() {
     const options = allOptions.value;
-    if (value.value.length !== options.length) {
+    if (value.value == null || value.value.length !== options.length) {
       return false;
     }
     const unchecked = options.filter((o) => !value.value.includes(o.value));
@@ -472,7 +466,7 @@ const selectFiltered = computed({
     let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
-    if (value.value.length < options.length) {
+    if (value.value == null || value.value.length < options.length) {
       return false;
     }
     const unchecked = options.filter((o) => !value.value.includes(o));
@@ -482,11 +476,12 @@ const selectFiltered = computed({
     let options = filteredItems.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
+    const checked = value.value ? value.value : [];
+    const unchecked = options.filter((o) => !checked.includes(o));
     if (toggleValue) {
-      const unchecked = options.filter((o) => !value.value.includes(o));
-      value.value = value.value.concat(unchecked);
+      value.value = checked.concat(unchecked);
     } else {
-      value.value = value.value.filter((o) => !options.includes(o));
+      value.value = checked.filter((o) => !options.includes(o));
     }
   },
 });
@@ -499,6 +494,7 @@ function selectGroup(groupName) {
   const group = filteredItems.value
     .filter((o) => o.kind === 'option' && o.group === groupName)
     .map((o) => o.value);
+  value.value = value.value ? value.value : []; // double check it's not null
   const unchecked = group.filter((o) => !value.value.includes(o));
   if (unchecked.length > 0) {
     unchecked.forEach((o) => {
@@ -513,7 +509,7 @@ function selectGroup(groupName) {
 <style module lang="scss">
 @import '../inputs';
 
-.wrapper {
+.inputWrapper {
   position: relative;
 }
 
@@ -528,6 +524,7 @@ function selectGroup(groupName) {
   max-height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  z-index: 9999;
 }
 
 ul.optlist {
@@ -537,8 +534,6 @@ ul.optlist {
 }
 
 .listItem {
-  cursor: pointer;
-
   &:first-child {
     border-radius: $rounding $rounding 0 0;
   }
@@ -549,7 +544,6 @@ ul.optlist {
 
   & > * {
     padding: $padding;
-    cursor: pointer;
   }
 
   &.option {

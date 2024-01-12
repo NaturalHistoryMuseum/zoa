@@ -16,36 +16,6 @@
   }
 }
 
-.label {
-  @include header-font;
-  font-size: 0.9em;
-
-  &.label--right,
-  &.label--below {
-    order: 2;
-  }
-
-  &.label--above,
-  &.label--below {
-    padding: 0 $h-pad;
-  }
-}
-
-.grid {
-  display: grid;
-  align-items: center;
-  gap: $padding;
-
-  &.grid--above,
-  &.grid--below {
-    grid-template-rows: auto auto;
-  }
-
-  &.grid--left {
-    grid-template-columns: auto 1fr;
-  }
-
-  &.grid--right {
-    grid-template-columns: 1fr auto;
-  }
+.inputWrapper {
+  grid-area: input;
 }

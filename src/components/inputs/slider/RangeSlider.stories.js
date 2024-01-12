@@ -1,18 +1,12 @@
 import ZoaRangeSlider from './RangeSlider.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
   component: ZoaRangeSlider,
   title: 'Components/Inputs/Slider/Range',
   argTypes: {
-    'update:modelValue': {
-      table: {
-        disable: true,
-      },
-    },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
-    },
+    ...argTypes,
     labelsRight: {
       control: 'boolean',
     },
@@ -33,16 +27,33 @@ const Base = {
   args: {
     label: 'Range',
     labelPosition: 'above',
+    help: 'Some example help text.',
+    helpPosition: 'right',
+    delay: 200,
+    placeholder: null,
+    min: 0,
+    max: 100,
+    step: 1,
     labelsRight: false,
+    labelUpper: 'Upper',
+    labelLower: 'Lower',
   },
   render: (args) => ({
-    components: { ZoaRangeSlider },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-          <zoa-range-slider v-bind="args"/>
-        `,
+      <zoa-input zoa-type="range-slider"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :help="help"
+                 :help-position="helpPosition"
+                 :options="{delay, placeholder, min, max, step, labelsRight,
+                           labelUpper, labelLower}"
+      />
+    `,
   }),
 };
 

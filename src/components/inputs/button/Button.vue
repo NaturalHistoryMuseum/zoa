@@ -1,6 +1,12 @@
 <template>
   <button
-    :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"
+    :class="
+      addPropClasses([
+        $style.main,
+        $style[`kind--${kind}`],
+        $style[`size--${size}`],
+      ])
+    "
   >
     <!-- @slot Text for the button; overrides the label prop. -->
     <slot>
@@ -10,7 +16,16 @@
 </template>
 
 <script setup>
+import { usePropClasses } from '../../utils/classes.js';
+
 const props = defineProps({
+  /**
+   * Additional class(es) to add to the root element.
+   */
+  class: {
+    type: [String, Array, null],
+    default: null,
+  },
   /**
    * The text for the button; overridden by the default slot.
    */
@@ -20,7 +35,7 @@ const props = defineProps({
   },
   /**
    * The appearance class of the button.
-   * @values normal, primary
+   * @values normal, primary, alt
    */
   kind: {
     type: String,
@@ -35,6 +50,8 @@ const props = defineProps({
     default: 'md',
   },
 });
+
+const { addPropClasses } = usePropClasses(props);
 </script>
 
 <style module lang="scss">
@@ -55,22 +72,46 @@ const props = defineProps({
 
 .kind--normal {
   background-color: $secondary;
+  color: $secondary-text;
 
   &:hover,
   &:focus,
   &:active {
     background-color: $secondary-b;
   }
+
+  .checkbox:checked + & {
+    background-color: $secondary-b;
+  }
 }
 
 .kind--primary {
   background-color: $primary;
+  color: $primary-text;
 
   &:hover,
   &:focus,
   &:active {
     background-color: $primary-b;
-    color: black;
+  }
+
+  .checkbox:checked + & {
+    background-color: $primary-b;
+  }
+}
+
+.kind--alt {
+  background-color: $tertiary;
+  color: $tertiary-text;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $tertiary-b;
+  }
+
+  .checkbox:checked + & {
+    background-color: $tertiary-b;
   }
 }
 

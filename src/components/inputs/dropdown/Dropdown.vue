@@ -1,30 +1,21 @@
 <template>
   <div
-    :class="[$style.grid, $style[`grid--${labelPosition}`]]"
-    :id="componentId"
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <label
-      :for="subId('dropdown')"
-      v-if="label && labelPosition !== 'none'"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.wrapper">
-      <select :id="subId('dropdown')" :class="$style.input" v-model="value">
-        <option :value="null">{{ placeholder }}</option>
-        <option v-for="opt in dropdownOptions" :value="opt.value">
-          {{ opt.label }}
-        </option>
-      </select>
-      <font-awesome-icon icon="fa-solid fa-caret-down" :class="$style.arrow" />
-    </div>
+    <select :id="inputId" :class="$style.input" v-model="value" ref="target">
+      <option :value="null">{{ placeholder }}</option>
+      <option v-for="opt in dropdownOptions" :value="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
+    <font-awesome-icon icon="fa-solid fa-caret-down" :class="$style.arrow" />
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
-import { computed } from 'vue';
+import { computed, inject, ref } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 
@@ -34,21 +25,6 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Dropdown',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -72,16 +48,32 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
+const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const dropdownOptions = computed(() => {
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
-      outputOptions.push({ label: o.label, value: o.value });
+      outputOptions.push({
+        label: o.label || o.value,
+        value: o.value || o.label,
+        order: o.order || null,
+      });
     } else {
       outputOptions.push({ label: o, value: o });
     }
+  });
+  outputOptions.sort((a, b) => {
+    let orderSort = 0;
+    if (a.order || b.order) {
+      orderSort = a.order && b.order ? a.order - b.order : a.order ? 1 : -1;
+    }
+
+    let labelSort = a.label.localeCompare(b.label);
+
+    return orderSort !== 0 ? orderSort : labelSort;
   });
   return outputOptions;
 });
@@ -98,6 +90,14 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const target = ref(null);
+
+// EXPOSE
+defineExpose({
+  target,
+});
 </script>
 
 <style module lang="scss">
@@ -110,7 +110,7 @@ const { value } = useChangeEmits(emit, props);
   cursor: pointer;
 }
 
-.wrapper {
+.inputWrapper {
   position: relative;
 
   & > .arrow {
