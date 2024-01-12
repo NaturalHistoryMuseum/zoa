@@ -1,47 +1,46 @@
 <template>
   <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <span
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </span>
-    <div>
-      <ZoaSlider
-        :min="min"
-        :max="max"
-        :valid-max="maxLower"
-        :step="step"
-        v-model="valueLower"
-        :label="labelLower"
-        :label-position="labelsRight ? 'right' : 'left'"
-        value-label-position="above"
-        :placeholder-position="0.25"
-      />
-      <ZoaSlider
-        :min="min"
-        :valid-min="minUpper"
-        :max="max"
-        :step="step"
-        v-model="valueUpper"
-        :label="labelUpper"
-        :label-position="labelsRight ? 'right' : 'left'"
-        :placeholder-position="0.75"
-        :active-track-right="true"
-      />
-    </div>
+    <zoa-input
+      zoa-type="slider"
+      :label="labelLower"
+      :label-position="labelsRight ? 'right' : 'left'"
+      :options="{
+        min,
+        max,
+        step,
+        validMax: maxLower,
+        valueLabelPosition: 'above',
+        placeholderPosition: 0.25,
+      }"
+      v-model="valueLower"
+      ref="lowerTrack"
+    />
+    <zoa-input
+      zoa-type="slider"
+      :label="labelUpper"
+      :label-position="labelsRight ? 'right' : 'left'"
+      :options="{
+        min,
+        max,
+        step,
+        validMin: minUpper,
+        placeholderPosition: 0.75,
+        activeTrackRight: true,
+      }"
+      v-model="valueUpper"
+      ref="upperTrack"
+    />
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref, watch } from 'vue';
-import ZoaSlider from './Slider.vue';
-import { usePropClasses } from '../../utils/classes.js';
+import { computed, inject, ref, watch } from 'vue';
+import { ZoaInput } from '../../index.js';
 
 const props = defineProps({
   /**
@@ -49,28 +48,6 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Range',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -130,8 +107,9 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -145,6 +123,28 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { valueChanged } = useChangeEmits(emit, props);
+
+// ELEMENTS
+const trackLower = ref(null);
+const trackUpper = ref(null);
+
+// EXPOSE
+const target = computed(() => {
+  if (trackLower.value) {
+    return trackLower.value.target;
+  }
+});
+const elements = computed(() => {
+  if (trackLower.value && trackUpper.value) {
+    return [trackLower.value.target, trackUpper.value.target];
+  } else {
+    return [];
+  }
+});
+defineExpose({
+  target,
+  elements,
+});
 
 const valueLower = ref(null);
 const valueUpper = ref(null);
@@ -176,13 +176,4 @@ watch(range, () => {
 
 <style module lang="scss">
 @import '../inputs';
-
-.label {
-  &.label--above {
-    margin-bottom: -35px;
-  }
-  &.label--below {
-    margin-top: -35px;
-  }
-}
 </style>

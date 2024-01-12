@@ -16,46 +16,6 @@
   }
 }
 
-.label {
-  @include header-font;
-  font-size: 0.9em;
-
-  &.label--right,
-  &.label--below {
-    order: 2;
-  }
-
-  &.label--above,
-  &.label--below {
-    padding: 0 $h-pad;
-  }
-
-  &.label--none {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
-}
-
-.grid {
-  display: grid;
-  align-items: center;
-  gap: $label-gap;
-
-  &.grid--above,
-  &.grid--below {
-    grid-template-rows: auto auto;
-  }
-
-  &.grid--left {
-    grid-template-columns: auto 1fr;
-  }
-
-  &.grid--right {
-    grid-template-columns: 1fr auto;
-  }
+.inputWrapper {
+  grid-area: input;
 }

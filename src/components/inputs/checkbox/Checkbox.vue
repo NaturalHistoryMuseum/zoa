@@ -1,39 +1,29 @@
 <template>
-  <label
-    :id="componentId"
-    :for="subId('checkbox')"
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    tabindex="0"
-    ref="checkboxContainer"
+  <div
+    :class="$style.inputWrapper"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <span
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </span>
     <input
       type="checkbox"
-      :id="subId('checkbox')"
+      :id="inputId"
       :class="$style.defaultCheckbox"
-      v-model="value"
-      :name="name"
+      v-model="checked"
+      :name="name ? name : null"
       :value="_checkValue"
       ref="checkboxInput"
     />
-    <span :class="$style.checkbox">
+    <span :class="$style.checkbox" @click="toggleValue">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
     </span>
-  </label>
+  </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref, computed, isProxy, toRaw } from 'vue';
-import { usePropClasses } from '../../utils/classes.js';
+import { ref, computed, inject } from 'vue';
 
 const props = defineProps({
   /**
@@ -44,28 +34,6 @@ const props = defineProps({
     default: undefined,
   },
   /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Checkbox',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'left',
-  },
-  /**
    * Debounce delay for the `change` event, in ms.
    */
   delay: {
@@ -73,7 +41,8 @@ const props = defineProps({
     default: 0,
   },
   /**
-   * An optional name for the checkbox; useful if making a group.
+   * An optional name for the checkbox; if this is set, the checkbox will return
+   * the checkValue/label instead of a boolean.
    */
   name: {
     type: [String, null],
@@ -89,8 +58,9 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -103,36 +73,58 @@ const emit = defineEmits([
    */
   'update:modelValue',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, valueChanged } = useChangeEmits(emit, props);
 
-const checkboxContainer = ref(null);
+// ELEMENTS
+const rootContainer = inject('rootContainer');
 const checkboxInput = ref(null);
-const focus = useFocusWithin(checkboxContainer);
 
-// for convenience and consistency
-const _checkValue = computed(() => {
-  return props.checkValue || props.label;
+// STATE
+const focus = useFocusWithin(rootContainer);
+
+// EXPOSE
+defineExpose({
+  target: checkboxInput,
 });
+
+const label = inject('label');
+const _checkValue = computed(() => {
+  return props.checkValue || label.value;
+});
+
+const checked = computed({
+  get() {
+    if (props.name) {
+      return value.value || [];
+    } else {
+      return value.value || false;
+    }
+  },
+  set(newValue) {
+    valueChanged(newValue);
+  },
+});
+
+function toggleValue() {
+  // if the same v-model is set on a group of checkboxes, they return an array
+  // of their _checkValue values instead of a single boolean.
+  if (props.name) {
+    // if it's currently unchecked, we want to check it, and vice versa
+    let check = !checked.value.includes(_checkValue.value);
+    // double-check the value isn't on there already
+    let currentValue = checked.value.filter((v) => v !== _checkValue.value);
+    if (check) {
+      currentValue.push(_checkValue.value);
+    }
+    checked.value = currentValue;
+  } else {
+    checked.value = !checked.value;
+  }
+}
 
 onKeyStroke(' ', () => {
   if (focus.focused.value) {
-    // if the same v-model is set on a group of checkboxes, they return an array
-    // of their _checkValue values instead of a single boolean. There may be a
-    // better way to check for this.
-    let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
-    if (Array.isArray(currentValue)) {
-      // if it's currently unchecked, we want to check it, and vice versa
-      let check = !checkboxInput.value.checked;
-      // double-check the value isn't on there already
-      currentValue = currentValue.filter((v) => v !== _checkValue.value);
-      if (check) {
-        currentValue.push(_checkValue.value);
-      }
-      value.value = currentValue;
-      checkboxInput.value.checked = check;
-    } else {
-      value.value = !value.value;
-    }
+    toggleValue();
   }
 });
 </script>
@@ -140,30 +132,8 @@ onKeyStroke(' ', () => {
 <style module lang="scss">
 @import '../inputs';
 
-.grid {
-  justify-items: center;
-
-  &.grid--left {
-    grid-template-columns: auto min-content;
-  }
-  &.grid--right {
-    grid-template-columns: min-content auto;
-  }
-}
-
-.label--right {
-  justify-self: left;
-}
-.label--left {
-  justify-self: right;
-}
-
 .defaultCheckbox {
   display: none;
-}
-
-.label {
-  cursor: pointer;
 }
 
 .checkbox {
@@ -174,6 +144,7 @@ onKeyStroke(' ', () => {
   border: 1px solid $grey;
   border-radius: $rounding;
   position: relative;
+  display: block;
 
   .defaultCheckbox:checked ~ & {
     background: $primary-a;
@@ -192,5 +163,9 @@ onKeyStroke(' ', () => {
   right: 0;
   left: 0;
   margin: auto;
+}
+
+.inputWrapper {
+  justify-self: center;
 }
 </style>

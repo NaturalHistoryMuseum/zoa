@@ -1,54 +1,45 @@
 <template>
   <div
-    :class="addPropClasses([$style.grid, $style[`grid--${labelPosition}`]])"
-    :id="componentId"
+    :class="$style.inputWrapper"
+    ref="container"
+    :aria-labelledby="labelId"
+    :aria-describedby="helpId"
   >
-    <label
-      :for="subId('textbox')"
-      v-if="label"
-      :class="[$style.label, $style[`label--${labelPosition}`]]"
-    >
-      {{ label }}
-    </label>
-    <div :class="$style.wrapper" ref="container">
-      <input
-        type="text"
-        :placeholder="placeholder"
-        :id="subId('textbox')"
-        :class="$style.input"
-        v-model="value"
-        @focusin="focused = true"
-        ref="textbox"
-      />
-      <div :class="$style.options" v-if="focused" ref="dropdown">
-        <ul v-if="dropdownOptions.length > 0">
-          <li
-            v-for="opt in dropdownOptions"
-            :class="$style.option"
-            @click="setOption(opt.value)"
-            tabindex="0"
-          >
-            <span>{{ opt.label }}</span>
-            <input type="hidden" :value="opt.value" />
-          </li>
-        </ul>
-        <div :class="$style.noOptions" v-else>No options found</div>
-      </div>
+    <input
+      type="text"
+      :placeholder="placeholder"
+      :id="inputId"
+      :class="$style.input"
+      v-model="value"
+      @focusin="focused = true"
+      ref="textbox"
+    />
+    <div :class="$style.options" v-if="focused" ref="dropdown">
+      <ul v-if="dropdownOptions.length > 0">
+        <li
+          v-for="opt in dropdownOptions"
+          :class="$style.option"
+          @click="setOption(opt.value)"
+          tabindex="0"
+        >
+          <span>{{ opt.label }}</span>
+          <input type="hidden" :value="opt.value" />
+        </li>
+      </ul>
+      <div :class="$style.noOptions" v-else>No options found</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
 import { useChangeEmits } from '../common.js';
-import { computed, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import {
   onClickOutside,
   onKeyStroke,
   useFocusWithin,
   useFocus,
 } from '@vueuse/core';
-import { usePropClasses } from '../../utils/classes.js';
 
 const props = defineProps({
   /**
@@ -56,28 +47,6 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
-  },
-  /**
-   * Additional class(es) to add to the root element.
-   */
-  class: {
-    type: [String, Array, null],
-    default: null,
-  },
-  /**
-   * Text for the input label.
-   */
-  label: {
-    type: String,
-    default: 'Autocomplete',
-  },
-  /**
-   * Position of the input label (or none).
-   * @values left, right, above, below, none
-   */
-  labelPosition: {
-    type: String,
-    default: 'above',
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -101,8 +70,9 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
-const { addPropClasses } = usePropClasses(props);
+const inputId = inject('inputId');
+const labelId = inject('labelId');
+const helpId = inject('helpId');
 
 const emit = defineEmits([
   /**
@@ -129,10 +99,15 @@ const dropdownOptions = computed(() => {
   return outputOptions;
 });
 
-// elements
+// ELEMENTS
 const container = ref(null);
 const textbox = ref(null);
 const dropdown = ref(null);
+
+// EXPOSE
+defineExpose({
+  target: textbox,
+});
 
 const focused = ref(false);
 const textboxFocus = useFocus(textbox);
@@ -202,7 +177,7 @@ function setOption(text) {
 <style module lang="scss">
 @import '../inputs';
 
-.wrapper {
+.inputWrapper {
   position: relative;
 }
 

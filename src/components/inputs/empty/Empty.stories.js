@@ -1,18 +1,35 @@
-import ZoaEmpty from './Empty.vue';
-import ZoaCheckbox from '../checkbox/Checkbox.vue';
+import { ZoaInput } from '../../index.js';
+import { argTypes, renderSetup } from '../stories.js';
 
 const meta = {
-  component: ZoaEmpty,
+  component: ZoaInput,
   title: 'Components/Inputs/Empty',
   argTypes: {
-    'update:modelValue': {
+    ...argTypes,
+    zoaType: {
       table: {
         disable: true,
       },
     },
-    labelPosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right', 'none'],
+    options: {
+      table: {
+        disable: true,
+      },
+    },
+    gridClass: {
+      table: {
+        category: 'Root props',
+      },
+    },
+    'v-model': {
+      table: {
+        disable: true,
+      },
+    },
+    change: {
+      table: {
+        disable: true,
+      },
     },
   },
   parameters: {
@@ -29,19 +46,30 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Empty',
     labelPosition: 'above',
+    help: 'Some example help text.',
+    helpPosition: 'right',
+    gridClass: '',
   },
   render: (args) => ({
-    components: { ZoaEmpty, ZoaCheckbox },
+    components: { ZoaInput },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
     template: `
-      <zoa-empty v-bind="args">
-        <zoa-checkbox label-position="below" label="option 1"/>
-        <zoa-checkbox label-position="below" label="option 2"/>
-      </zoa-empty>
+      <zoa-input zoa-type="empty"
+                 :class="rootClass"
+                 :label="label"
+                 :label-position="labelPosition"
+                 :help="help"
+                 :help-position="helpPosition"
+                 :grid-class="gridClass"
+      >
+        <zoa-input zoa-type="checkbox" label-position="below" label="option 1"/>
+        <zoa-input zoa-type="checkbox" label-position="below" label="option 2"/>
+      </zoa-input>
         `,
   }),
 };
