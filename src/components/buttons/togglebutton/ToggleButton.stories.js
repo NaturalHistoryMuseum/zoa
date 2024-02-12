@@ -2,7 +2,7 @@ import ZoaToggleButton from './ToggleButton.vue';
 
 const meta = {
   component: ZoaToggleButton,
-  title: 'Components/Inputs/Button/ToggleButton',
+  title: 'Components/Buttons/ToggleButton',
   argTypes: {
     'update:modelValue': {
       table: {

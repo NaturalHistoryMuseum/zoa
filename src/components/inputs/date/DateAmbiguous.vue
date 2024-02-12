@@ -115,8 +115,7 @@
 <script setup>
 import { useChangeEmits } from '../common.js';
 import { ref, computed, watch, inject, onMounted, watchEffect } from 'vue';
-import { ZoaInput } from '../../index.js';
-import ZoaButton from '../button/Button.vue';
+import { ZoaInput, ZoaButton } from '../../index.js';
 import { debounce } from 'dettle';
 import datenames from 'date-names';
 import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
