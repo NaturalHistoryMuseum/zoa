@@ -176,10 +176,13 @@ if (
     @include sr-only;
   }
 
-  &.state--active::after {
+  &::after {
     content: '';
     height: 0;
     width: 0;
+  }
+
+  &.state--active::after {
     position: absolute;
     border: $arrowSize solid transparent;
   }
