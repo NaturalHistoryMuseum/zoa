@@ -1,0 +1,1 @@
+function e(n){function a(c){return c=c||[],n.class&&Array.isArray(n.class)?c=c.concat(n.class):n.class&&c.push(n.class),c}return{addPropClasses:a}}const r=(n,a)=>{const c=n.__vccOpts||n;for(const[t,u]of a)c[t]=u;return c};export{r as _,e as u};
