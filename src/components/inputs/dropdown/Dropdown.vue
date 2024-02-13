@@ -41,7 +41,9 @@ const props = defineProps({
     default: 'Please choose an option',
   },
   /**
-   * The options available to select. Each item can be a string, or an object with `label` and `value` keys.
+   * The options available to select. Each item can be a string, or an object
+   * with `label`, `value`, and `order` keys (one of label/value required; order
+   * is optional).
    */
   options: {
     type: Array,
@@ -59,7 +61,7 @@ const dropdownOptions = computed(() => {
       outputOptions.push({
         label: o.label || o.value,
         value: o.value || o.label,
-        order: o.order || null,
+        order: o.order == null ? null : o.order,
       });
     } else {
       outputOptions.push({ label: o, value: o });
@@ -67,8 +69,13 @@ const dropdownOptions = computed(() => {
   });
   outputOptions.sort((a, b) => {
     let orderSort = 0;
-    if (a.order || b.order) {
-      orderSort = a.order && b.order ? a.order - b.order : a.order ? 1 : -1;
+    if (a.order != null || b.order != null) {
+      orderSort =
+        a.order != null && b.order != null
+          ? a.order - b.order
+          : a.order != null
+          ? -1
+          : 1;
     }
 
     let labelSort = a.label.localeCompare(b.label);

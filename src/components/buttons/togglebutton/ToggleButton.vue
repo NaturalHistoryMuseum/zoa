@@ -28,7 +28,7 @@
 
 <script setup>
 import { useComponentId } from '../../utils/compid.js';
-import { useChangeEmits } from '../common.js';
+import { useChangeEmits } from '../../inputs/common.js';
 import { useFocusWithin, onKeyStroke } from '@vueuse/core';
 import { ref, computed, isProxy, toRaw } from 'vue';
 import { usePropClasses } from '../../utils/classes.js';
@@ -153,7 +153,7 @@ onKeyStroke('Enter', () => {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@import '../../inputs/inputs';
 .main {
   font-family: $header-font;
   font-weight: 600;

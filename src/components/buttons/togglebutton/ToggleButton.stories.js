@@ -2,11 +2,16 @@ import ZoaToggleButton from './ToggleButton.vue';
 
 const meta = {
   component: ZoaToggleButton,
-  title: 'Components/Inputs/Button/ToggleButton',
+  title: 'Components/Buttons/ToggleButton',
   argTypes: {
     'update:modelValue': {
       table: {
         disable: true,
+      },
+    },
+    'v-model': {
+      table: {
+        category: 'Output',
       },
     },
     kind: {
@@ -32,16 +37,30 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
+    delay: 0,
     label: 'Button',
+    checkValue: 'toggle',
+    kind: 'normal',
+    name: 'toggle-group',
     size: 'md',
   },
   render: (args) => ({
     components: { ZoaToggleButton },
     setup() {
-      return { args };
+      args['rootClass'] = args.class;
+      delete args.class;
+      return args;
     },
     template: `
-          <zoa-toggle-button v-bind="args"/>
+          <zoa-toggle-button :class="rootClass"
+                             :delay="delay"
+                             :label="label"
+                             :check-value="checkValue"
+                             :kind="kind"
+                             :name="name"
+                             :size="size"
+          />
         `,
   }),
 };

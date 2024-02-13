@@ -2,7 +2,7 @@ import ZoaButton from './Button.vue';
 
 const meta = {
   component: ZoaButton,
-  title: 'Components/Inputs/Button/Button',
+  title: 'Components/Buttons/Button',
   argTypes: {
     kind: {
       control: 'select',
@@ -26,16 +26,22 @@ export default meta;
 
 const Base = {
   args: {
+    class: '',
     label: 'Button',
     size: 'md',
   },
   render: (args) => ({
     components: { ZoaButton },
     setup() {
-      return { args };
+      args['rootClass'] = args.class;
+      delete args.class;
+      return args;
     },
     template: `
-          <zoa-button v-bind="args"/>
+      <zoa-button :class="rootClass"
+                  :label="label"
+                  :kind="kind"
+                  :size="size"/>
         `,
   }),
 };
