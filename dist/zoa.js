@@ -1,4 +1,4 @@
-import { Z as p, a as r, F as m, b as i, M as l, T as n } from "./main-84c51dda.js";
+import { Z as p, a as r, F as m, c as i, M as l, b as n, T as u } from "./main-795990c3.js";
 import "vue";
 import "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/free-solid-svg-icons";
@@ -8,5 +8,6 @@ export {
   m as ZoaFlash,
   i as ZoaInput,
   l as ZoaModal,
-  n as ZoaToggleButton
+  n as ZoaTabs,
+  u as ZoaToggleButton
 };

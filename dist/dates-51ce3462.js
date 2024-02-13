@@ -1,4 +1,4 @@
-import { g as G, d as k } from "./main-84c51dda.js";
+import { g as P, d as k } from "./main-795990c3.js";
 import "vue";
 import "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ if (typeof navigator < "u") {
   const r = navigator;
   h = Array.isArray(r.languages) ? r.languages[0] : r.language;
 } else if (typeof process < "u") {
-  const r = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_b31fe970-3421-496e-97c4-c31fbe0d536a", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_b31fe970-3421-496e-97c4-c31fbe0d536a", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.5", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.1.10909125", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "595", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.12/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.5/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240107.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:17386", GITHUB_WORKFLOW: "Bump version", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", GITHUB_RUN_ID: "7503555034", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "e375314a0da4ac9be2ac53cb5b1dc335bd005738", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/bump.yml@refs/heads/main", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_424b9591-93de-4121-8107-6c30aa34f59a", INVOCATION_ID: "47b1dd133c95436c88610676fc25d9b7", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.13/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "27", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 2", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "main", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.6.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-then-bump", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "e375314a0da4ac9be2ac53cb5b1dc335bd005738", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/main", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_b31fe970-3421-496e-97c4-c31fbe0d536a", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.10.0-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_b31fe970-3421-496e-97c4-c31fbe0d536a", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_b31fe970-3421-496e-97c4-c31fbe0d536a", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
+  const r = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_404a3a4d-46f3-4aa5-8b52-94a4960a4b89", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_404a3a4d-46f3-4aa5-8b52-94a4960a4b89", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.6", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.1.10909125", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "ginger/tabs", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "589", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.7/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240212.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.0/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:16243", GITHUB_WORKFLOW: "Build dist (dev/patch)", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", GITHUB_RUN_ID: "7887459146", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "88f0572e2c6d4d87ed84ad9ee026bd7fe8f42769", GITHUB_BASE_REF: "dev", ImageOS: "ubuntu22", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/build.yml@refs/heads/dev", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_31599e23-959a-417c-8ef3-7136aa2bf096", INVOCATION_ID: "056167bea82c452a83bde56bf7145e8a", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", GOROOT_1_19_X64: "/opt/hostedtoolcache/go/1.19.13/x64", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "17", GITHUB_TRIGGERING_ACTOR: "alycejenni", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 9", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "dev", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.7.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "88f0572e2c6d4d87ed84ad9ee026bd7fe8f42769", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/dev", GITHUB_ACTOR: "alycejenni", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_404a3a4d-46f3-4aa5-8b52-94a4960a4b89", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "23579762", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "pull_request", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.1-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_404a3a4d-46f3-4aa5-8b52-94a4960a4b89", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.154/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_404a3a4d-46f3-4aa5-8b52-94a4960a4b89", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
   h = r.LC_ALL || r.LC_MESSAGES || r.LANG || r.LANGUAGE;
 }
 h || (h = "en-US");
@@ -500,7 +500,7 @@ const w = {
   telu: 3174,
   thai: 3664,
   tibt: 3872
-}, L = "[０１２３４５６７８９〇一二三四五六七八九\\d]", O = {
+}, L = "[０１２３４５６７８９〇一二三四五六七八九\\d]", I = {
   0: 0,
   1: 1,
   2: 2,
@@ -536,10 +536,10 @@ function Q(r) {
   if (p[r])
     return p[r];
   if (r === "fullwide" || r === "hanidec")
-    return { group: L, lookup: { ...O } };
+    return { group: L, lookup: { ...I } };
   const e = w[r];
   if (!e)
-    return { group: "\\d", lookup: { ...O } };
+    return { group: "\\d", lookup: { ...I } };
   const t = String.fromCharCode(e), n = String.fromCharCode(e + 9), o = {};
   for (let a = 0; a < 10; a++)
     o[String.fromCharCode(e + a)] = a;
@@ -548,7 +548,7 @@ function Q(r) {
     lookup: o
   }, p[r];
 }
-var $ = { chineseGroup: L, defaultLookup: O, startCodes: w, buildDigits: Q };
+var v = { chineseGroup: L, defaultLookup: I, startCodes: w, buildDigits: Q };
 const ee = [
   "year",
   "month",
@@ -559,15 +559,15 @@ const ee = [
   "millisecond"
 ];
 var te = ee;
-const oe = X, { latn: ne, other: D } = q, { buildDigits: re } = $, N = y, se = te, g = {};
-let ae = class v {
+const oe = X, { latn: ne, other: g } = q, { buildDigits: re } = v, N = y, se = te, D = {};
+let ae = class $ {
   /**
    * Get a singleton instance with the given locale
    * @param {String} locale such as en, en-US, es, fr-FR, etc.
    * @returns {LocaleHelper}
    */
   static factory(e = N) {
-    return g[e.toLowerCase()] || (g[e.toLowerCase()] = new v(e)), g[e.toLowerCase()];
+    return D[e.toLowerCase()] || (D[e.toLowerCase()] = new $(e)), D[e.toLowerCase()];
   }
   /**
    * Create a new instance with the given locale
@@ -605,8 +605,8 @@ let ae = class v {
   buildNumbers() {
     const e = this.numberingSystem, { group: t, lookup: n } = re(e);
     this.lookups.digit = n;
-    for (const o in D)
-      D.hasOwnProperty(o) && (this.vars[o] = D[o].replace(/\*/g, t));
+    for (const o in g)
+      g.hasOwnProperty(o) && (this.vars[o] = g[o].replace(/\*/g, t));
   }
   /**
    * Build lookup for month names
@@ -832,7 +832,7 @@ function me(r) {
   };
 }
 var ue = me;
-const I = y, R = le, Te = ue;
+const O = y, R = le, Te = ue;
 let _e = class {
   /**
    * Initialize an object with an empty array of registered formats
@@ -877,7 +877,7 @@ let _e = class {
    * @param {String} locale  The name of the locale
    * @returns {Object}
    */
-  attempt(e, t = I) {
+  attempt(e, t = O) {
     for (const o of this.formats) {
       if (Array.isArray(o.locales) && o.locales.length > 0 && !o.locales.includes(new Intl.Locale(t).baseName))
         continue;
@@ -893,7 +893,7 @@ let _e = class {
    * @param {String} locale  The default locale it should use
    * @returns {Function}
    */
-  exportAsFunction(e = I) {
+  exportAsFunction(e = O) {
     return R(this, e);
   }
   /**
@@ -901,7 +901,7 @@ let _e = class {
    * @param {String} locale  The default locale it should use
    * @returns {Function}
    */
-  exportAsFunctionAny(e = I) {
+  exportAsFunctionAny(e = O) {
     return Te(R(this, e));
   }
 };
@@ -948,13 +948,13 @@ const Se = {
   s: "second",
   ms: "millisecond"
 };
-var De = Se;
-const ge = m, Ie = De, Oe = new ge({
+var ge = Se;
+const De = m, Oe = ge, Ie = new De({
   /* prettier-ignore */
   //          $1          $2        $3                                                                                   $4
   matcher: /^(\+|-|in|) ?([\d.]+) ?(years?|months?|weeks?|days?|hours?|minutes?|seconds?|milliseconds?|ms|s|m|h|w|d|M|y)( ago)?$/i,
   handler: function([, r, e, t, n]) {
-    e = parseFloat(e), t.length <= 2 ? t = Ie[t] : (t = t.replace(/s$/, ""), t = t.toLowerCase()), t === "week" && (t = "day", e *= 7), (r === "-" || n) && (e *= -1);
+    e = parseFloat(e), t.length <= 2 ? t = Oe[t] : (t = t.replace(/s$/, ""), t = t.toLowerCase()), t === "week" && (t = "day", e *= 7), (r === "-" || n) && (e *= -1);
     const o = this.now();
     return t === "millisecond" ? o.setUTCMilliseconds(o.getUTCMilliseconds() + e) : t === "second" ? o.setUTCSeconds(o.getUTCSeconds() + e) : t === "minute" ? o.setUTCMinutes(o.getUTCMinutes() + e) : t === "hour" ? o.setUTCHours(o.getUTCHours() + e) : t === "day" ? o.setUTCDate(o.getUTCDate() + e) : t === "month" ? o.setUTCMonth(o.getUTCMonth() + e) : t === "year" && o.setUTCFullYear(o.getUTCFullYear() + e), {
       year: o.getUTCFullYear(),
@@ -967,8 +967,8 @@ const ge = m, Ie = De, Oe = new ge({
     };
   }
 });
-var Ce = Oe;
-const Ne = m, Me = f, { chineseGroup: A } = $;
+var Ce = Ie;
+const Ne = m, Me = f, { chineseGroup: A } = v;
 let d;
 const Re = new Ne({
   /* prettier-ignore */
@@ -986,20 +986,20 @@ const He = m, Ue = new He({
   units: ["day", "month"]
 });
 var we = Ue;
-const Le = m, $e = new Le({
+const Le = m, ve = new Le({
   /* prettier-ignore */
   //           $1                       $2
   template: "^(_DAY_)(?:_ORDINAL_)?[ -](_MONTHNAME_)$",
   units: ["day", "month"]
 });
-var ve = $e;
-const Fe = m, Pe = new Fe({
+var $e = ve;
+const Fe = m, Ge = new Fe({
   /* prettier-ignore */
   //                                $1                   $2    $3              $4
   template: "^(?:(?:_DAYNAME_),? )?(_DAY_)(?:_ORDINAL_)?([ -])(_MONTHNAME_)\\2(_YEAR_)$",
   units: ["day", null, "month", "year"]
 });
-var Ge = Pe;
+var Pe = Ge;
 const ke = m, Ye = new ke({
   /* prettier-ignore */
   //           $1     $2        $3          $4
@@ -1140,7 +1140,7 @@ const ht = m, ft = new ht({
   units: ["year", null, "month", "day"]
 });
 var pt = ft;
-const F = de, Et = m, At = f, yt = pe, St = ye, Dt = Ce, gt = be, It = we, Ot = ve, Ct = Ge, Nt = Be, Mt = y, Rt = Ke, bt = We, Ht = Ze, Ut = et, wt = rt, Lt = ct, $t = ut, vt = dt, Ft = pt, u = new F();
+const F = de, Et = m, At = f, yt = pe, St = ye, gt = Ce, Dt = be, Ot = we, It = $e, Ct = Pe, Nt = Be, Mt = y, Rt = Ke, bt = We, Ht = Ze, Ut = et, wt = rt, Lt = ct, vt = ut, $t = dt, Ft = pt, u = new F();
 u.addFormats([
   Lt,
   wt,
@@ -1150,14 +1150,14 @@ u.addFormats([
   Ut,
   bt,
   Nt,
-  gt,
-  vt,
-  $t,
   Dt,
+  $t,
+  vt,
+  gt,
   Ht,
-  Ot,
-  Rt,
   It,
+  Rt,
+  Ot,
   yt,
   St
 ]);
@@ -1169,7 +1169,7 @@ u.fromString = Date.fromString = u.exportAsFunction();
 u.fromAny = Date.fromAny = u.exportAsFunctionAny();
 typeof window < "u" && (window.anyDateParser = u);
 var S = u;
-const Pt = /* @__PURE__ */ G(S), Gt = new RegExp(
+const Gt = /* @__PURE__ */ P(S), Pt = new RegExp(
   `(${k.abbreviated_months.map((r) => r.toLowerCase()).join("|")})`
 ), kt = new S.Format({
   matcher: /^'?(\d{2}|\d{4})$/,
@@ -1177,20 +1177,20 @@ const Pt = /* @__PURE__ */ G(S), Gt = new RegExp(
 }), Yt = new S.Format({
   matcher: /^(\d{1,2})\D*'?(\d{2}|\d{4})$/,
   units: ["month", "year"]
-}), P = new S.Parser();
-P.addFormats([kt, Yt]);
+}), G = new S.Parser();
+G.addFormats([kt, Yt]);
 function Wt(r) {
   r = r.trim();
   let e = [], t;
-  return t = P.attempt(r), t.invalid || e.push({
+  return t = G.attempt(r), t.invalid || e.push({
     year: t.year,
     month: t.month,
     day: t.day
-  }), t = Pt.attempt(r), t.invalid || e.push({
+  }), t = Gt.attempt(r), t.invalid || e.push({
     year: t.year,
     month: t.month,
     day: t.day
-  }), Gt.test(r.toLowerCase()) || [...e].forEach((n) => {
+  }), Pt.test(r.toLowerCase()) || [...e].forEach((n) => {
     n.day <= 12 && n.day !== n.month && e.push({
       year: n.year,
       month: n.day,
