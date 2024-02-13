@@ -9,6 +9,11 @@ const meta = {
         disable: true,
       },
     },
+    'v-model': {
+      table: {
+        category: 'Output',
+      },
+    },
     kind: {
       control: 'select',
       options: ['normal', 'primary', 'alt'],
@@ -35,23 +40,35 @@ export default meta;
 
 const Base = {
   args: {
-    kind: 'normal',
-    size: 'md',
+    class: '',
+    delay: 0,
     activePosition: 'below',
+    initialValue: 'Tab 1',
+    kind: 'normal',
     options: [
       'Tab 1',
       'Tab 2',
       { label: 'Tab 3', value: 'tab3', order: 0 },
       { label: 'Tab 4', order: 2 },
     ],
+    size: 'md',
   },
   render: (args) => ({
     components: { ZoaTabs },
     setup() {
-      return { args };
+      args['rootClass'] = args.class;
+      delete args.class;
+      return args;
     },
     template: `
-          <zoa-tabs v-bind="args"/>
+          <zoa-tabs :class="rootClass"
+                    :delay="delay"
+                    :active-position="activePosition"
+                    :initial-value="initialValue"
+                    :kind="kind"
+                    :options="options"
+                    :size="size"
+          />
         `,
   }),
 };
