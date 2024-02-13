@@ -1,3 +1,26 @@
+## v0.8.0 (2024-02-13)
+
+### Feature
+
+- add tabs component
+
+### Fix
+
+- fix option sorting based on order
+
+### Refactor
+
+- move buttons into separate folder
+
+### Docs
+
+- **storybook**: improve docs for buttons in storybook
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+
 ## v0.7.0 (2024-01-12)
 
 ### Feature
