@@ -704,7 +704,7 @@ const Tl = "zoa__togglebutton__input", Nl = "zoa__togglebutton__inputWrapper", A
         return p !== 0 ? p : d;
       }), o;
     });
-    return n.initialValue && i.value.some((o) => o.value === n.initialValue) ? r.value = n.initialValue : r.value = i.value[0].value, (o, a) => (z(), w("div", {
+    return r.value == null && (n.initialValue && i.value.some((o) => o.value === n.initialValue) ? r.value = n.initialValue : r.value = i.value[0].value), (o, a) => (z(), w("div", {
       class: h(_(l)([]))
     }, [
       M("ul", {
@@ -1619,7 +1619,7 @@ const $t = /* @__PURE__ */ Fn(Kn), Zn = "zoa__dateambiguous__input", Xn = "zoa__
     "update:modelValue"
   ],
   setup(e, { expose: t, emit: n }) {
-    const l = e, r = () => import("./dates-55fbcdb8.js"), u = V("inputId"), i = V("labelId"), o = V("helpId"), { valueChanged: a } = ie(n, l.delay), c = I(() => {
+    const l = e, r = () => import("./dates-fb62e947.js"), u = V("inputId"), i = V("labelId"), o = V("helpId"), { valueChanged: a } = ie(n, l.delay), c = I(() => {
       let s;
       try {
         s = new Date(
