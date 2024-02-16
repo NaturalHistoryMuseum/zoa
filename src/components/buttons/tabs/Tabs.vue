@@ -146,13 +146,15 @@ const tabOptions = computed(() => {
 });
 
 // set initial value
-if (
-  props.initialValue &&
-  tabOptions.value.some((o) => o.value === props.initialValue)
-) {
-  value.value = props.initialValue;
-} else {
-  value.value = tabOptions.value[0].value;
+if (value.value == null) {
+  if (
+    props.initialValue &&
+    tabOptions.value.some((o) => o.value === props.initialValue)
+  ) {
+    value.value = props.initialValue;
+  } else {
+    value.value = tabOptions.value[0].value;
+  }
 }
 </script>
 
