@@ -146,13 +146,15 @@ const tabOptions = computed(() => {
 });
 
 // set initial value
-if (
-  props.initialValue &&
-  tabOptions.value.some((o) => o.value === props.initialValue)
-) {
-  value.value = props.initialValue;
-} else {
-  value.value = tabOptions.value[0].value;
+if (value.value == null) {
+  if (
+    props.initialValue &&
+    tabOptions.value.some((o) => o.value === props.initialValue)
+  ) {
+    value.value = props.initialValue;
+  } else {
+    value.value = tabOptions.value[0].value;
+  }
 }
 </script>
 
@@ -176,10 +178,13 @@ if (
     @include sr-only;
   }
 
-  &.state--active::after {
+  &::after {
     content: '';
     height: 0;
     width: 0;
+  }
+
+  &.state--active::after {
     position: absolute;
     border: $arrowSize solid transparent;
   }
