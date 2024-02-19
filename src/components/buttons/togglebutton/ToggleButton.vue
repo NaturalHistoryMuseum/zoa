@@ -4,7 +4,7 @@
     :for="subId('toggle')"
     tabindex="0"
     ref="checkboxContainer"
-    :class="addPropClasses([])"
+    :class="addPropClasses([$style.container])"
   >
     <input
       type="checkbox"
@@ -154,59 +154,61 @@ onKeyStroke('Enter', () => {
 
 <style module lang="scss">
 @import '../../inputs/inputs';
+.container {
+  display: inline-block;
+}
+
 .main {
   font-family: $header-font;
   font-weight: 600;
   border: none;
   border-radius: $rounding;
-
+  display: inline-block;
   transition: 0.2s;
   cursor: pointer;
   color: black;
+  background-color: $grey;
 }
 
 .kind--normal {
-  background-color: $secondary;
-  color: $secondary-text;
-
   &:hover,
   &:focus,
   &:active {
     background-color: $secondary-b;
+    color: $secondary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $secondary-b;
+    background-color: $secondary;
+    color: $secondary-text;
   }
 }
 
 .kind--primary {
-  background-color: $primary;
-  color: $primary-text;
-
   &:hover,
   &:focus,
   &:active {
     background-color: $primary-b;
+    color: $primary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $primary-b;
+    background-color: $primary;
+    color: $primary-text;
   }
 }
 
 .kind--alt {
-  background-color: $tertiary;
-  color: $tertiary-text;
-
   &:hover,
   &:focus,
   &:active {
     background-color: $tertiary-b;
+    color: $tertiary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $tertiary-b;
+    background-color: $tertiary;
+    color: $tertiary-text;
   }
 }
 
