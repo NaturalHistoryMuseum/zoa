@@ -38,6 +38,7 @@ import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { ref } from 'vue';
 import { usePropClasses } from '../../utils/classes.js';
+import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
   /**
@@ -99,6 +100,11 @@ function openModal() {
   modal.value.show();
   emit('opened');
 }
+
+onClickOutside(modal, () => {
+  modal.value.close();
+  emit('closed');
+});
 </script>
 
 <style module lang="scss">
