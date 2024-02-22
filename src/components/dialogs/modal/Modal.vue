@@ -1,5 +1,8 @@
 <template>
-  <ZoaButton v-bind="buttonArgs" @click="openModal" />
+  <ZoaButton v-bind="buttonArgs" @click="openModal">
+    <!-- @slot The content of the button; overrides buttonArgs.label -->
+    <slot name="button" />
+  </ZoaButton>
   <dialog
     ref="modal"
     :class="addPropClasses([$style.main, $style[`kind--${kind}`]])"
@@ -12,7 +15,12 @@
       </form>
       <div :class="$style.header">
         <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
-        <h2>{{ header }}</h2>
+        <h2>
+          <!-- @slot The header content (within <h2> tags); overrides the header prop. -->
+          <slot name="header">
+            {{ header }}
+          </slot>
+        </h2>
       </div>
       <div :class="$style.content">
         <!-- @slot The main content of the modal; overrides the message prop. -->
