@@ -8,19 +8,19 @@
     :class="addPropClasses([$style.main, $style[`kind--${kind}`]])"
   >
     <div :class="$style.container">
-      <form method="dialog" :class="$style.form" @submit="emit('closed')">
-        <button :class="$style.close">
-          <font-awesome-icon icon="fa-solid fa-xmark" />
-        </button>
-      </form>
       <div :class="$style.header">
         <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
-        <h2>
+        <h2 :class="$style.headerText">
           <!-- @slot The header content (within <h2> tags); overrides the header prop. -->
           <slot name="header">
             {{ header }}
           </slot>
         </h2>
+        <form method="dialog" :class="$style.form" @submit="emit('closed')">
+          <button :class="$style.close">
+            <font-awesome-icon icon="fa-solid fa-xmark" />
+          </button>
+        </form>
       </div>
       <div :class="$style.content">
         <!-- @slot The main content of the modal; overrides the message prop. -->
@@ -134,13 +134,6 @@ onClickOutside(modal, () => {
   }
 }
 
-.container {
-  grid-template-areas:
-    'header button'
-    'content content';
-  grid-template-columns: 1fr auto;
-}
-
 .form {
   grid-area: button;
 }
@@ -150,13 +143,5 @@ onClickOutside(modal, () => {
   background: none;
   border: none;
   cursor: pointer;
-}
-
-.header {
-  grid-area: header;
-}
-
-.content {
-  grid-area: content;
 }
 </style>

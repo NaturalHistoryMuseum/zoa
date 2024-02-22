@@ -6,7 +6,7 @@
   border-width: 1px;
   border-style: solid;
   border-radius: $rounding;
-  padding: $box-padding;
+  padding: 0;
 }
 
 .container {
@@ -15,18 +15,36 @@
 }
 
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 'icon text button';
   gap: 10px;
   align-items: center;
+  padding: $box-padding;
+  border-radius: $rounding;
+
+  & .icon {
+    grid-area: icon;
+    padding-top: 2px;
+  }
+
+  & .headerText {
+    grid-area: text;
+  }
 }
 
-.icon {
-  padding-top: 2px;
+.content {
+  background: #fff;
+  padding: 0 $box-padding $box-padding;
+  border-radius: $rounding;
 }
 
 .kind--info {
   border-color: $info-dark;
-  background: $info-light;
+
+  .header {
+    background: $info-light;
+  }
 
   .icon {
     color: $info-dark;
@@ -35,7 +53,10 @@
 
 .kind--warning {
   border-color: $warning-dark;
-  background: $warning-light;
+
+  .header {
+    background: $warning-light;
+  }
 
   .icon {
     color: $warning-dark;
@@ -44,7 +65,10 @@
 
 .kind--error {
   border-color: $error-dark;
-  background: $error-light;
+
+  .header {
+    background: $error-light;
+  }
 
   .icon {
     color: $error-dark;
@@ -53,7 +77,10 @@
 
 .kind--success {
   border-color: $success-dark;
-  background: $success-light;
+
+  .header {
+    background: $success-light;
+  }
 
   .icon {
     color: $success-dark;
