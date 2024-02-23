@@ -21,7 +21,7 @@
   gap: 10px;
   align-items: center;
   padding: $box-padding;
-  border-radius: $rounding;
+  border-radius: $rounding $rounding 0 0;
 
   & .icon {
     grid-area: icon;
@@ -36,7 +36,7 @@
 .content {
   background: #fff;
   padding: 0 $box-padding $box-padding;
-  border-radius: $rounding;
+  border-radius: 0 0 $rounding $rounding;
 }
 
 .kind--info {
