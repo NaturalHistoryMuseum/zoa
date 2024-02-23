@@ -24,6 +24,7 @@ const Base = {
     labelPosition: 'right',
     help: 'Some example help text.',
     helpPosition: 'right',
+    disabled: false,
     delay: 0,
     name: '',
     checkValue: 'chkbx',
@@ -40,6 +41,7 @@ const Base = {
                  :label-position="labelPosition"
                  :help="help"
                  :help-position="helpPosition"
+                 :disabled="disabled"
                  :options="{delay, name, checkValue}"
       />
     `,

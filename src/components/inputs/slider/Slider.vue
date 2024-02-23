@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, , disabled ? $style.disabled : '']"
     @wheel="onScroll"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
@@ -26,6 +26,7 @@
       :class="$style.input"
       v-model="value"
       ref="slider"
+      :disabled="disabled"
     />
   </div>
 </template>
@@ -118,6 +119,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -374,6 +376,24 @@ $handleBorder: 2px;
 
   &.valueLabel--above {
     bottom: $handleSize + ($handleBorder * 2) + 5px;
+  }
+}
+
+.disabled {
+  & .track {
+    @include disabled;
+    position: absolute;
+  }
+
+  & .input {
+    cursor: default;
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+      background: #eee;
+      border-color: #ddd;
+      cursor: default;
+    }
   }
 }
 </style>

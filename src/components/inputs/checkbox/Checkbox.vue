@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
@@ -12,6 +12,7 @@
       :name="name ? name : null"
       :value="_checkValue"
       ref="checkboxInput"
+      :disabled="disabled"
     />
     <span :class="$style.checkbox" @click="toggleValue">
       <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
@@ -61,6 +62,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -106,6 +108,10 @@ const checked = computed({
 });
 
 function toggleValue() {
+  if (disabled.value) {
+    return;
+  }
+
   // if the same v-model is set on a group of checkboxes, they return an array
   // of their _checkValue values instead of a single boolean.
   if (props.name) {
@@ -167,5 +173,9 @@ onKeyStroke(' ', () => {
 
 .inputWrapper {
   justify-self: center;
+
+  &.disabled .checkbox {
+    @include disabled;
+  }
 }
 </style>

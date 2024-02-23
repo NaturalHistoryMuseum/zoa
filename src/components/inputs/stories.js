@@ -49,6 +49,14 @@ export const argTypes = {
       category: 'Root props',
     },
   },
+  disabled: {
+    control: 'boolean',
+    description: 'Disables the input.',
+    table: {
+      type: { summary: 'boolean' },
+      category: 'Root props',
+    },
+  },
   'v-model': {
     table: {
       category: 'Output',
