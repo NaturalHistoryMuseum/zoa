@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     ref="container"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
@@ -12,13 +12,14 @@
         :id="inputId"
         :class="$style.input"
         v-model="search"
-        v-show="focused"
+        v-show="focused && !disabled"
         ref="textbox"
+        :disabled="disabled"
       />
       <div
         :class="$style.input"
         tabindex="0"
-        v-show="!focused"
+        v-show="!focused || disabled"
         @focusin="startFocus"
       >
         {{ value ? value.length : 0 }} {{ itemString }} selected
@@ -29,7 +30,7 @@
         @click="toggleFocus"
       />
     </div>
-    <div :class="$style.options" v-if="focused" ref="dropdown">
+    <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
       <ul v-if="allOptions.length > 0" :class="$style.optlist">
         <li
           title="Select all"
@@ -170,6 +171,7 @@ const inputId = inject('inputId');
 const subId = inject('subId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -518,6 +520,10 @@ function selectGroup(groupName) {
 
 .inputWrapper {
   position: relative;
+
+  &.disabled {
+    @include disabled;
+  }
 }
 
 .options {

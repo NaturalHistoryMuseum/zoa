@@ -6,7 +6,7 @@
   >
     <div :class="$style.header">
       <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
-      <h2>{{ header }}</h2>
+      <h2 :class="$style.headerText">{{ header }}</h2>
     </div>
     <div :class="$style.content">
       <!-- @slot The main content of the flash message; overrides the message prop. -->

@@ -1,18 +1,26 @@
 <template>
-  <ZoaButton v-bind="buttonArgs" @click="openModal" />
+  <ZoaButton v-bind="buttonArgs" @click="openModal">
+    <!-- @slot The content of the button; overrides buttonArgs.label -->
+    <slot name="button" />
+  </ZoaButton>
   <dialog
     ref="modal"
     :class="addPropClasses([$style.main, $style[`kind--${kind}`]])"
   >
     <div :class="$style.container">
-      <form method="dialog" :class="$style.form" @submit="emit('closed')">
-        <button :class="$style.close">
-          <font-awesome-icon icon="fa-solid fa-xmark" />
-        </button>
-      </form>
       <div :class="$style.header">
         <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
-        <h2>{{ header }}</h2>
+        <h2 :class="$style.headerText">
+          <!-- @slot The header content (within <h2> tags); overrides the header prop. -->
+          <slot name="header">
+            {{ header }}
+          </slot>
+        </h2>
+        <form method="dialog" :class="$style.form" @submit="emit('closed')">
+          <button :class="$style.close">
+            <font-awesome-icon icon="fa-solid fa-xmark" />
+          </button>
+        </form>
       </div>
       <div :class="$style.content">
         <!-- @slot The main content of the modal; overrides the message prop. -->
@@ -30,6 +38,7 @@ import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { ref } from 'vue';
 import { usePropClasses } from '../../utils/classes.js';
+import { onClickOutside } from '@vueuse/core';
 
 const props = defineProps({
   /**
@@ -91,6 +100,11 @@ function openModal() {
   modal.value.show();
   emit('opened');
 }
+
+onClickOutside(modal, () => {
+  modal.value.close();
+  emit('closed');
+});
 </script>
 
 <style module lang="scss">
@@ -120,13 +134,6 @@ function openModal() {
   }
 }
 
-.container {
-  grid-template-areas:
-    'header button'
-    'content content';
-  grid-template-columns: 1fr auto;
-}
-
 .form {
   grid-area: button;
 }
@@ -136,13 +143,5 @@ function openModal() {
   background: none;
   border: none;
   cursor: pointer;
-}
-
-.header {
-  grid-area: header;
-}
-
-.content {
-  grid-area: content;
 }
 </style>

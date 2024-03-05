@@ -25,6 +25,7 @@ const Base = {
     labelPosition: 'above',
     help: 'Some example help text.',
     helpPosition: 'right',
+    disabled: false,
     delay: 0,
     placeholder: 'select option',
     options: [
@@ -54,6 +55,7 @@ const Base = {
                  :label-position="labelPosition"
                  :help="help"
                  :help-position="helpPosition"
+                 :disabled="disabled"
                  :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
       />
     `,

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     ref="container"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
@@ -13,8 +13,9 @@
       v-model="value"
       @focusin="focused = true"
       ref="textbox"
+      :disabled="disabled"
     />
-    <div :class="$style.options" v-if="focused" ref="dropdown">
+    <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
       <ul v-if="dropdownOptions.length > 0">
         <li
           v-for="opt in dropdownOptions"
@@ -75,6 +76,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -200,6 +202,10 @@ function setOption(text) {
 
 .inputWrapper {
   position: relative;
+
+  &.disabled {
+    @include disabled;
+  }
 }
 
 .options {

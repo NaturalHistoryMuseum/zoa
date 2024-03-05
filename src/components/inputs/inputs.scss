@@ -19,3 +19,23 @@
 .inputWrapper {
   grid-area: input;
 }
+
+@mixin disabled {
+  cursor: default;
+  position: relative;
+
+  & input {
+    cursor: default;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    border-radius: $rounding;
+    background-color: #eeeeee99;
+  }
+}

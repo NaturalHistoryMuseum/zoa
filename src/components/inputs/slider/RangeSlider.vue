@@ -18,6 +18,7 @@
       }"
       v-model="valueLower"
       ref="lowerTrack"
+      :disabled="disabled"
     />
     <zoa-input
       zoa-type="slider"
@@ -33,6 +34,7 @@
       }"
       v-model="valueUpper"
       ref="upperTrack"
+      :disabled="disabled"
     />
   </div>
 </template>
@@ -110,6 +112,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**

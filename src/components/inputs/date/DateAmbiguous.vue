@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
@@ -11,8 +11,9 @@
       :class="[$style.input, editing ? $style.editing : '']"
       ref="displayBox"
       @input="parseInput"
+      :disabled="disabled"
     />
-    <div v-if="focused" :class="$style.datePopup">
+    <div v-if="focused && !disabled" :class="$style.datePopup">
       <div :class="$style.popupSection" v-if="guessedDates.length > 0">
         <span
           v-for="dt in guessedDates"
@@ -162,6 +163,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -798,6 +800,9 @@ watch(returnDate, () => {
 
 .inputWrapper {
   position: relative;
+  &.disabled {
+    @include disabled;
+  }
 }
 
 .datePopup {
@@ -873,5 +878,8 @@ watch(returnDate, () => {
   input[type='number'] {
     -moz-appearance: textfield;
   }
+}
+
+.input {
 }
 </style>
