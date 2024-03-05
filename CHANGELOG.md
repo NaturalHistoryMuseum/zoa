@@ -1,3 +1,28 @@
+## v0.9.0 (2024-03-05)
+
+### Feature
+
+- add "disabled" property to inputs
+- close modal when clicking outside
+- add more slots to modal
+
+### Fix
+
+- don't round all corners on internal dialog boxes
+- **toggle**: fix toggle button spacing
+- **tabs**: only set initial value if value not already set
+- make content of tab label afters always empty
+
+### Refactor
+
+- make only the header of dialogs the highlight colour
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+- build dist package
+
 ## v0.8.0 (2024-02-13)
 
 ### Feature
