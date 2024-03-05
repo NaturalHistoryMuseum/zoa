@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
@@ -14,6 +14,7 @@
       :class="$style.input"
       v-model="value"
       ref="target"
+      :disabled="disabled"
     />
   </div>
 </template>
@@ -69,6 +70,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const emit = defineEmits([
   /**
@@ -97,5 +99,9 @@ defineExpose({
 
 .input:invalid {
   border-color: $error-dark;
+}
+
+.inputWrapper.disabled {
+  @include disabled;
 }
 </style>

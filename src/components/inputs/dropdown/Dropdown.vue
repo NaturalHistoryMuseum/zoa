@@ -1,10 +1,16 @@
 <template>
   <div
-    :class="$style.inputWrapper"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
-    <select :id="inputId" :class="$style.input" v-model="value" ref="target">
+    <select
+      :id="inputId"
+      :class="$style.input"
+      v-model="value"
+      ref="target"
+      :disabled="disabled"
+    >
       <option :value="null">{{ placeholder }}</option>
       <option v-for="opt in dropdownOptions" :value="opt.value">
         {{ opt.label }}
@@ -53,6 +59,7 @@ const props = defineProps({
 const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
+const disabled = inject('disabled');
 
 const dropdownOptions = computed(() => {
   let outputOptions = [];
@@ -129,6 +136,10 @@ defineExpose({
     padding-left: 1em;
     pointer-events: none;
     cursor: pointer;
+  }
+
+  &.disabled {
+    @include disabled;
   }
 }
 </style>

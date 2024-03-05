@@ -125,6 +125,13 @@ const props = defineProps({
     type: String,
     default: 'right',
   },
+  /**
+   * Disables the input.
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const zoaInput = computed(() => {
@@ -190,6 +197,9 @@ const _labelPosition = computed(() => {
 const _helpId = computed(() => {
   return props.help ? helpId : null;
 });
+const _disabled = computed(() => {
+  return props.disabled;
+});
 provide('label', _label);
 provide('labelPosition', _labelPosition);
 provide('componentId', componentId);
@@ -198,6 +208,7 @@ provide('inputId', inputId);
 provide('labelId', labelId);
 provide('helpId', _helpId);
 provide('rootContainer', rootContainer);
+provide('disabled', _disabled);
 
 const inputComponent = ref(null);
 function focus() {
