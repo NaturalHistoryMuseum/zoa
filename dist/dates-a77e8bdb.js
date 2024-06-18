@@ -1,4 +1,4 @@
-import { g as G, d as k } from "./main-0c07fa95.js";
+import { g as G, d as k } from "./main-7059bc95.js";
 import "vue";
 import "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ if (typeof navigator < "u") {
   const r = navigator;
   h = Array.isArray(r.languages) ? r.languages[0] : r.language;
 } else if (typeof process < "u") {
-  const r = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_17a6dee1-dd0f-4358-9283-6524e1abc65f", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_17a6dee1-dd0f-4358-9283-6524e1abc65f", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "590", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240609.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:4090", GITHUB_WORKFLOW: "Bump version", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "9562498317", STATS_VMFE: "true", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "921252c31e93ac4a5dfc2a31e8cf917e0b2cbe53", GITHUB_BASE_REF: "", ImageOS: "ubuntu22", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/bump.yml@refs/heads/main", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_3361eb49-f6e3-4ac6-beee-1b89a566462d", INVOCATION_ID: "efbeb3c958b444758cd8bbe805b0503a", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "33", GITHUB_TRIGGERING_ACTOR: "jrdh", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 16", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "main", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", STATS_D_D: "false", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.9.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-then-bump", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "921252c31e93ac4a5dfc2a31e8cf917e0b2cbe53", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/main", GITHUB_ACTOR: "jrdh", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_17a6dee1-dd0f-4358-9283-6524e1abc65f", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "4718259", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "push", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_17a6dee1-dd0f-4358-9283-6524e1abc65f", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_17a6dee1-dd0f-4358-9283-6524e1abc65f", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
+  const r = { GITHUB_STATE: "/home/runner/work/_temp/_runner_file_commands/save_state_4792fb13-c0a5-4e04-af59-519df018f150", STATS_TRP: "true", DEPLOYMENT_BASEPATH: "/opt/runner", DOTNET_NOLOGO: "1", USER: "runner", npm_config_user_agent: "npm/8.19.4 node/v16.20.2 linux x64 workspaces/false ci/github-actions", CI: "true", RUNNER_ENVIRONMENT: "github-hosted", GITHUB_ENV: "/home/runner/work/_temp/_runner_file_commands/set_env_4792fb13-c0a5-4e04-af59-519df018f150", PIPX_HOME: "/opt/pipx", npm_node_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", JAVA_HOME_8_X64: "/usr/lib/jvm/temurin-8-jdk-amd64", SHLVL: "1", npm_config_noproxy: "", HOME: "/home/runner", RUNNER_TEMP: "/home/runner/work/_temp", GITHUB_EVENT_PATH: "/home/runner/work/_temp/_github_workflow/event.json", npm_package_json: "/home/runner/work/zoa/zoa/package.json", JAVA_HOME_11_X64: "/usr/lib/jvm/temurin-11-jdk-amd64", PIPX_BIN_DIR: "/opt/pipx_bin", GITHUB_REPOSITORY_OWNER: "NaturalHistoryMuseum", GRADLE_HOME: "/usr/share/gradle-8.8", ANDROID_NDK_LATEST_HOME: "/usr/local/lib/android/sdk/ndk/26.3.11579264", JAVA_HOME_21_X64: "/usr/lib/jvm/temurin-21-jdk-amd64", STATS_RDCL: "true", GITHUB_RETENTION_DAYS: "90", GITHUB_REPOSITORY_OWNER_ID: "5260760", POWERSHELL_DISTRIBUTION_CHANNEL: "GitHub-Actions-ubuntu22", AZURE_EXTENSION_DIR: "/opt/az/azcliextensions", GITHUB_HEAD_REF: "josh/fix_autocomplete_styling_error", npm_config_userconfig: "/home/runner/.npmrc", npm_config_local_prefix: "/home/runner/work/zoa/zoa", SYSTEMD_EXEC_PID: "597", GITHUB_GRAPHQL_URL: "https://api.github.com/graphql", COLOR: "0", GOROOT_1_20_X64: "/opt/hostedtoolcache/go/1.20.14/x64", NVM_DIR: "/home/runner/.nvm", npm_config_metrics_registry: "https://registry.npmjs.org/", DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1", GOROOT_1_21_X64: "/opt/hostedtoolcache/go/1.21.11/x64", JAVA_HOME_17_X64: "/usr/lib/jvm/temurin-17-jdk-amd64", ImageVersion: "20240609.1.0", RUNNER_OS: "Linux", GITHUB_API_URL: "https://api.github.com", GOROOT_1_22_X64: "/opt/hostedtoolcache/go/1.22.4/x64", SWIFT_PATH: "/usr/share/swift/usr/bin", RUNNER_USER: "runner", STATS_V3PS: "true", CHROMEWEBDRIVER: "/usr/local/share/chromedriver-linux64", JOURNAL_STREAM: "8:18994", GITHUB_WORKFLOW: "Build dist (dev/patch)", _: "/opt/hostedtoolcache/node/16.20.2/x64/bin/npm", npm_config_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE: "/opt/actionarchivecache", STATS_D: "false", GITHUB_RUN_ID: "9564907236", STATS_VMFE: "true", npm_config_cache: "/home/runner/.npm", GITHUB_REF_TYPE: "branch", BOOTSTRAP_HASKELL_NONINTERACTIVE: "1", GITHUB_WORKFLOW_SHA: "1a481c757b9a131778e07e3a69d82c5c4a0ab952", GITHUB_BASE_REF: "dev", ImageOS: "ubuntu22", STATS_BLT: "true", GITHUB_WORKFLOW_REF: "NaturalHistoryMuseum/zoa/.github/workflows/build.yml@refs/heads/dev", PERFLOG_LOCATION_SETTING: "RUNNER_PERFLOG", GITHUB_ACTION_REPOSITORY: "", npm_config_node_gyp: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js", PATH: "/home/runner/work/zoa/zoa/node_modules/.bin:/home/runner/work/zoa/node_modules/.bin:/home/runner/work/node_modules/.bin:/home/runner/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/opt/hostedtoolcache/node/16.20.2/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", ANT_HOME: "/usr/share/ant", DOTNET_MULTILEVEL_LOOKUP: "0", RUNNER_TRACKING_ID: "github_5ca0a157-eff4-4869-9a74-ab63b1571dbd", INVOCATION_ID: "4eb7cefd4f8b4b35bb810ae668c7dae7", RUNNER_TOOL_CACHE: "/opt/hostedtoolcache", NODE: "/opt/hostedtoolcache/node/16.20.2/x64/bin/node", npm_package_name: "@nhm-data/zoa", GITHUB_ACTION: "__run_2", GITHUB_RUN_NUMBER: "21", GITHUB_TRIGGERING_ACTOR: "jrdh", RUNNER_ARCH: "X64", XDG_RUNTIME_DIR: "/run/user/1001", AGENT_TOOLSDIRECTORY: "/opt/hostedtoolcache", LANG: "C.UTF-8", VCPKG_INSTALLATION_ROOT: "/usr/local/share/vcpkg", CONDA: "/usr/share/miniconda", RUNNER_NAME: "GitHub Actions 10", XDG_CONFIG_HOME: "/home/runner/.config", STATS_VMD: "true", GITHUB_REF_NAME: "dev", GITHUB_REPOSITORY: "NaturalHistoryMuseum/zoa", STATS_D_D: "false", npm_lifecycle_script: "vite build", STATS_UE: "true", ANDROID_NDK_ROOT: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_ACTION_REF: "", DEBIAN_FRONTEND: "noninteractive", GITHUB_REPOSITORY_ID: "630464665", GITHUB_ACTIONS: "true", npm_package_version: "0.10.0", npm_lifecycle_event: "build", GITHUB_REF_PROTECTED: "false", GITHUB_WORKSPACE: "/home/runner/work/zoa/zoa", ACCEPT_EULA: "Y", GITHUB_JOB: "build-dist", RUNNER_PERFLOG: "/home/runner/perflog", GITHUB_SHA: "1a481c757b9a131778e07e3a69d82c5c4a0ab952", GITHUB_RUN_ATTEMPT: "1", GITHUB_REF: "refs/heads/dev", GITHUB_ACTOR: "jrdh", ANDROID_SDK_ROOT: "/usr/local/lib/android/sdk", LEIN_HOME: "/usr/local/lib/lein", npm_config_globalconfig: "/opt/hostedtoolcache/node/16.20.2/x64/etc/npmrc", npm_config_init_module: "/home/runner/.npm-init.js", GITHUB_PATH: "/home/runner/work/_temp/_runner_file_commands/add_path_4792fb13-c0a5-4e04-af59-519df018f150", JAVA_HOME: "/usr/lib/jvm/temurin-11-jdk-amd64", PWD: "/home/runner/work/zoa/zoa", GITHUB_ACTOR_ID: "4718259", RUNNER_WORKSPACE: "/home/runner/work/zoa", npm_execpath: "/opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/npm/bin/npm-cli.js", HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS: "3650", STATS_TIS: "mining", GITHUB_EVENT_NAME: "pull_request", HOMEBREW_NO_AUTO_UPDATE: "1", ANDROID_HOME: "/usr/local/lib/android/sdk", GITHUB_SERVER_URL: "https://github.com", GECKOWEBDRIVER: "/usr/local/share/gecko_driver", LEIN_JAR: "/usr/local/lib/lein/self-installs/leiningen-2.11.2-standalone.jar", GHCUP_INSTALL_BASE_PREFIX: "/usr/local", GITHUB_OUTPUT: "/home/runner/work/_temp/_runner_file_commands/set_output_4792fb13-c0a5-4e04-af59-519df018f150", npm_config_global_prefix: "/opt/hostedtoolcache/node/16.20.2/x64", EDGEWEBDRIVER: "/usr/local/share/edge_driver", STATS_EXT: "true", npm_command: "run-script", ANDROID_NDK: "/usr/local/lib/android/sdk/ndk/25.2.9519653", SGX_AESM_ADDR: "1", CHROME_BIN: "/usr/bin/google-chrome", SELENIUM_JAR_PATH: "/usr/share/java/selenium-server.jar", STATS_EXTP: "https://provjobdsettingscdn.blob.core.windows.net/settings/provjobdsettings-0.5.181+6/provjobd.data", ANDROID_NDK_HOME: "/usr/local/lib/android/sdk/ndk/25.2.9519653", GITHUB_STEP_SUMMARY: "/home/runner/work/_temp/_runner_file_commands/step_summary_4792fb13-c0a5-4e04-af59-519df018f150", INIT_CWD: "/home/runner/work/zoa/zoa", EDITOR: "vi", NODE_ENV: "production" };
   h = r.LC_ALL || r.LC_MESSAGES || r.LANG || r.LANGUAGE;
 }
 h || (h = "en-US");
@@ -548,7 +548,7 @@ function Q(r) {
     lookup: o
   }, p[r];
 }
-var $ = { chineseGroup: L, defaultLookup: O, startCodes: w, buildDigits: Q };
+var v = { chineseGroup: L, defaultLookup: O, startCodes: w, buildDigits: Q };
 const ee = [
   "year",
   "month",
@@ -559,15 +559,15 @@ const ee = [
   "millisecond"
 ];
 var te = ee;
-const oe = X, { latn: ne, other: D } = q, { buildDigits: re } = $, N = y, se = te, g = {};
-let ae = class v {
+const oe = X, { latn: ne, other: D } = q, { buildDigits: re } = v, N = y, se = te, g = {};
+let ae = class $ {
   /**
    * Get a singleton instance with the given locale
    * @param {String} locale such as en, en-US, es, fr-FR, etc.
    * @returns {LocaleHelper}
    */
   static factory(e = N) {
-    return g[e.toLowerCase()] || (g[e.toLowerCase()] = new v(e)), g[e.toLowerCase()];
+    return g[e.toLowerCase()] || (g[e.toLowerCase()] = new $(e)), g[e.toLowerCase()];
   }
   /**
    * Create a new instance with the given locale
@@ -968,7 +968,7 @@ const ge = m, Ie = De, Oe = new ge({
   }
 });
 var Ce = Oe;
-const Ne = m, Me = f, { chineseGroup: A } = $;
+const Ne = m, Me = f, { chineseGroup: A } = v;
 let d;
 const Re = new Ne({
   /* prettier-ignore */
@@ -986,13 +986,13 @@ const He = m, Ue = new He({
   units: ["day", "month"]
 });
 var we = Ue;
-const Le = m, $e = new Le({
+const Le = m, ve = new Le({
   /* prettier-ignore */
   //           $1                       $2
   template: "^(_DAY_)(?:_ORDINAL_)?[ -](_MONTHNAME_)$",
   units: ["day", "month"]
 });
-var ve = $e;
+var $e = ve;
 const Fe = m, Pe = new Fe({
   /* prettier-ignore */
   //                                $1                   $2    $3              $4
@@ -1140,7 +1140,7 @@ const ht = m, ft = new ht({
   units: ["year", null, "month", "day"]
 });
 var pt = ft;
-const F = de, Et = m, At = f, yt = pe, St = ye, Dt = Ce, gt = be, It = we, Ot = ve, Ct = Ge, Nt = Be, Mt = y, Rt = Ke, bt = We, Ht = Ze, Ut = et, wt = rt, Lt = ct, $t = Tt, vt = dt, Ft = pt, T = new F();
+const F = de, Et = m, At = f, yt = pe, St = ye, Dt = Ce, gt = be, It = we, Ot = $e, Ct = Ge, Nt = Be, Mt = y, Rt = Ke, bt = We, Ht = Ze, Ut = et, wt = rt, Lt = ct, vt = Tt, $t = dt, Ft = pt, T = new F();
 T.addFormats([
   Lt,
   wt,
@@ -1151,8 +1151,8 @@ T.addFormats([
   bt,
   Nt,
   gt,
-  vt,
   $t,
+  vt,
   Dt,
   Ht,
   Ot,
