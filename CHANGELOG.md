@@ -1,3 +1,14 @@
+## v0.10.1 (2024-06-18)
+
+### Fix
+
+- apply styling to autocomplete .options, not .option
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+
 ## v0.10.0 (2024-06-18)
 
 ### Feature
