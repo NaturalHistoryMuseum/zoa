@@ -1,3 +1,14 @@
+## v0.10.0 (2024-06-18)
+
+### Feature
+
+- add max-height and scroll to autocomplete options
+
+### Chores/Misc
+
+- build dist package
+- build dist package
+
 ## v0.9.0 (2024-03-05)
 
 ### Feature
