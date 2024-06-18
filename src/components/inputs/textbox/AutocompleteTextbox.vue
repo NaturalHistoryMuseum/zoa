@@ -226,6 +226,8 @@ function setOption(text) {
 
 .option {
   padding: $padding;
+  overflow-y: auto;
+  max-height: 12em;
 
   &:hover,
   &:focus {
