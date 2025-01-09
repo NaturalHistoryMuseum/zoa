@@ -153,34 +153,38 @@ onKeyStroke('Enter', () => {
 </script>
 
 <style module lang="scss">
-@import '../../inputs/inputs';
+@use '../../inputs/inputs';
+@use '../../../styles/fonts';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
+
 .container {
   display: inline-block;
 }
 
 .main {
-  font-family: $header-font;
+  font-family: fonts.$header-font;
   font-weight: 600;
   border: none;
-  border-radius: $rounding;
+  border-radius: vars.$rounding;
   display: inline-block;
   transition: 0.2s;
   cursor: pointer;
   color: black;
-  background-color: $grey;
+  background-color: palette.$grey;
 }
 
 .kind--normal {
   &:hover,
   &:focus,
   &:active {
-    background-color: $secondary-b;
-    color: $secondary-text;
+    background-color: palette.$secondary-b;
+    color: palette.$secondary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $secondary;
-    color: $secondary-text;
+    background-color: palette.$secondary;
+    color: palette.$secondary-text;
   }
 }
 
@@ -188,13 +192,13 @@ onKeyStroke('Enter', () => {
   &:hover,
   &:focus,
   &:active {
-    background-color: $primary-b;
-    color: $primary-text;
+    background-color: palette.$primary-b;
+    color: palette.$primary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $primary;
-    color: $primary-text;
+    background-color: palette.$primary;
+    color: palette.$primary-text;
   }
 }
 
@@ -202,23 +206,23 @@ onKeyStroke('Enter', () => {
   &:hover,
   &:focus,
   &:active {
-    background-color: $tertiary-b;
-    color: $tertiary-text;
+    background-color: palette.$tertiary-b;
+    color: palette.$tertiary-text;
   }
 
   .checkbox:checked + & {
-    background-color: $tertiary;
-    color: $tertiary-text;
+    background-color: palette.$tertiary;
+    color: palette.$tertiary-text;
   }
 }
 
 .size--sm {
-  padding: calc($v-pad/2) calc($h-pad/2);
+  padding: calc(vars.$v-pad/2) calc(vars.$h-pad/2);
   font-size: 0.8em;
 }
 
 .size--md {
-  padding: $padding;
+  padding: vars.$padding;
 }
 
 .checkbox {

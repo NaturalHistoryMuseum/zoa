@@ -516,21 +516,23 @@ function selectGroup(groupName) {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .inputWrapper {
   position: relative;
 
   &.disabled {
-    @include disabled;
+    @include inputs.disabled;
   }
 }
 
 .options {
   position: absolute;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   width: 100%;
   margin-top: 2px;
   font-size: 0.9em;
@@ -548,22 +550,22 @@ ul.optlist {
 
 .listItem {
   &:first-child {
-    border-radius: $rounding $rounding 0 0;
+    border-radius: vars.$rounding vars.$rounding 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 $rounding $rounding;
+    border-radius: 0 0 vars.$rounding vars.$rounding;
   }
 
   & > * {
-    padding: $padding;
+    padding: vars.$padding;
   }
 
   &.option {
     &:not(.selectAll) > * {
       &:hover,
       &:focus {
-        background: $secondary;
+        background: palette.$secondary;
       }
     }
 
@@ -582,14 +584,14 @@ ul.optlist {
 }
 
 .selectAll + .option:not(.selectAll) {
-  border-top: 2px solid $primary;
+  border-top: 2px solid palette.$primary;
 }
 
 .subgroup {
-  border-top: 2px solid $primary;
+  border-top: 2px solid palette.$primary;
 
   & > .optlist label {
-    padding-left: calc($h-pad * 2);
+    padding-left: calc(vars.$h-pad * 2);
   }
 }
 
@@ -597,14 +599,14 @@ ul.optlist {
 .subgroup > *:first-child {
   &:hover,
   &:focus {
-    background: $primary;
+    background: palette.$primary;
   }
 }
 
 .noOptions {
   font-size: 0.8em;
   font-style: italic;
-  padding: $padding;
+  padding: vars.$padding;
   opacity: 0.8;
 }
 

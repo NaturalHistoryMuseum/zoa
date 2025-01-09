@@ -1,18 +1,18 @@
-@import '../../styles/palette';
-@import '../../styles/fonts';
-@import '../../styles/vars';
+@use '../../styles/palette';
+@use '../../styles/fonts';
+@use '../../styles/vars';
 
 .input {
   -webkit-appearance: none;
   background: white;
-  color: $dark;
-  border: 1px solid $grey;
-  border-radius: $rounding;
-  padding: $padding;
+  color: palette.$dark;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
+  padding: vars.$padding;
   width: 100%;
 
   &:disabled {
-    color: $grey;
+    color: palette.$grey;
   }
 }
 
@@ -35,7 +35,7 @@
     left: -1px;
     bottom: -1px;
     right: -1px;
-    border-radius: $rounding;
+    border-radius: vars.$rounding;
     background-color: #eeeeee99;
   }
 }

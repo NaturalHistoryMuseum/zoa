@@ -108,7 +108,8 @@ onClickOutside(modal, () => {
 </script>
 
 <style module lang="scss">
-@import '../dialogs';
+@use '../dialogs';
+@use '../../../styles/vars';
 
 .main {
   position: fixed;
@@ -117,19 +118,19 @@ onClickOutside(modal, () => {
   left: 0;
   right: 0;
 
-  @include media-less-than('sm') {
+  @include vars.media-less-than('sm') {
     width: 90vw;
   }
 
-  @include media-between('sm', 'md') {
+  @include vars.media-between('sm', 'md') {
     width: 80vw;
   }
 
-  @include media-between('md', 'lg') {
+  @include vars.media-between('md', 'lg') {
     width: 70vw;
   }
 
-  @include media-from('lg') {
+  @include vars.media-from('lg') {
     width: 50vw;
   }
 }

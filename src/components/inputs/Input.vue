@@ -244,12 +244,13 @@ defineExpose({
 </script>
 
 <style module lang="scss">
-@import 'inputs';
+@use 'inputs';
+@use '../../styles/vars';
 
 .rootWrapper {
   display: grid;
   align-items: center;
-  gap: $label-gap;
+  gap: vars.$label-gap;
   grid-template-rows: auto;
 
   // because sometimes the label is a <legend> and that has to be directly under

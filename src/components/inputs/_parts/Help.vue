@@ -52,8 +52,8 @@ onKeyStroke('Escape', () => (showText.value = false));
 </script>
 
 <style module lang="scss">
-@import '../../../styles/palette';
-@import '../../../styles/vars';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .main {
   position: relative;
@@ -67,15 +67,15 @@ onKeyStroke('Escape', () => (showText.value = false));
 }
 
 .icon {
-  color: $grey;
+  color: palette.$grey;
 }
 
 .popup {
   position: absolute;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
-  padding: $box-padding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
+  padding: vars.$box-padding;
   z-index: 9999;
   width: max-content;
   max-width: 350px;

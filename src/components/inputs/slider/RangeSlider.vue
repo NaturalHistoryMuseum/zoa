@@ -178,5 +178,5 @@ watch(range, () => {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
 </style>
