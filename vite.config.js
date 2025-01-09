@@ -27,9 +27,6 @@ export default defineConfig({
       },
     },
   },
-  define: {
-    'process.env': process.env,
-  },
   css: {
     modules: {
       generateScopedName: (name, filename, css) => {
