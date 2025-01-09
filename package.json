@@ -21,7 +21,7 @@
     ".": {
       "import": "./dist/zoa.js"
     },
-    "./theme": "./dist/style.css"
+    "./theme": "./dist/zoa.css"
   },
   "scripts": {
     "build": "vite build",
@@ -41,25 +41,25 @@
     "levenshtein-search": "^0.1.2",
     "modern-css-reset": "^1.4.0",
     "nanoid": "^5.0.9",
-    "vue": "^3.3.4"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.8",
-    "@storybook/addon-a11y": "^7.6.14",
-    "@storybook/addon-essentials": "^7.6.14",
-    "@storybook/addon-interactions": "^7.6.14",
-    "@storybook/addon-links": "^7.6.14",
-    "@storybook/blocks": "^7.6.14",
-    "@storybook/manager-api": "^7.6.14",
-    "@storybook/testing-library": "^0.2.0",
-    "@storybook/vue3": "^7.6.14",
-    "@storybook/vue3-vite": "^7.6.14",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rollup-plugin-visualizer": "^5.9.2",
-    "sass": "^1.63.6",
-    "storybook": "^7.6.14",
-    "vite": "^4.4.3"
+    "@babel/core": "^7.26.0",
+    "@storybook/addon-a11y": "^8.4.7",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-links": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/manager-api": "^8.4.7",
+    "@storybook/test": "^8.4.7",
+    "@storybook/vue3": "^8.4.7",
+    "@storybook/vue3-vite": "^8.4.7",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rollup-plugin-visualizer": "^5.14.0",
+    "sass": "^1.83.1",
+    "storybook": "^8.4.7",
+    "vite": "^6.0.7"
   }
 }
