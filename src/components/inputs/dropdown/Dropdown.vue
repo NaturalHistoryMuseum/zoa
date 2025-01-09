@@ -81,8 +81,8 @@ const dropdownOptions = computed(() => {
         a.order != null && b.order != null
           ? a.order - b.order
           : a.order != null
-          ? -1
-          : 1;
+            ? -1
+            : 1;
     }
 
     let labelSort = a.label.localeCompare(b.label);

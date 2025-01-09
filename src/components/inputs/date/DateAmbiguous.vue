@@ -678,8 +678,8 @@ const monthOptions = computed(() => {
   const yr = year.value
     ? year.value
     : minDate.value.year === maxDate.value.year
-    ? minDate.value.year
-    : null;
+      ? minDate.value.year
+      : null;
   if (yr === minDate.value.year) {
     options = options.slice(minDate.value.month - 1, options.length);
   }
@@ -725,14 +725,14 @@ const dayOptions = computed(() => {
   const yr = year.value
     ? year.value
     : minDate.value.year === maxDate.value.year
-    ? minDate.value.year
-    : null;
+      ? minDate.value.year
+      : null;
   const mnth = month.value
     ? month.value
     : minDate.value.year === maxDate.value.year &&
-      minDate.value.month === maxDate.value.month
-    ? minDate.value.month
-    : null;
+        minDate.value.month === maxDate.value.month
+      ? minDate.value.month
+      : null;
   const mnthDays = getMonthDays(mnth);
 
   let options = Array(mnthDays)
