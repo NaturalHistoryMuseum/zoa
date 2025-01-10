@@ -55,15 +55,15 @@ const { addPropClasses } = usePropClasses(props);
 </script>
 
 <style module lang="scss">
-@import '../../../styles/palette';
-@import '../../../styles/fonts';
-@import '../../../styles/vars';
+@use '../../../styles/palette';
+@use '../../../styles/fonts';
+@use '../../../styles/vars';
 
 .main {
-  font-family: $header-font;
+  font-family: fonts.$header-font;
   font-weight: 600;
   border: none;
-  border-radius: $rounding;
+  border-radius: vars.$rounding;
 
   transition: 0.2s;
   cursor: pointer;
@@ -71,56 +71,56 @@ const { addPropClasses } = usePropClasses(props);
 }
 
 .kind--normal {
-  background-color: $secondary;
-  color: $secondary-text;
+  background-color: palette.$secondary;
+  color: palette.$secondary-text;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $secondary-b;
+    background-color: palette.$secondary-b;
   }
 
   .checkbox:checked + & {
-    background-color: $secondary-b;
+    background-color: palette.$secondary-b;
   }
 }
 
 .kind--primary {
-  background-color: $primary;
-  color: $primary-text;
+  background-color: palette.$primary;
+  color: palette.$primary-text;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $primary-b;
+    background-color: palette.$primary-b;
   }
 
   .checkbox:checked + & {
-    background-color: $primary-b;
+    background-color: palette.$primary-b;
   }
 }
 
 .kind--alt {
-  background-color: $tertiary;
-  color: $tertiary-text;
+  background-color: palette.$tertiary;
+  color: palette.$tertiary-text;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $tertiary-b;
+    background-color: palette.$tertiary-b;
   }
 
   .checkbox:checked + & {
-    background-color: $tertiary-b;
+    background-color: palette.$tertiary-b;
   }
 }
 
 .size--sm {
-  padding: calc($v-pad/2) calc($h-pad/2);
+  padding: calc(vars.$v-pad/2) calc(vars.$h-pad/2);
   font-size: 0.8em;
 }
 
 .size--md {
-  padding: $padding;
+  padding: vars.$padding;
 }
 </style>

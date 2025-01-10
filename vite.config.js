@@ -16,7 +16,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-        '@fortawesome/vue-fontawesome@latest-3',
+        '@fortawesome/vue-fontawesome',
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons',
         '@fortawesome/free-brands-svg-icons',
@@ -26,9 +26,6 @@ export default defineConfig({
         entryFileNames: 'zoa.js',
       },
     },
-  },
-  define: {
-    'process.env': process.env,
   },
   css: {
     modules: {

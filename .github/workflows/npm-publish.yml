@@ -2,22 +2,24 @@ name: Upload NPM Package
 
 on:
   release:
-    types: [published]
+    types:
+      - published
 
 jobs:
   deploy:
+    name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
       - name: Install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
       - name: Publish package
         run: npm publish
         env:

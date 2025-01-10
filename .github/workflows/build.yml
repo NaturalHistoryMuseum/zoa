@@ -10,16 +10,16 @@ on:
 
 jobs:
   build-dist:
-    if: github.event.pull_request.merged == true
+    name: Build dist package
     runs-on: ubuntu-latest
-    name: "Build dist"
+    if: github.event.pull_request.merged == true
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v4
       - name: Install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: 20
       - name: Install packages
         run: npm install
       - name: Build
@@ -27,5 +27,5 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'dist'
-          message: 'chore: build dist package'
+          add: dist
+          message: "chore: build dist package"

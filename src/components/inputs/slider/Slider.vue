@@ -308,7 +308,9 @@ value.value = getInitialValue();
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 $handleSize: 20px;
 $handleBorder: 2px;
@@ -332,11 +334,11 @@ $handleBorder: 2px;
     -webkit-appearance: none;
     width: $handleSize;
     height: $handleSize;
-    background: $primary;
+    background: palette.$primary;
     cursor: pointer;
     border-radius: 100%;
     z-index: 100;
-    border: $handleBorder solid $grey;
+    border: $handleBorder solid palette.$grey;
   }
 }
 
@@ -353,20 +355,20 @@ $handleBorder: 2px;
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: $rounding;
-  background: $grey;
+  border-radius: vars.$rounding;
+  background: palette.$grey;
 
   &.track--active {
-    background: $secondary;
+    background: palette.$secondary;
   }
 }
 
 .valueLabel {
   position: absolute;
   font-size: 0.8em;
-  padding: $half-pad;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  padding: vars.$half-pad;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   background: white;
   height: 30px;
 
@@ -381,7 +383,7 @@ $handleBorder: 2px;
 
 .disabled {
   & .track {
-    @include disabled;
+    @include inputs.disabled;
     position: absolute;
   }
 

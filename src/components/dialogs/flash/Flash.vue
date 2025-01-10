@@ -60,5 +60,5 @@ const { addPropClasses } = usePropClasses(props);
 </script>
 
 <style module lang="scss">
-@import '../dialogs';
+@use '../dialogs';
 </style>

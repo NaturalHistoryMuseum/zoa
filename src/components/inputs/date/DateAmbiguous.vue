@@ -678,8 +678,8 @@ const monthOptions = computed(() => {
   const yr = year.value
     ? year.value
     : minDate.value.year === maxDate.value.year
-    ? minDate.value.year
-    : null;
+      ? minDate.value.year
+      : null;
   if (yr === minDate.value.year) {
     options = options.slice(minDate.value.month - 1, options.length);
   }
@@ -725,14 +725,14 @@ const dayOptions = computed(() => {
   const yr = year.value
     ? year.value
     : minDate.value.year === maxDate.value.year
-    ? minDate.value.year
-    : null;
+      ? minDate.value.year
+      : null;
   const mnth = month.value
     ? month.value
     : minDate.value.year === maxDate.value.year &&
-      minDate.value.month === maxDate.value.month
-    ? minDate.value.month
-    : null;
+        minDate.value.month === maxDate.value.month
+      ? minDate.value.month
+      : null;
   const mnthDays = getMonthDays(mnth);
 
   let options = Array(mnthDays)
@@ -796,12 +796,14 @@ watch(returnDate, () => {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .inputWrapper {
   position: relative;
   &.disabled {
-    @include disabled;
+    @include inputs.disabled;
   }
 }
 
@@ -810,12 +812,12 @@ watch(returnDate, () => {
   min-width: 250px;
   max-width: 380px;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   top: 100%;
   left: 0;
-  margin-top: $v-pad;
-  padding: $padding;
+  margin-top: vars.$v-pad;
+  padding: vars.$padding;
   z-index: 9999;
 }
 
@@ -823,10 +825,10 @@ watch(returnDate, () => {
   display: grid;
   align-items: start;
   gap: 1em 2em;
-  padding: $v-pad $h-pad 1em;
+  padding: vars.$v-pad vars.$h-pad 1em;
 
   &:not(:last-child) {
-    border-bottom: 1px solid $grey;
+    border-bottom: 1px solid palette.$grey;
   }
 }
 

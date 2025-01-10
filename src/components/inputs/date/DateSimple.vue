@@ -95,13 +95,14 @@ defineExpose({
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
 
 .inputWrapper.disabled {
-  @include disabled;
+  @include inputs.disabled;
 }
 
 .input:invalid {
-  border-color: $error-dark;
+  border-color: palette.$error-dark;
 }
 </style>

@@ -111,8 +111,8 @@ const dropdownOptions = computed(() => {
         a.order != null && b.order != null
           ? a.order - b.order
           : a.order != null
-          ? -1
-          : 1;
+            ? -1
+            : 1;
     }
 
     let labelSort = a.label.localeCompare(b.label);
@@ -198,21 +198,23 @@ function setOption(text) {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .inputWrapper {
   position: relative;
 
   &.disabled {
-    @include disabled;
+    @include inputs.disabled;
   }
 }
 
 .options {
   position: absolute;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   width: 100%;
   margin-top: 2px;
   font-size: 0.9em;
@@ -227,26 +229,26 @@ function setOption(text) {
 }
 
 .option {
-  padding: $padding;
+  padding: vars.$padding;
 
   &:hover,
   &:focus {
-    background: $secondary;
+    background: palette.$secondary;
   }
 
   &:first-child {
-    border-radius: $rounding $rounding 0 0;
+    border-radius: vars.$rounding vars.$rounding 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 $rounding $rounding;
+    border-radius: 0 0 vars.$rounding vars.$rounding;
   }
 }
 
 .noOptions {
   font-size: 0.8em;
   font-style: italic;
-  padding: $padding;
+  padding: vars.$padding;
   opacity: 0.8;
 }
 </style>

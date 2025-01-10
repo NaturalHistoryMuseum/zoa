@@ -136,7 +136,9 @@ onKeyStroke(' ', () => {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .defaultCheckbox {
   display: none;
@@ -147,13 +149,13 @@ onKeyStroke(' ', () => {
   width: 1.5em;
   cursor: pointer;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   position: relative;
   display: block;
 
   .defaultCheckbox:checked ~ & {
-    background: $primary-a;
+    background: palette.$primary-a;
 
     & > .check {
       display: block;
@@ -175,7 +177,7 @@ onKeyStroke(' ', () => {
   justify-self: center;
 
   &.disabled .checkbox {
-    @include disabled;
+    @include inputs.disabled;
   }
 }
 </style>
