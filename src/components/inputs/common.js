@@ -20,11 +20,16 @@ export function useChangeEmits(emit, props) {
     emit('change', newValue);
   }
 
-  const emitChange = debounce(_emitChange, delay);
-
-  function valueChanged(newValue) {
+  function _updateModel(newValue) {
     emit('update:modelValue', newValue);
     internalModel.value = newValue;
+  }
+
+  const emitChange = debounce(_emitChange, delay);
+  const updateModel = debounce(_updateModel, delay);
+
+  function valueChanged(newValue) {
+    updateModel(newValue);
     emitChange(newValue);
   }
 
