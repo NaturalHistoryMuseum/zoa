@@ -574,7 +574,7 @@ ul.optlist {
     }
   }
 
-  &.option label > span:first-child,
+  &.option label,
   &.subgroup > div {
     width: 100%;
     overflow-x: hidden;
