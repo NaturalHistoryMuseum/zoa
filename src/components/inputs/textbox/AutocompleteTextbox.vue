@@ -23,7 +23,7 @@
           @click="setOption(opt.value)"
           tabindex="0"
         >
-          <span>{{ opt.label }}</span>
+          <span>{{ opt.value }}</span>
           <input type="hidden" :value="opt.value" />
         </li>
       </ul>
@@ -65,8 +65,7 @@ const props = defineProps({
   },
   /**
    * The options available to select. Each item can be a string, or an object
-   * with `label`, `value`, and `order` keys (one of label/value required; order
-   * is optional).
+   * with `value`, and `order` keys (value required; order is optional).
    */
   options: {
     type: Array,
@@ -96,12 +95,11 @@ const dropdownOptions = computed(() => {
   props.options.forEach((o) => {
     if (typeof o === 'object') {
       outputOptions.push({
-        label: o.label || o.value,
-        value: o.value || o.label,
+        value: o.value,
         order: o.order == null ? null : o.order,
       });
     } else {
-      outputOptions.push({ label: o, value: o });
+      outputOptions.push({ value: o });
     }
   });
   outputOptions.sort((a, b) => {
@@ -115,9 +113,9 @@ const dropdownOptions = computed(() => {
             : 1;
     }
 
-    let labelSort = a.label.localeCompare(b.label);
+    let valueSort = a.value.localeCompare(b.value);
 
-    return orderSort !== 0 ? orderSort : labelSort;
+    return orderSort !== 0 ? orderSort : valueSort;
   });
   return outputOptions;
 });

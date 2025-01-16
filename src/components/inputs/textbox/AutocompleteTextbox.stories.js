@@ -27,7 +27,11 @@ const Base = {
     disabled: false,
     delay: 200,
     placeholder: 'Write something here...',
-    options: ['Option 1', 'Option 2', { label: 'Option 3', value: 'opt3' }],
+    options: [
+      'Option 1',
+      { value: 'Option 2', order: 0 },
+      { value: 'opt3', order: 1 },
+    ],
   },
   render: (args) => ({
     components: { ZoaInput },
