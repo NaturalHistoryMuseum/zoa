@@ -31,7 +31,7 @@
       />
     </div>
     <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
-      <ul v-if="allOptions.length > 0" :class="$style.optlist">
+      <ul v-if="unfilteredOptions.length > 0" :class="$style.optlist">
         <li
           title="Select all"
           :class="[$style.selectAll, $style.listItem, $style.option]"
@@ -58,7 +58,7 @@
           />
         </li>
         <li
-          v-for="item in filteredItems"
+          v-for="item in dropdownOptions"
           :title="item.label"
           :class="[
             $style.listItem,
@@ -223,7 +223,7 @@ const itemString = computed(() => {
   return props.itemName;
 });
 
-const allOptions = computed(() => {
+const unfilteredOptions = computed(() => {
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
@@ -268,7 +268,7 @@ const allOptions = computed(() => {
   return outputOptions;
 });
 
-const filteredItems = computed(() => {
+const dropdownOptions = computed(() => {
   const doSearch = props.enableSearch && search.value;
   const searchString = doSearch ? search.value.toLowerCase() : null;
   const checkMatch = (txt) => {
@@ -279,11 +279,11 @@ const filteredItems = computed(() => {
 
   let filteredOptions;
   if (doSearch) {
-    filteredOptions = allOptions.value.filter((o) => {
+    filteredOptions = unfilteredOptions.value.filter((o) => {
       return checkMatch(o.group) || checkMatch(o.label) || checkMatch(o.value);
     });
   } else {
-    filteredOptions = allOptions.value;
+    filteredOptions = unfilteredOptions.value;
   }
 
   let items = [];
@@ -353,15 +353,15 @@ const dropdownHeight = computed(() => {
   }
 });
 const lowerVisible = computed(() => {
-  if (filteredItems.value.length < buffer * 2) {
+  if (dropdownOptions.value.length < buffer * 2) {
     return 0;
   }
   // doesn't matter if it's < n options
   return Math.floor(scrollY.value / props.itemHeight) - buffer;
 });
 const upperVisible = computed(() => {
-  if (filteredItems.value.length < buffer * 2) {
-    return filteredItems.value.length + buffer;
+  if (dropdownOptions.value.length < buffer * 2) {
+    return dropdownOptions.value.length + buffer;
   }
   // doesn't matter if it's > n options
   return Math.ceil((scrollY.value + dropdownHeight.value) / props.itemHeight);
@@ -400,7 +400,7 @@ onClickOutside(container, () => {
 
 // KEYBINDINGS
 onKeyStroke('ArrowDown', () => {
-  if (allOptions.value.length === 0) {
+  if (unfilteredOptions.value.length === 0) {
     return;
   }
   if (textboxFocus.focused.value) {
@@ -422,7 +422,7 @@ onKeyStroke('ArrowDown', () => {
 });
 
 onKeyStroke('ArrowUp', () => {
-  if (allOptions.value.length === 0) {
+  if (unfilteredOptions.value.length === 0) {
     return;
   }
   if (dropdownFocus.focused.value) {
@@ -451,7 +451,7 @@ onKeyStroke('Enter', () => {
  */
 const selectAll = computed({
   get() {
-    const options = allOptions.value;
+    const options = unfilteredOptions.value;
     if (value.value == null || value.value.length !== options.length) {
       return false;
     }
@@ -460,7 +460,7 @@ const selectAll = computed({
   },
   set(toggleValue) {
     if (toggleValue) {
-      value.value = allOptions.value.map((o) => o.value);
+      value.value = unfilteredOptions.value.map((o) => o.value);
     } else {
       value.value = [];
     }
@@ -472,7 +472,7 @@ const selectAll = computed({
  */
 const selectFiltered = computed({
   get() {
-    let options = filteredItems.value
+    let options = dropdownOptions.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
     if (value.value == null || value.value.length < options.length) {
@@ -482,7 +482,7 @@ const selectFiltered = computed({
     return unchecked.length === 0;
   },
   set(toggleValue) {
-    let options = filteredItems.value
+    let options = dropdownOptions.value
       .filter((i) => i.kind === 'option')
       .map((o) => o.value);
     const checked = value.value ? value.value : [];
@@ -500,7 +500,7 @@ const selectFiltered = computed({
  * @param groupName
  */
 function selectGroup(groupName) {
-  const group = filteredItems.value
+  const group = dropdownOptions.value
     .filter((o) => o.kind === 'option' && o.group === groupName)
     .map((o) => o.value);
   value.value = value.value ? value.value : []; // double check it's not null
