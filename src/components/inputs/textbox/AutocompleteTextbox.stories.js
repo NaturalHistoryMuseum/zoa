@@ -32,6 +32,7 @@ const Base = {
       { value: 'Option 2', order: 0 },
       { value: 'opt3', order: 1 },
     ],
+    enableSearch: false,
   },
   render: (args) => ({
     components: { ZoaInput },
@@ -46,7 +47,7 @@ const Base = {
                  :help="help"
                  :help-position="helpPosition"
                  :disabled="disabled"
-                 :options="{delay, placeholder, options}"
+                 :options="{delay, placeholder, options, enableSearch}"
       />
         `,
   }),

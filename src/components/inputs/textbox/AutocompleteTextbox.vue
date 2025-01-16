@@ -41,6 +41,7 @@ import {
   useFocusWithin,
   useFocus,
 } from '@vueuse/core';
+import { fuzzySearch } from 'levenshtein-search';
 
 const props = defineProps({
   /**
@@ -70,6 +71,13 @@ const props = defineProps({
   options: {
     type: Array,
   },
+  /**
+   * Enables internal list filtering based on the current value. Disable if implementing an external filter using emits.
+   */
+  enableSearch: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const inputId = inject('inputId');
@@ -91,6 +99,14 @@ const emit = defineEmits([
 const { value } = useChangeEmits(emit, props);
 
 const dropdownOptions = computed(() => {
+  const doSearch = props.enableSearch && value.value;
+  const searchString = doSearch ? value.value.toLowerCase() : null;
+  const checkMatch = (txt) => {
+    return txt
+      ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
+      : false;
+  };
+
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
@@ -102,6 +118,11 @@ const dropdownOptions = computed(() => {
       outputOptions.push({ value: o });
     }
   });
+
+  if (doSearch) {
+    outputOptions = outputOptions.filter((o) => checkMatch(o.value));
+  }
+
   outputOptions.sort((a, b) => {
     let orderSort = 0;
     if (a.order != null || b.order != null) {
