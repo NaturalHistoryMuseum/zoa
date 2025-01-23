@@ -442,7 +442,10 @@ onKeyStroke('ArrowUp', () => {
 });
 
 onKeyStroke('Enter', () => {
-  unfocus();
+  if (!textboxFocus.focused.value) {
+    // if they press enter in the textbox they may just be searching
+    unfocus();
+  }
 });
 
 // select/deselect multiple checkboxes at once
