@@ -31,7 +31,7 @@
       />
     </div>
     <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
-      <ul v-if="unfilteredOptions.length > 0" :class="$style.optlist">
+      <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
         <li
           title="Select all"
           :class="[$style.selectAll, $style.listItem, $style.option]"
