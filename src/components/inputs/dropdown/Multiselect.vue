@@ -403,10 +403,10 @@ onKeyStroke('ArrowDown', () => {
   if (unfilteredOptions.value.length === 0) {
     return;
   }
+  const labels = [...dropdown.value.querySelectorAll('label')];
   if (textboxFocus.focused.value) {
-    dropdown.value.children[0].children[0].children[0].focus();
+    labels[0].focus();
   } else if (dropdownFocus.focused.value) {
-    const labels = [...dropdown.value.querySelectorAll('label')];
     const selectedElement = dropdown.value.querySelector('label:focus');
     if (!selectedElement) {
       labels[0].focus();
