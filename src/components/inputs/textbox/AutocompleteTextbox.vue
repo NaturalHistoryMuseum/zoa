@@ -23,7 +23,7 @@
           @click="setOption(opt.value)"
           tabindex="0"
         >
-          <span>{{ opt.label }}</span>
+          <span>{{ opt.value }}</span>
           <input type="hidden" :value="opt.value" />
         </li>
       </ul>
@@ -41,6 +41,7 @@ import {
   useFocusWithin,
   useFocus,
 } from '@vueuse/core';
+import { fuzzySearch } from 'levenshtein-search';
 
 const props = defineProps({
   /**
@@ -65,11 +66,17 @@ const props = defineProps({
   },
   /**
    * The options available to select. Each item can be a string, or an object
-   * with `label`, `value`, and `order` keys (one of label/value required; order
-   * is optional).
+   * with `value`, and `order` keys (value required; order is optional).
    */
   options: {
     type: Array,
+  },
+  /**
+   * Enables internal list filtering based on the current value. Disable if implementing an external filter using emits.
+   */
+  enableSearch: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -92,18 +99,30 @@ const emit = defineEmits([
 const { value } = useChangeEmits(emit, props);
 
 const dropdownOptions = computed(() => {
+  const doSearch = props.enableSearch && value.value;
+  const searchString = doSearch ? value.value.toLowerCase() : null;
+  const checkMatch = (txt) => {
+    return txt
+      ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
+      : false;
+  };
+
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
       outputOptions.push({
-        label: o.label || o.value,
-        value: o.value || o.label,
+        value: o.value,
         order: o.order == null ? null : o.order,
       });
     } else {
-      outputOptions.push({ label: o, value: o });
+      outputOptions.push({ value: o });
     }
   });
+
+  if (doSearch) {
+    outputOptions = outputOptions.filter((o) => checkMatch(o.value));
+  }
+
   outputOptions.sort((a, b) => {
     let orderSort = 0;
     if (a.order != null || b.order != null) {
@@ -115,9 +134,9 @@ const dropdownOptions = computed(() => {
             : 1;
     }
 
-    let labelSort = a.label.localeCompare(b.label);
+    let valueSort = a.value.localeCompare(b.value);
 
-    return orderSort !== 0 ? orderSort : labelSort;
+    return orderSort !== 0 ? orderSort : valueSort;
   });
   return outputOptions;
 });

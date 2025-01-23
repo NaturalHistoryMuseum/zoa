@@ -315,7 +315,8 @@ defineExpose({
   }
 }
 
-.checkbox {
+.checkbox,
+.radio {
   &.rootWrapper {
     width: auto;
 
@@ -357,8 +358,9 @@ defineExpose({
     }
 
     &.rootWrapper--right {
-      grid-template-areas: 'input label .';
-      grid-template-columns: auto auto 1fr;
+      // extend the label to the right for dropdowns
+      grid-template-areas: 'input label';
+      grid-template-columns: auto 1fr;
 
       &.rootWrapper--help {
         grid-template-areas: 'input label help';

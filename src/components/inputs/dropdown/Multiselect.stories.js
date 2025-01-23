@@ -44,7 +44,7 @@ const Base = {
     itemHeight: 38,
   },
   render: (args) => ({
-    components: { ZoaMultiselect },
+    components: { ZoaInput },
     setup() {
       return renderSetup(args);
     },
