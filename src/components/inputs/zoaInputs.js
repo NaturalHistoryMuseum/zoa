@@ -5,6 +5,7 @@ import ZoaDateSimple from './date/DateSimple.vue';
 import ZoaDropdown from './dropdown/Dropdown.vue';
 import ZoaMultiselect from './dropdown/Multiselect.vue';
 import ZoaNumber from './number/Number.vue';
+import ZoaRadio from './radio/Radio.vue';
 import ZoaRangeSlider from './slider/RangeSlider.vue';
 import ZoaSlider from './slider/Slider.vue';
 import ZoaTextbox from './textbox/Textbox.vue';
@@ -44,6 +45,12 @@ export default {
     component: ZoaNumber,
     multi: false,
     delay: 200,
+  },
+  radio: {
+    component: ZoaRadio,
+    multi: false,
+    delay: 0,
+    tabLabel: true,
   },
   'range-slider': {
     component: ZoaRangeSlider,

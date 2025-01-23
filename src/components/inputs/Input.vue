@@ -315,7 +315,8 @@ defineExpose({
   }
 }
 
-.checkbox {
+.checkbox,
+.radio {
   &.rootWrapper {
     width: auto;
 
