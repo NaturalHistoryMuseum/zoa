@@ -438,6 +438,7 @@ ul.optlist {
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
   }
 }
 
