@@ -4,6 +4,7 @@ import ZoaDateAmbiguous from './date/DateAmbiguous.vue';
 import ZoaDateSimple from './date/DateSimple.vue';
 import ZoaDropdown from './dropdown/Dropdown.vue';
 import ZoaMultiselect from './dropdown/Multiselect.vue';
+import ZoaDropdownSearch from './dropdown/DropdownSearch.vue';
 import ZoaNumber from './number/Number.vue';
 import ZoaRadio from './radio/Radio.vue';
 import ZoaRangeSlider from './slider/RangeSlider.vue';
@@ -34,6 +35,11 @@ export default {
   },
   multiselect: {
     component: ZoaMultiselect,
+    multi: false,
+    delay: 0,
+  },
+  'dropdown-search': {
+    component: ZoaDropdownSearch,
     multi: false,
     delay: 0,
   },
