@@ -3,6 +3,18 @@ import { nanoid } from 'nanoid';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="multiselect"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
+/>
+`;
+
 const meta = {
   component: ZoaMultiselect,
   title: 'Components/Inputs/Select/Multiselect',
@@ -12,6 +24,9 @@ const meta = {
       description: {
         component:
           'A dropdown/select component allowing selection of multiple options. Options can be passed in as a mixed list of strings or objects with `label`, `value`, and (optionally) `group` keys. Each option must have a unique value (or label, if not using values), even between groups.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -48,17 +63,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="multiselect"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
-      />
-    `,
+    template,
   }),
 };
 

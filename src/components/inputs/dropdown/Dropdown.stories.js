@@ -2,6 +2,18 @@ import ZoaDropdown from './Dropdown.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="dropdown"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, options}"
+/>
+`;
+
 const meta = {
   component: ZoaDropdown,
   title: 'Components/Inputs/Select/Dropdown',
@@ -11,6 +23,9 @@ const meta = {
       description: {
         component:
           'A dropdown/select component. Options can be passed in as a mixed list of strings or objects with `label` and `value` keys.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -35,17 +50,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="dropdown"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, options}"
-      />
-    `,
+    template,
   }),
 };
 

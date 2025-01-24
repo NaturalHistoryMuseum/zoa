@@ -2,6 +2,18 @@ import ZoaDateAmbiguous from './DateAmbiguous.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="date-ambiguous"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, min, max}"
+/>
+`;
+
 const meta = {
   component: ZoaDateAmbiguous,
   title: 'Components/Inputs/Date/Ambiguous Date',
@@ -11,6 +23,9 @@ const meta = {
       description: {
         component:
           'A date picker that allows for missing parts, e.g. just a year, a year and a month, a month and a day, etc.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -36,17 +51,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="date-ambiguous"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, min, max}"
-      />
-    `,
+    template,
   }),
 };
 

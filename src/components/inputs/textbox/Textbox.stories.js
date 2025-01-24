@@ -2,6 +2,18 @@ import ZoaTextbox from './Textbox.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="textbox"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder}"
+/>
+`;
+
 const meta = {
   component: ZoaTextbox,
   title: 'Components/Inputs/Textbox/Simple',
@@ -10,6 +22,9 @@ const meta = {
     docs: {
       description: {
         component: 'A one-line textbox.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -33,17 +48,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="textbox"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder}"
-      />
-    `,
+    template,
   }),
 };
 

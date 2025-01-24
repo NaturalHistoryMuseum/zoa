@@ -2,6 +2,18 @@ import ZoaCheckbox from './Checkbox.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="checkbox"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, name, checkValue}"
+/>
+`;
+
 const meta = {
   component: ZoaCheckbox,
   title: 'Components/Inputs/Checkbox',
@@ -10,6 +22,9 @@ const meta = {
     docs: {
       description: {
         component: 'A single checkbox with an optional label.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -34,17 +49,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="checkbox"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, name, checkValue}"
-      />
-    `,
+    template,
   }),
 };
 

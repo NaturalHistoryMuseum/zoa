@@ -1,5 +1,13 @@
 import ZoaFlash from './Flash.vue';
 
+const template = `
+<zoa-flash :kind="kind"
+           :class="rootClass"
+           :header="header"
+           :message="message"
+/>
+`;
+
 const meta = {
   component: ZoaFlash,
   title: 'Components/Dialogs/Flash',
@@ -15,6 +23,9 @@ const meta = {
         component:
           'A flash dialog for displaying alert messages within the body of the page.',
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -28,9 +39,7 @@ const Base = {
     setup() {
       return { args };
     },
-    template: `
-          <zoa-flash v-bind="args"/>
-        `,
+    template,
   }),
 };
 

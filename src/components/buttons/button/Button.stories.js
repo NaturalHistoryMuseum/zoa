@@ -1,5 +1,12 @@
 import ZoaButton from './Button.vue';
 
+const template = `
+<zoa-button :class="rootClass"
+            :label="label"
+            :kind="kind"
+            :size="size"/>
+`;
+
 const meta = {
   component: ZoaButton,
   title: 'Components/Buttons/Button',
@@ -17,6 +24,9 @@ const meta = {
     docs: {
       description: {
         component: 'A button.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -37,18 +47,14 @@ const Base = {
       delete args.class;
       return args;
     },
-    template: `
-      <zoa-button :class="rootClass"
-                  :label="label"
-                  :kind="kind"
-                  :size="size"/>
-        `,
+    template,
   }),
 };
 
 export const Normal = {
   ...Base,
   args: {
+    ...Base.args,
     kind: 'normal',
   },
 };
@@ -56,6 +62,7 @@ export const Normal = {
 export const Primary = {
   ...Base,
   args: {
+    ...Base.args,
     kind: 'primary',
     label: 'Special Button',
   },

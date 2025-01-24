@@ -1,5 +1,9 @@
 import ZoaModal from './Modal.vue';
 
+const template = `
+<zoa-modal v-bind="args"/>
+  `;
+
 const meta = {
   component: ZoaModal,
   title: 'Components/Dialogs/Modal',
@@ -13,6 +17,9 @@ const meta = {
     docs: {
       description: {
         component: 'A modal dialog for displaying pop-up alert messages.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -29,9 +36,7 @@ const Base = {
     setup() {
       return { args };
     },
-    template: `
-      <zoa-modal v-bind="args"/>
-        `,
+    template,
   }),
 };
 

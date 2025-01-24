@@ -2,6 +2,18 @@ import ZoaNumber from './Number.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes, renderSetup } from '../stories.js';
 
+const template = `
+<zoa-input zoa-type="number"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, min, max, step}"
+/>
+`;
+
 const meta = {
   component: ZoaNumber,
   title: 'Components/Inputs/Number',
@@ -10,6 +22,9 @@ const meta = {
     docs: {
       description: {
         component: 'A number select component.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -36,17 +51,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="number"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, min, max, step}"
-      />
-        `,
+    template,
   }),
 };
 
