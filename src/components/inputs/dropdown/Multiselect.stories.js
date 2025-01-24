@@ -1,7 +1,8 @@
 import ZoaMultiselect from './Multiselect.vue';
 import { nanoid } from 'nanoid';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
 
 const template = `
 <zoa-input zoa-type="multiselect"
