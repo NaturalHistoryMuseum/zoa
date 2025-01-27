@@ -4,7 +4,6 @@ about: Report a bug you've found in this extension
 title: ''
 labels: bug
 assignees: ''
-
 ---
 
 **Description**
@@ -18,6 +17,7 @@ Steps to reproduce the bug.
 
 **Error Log**
 Paste any relevant error logs below:
+
 ```
 <error log here>
 ```
@@ -26,8 +26,9 @@ Paste any relevant error logs below:
 Add screenshots to illustrate the bug if you want.
 
 **Your Setup**
- - Commit/version of this repo:
- - Browser (if relevant): [e.g. chrome, safari]
+
+- Commit/version of this repo:
+- Browser (if relevant): [e.g. chrome, safari]
 
 **Anything Else?**
 ...

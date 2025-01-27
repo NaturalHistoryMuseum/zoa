@@ -1,11 +1,11 @@
-@import '../../styles/palette';
-@import '../../styles/fonts';
-@import '../../styles/vars';
+@use '../../styles/palette';
+@use '../../styles/fonts';
+@use '../../styles/vars';
 
 .main {
   border-width: 1px;
   border-style: solid;
-  border-radius: $rounding;
+  border-radius: vars.$rounding;
   padding: 0;
 }
 
@@ -20,8 +20,8 @@
   grid-template-areas: 'icon text button';
   gap: 10px;
   align-items: center;
-  padding: $box-padding;
-  border-radius: $rounding $rounding 0 0;
+  padding: vars.$box-padding;
+  border-radius: vars.$rounding vars.$rounding 0 0;
 
   & .icon {
     grid-area: icon;
@@ -35,54 +35,54 @@
 
 .content {
   background: #fff;
-  padding: 0 $box-padding $box-padding;
-  border-radius: 0 0 $rounding $rounding;
+  padding: 0 vars.$box-padding vars.$box-padding;
+  border-radius: 0 0 vars.$rounding vars.$rounding;
 }
 
 .kind--info {
-  border-color: $info-dark;
+  border-color: palette.$info-dark;
 
   .header {
-    background: $info-light;
+    background: palette.$info-light;
   }
 
   .icon {
-    color: $info-dark;
+    color: palette.$info-dark;
   }
 }
 
 .kind--warning {
-  border-color: $warning-dark;
+  border-color: palette.$warning-dark;
 
   .header {
-    background: $warning-light;
+    background: palette.$warning-light;
   }
 
   .icon {
-    color: $warning-dark;
+    color: palette.$warning-dark;
   }
 }
 
 .kind--error {
-  border-color: $error-dark;
+  border-color: palette.$error-dark;
 
   .header {
-    background: $error-light;
+    background: palette.$error-light;
   }
 
   .icon {
-    color: $error-dark;
+    color: palette.$error-dark;
   }
 }
 
 .kind--success {
-  border-color: $success-dark;
+  border-color: palette.$success-dark;
 
   .header {
-    background: $success-light;
+    background: palette.$success-light;
   }
 
   .icon {
-    color: $success-dark;
+    color: palette.$success-dark;
   }
 }

@@ -71,9 +71,9 @@ defineExpose({
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
 
 .inputWrapper.disabled {
-  @include disabled;
+  @include inputs.disabled;
 }
 </style>

@@ -5,17 +5,17 @@
     :aria-describedby="helpId"
   >
     <input
-      type="checkbox"
+      type="radio"
       :id="inputId"
-      :class="$style.defaultCheckbox"
-      v-model="checked"
+      :class="$style.defaultRadio"
+      v-model="value"
       :name="name ? name : null"
       :value="_checkValue"
-      ref="checkboxInput"
+      ref="radioInput"
       :disabled="disabled"
     />
-    <span :class="$style.checkbox" @click="toggleValue">
-      <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
+    <span :class="$style.radio" @click="toggleValue">
+      <font-awesome-icon icon="fa-solid fa-circle" :class="$style.check" />
     </span>
   </div>
 </template>
@@ -31,7 +31,7 @@ const props = defineProps({
    * @model
    */
   modelValue: {
-    type: [Boolean, Array],
+    type: String,
     default: undefined,
   },
   /**
@@ -42,16 +42,18 @@ const props = defineProps({
     default: 0,
   },
   /**
-   * An optional name for the checkbox; if this is set, the checkbox will return
-   * the checkValue/label instead of a boolean.
+   * An optional name for a radio button group; if this is set, the radio button
+   * will return the value of the radio button that's currently selected in the
+   * group.
    */
   name: {
     type: [String, null],
     default: null,
   },
   /**
-   * An optional alternative value for the checkbox to return. If not specified,
-   * the label value will be used.
+   * An optional alternative value for the radio button to return. If not
+   * specified, the label value will be used. If neither are specified, the
+   * input ID will be used.
    */
   checkValue: {
     type: [String, null],
@@ -79,32 +81,19 @@ const { value, valueChanged } = useChangeEmits(emit, props);
 
 // ELEMENTS
 const rootContainer = inject('rootContainer');
-const checkboxInput = ref(null);
+const radioInput = ref(null);
 
 // STATE
 const focus = useFocusWithin(rootContainer);
 
 // EXPOSE
 defineExpose({
-  target: checkboxInput,
+  target: radioInput,
 });
 
 const label = inject('label');
 const _checkValue = computed(() => {
-  return props.checkValue || label.value;
-});
-
-const checked = computed({
-  get() {
-    if (props.name) {
-      return value.value || [];
-    } else {
-      return value.value || false;
-    }
-  },
-  set(newValue) {
-    valueChanged(newValue);
-  },
+  return props.checkValue || label.value || inputId.value;
 });
 
 function toggleValue() {
@@ -112,19 +101,10 @@ function toggleValue() {
     return;
   }
 
-  // if the same v-model is set on a group of checkboxes, they return an array
-  // of their _checkValue values instead of a single boolean.
-  if (props.name) {
-    // if it's currently unchecked, we want to check it, and vice versa
-    let check = !checked.value.includes(_checkValue.value);
-    // double-check the value isn't on there already
-    let currentValue = checked.value.filter((v) => v !== _checkValue.value);
-    if (check) {
-      currentValue.push(_checkValue.value);
-    }
-    checked.value = currentValue;
-  } else {
-    checked.value = !checked.value;
+  // if it's currently unchecked, we want to check it; ignore if already checked
+  let checked = value.value === _checkValue.value;
+  if (!checked) {
+    value.value = _checkValue.value;
   }
 }
 
@@ -140,21 +120,21 @@ onKeyStroke(' ', () => {
 @use '../../../styles/palette';
 @use '../../../styles/vars';
 
-.defaultCheckbox {
+.defaultRadio {
   display: none;
 }
 
-.checkbox {
+.radio {
   height: 1.5em;
   width: 1.5em;
   cursor: pointer;
   background: white;
   border: 1px solid palette.$grey;
-  border-radius: vars.$rounding;
+  border-radius: 100%;
   position: relative;
   display: block;
 
-  .defaultCheckbox:checked ~ & {
+  .defaultRadio:checked ~ & {
     background: palette.$primary-a;
 
     & > .check {
@@ -171,12 +151,13 @@ onKeyStroke(' ', () => {
   right: 0;
   left: 0;
   margin: auto;
+  font-size: 0.7em;
 }
 
 .inputWrapper {
   justify-self: center;
 
-  &.disabled .checkbox {
+  &.disabled .radio {
     @include inputs.disabled;
   }
 }

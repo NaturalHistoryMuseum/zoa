@@ -1,6 +1,21 @@
 import ZoaSlider from './Slider.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="slider"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, min, max, step,
+                     placeholderPosition, validMin, validMax,
+                     activeTrackRight, valueLabelPosition}"
+/>
+`;
 
 const meta = {
   component: ZoaSlider,
@@ -19,6 +34,9 @@ const meta = {
     docs: {
       description: {
         component: 'A slider component, returning a single value.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -49,19 +67,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="slider"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, min, max, step,
-                           placeholderPosition, validMin, validMax,
-                           activeTrackRight, valueLabelPosition}"
-      />
-    `,
+    template,
   }),
 };
 

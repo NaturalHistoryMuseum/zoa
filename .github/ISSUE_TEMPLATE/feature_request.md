@@ -4,7 +4,6 @@ about: Suggest an feature or improvement for this extension
 title: ''
 labels: enhancement
 assignees: ''
-
 ---
 
 **Overview**

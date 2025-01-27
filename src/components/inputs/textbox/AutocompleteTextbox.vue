@@ -23,7 +23,7 @@
           @click="setOption(opt.value)"
           tabindex="0"
         >
-          <span>{{ opt.label }}</span>
+          <span>{{ opt.value }}</span>
           <input type="hidden" :value="opt.value" />
         </li>
       </ul>
@@ -41,6 +41,7 @@ import {
   useFocusWithin,
   useFocus,
 } from '@vueuse/core';
+import { fuzzySearch } from 'levenshtein-search';
 
 const props = defineProps({
   /**
@@ -65,11 +66,17 @@ const props = defineProps({
   },
   /**
    * The options available to select. Each item can be a string, or an object
-   * with `label`, `value`, and `order` keys (one of label/value required; order
-   * is optional).
+   * with `value`, and `order` keys (value required; order is optional).
    */
   options: {
     type: Array,
+  },
+  /**
+   * Enables internal list filtering based on the current value. Disable if implementing an external filter using emits.
+   */
+  enableSearch: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -92,18 +99,30 @@ const emit = defineEmits([
 const { value } = useChangeEmits(emit, props);
 
 const dropdownOptions = computed(() => {
+  const doSearch = props.enableSearch && value.value;
+  const searchString = doSearch ? value.value.toLowerCase() : null;
+  const checkMatch = (txt) => {
+    return txt
+      ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
+      : false;
+  };
+
   let outputOptions = [];
   props.options.forEach((o) => {
     if (typeof o === 'object') {
       outputOptions.push({
-        label: o.label || o.value,
-        value: o.value || o.label,
+        value: o.value,
         order: o.order == null ? null : o.order,
       });
     } else {
-      outputOptions.push({ label: o, value: o });
+      outputOptions.push({ value: o });
     }
   });
+
+  if (doSearch) {
+    outputOptions = outputOptions.filter((o) => checkMatch(o.value));
+  }
+
   outputOptions.sort((a, b) => {
     let orderSort = 0;
     if (a.order != null || b.order != null) {
@@ -111,13 +130,13 @@ const dropdownOptions = computed(() => {
         a.order != null && b.order != null
           ? a.order - b.order
           : a.order != null
-          ? -1
-          : 1;
+            ? -1
+            : 1;
     }
 
-    let labelSort = a.label.localeCompare(b.label);
+    let valueSort = a.value.localeCompare(b.value);
 
-    return orderSort !== 0 ? orderSort : labelSort;
+    return orderSort !== 0 ? orderSort : valueSort;
   });
   return outputOptions;
 });
@@ -198,21 +217,23 @@ function setOption(text) {
 </script>
 
 <style module lang="scss">
-@import '../inputs';
+@use '../inputs';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .inputWrapper {
   position: relative;
 
   &.disabled {
-    @include disabled;
+    @include inputs.disabled;
   }
 }
 
 .options {
   position: absolute;
   background: white;
-  border: 1px solid $grey;
-  border-radius: $rounding;
+  border: 1px solid palette.$grey;
+  border-radius: vars.$rounding;
   width: 100%;
   margin-top: 2px;
   font-size: 0.9em;
@@ -227,26 +248,26 @@ function setOption(text) {
 }
 
 .option {
-  padding: $padding;
+  padding: vars.$padding;
 
   &:hover,
   &:focus {
-    background: $secondary;
+    background: palette.$secondary;
   }
 
   &:first-child {
-    border-radius: $rounding $rounding 0 0;
+    border-radius: vars.$rounding vars.$rounding 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 $rounding $rounding;
+    border-radius: 0 0 vars.$rounding vars.$rounding;
   }
 }
 
 .noOptions {
   font-size: 0.8em;
   font-style: italic;
-  padding: $padding;
+  padding: vars.$padding;
   opacity: 0.8;
 }
 </style>

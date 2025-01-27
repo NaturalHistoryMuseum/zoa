@@ -1,4 +1,16 @@
 import ZoaToggleButton from './ToggleButton.vue';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-toggle-button :class="rootClass"
+                   :delay="delay"
+                   :label="label"
+                   :check-value="checkValue"
+                   :kind="kind"
+                   :name="name"
+                   :size="size"
+/>
+`;
 
 const meta = {
   component: ZoaToggleButton,
@@ -29,6 +41,9 @@ const meta = {
         component:
           "A toggleable button. Only shows its status via colour change, so it's mostly useful for things like opening menus rather than as a part of a form.",
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -48,20 +63,9 @@ const Base = {
   render: (args) => ({
     components: { ZoaToggleButton },
     setup() {
-      args['rootClass'] = args.class;
-      delete args.class;
-      return args;
+      return renderSetup(args);
     },
-    template: `
-          <zoa-toggle-button :class="rootClass"
-                             :delay="delay"
-                             :label="label"
-                             :check-value="checkValue"
-                             :kind="kind"
-                             :name="name"
-                             :size="size"
-          />
-        `,
+    template,
   }),
 };
 

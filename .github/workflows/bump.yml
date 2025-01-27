@@ -7,19 +7,19 @@ on:
 
 jobs:
   build-then-bump:
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    name: Build dist package, bump version, create changelog
     runs-on: ubuntu-latest
-    name: "Build dist, bump version, create changelog"
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
       - name: Install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: 20
       - name: Install packages
         run: npm install
       - name: Build
@@ -27,7 +27,7 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'dist'
+          add: dist
           message: 'chore: build dist package'
           push: false
       - name: Create bump and changelog
@@ -35,11 +35,11 @@ jobs:
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           changelog_increment_filename: CURRENT.md
-          extra_requirements: "cz-nhm"
+          extra_requirements: 'cz-nhm'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: "CURRENT.md"
+          body_path: 'CURRENT.md'
           tag_name: v${{ env.REVISION }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

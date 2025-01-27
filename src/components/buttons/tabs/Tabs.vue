@@ -134,8 +134,8 @@ const tabOptions = computed(() => {
         a.order != null && b.order != null
           ? a.order - b.order
           : a.order != null
-          ? -1
-          : 1;
+            ? -1
+            : 1;
     }
 
     let labelSort = a.label.localeCompare(b.label);
@@ -159,23 +159,26 @@ if (value.value == null) {
 </script>
 
 <style module lang="scss">
-@import '../../inputs/inputs';
+@use '../../inputs/inputs';
+@use '../../../styles/fonts';
+@use '../../../styles/palette';
+@use '../../../styles/vars';
 
 .tab {
   $arrowSize: 6px;
 
-  font-family: $header-font;
+  font-family: fonts.$header-font;
   font-weight: 600;
   border: none;
-  border-radius: $rounding;
+  border-radius: vars.$rounding;
   position: relative;
   transition: 0.2s;
   cursor: pointer;
   color: black;
-  background-color: $grey;
+  background-color: palette.$grey;
 
   & input {
-    @include sr-only;
+    @include vars.sr-only;
   }
 
   &::after {
@@ -222,25 +225,25 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: $secondary-b;
-    color: $secondary-text;
+    background-color: palette.$secondary-b;
+    color: palette.$secondary-text;
   }
 
   &.state--active {
-    background-color: $secondary;
-    color: $secondary-text;
+    background-color: palette.$secondary;
+    color: palette.$secondary-text;
 
     &.orient--above::after {
-      border-bottom-color: $secondary;
+      border-bottom-color: palette.$secondary;
     }
     &.orient--below::after {
-      border-top-color: $secondary;
+      border-top-color: palette.$secondary;
     }
     &.orient--left::after {
-      border-right-color: $secondary;
+      border-right-color: palette.$secondary;
     }
     &.orient--right::after {
-      border-left-color: $secondary;
+      border-left-color: palette.$secondary;
     }
   }
 }
@@ -249,25 +252,25 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: $primary-b;
-    color: $primary-text;
+    background-color: palette.$primary-b;
+    color: palette.$primary-text;
   }
 
   &.state--active {
-    background-color: $primary;
-    color: $primary-text;
+    background-color: palette.$primary;
+    color: palette.$primary-text;
 
     &.orient--above::after {
-      border-bottom-color: $primary;
+      border-bottom-color: palette.$primary;
     }
     &.orient--below::after {
-      border-top-color: $primary;
+      border-top-color: palette.$primary;
     }
     &.orient--left::after {
-      border-right-color: $primary;
+      border-right-color: palette.$primary;
     }
     &.orient--right::after {
-      border-left-color: $primary;
+      border-left-color: palette.$primary;
     }
   }
 }
@@ -276,25 +279,25 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: $tertiary-b;
-    color: $tertiary-text;
+    background-color: palette.$tertiary-b;
+    color: palette.$tertiary-text;
   }
 
   &.state--active {
-    background-color: $tertiary;
-    color: $tertiary-text;
+    background-color: palette.$tertiary;
+    color: palette.$tertiary-text;
 
     &.orient--above::after {
-      border-bottom-color: $tertiary;
+      border-bottom-color: palette.$tertiary;
     }
     &.orient--below::after {
-      border-top-color: $tertiary;
+      border-top-color: palette.$tertiary;
     }
     &.orient--left::after {
-      border-right-color: $tertiary;
+      border-right-color: palette.$tertiary;
     }
     &.orient--right::after {
-      border-left-color: $tertiary;
+      border-left-color: palette.$tertiary;
     }
   }
 }
@@ -304,22 +307,22 @@ if (value.value == null) {
 
   &.orient--above,
   &.orient--below {
-    padding: calc($v-pad / 2) calc($h-pad / 2);
+    padding: calc(vars.$v-pad / 2) calc(vars.$h-pad / 2);
   }
   &.orient--left,
   &.orient--right {
-    padding: calc($h-pad / 2) calc($v-pad / 2);
+    padding: calc(vars.$h-pad / 2) calc(vars.$v-pad / 2);
   }
 }
 
 .size--md {
   &.orient--above,
   &.orient--below {
-    padding: $padding;
+    padding: vars.$padding;
   }
   &.orient--left,
   &.orient--right {
-    padding: $h-pad $v-pad;
+    padding: vars.$h-pad vars.$v-pad;
   }
 }
 

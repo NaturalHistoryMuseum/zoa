@@ -1,10 +1,10 @@
-@import 'modern-css-reset/dist/reset.css';
-@import 'palette';
-@import 'fonts';
-@import 'vars';
+@use 'modern-css-reset/dist/reset.css';
+@use 'palette';
+@use 'fonts';
+@use 'vars';
 
 body {
-  @include body-font;
+  @include fonts.body-font;
   font-size: 1em;
 }
 
@@ -14,5 +14,5 @@ h3,
 h4,
 h5,
 h6 {
-  @include header-font;
+  @include fonts.header-font;
 }

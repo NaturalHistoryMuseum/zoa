@@ -1,5 +1,20 @@
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="empty"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :grid-class="gridClass"
+>
+  <zoa-input zoa-type="checkbox" label-position="below" label="option 1"/>
+  <zoa-input zoa-type="checkbox" label-position="below" label="option 2"/>
+</zoa-input>
+`;
 
 const meta = {
   component: ZoaInput,
@@ -38,6 +53,9 @@ const meta = {
         component:
           'An empty grid for positioning other inputs under a single label.',
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -58,19 +76,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="empty"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :grid-class="gridClass"
-      >
-        <zoa-input zoa-type="checkbox" label-position="below" label="option 1"/>
-        <zoa-input zoa-type="checkbox" label-position="below" label="option 2"/>
-      </zoa-input>
-        `,
+    template,
   }),
 };
 

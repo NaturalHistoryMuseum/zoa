@@ -244,12 +244,13 @@ defineExpose({
 </script>
 
 <style module lang="scss">
-@import 'inputs';
+@use 'inputs';
+@use '../../styles/vars';
 
 .rootWrapper {
   display: grid;
   align-items: center;
-  gap: $label-gap;
+  gap: vars.$label-gap;
   grid-template-rows: auto;
 
   // because sometimes the label is a <legend> and that has to be directly under
@@ -314,7 +315,8 @@ defineExpose({
   }
 }
 
-.checkbox {
+.checkbox,
+.radio {
   &.rootWrapper {
     width: auto;
 
@@ -356,8 +358,9 @@ defineExpose({
     }
 
     &.rootWrapper--right {
-      grid-template-areas: 'input label .';
-      grid-template-columns: auto auto 1fr;
+      // extend the label to the right for dropdowns
+      grid-template-areas: 'input label';
+      grid-template-columns: auto 1fr;
 
       &.rootWrapper--help {
         grid-template-areas: 'input label help';

@@ -45,11 +45,11 @@ const labelId = inject('labelId');
 </script>
 
 <style module lang="scss">
-@import '../../../styles/fonts';
-@import '../../../styles/vars';
+@use '../../../styles/fonts';
+@use '../../../styles/vars';
 
 .main {
-  @include header-font;
+  @include fonts.header-font;
   font-size: 0.9em;
   grid-area: label;
 
@@ -63,7 +63,7 @@ const labelId = inject('labelId');
 
   &.main--above,
   &.main--below {
-    padding: 0 $h-pad;
+    padding: 0 vars.$h-pad;
   }
 
   &.main--none {
