@@ -1,3 +1,61 @@
+## v0.11.0 (2025-01-27)
+
+### Feature
+
+- **dropdown-search**: add searchable dropdown component
+- add radio button
+- add basic search to autocomplete
+
+### Fix
+
+- **storybook**: use explicit code snippet for many option multiselect
+- **storybook**: improve button story
+- **storybook**: improve story for modal dialog
+- **storybook**: improve story for flash dialog
+- **storybook**: define code examples explicitly
+- make checkbox and radio labels extend right
+- **multiselect**: use ZoaInput component in storybook
+- **multiselect**: don't close dropdown if enter pressed in search box
+- **multiselect**: move into options when down arrow pressed
+- show no options message if no options visible
+- remove label from autocomplete options
+- truncate long labels again
+- also debounce model value change
+- change import to use in sass
+- update dev dependencies
+- update dependencies
+- update nanoid
+
+### Refactor
+
+- **storybook**: use renderSetup for buttons
+- **storybook**: move renderSetup util
+- change dropdown opts variable names
+
+### Style
+
+- run prettier on everything
+- run pre-commit (i.e. prettier) on all files
+
+### Build System(s)
+
+- remove process.env from vite config
+
+### CI System(s)
+
+- standardise actions, add pr validation action
+- update node version in github actions
+
+### Chores/Misc
+
+- add .prettierignore
+- build dist package
+- build dist package
+- update pre-commit hooks
+- remove vue-fontawesome tag
+- use version provider to bump versions with cz
+- bump version in package-lock.json
+
 ## v0.10.1 (2024-06-18)
 
 ### Fix
