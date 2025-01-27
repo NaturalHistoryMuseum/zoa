@@ -1,6 +1,19 @@
 import ZoaAutocompleteTextbox from './AutocompleteTextbox.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="autocomplete-textbox"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, options, enableSearch}"
+/>
+`;
 
 const meta = {
   component: ZoaAutocompleteTextbox,
@@ -11,6 +24,9 @@ const meta = {
       description: {
         component:
           'A textbox with dropdown options. The text entered into the box is the returned value; options are supplied from outside of the component, and users can choose whether or not to click them.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -39,17 +55,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="autocomplete-textbox"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, options, enableSearch}"
-      />
-        `,
+    template,
   }),
 };
 

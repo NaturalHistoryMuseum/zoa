@@ -28,4 +28,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: dist
-          message: "chore: build dist package"
+          message: 'chore: build dist package'

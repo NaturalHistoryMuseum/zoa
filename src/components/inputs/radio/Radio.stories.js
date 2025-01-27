@@ -1,6 +1,19 @@
 import ZoaRadio from './Radio.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="radio"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, name, checkValue}"
+/>
+`;
 
 const meta = {
   component: ZoaRadio,
@@ -10,6 +23,9 @@ const meta = {
     docs: {
       description: {
         component: 'A single radio button with an optional label.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -34,17 +50,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="radio"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, name, checkValue}"
-      />
-    `,
+    template,
   }),
 };
 

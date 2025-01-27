@@ -1,6 +1,19 @@
 import ZoaDropdownSearch from './DropdownSearch.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="dropdown-search"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, options, searchDelay, enableSearch, itemHeight}"
+/>
+`;
 
 const meta = {
   component: ZoaDropdownSearch,
@@ -11,6 +24,9 @@ const meta = {
       description: {
         component:
           'A dropdown/select component allowing searching/filtering the list of potential options. Options can be passed in as a mixed list of strings or objects with `label` and `value` keys. Each option must have a unique value (or label, if not using values).',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -46,17 +62,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="dropdown-search"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, options, searchDelay, enableSearch, itemHeight}"
-      />
-    `,
+    template,
   }),
 };
 

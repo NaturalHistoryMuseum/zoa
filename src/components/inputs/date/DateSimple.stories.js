@@ -1,6 +1,19 @@
 import ZoaDateSimple from './DateSimple.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="date-simple"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, min, max, step}"
+/>
+`;
 
 const meta = {
   component: ZoaDateSimple,
@@ -10,6 +23,9 @@ const meta = {
     docs: {
       description: {
         component: 'A standard date picker.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -36,17 +52,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="date-simple"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, min, max, step}"
-      />
-        `,
+    template,
   }),
 };
 

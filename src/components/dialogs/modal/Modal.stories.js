@@ -1,4 +1,14 @@
 import ZoaModal from './Modal.vue';
+import { renderSetup, htmlArgs } from '../../utils/stories.js';
+
+const template = `
+<zoa-modal :kind="kind"
+           :header="header"
+           :message="message"
+           :class="rootClass"
+           :button-args="buttonArgs"
+/>
+`;
 
 const meta = {
   component: ZoaModal,
@@ -14,6 +24,9 @@ const meta = {
       description: {
         component: 'A modal dialog for displaying pop-up alert messages.',
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -22,80 +35,108 @@ export default meta;
 
 const Base = {
   args: {
-    message: 'Here is some content that goes in the modal.',
+    kind: 'info',
+    header: 'Modal dialog header',
+    message:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
+    class: '',
+    buttonArgs: { label: 'Open modal' },
   },
   render: (args) => ({
     components: { ZoaModal },
     setup() {
-      return { args };
+      return renderSetup(args);
     },
-    template: `
-      <zoa-modal v-bind="args"/>
-        `,
+    template,
   }),
 };
 
 export const Default = {
   ...Base,
-  args: {
-    ...Base.args,
-    kind: 'info',
-    header: 'Parameters can be set using properties',
-  },
+  tags: ['!dev', '!autodocs'], // hides it from the sidebar and variant section
 };
 
-export const Slot = {
-  ...Base,
-  args: {
-    kind: 'info',
-  },
-  render: (args) => ({
+const slotTemplate = `
+<zoa-modal>
+  <template v-slot:button>Button label</template>
+  <template v-slot:header>You can also use slots!</template>
+  <span>The default slot defines the modal body.</span>
+</zoa-modal>
+`;
+export const Slots = {
+  render: () => ({
     components: { ZoaModal },
-    setup() {
-      return { args };
-    },
-    template: `
-      <zoa-modal v-bind="args">
-        <template v-slot:button>Button slot</template>
-        <template v-slot:header>Or you can use slots</template>
-        <span>The default slot defines the modal body.</span>
-      </zoa-modal>
-        `,
+    template: slotTemplate,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: slotTemplate,
+      },
+    },
+  },
 };
 
+// VARIANTS =====
+const infoArgs = {
+  kind: 'info',
+};
 export const Info = {
   ...Base,
-  args: {
-    ...Base.args,
-    kind: 'info',
-    header: 'Here is an informational message.',
+  args: infoArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-modal ${htmlArgs(infoArgs)}/>`,
+      },
+    },
   },
 };
 
+const warningArgs = {
+  kind: 'warning',
+  header: "Are you sure that's a good idea?",
+};
 export const Warning = {
   ...Base,
-  args: {
-    ...Base.args,
-    kind: 'warning',
-    header: "Are you sure that's a good idea?",
+  args: warningArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-modal ${htmlArgs(warningArgs)}/>`,
+      },
+    },
   },
 };
 
+const errorArgs = {
+  kind: 'error',
+  header: 'Oh no! Something went wrong.',
+};
 export const Error = {
   ...Base,
-  args: {
-    ...Base.args,
-    kind: 'error',
-    header: 'Oh no! Something went wrong.',
+  args: errorArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-modal ${htmlArgs(errorArgs)}/>`,
+      },
+    },
   },
 };
 
+const successArgs = {
+  kind: 'success',
+  header: 'Congratulations! The thing worked.',
+};
 export const Success = {
   ...Base,
-  args: {
-    ...Base.args,
-    kind: 'success',
-    header: 'Congratulations! The thing worked.',
+  args: successArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-modal ${htmlArgs(successArgs)}/>`,
+      },
+    },
   },
 };

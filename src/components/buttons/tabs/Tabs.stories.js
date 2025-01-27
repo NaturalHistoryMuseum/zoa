@@ -1,4 +1,16 @@
 import ZoaTabs from './Tabs.vue';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-tabs :class="rootClass"
+          :delay="delay"
+          :active-position="activePosition"
+          :initial-value="initialValue"
+          :kind="kind"
+          :options="options"
+          :size="size"
+/>
+`;
 
 const meta = {
   component: ZoaTabs,
@@ -32,6 +44,9 @@ const meta = {
       description: {
         component: 'A set of radio buttons displayed as tabs.',
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -56,20 +71,9 @@ const Base = {
   render: (args) => ({
     components: { ZoaTabs },
     setup() {
-      args['rootClass'] = args.class;
-      delete args.class;
-      return args;
+      return renderSetup(args);
     },
-    template: `
-          <zoa-tabs :class="rootClass"
-                    :delay="delay"
-                    :active-position="activePosition"
-                    :initial-value="initialValue"
-                    :kind="kind"
-                    :options="options"
-                    :size="size"
-          />
-        `,
+    template,
   }),
 };
 

@@ -28,18 +28,18 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: dist
-          message: "chore: build dist package"
+          message: 'chore: build dist package'
           push: false
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           changelog_increment_filename: CURRENT.md
-          extra_requirements: "cz-nhm"
+          extra_requirements: 'cz-nhm'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: "CURRENT.md"
+          body_path: 'CURRENT.md'
           tag_name: v${{ env.REVISION }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

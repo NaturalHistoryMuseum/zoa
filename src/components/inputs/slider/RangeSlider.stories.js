@@ -1,6 +1,20 @@
 import ZoaRangeSlider from './RangeSlider.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes, renderSetup } from '../stories.js';
+import { argTypes } from '../stories.js';
+import { renderSetup } from '../../utils/stories.js';
+
+const template = `
+<zoa-input zoa-type="range-slider"
+           :class="rootClass"
+           :label="label"
+           :label-position="labelPosition"
+           :help="help"
+           :help-position="helpPosition"
+           :disabled="disabled"
+           :options="{delay, placeholder, min, max, step, labelsRight,
+                     labelUpper, labelLower}"
+/>
+`;
 
 const meta = {
   component: ZoaRangeSlider,
@@ -16,6 +30,9 @@ const meta = {
       description: {
         component:
           'A component with two sliders representing a lower and upper value. Returns the values as an array.',
+      },
+      source: {
+        code: template,
       },
     },
   },
@@ -44,18 +61,7 @@ const Base = {
     setup() {
       return renderSetup(args);
     },
-    template: `
-      <zoa-input zoa-type="range-slider"
-                 :class="rootClass"
-                 :label="label"
-                 :label-position="labelPosition"
-                 :help="help"
-                 :help-position="helpPosition"
-                 :disabled="disabled"
-                 :options="{delay, placeholder, min, max, step, labelsRight,
-                           labelUpper, labelLower}"
-      />
-    `,
+    template,
   }),
 };
 

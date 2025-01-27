@@ -1,4 +1,12 @@
 import ZoaButton from './Button.vue';
+import { renderSetup, htmlArgs } from '../../utils/stories.js';
+
+const template = `
+<zoa-button :class="rootClass"
+            :label="label"
+            :kind="kind"
+            :size="size"/>
+`;
 
 const meta = {
   component: ZoaButton,
@@ -18,6 +26,9 @@ const meta = {
       description: {
         component: 'A button.',
       },
+      source: {
+        code: template,
+      },
     },
   },
 };
@@ -33,30 +44,63 @@ const Base = {
   render: (args) => ({
     components: { ZoaButton },
     setup() {
-      args['rootClass'] = args.class;
-      delete args.class;
-      return args;
+      return renderSetup(args);
     },
-    template: `
-      <zoa-button :class="rootClass"
-                  :label="label"
-                  :kind="kind"
-                  :size="size"/>
-        `,
+    template,
   }),
 };
 
+// this is the main example; if we don't have this then the first variant is
+// used
+export const Default = {
+  ...Base,
+  tags: ['!dev', '!autodocs'], // hides it from the sidebar and variant section
+};
+
+// VARIANTS =====
+const normalArgs = {
+  kind: 'normal',
+};
 export const Normal = {
   ...Base,
-  args: {
-    kind: 'normal',
+  args: normalArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-button ${htmlArgs(normalArgs)}/>`,
+      },
+    },
   },
 };
 
+const primaryArgs = {
+  kind: 'primary',
+  label: 'Special Button',
+};
 export const Primary = {
   ...Base,
-  args: {
-    kind: 'primary',
-    label: 'Special Button',
+  args: primaryArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-button ${htmlArgs(primaryArgs)}/>`,
+      },
+    },
+  },
+};
+
+const altArgs = {
+  kind: 'alt',
+  label: 'Different Button',
+};
+export const Alt = {
+  ...Base,
+  args: altArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `<zoa-button ${htmlArgs(altArgs)}/>`,
+      },
+    },
   },
 };
