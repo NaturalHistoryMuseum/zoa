@@ -1,4 +1,5 @@
 import ZoaToggleButton from './ToggleButton.vue';
+import { renderSetup } from '../../utils/stories.js';
 
 const template = `
 <zoa-toggle-button :class="rootClass"
@@ -62,9 +63,7 @@ const Base = {
   render: (args) => ({
     components: { ZoaToggleButton },
     setup() {
-      args['rootClass'] = args.class;
-      delete args.class;
-      return args;
+      return renderSetup(args);
     },
     template,
   }),

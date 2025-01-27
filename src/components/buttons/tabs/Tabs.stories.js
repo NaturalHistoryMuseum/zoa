@@ -1,4 +1,5 @@
 import ZoaTabs from './Tabs.vue';
+import { renderSetup } from '../../utils/stories.js';
 
 const template = `
 <zoa-tabs :class="rootClass"
@@ -70,9 +71,7 @@ const Base = {
   render: (args) => ({
     components: { ZoaTabs },
     setup() {
-      args['rootClass'] = args.class;
-      delete args.class;
-      return args;
+      return renderSetup(args);
     },
     template,
   }),
