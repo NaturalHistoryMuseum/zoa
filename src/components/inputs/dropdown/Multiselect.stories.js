@@ -77,29 +77,39 @@ const groups = ['root'];
   groups.push(`Group ${i + 1}`);
 });
 
+const manyArgs = {
+  label: 'Many Options',
+  labelPosition: 'above',
+  help: 'An example with a lot of randomly generated options and groups.',
+  options: [...Array(300).keys()].map((i) => {
+    let opt = {
+      value: nanoid(Math.ceil(Math.random() * 100)),
+    };
+    const group = groups[Math.floor(Math.random() * groups.length)];
+    if (group !== 'root') {
+      opt['group'] = group;
+    }
+    return opt;
+  }),
+  itemName: 'datum',
+  itemNamePlural: 'data',
+  enableSearch: true,
+};
 export const Many = {
   ...Base,
-  args: {
-    label: 'Many Options',
-    labelPosition: 'above',
-    help: 'Some example help text.',
-    helpPosition: 'right',
-    delay: 0,
-    placeholder: 'select option',
-    options: [...Array(300).keys()].map((i) => {
-      let opt = {
-        value: nanoid(Math.ceil(Math.random() * 100)),
-      };
-      const group = groups[Math.floor(Math.random() * groups.length)];
-      if (group !== 'root') {
-        opt['group'] = group;
-      }
-      return opt;
-    }),
-    itemName: 'datum',
-    itemNamePlural: 'data',
-    searchDelay: 200,
-    enableSearch: true,
-    itemHeight: 38,
+  args: manyArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<zoa-input zoa-type="multiselect"
+           label="${manyArgs.label}"
+           label-position="${manyArgs.labelPosition}"
+           help="${manyArgs.help}"
+           :options="{options, itemName: '${manyArgs.itemName}', itemNamePlural: '${manyArgs.itemNamePlural}', enableSearch: ${manyArgs.enableSearch}}"
+/>
+        `,
+      },
+    },
   },
 };
