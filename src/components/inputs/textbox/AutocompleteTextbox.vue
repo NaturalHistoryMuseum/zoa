@@ -239,6 +239,7 @@ function setOption(text) {
   font-size: 0.9em;
   max-height: 12em;
   overflow-y: auto;
+  z-index: 100;
 
   & > ul {
     padding: 0;
