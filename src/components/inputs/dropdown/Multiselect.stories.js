@@ -1,8 +1,8 @@
 import ZoaMultiselect from './Multiselect.vue';
-import { nanoid } from 'nanoid';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { loremIpsum } from 'lorem-ipsum';
 
 const template = `
 <zoa-input zoa-type="multiselect"
@@ -83,7 +83,11 @@ const manyArgs = {
   help: 'An example with a lot of randomly generated options and groups.',
   options: [...Array(300).keys()].map((i) => {
     let opt = {
-      value: nanoid(Math.ceil(Math.random() * 100)),
+      value: loremIpsum({
+        count: Math.ceil(Math.random() * 20),
+        units: 'words',
+        suffix: '',
+      }),
     };
     const group = groups[Math.floor(Math.random() * groups.length)];
     if (group !== 'root') {
