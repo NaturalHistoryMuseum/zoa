@@ -2,6 +2,7 @@ import ZoaAutocompleteTextbox from './AutocompleteTextbox.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { loremIpsum } from 'lorem-ipsum';
 
 const template = `
 <zoa-input zoa-type="autocomplete-textbox"
@@ -61,4 +62,36 @@ const Base = {
 
 export const Default = {
   ...Base,
+};
+
+const manyArgs = {
+  label: 'Many Options',
+  labelPosition: 'above',
+  help: 'An example with a lot of randomly generated options.',
+  options: [...Array(300).keys()].map((i) => {
+    return loremIpsum({
+      count: Math.ceil(Math.random() * 20),
+      units: 'words',
+      suffix: '',
+    });
+  }),
+  enableSearch: true,
+};
+export const Many = {
+  ...Base,
+  args: manyArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<zoa-input zoa-type="autocomplete-textbox"
+           label="${manyArgs.label}"
+           label-position="${manyArgs.labelPosition}"
+           help="${manyArgs.help}"
+           :options="{options, enableSearch: ${manyArgs.enableSearch}}"
+/>
+        `,
+      },
+    },
+  },
 };
