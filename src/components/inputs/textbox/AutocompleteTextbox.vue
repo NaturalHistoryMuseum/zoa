@@ -42,6 +42,7 @@ import {
   useFocus,
 } from '@vueuse/core';
 import { fuzzySearch } from 'levenshtein-search';
+import { debounce } from 'dettle';
 
 const props = defineProps({
   /**
@@ -55,7 +56,7 @@ const props = defineProps({
    */
   delay: {
     type: Number,
-    default: 200,
+    default: 0,
   },
   /**
    * Text to display in the blank input.
@@ -72,7 +73,15 @@ const props = defineProps({
     type: Array,
   },
   /**
-   * Enables internal list filtering based on the current value. Disable if implementing an external filter using emits.
+   * Debounce delay for the `search` event, in ms.
+   */
+  searchDelay: {
+    type: Number,
+    default: 400,
+  },
+  /**
+   * Enables internal list filtering based on the current value. Disable if
+   * implementing an external filter using emits.
    */
   enableSearch: {
     type: Boolean,
@@ -95,12 +104,28 @@ const emit = defineEmits([
    * @ignore
    */
   'update:modelValue',
+  /**
+   * Emitted when the search value changes; debounced if the searchDelay prop is > 0.
+   * @arg {string} searchTerm the search term
+   */
+  'search',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, valueChanged } = useChangeEmits(emit, props);
+// The value and the search term are the same, but we don't want to run the
+// search function as often as we update the value.
+const search = ref(null);
+const emitSearch = debounce((searchTerm) => {
+  search.value = searchTerm;
+  emit('search', searchTerm);
+}, props.searchDelay);
+value.setter = function (newValue) {
+  valueChanged(newValue);
+  emitSearch(newValue);
+};
 
 const dropdownOptions = computed(() => {
-  const doSearch = props.enableSearch && value.value;
-  const searchString = doSearch ? value.value.toLowerCase() : null;
+  const doSearch = props.enableSearch && search.value;
+  const searchString = doSearch ? search.value.toLowerCase() : null;
   const checkMatch = (txt) => {
     return txt
       ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0
