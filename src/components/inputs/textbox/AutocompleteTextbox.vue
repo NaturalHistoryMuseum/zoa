@@ -105,18 +105,22 @@ const emit = defineEmits([
    */
   'update:modelValue',
   /**
+   * @ignore Custom events must be emitted through the zoaEvent function.
+   */
+  'zoaEvent',
+  /**
    * Emitted when the search value changes; debounced if the searchDelay prop is > 0.
    * @arg {string} searchTerm the search term
    */
   'search',
 ]);
-const { value, valueChanged } = useChangeEmits(emit, props);
+const { value, valueChanged, zoaEvent } = useChangeEmits(emit, props);
 // The value and the search term are the same, but we don't want to run the
 // search function as often as we update the value.
 const search = ref(null);
 const emitSearch = debounce((searchTerm) => {
   search.value = searchTerm;
-  emit('search', searchTerm);
+  zoaEvent('search', searchTerm);
 }, props.searchDelay);
 value.setter = function (newValue) {
   valueChanged(newValue);

@@ -184,12 +184,16 @@ const emit = defineEmits([
    */
   'update:modelValue',
   /**
+   * @ignore Custom events must be emitted through the zoaEvent function.
+   */
+  'zoaEvent',
+  /**
    * Emitted when the search value changes; debounced if the searchDelay prop is > 0.
    * @arg {string} searchTerm the search term
    */
   'search',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, zoaEvent } = useChangeEmits(emit, props);
 if (!Array.isArray(value)) {
   // needs to be initialised as an array or the checkboxes will all select as
   // one, but returning an empty array as the default prop breaks reactivity
@@ -203,7 +207,7 @@ const displaySearch = ref(null);
 const activeSearch = ref(null);
 const emitSearch = debounce((searchTerm) => {
   activeSearch.value = searchTerm;
-  emit('search', searchTerm);
+  zoaEvent('search', searchTerm);
 }, props.searchDelay);
 const search = computed({
   get() {
