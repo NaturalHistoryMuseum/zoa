@@ -98,6 +98,7 @@ const manyArgs = {
   itemName: 'datum',
   itemNamePlural: 'data',
   enableSearch: true,
+  searchDelay: 200,
 };
 export const Many = {
   ...Base,
@@ -110,7 +111,7 @@ export const Many = {
            label="${manyArgs.label}"
            label-position="${manyArgs.labelPosition}"
            help="${manyArgs.help}"
-           :options="{options, itemName: '${manyArgs.itemName}', itemNamePlural: '${manyArgs.itemNamePlural}', enableSearch: ${manyArgs.enableSearch}}"
+           :options="{options, itemName: '${manyArgs.itemName}', itemNamePlural: '${manyArgs.itemNamePlural}', enableSearch: ${manyArgs.enableSearch}, searchDelay: ${manyArgs.searchDelay}}"
 />
         `,
       },
