@@ -71,6 +71,7 @@ const props = defineProps({
    */
   options: {
     type: Array,
+    required: true,
   },
   /**
    * Debounce delay for the `search` event, in ms.

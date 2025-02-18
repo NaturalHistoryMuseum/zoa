@@ -129,6 +129,7 @@ const props = defineProps({
    */
   options: {
     type: Array,
+    required: true,
   },
   /**
    * The string used to describe the items being selected, in singular form e.g. "resource", "genus".
