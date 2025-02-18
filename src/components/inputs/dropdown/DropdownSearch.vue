@@ -44,7 +44,7 @@
               zoa-type="radio"
               :label="item.label"
               label-position="right"
-              :options="{ checkValue: item.value, name: subId('radio') }"
+              :config="{ checkValue: item.value, name: subId('radio') }"
               v-model="value"
               v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
               @change="unfocus"
@@ -100,6 +100,7 @@ const props = defineProps({
    */
   options: {
     type: Array,
+    required: true,
   },
   /**
    * Debounce delay for the `search` event, in ms.
@@ -141,27 +142,32 @@ const emit = defineEmits([
    */
   'update:modelValue',
   /**
+   * @ignore Custom events must be emitted through the zoaEvent function.
+   */
+  'zoaEvent',
+  /**
    * Emitted when the search value changes; debounced if the searchDelay prop is > 0.
    * @arg {string} searchTerm the search term
    */
   'search',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, zoaEvent } = useChangeEmits(emit, props);
 
 // SEARCH
-const _search = ref(null);
+// to show to the user; should be updated immediately
+const displaySearch = ref(null);
+// to pass to the internal search function; update is debounced
+const activeSearch = ref(null);
 const emitSearch = debounce((searchTerm) => {
-  emit('search', searchTerm);
-}, props.searchDelay);
-const updateSearch = debounce((searchTerm) => {
-  _search.value = searchTerm;
+  activeSearch.value = searchTerm;
+  zoaEvent('search', searchTerm);
 }, props.searchDelay);
 const search = computed({
   get() {
-    return _search.value;
+    return displaySearch.value;
   },
   set(searchTerm) {
-    updateSearch(searchTerm);
+    displaySearch.value = searchTerm;
     emitSearch(searchTerm);
   },
 });
@@ -185,8 +191,8 @@ const unfilteredOptions = computed(() => {
 });
 
 const dropdownOptions = computed(() => {
-  const doSearch = props.enableSearch && search.value;
-  const searchString = doSearch ? search.value.toLowerCase() : null;
+  const doSearch = props.enableSearch && activeSearch.value;
+  const searchString = doSearch ? activeSearch.value.toLowerCase() : null;
   const checkMatch = (txt) => {
     return txt
       ? [...fuzzySearch(searchString, txt.toLowerCase(), 1)].length > 0

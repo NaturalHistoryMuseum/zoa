@@ -21,9 +21,10 @@
           <slot />
         </div>
         <zoa-input-component
-          v-bind="options"
+          v-bind="config"
           v-model="value"
           ref="inputComponent"
+          @zoa-event="handleCustomEvent"
           v-else
         />
       </fieldset>
@@ -39,8 +40,9 @@
       />
       <zoa-help v-if="help" :text="help" :position="helpPosition" />
       <zoa-input-component
-        v-bind="options"
+        v-bind="config"
         v-model="value"
+        @zoa-event="handleCustomEvent"
         ref="inputComponent"
       />
     </template>
@@ -96,7 +98,7 @@ const props = defineProps({
   /**
    * Parameters passed to the input.
    */
-  options: {
+  config: {
     type: Object,
     default: () => {
       return {};
@@ -161,8 +163,8 @@ const rootClassKeys = computed(() => {
   }
   if (zoaInput.value.wrapperProps) {
     zoaInput.value.wrapperProps.forEach((p) => {
-      if (props.options[p] != null) {
-        _keys.push(`rootWrapper-${p}--${props.options[p]}`);
+      if (props.config[p] != null) {
+        _keys.push(`rootWrapper-${p}--${props.config[p]}`);
       }
     });
   }
@@ -180,8 +182,22 @@ const emit = defineEmits([
    * @ignore
    */
   'update:modelValue',
+  /**
+   * Search event (emitted by some child inputs).
+   */
+  'search',
+  /**
+   * Item selection event (emitted by some child inputs).
+   */
+  'selected',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+function handleCustomEvent(eventName, ...args) {
+  // Emit "custom" (non-standard, i.e. not "change" or "update:modelValue")
+  // events emitted by child input components.
+  emit(eventName, ...args);
+}
 
 const rootContainer = ref(null);
 

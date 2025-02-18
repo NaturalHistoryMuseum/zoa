@@ -47,5 +47,15 @@ export function useChangeEmits(emit, props) {
     },
   });
 
-  return { emitChange, valueChanged, value };
+  function zoaEvent(eventName, ...args) {
+    /**
+     * Emit an event both as itself and as a generic 'zoaEvent', to be captured
+     * by the ZoaInput wrapper and re-emitted. Any event emitted through this
+     * function should also be added to the list of emits in ZoaInput.
+     */
+    emit(eventName, ...args);
+    emit('zoaEvent', eventName, ...args);
+  }
+
+  return { emitChange, valueChanged, value, zoaEvent };
 }

@@ -4,6 +4,11 @@ export const argTypes = {
       disable: true,
     },
   },
+  zoaEvent: {
+    table: {
+      disable: true,
+    },
+  },
   class: {
     control: 'text',
     description:
