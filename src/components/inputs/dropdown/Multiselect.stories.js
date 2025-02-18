@@ -12,7 +12,7 @@ const template = `
            :help="help"
            :help-position="helpPosition"
            :disabled="disabled"
-           :options="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
+           :config="{delay, placeholder, options, itemName, itemNamePlural, searchDelay, enableSearch, itemHeight}"
 />
 `;
 
@@ -111,7 +111,7 @@ export const Many = {
            label="${manyArgs.label}"
            label-position="${manyArgs.labelPosition}"
            help="${manyArgs.help}"
-           :options="{options, itemName: '${manyArgs.itemName}', itemNamePlural: '${manyArgs.itemNamePlural}', enableSearch: ${manyArgs.enableSearch}, searchDelay: ${manyArgs.searchDelay}}"
+           :config="{options, itemName: '${manyArgs.itemName}', itemNamePlural: '${manyArgs.itemNamePlural}', enableSearch: ${manyArgs.enableSearch}, searchDelay: ${manyArgs.searchDelay}}"
 />
         `,
       },

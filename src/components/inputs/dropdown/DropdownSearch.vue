@@ -44,7 +44,7 @@
               zoa-type="radio"
               :label="item.label"
               label-position="right"
-              :options="{ checkValue: item.value, name: subId('radio') }"
+              :config="{ checkValue: item.value, name: subId('radio') }"
               v-model="value"
               v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
               @change="unfocus"

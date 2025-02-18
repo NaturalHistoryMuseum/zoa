@@ -30,7 +30,7 @@
             zoa-type="number"
             label="millenium"
             label-position="none"
-            :options="{ placeholder: 0, min: 0, max: 9 }"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.millenium"
             ref="yrM"
           />
@@ -38,7 +38,7 @@
             zoa-type="number"
             label="century"
             label-position="none"
-            :options="{ placeholder: 0, min: 0, max: 9 }"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.century"
             ref="yrC"
           />
@@ -46,7 +46,7 @@
             zoa-type="number"
             label="decade"
             label-position="none"
-            :options="{ placeholder: 0, min: 0, max: 9 }"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.decade"
             ref="yrD"
           />
@@ -54,7 +54,7 @@
             zoa-type="number"
             label="year"
             label-position="none"
-            :options="{ placeholder: 0, min: 0, max: 9 }"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             v-model="yearParts.year"
             ref="yrY"
           />
@@ -73,7 +73,7 @@
         <zoa-input
           zoa-type="number"
           label="month"
-          :options="{ placeholder: 1, min: 1, max: 12 }"
+          :config="{ placeholder: 1, min: 1, max: 12 }"
           v-model="month"
         />
         <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
@@ -90,7 +90,7 @@
         <zoa-input
           zoa-type="number"
           label="day"
-          :options="{ placeholder: 1, min: 1, max: monthDays }"
+          :config="{ placeholder: 1, min: 1, max: monthDays }"
           v-model="day"
         />
         <div :class="$style.dayGrid" tabindex="0" ref="dayBtns">
