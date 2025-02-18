@@ -1,4 +1,4 @@
-import{am as n,an as a,ao as p}from"./index-ku68P6bd.js";import{u as i}from"./index-DWr15mJx.js";import"./iframe-DnF1o5Z-.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-Cu4lwwaE.js";import"./index-DkDiOc0H.js";import"./index-ogSvIofg.js";const r=`# Zoa
+import{am as n,an as a,ao as p}from"./index-DBSuUip6.js";import{u as i}from"./index-Bhdy-LxE.js";import"./iframe-UoQItGig.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-Cu4lwwaE.js";import"./index-DkDiOc0H.js";import"./index-ogSvIofg.js";const r=`# Zoa
 
 UI components for the Data Portal team.
 
@@ -60,12 +60,12 @@ Inputs (other than the button and toggle button) are used via the \`<zoa-input>\
   <zoa-input
     zoa-type="checkbox"
     label="Checkbox"
-    :options="{ name: 'chkbox', delay: '200' }"
+    :config="{ name: 'chkbox', delay: '200' }"
   />
   <zoa-input
     zoa-type="textbox"
     label="Textbox"
-    :options="{ placeholder: 'this is a placeholder' }"
+    :config="{ placeholder: 'this is a placeholder' }"
   />
 </template>
 
