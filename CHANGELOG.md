@@ -1,3 +1,36 @@
+## v0.12.0 (2025-02-18)
+
+### Breaking Changes
+
+- change options to config on input wrapper
+
+### Feature
+
+- **autocomplete**: emit a 'selected' event when an item is chosen
+- debounce search on autocomplete
+
+### Fix
+
+- make options props required
+- emit custom events from input wrapper
+- separate displayed search term and actual search term
+- increase z-index to make options appear on top of other items
+
+### Refactor
+
+- **inputs**: change options to config on input wrapper
+- **storybook**: use lorem ipsum instead of nanoid for example text
+
+### Docs
+
+- **storybook**: add autocomplete example with many options
+
+### Chores/Misc
+
+- build dist package
+- add major_version_zero to commitizen config
+- build dist package
+
 ## v0.11.0 (2025-01-27)
 
 ### Feature
