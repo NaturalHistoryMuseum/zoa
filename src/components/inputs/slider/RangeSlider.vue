@@ -8,7 +8,7 @@
       zoa-type="slider"
       :label="labelLower"
       :label-position="labelsRight ? 'right' : 'left'"
-      :options="{
+      :config="{
         min,
         max,
         step,
@@ -24,7 +24,7 @@
       zoa-type="slider"
       :label="labelUpper"
       :label-position="labelsRight ? 'right' : 'left'"
-      :options="{
+      :config="{
         min,
         max,
         step,

@@ -74,7 +74,7 @@
               zoa-type="checkbox"
               :label="item.label"
               label-position="right"
-              :options="{ checkValue: item.value, name: subId('checkboxes') }"
+              :config="{ checkValue: item.value, name: subId('checkboxes') }"
               v-model="value"
               v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
             />

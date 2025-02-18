@@ -21,7 +21,7 @@
           <slot />
         </div>
         <zoa-input-component
-          v-bind="options"
+          v-bind="config"
           v-model="value"
           ref="inputComponent"
           @zoa-event="handleCustomEvent"
@@ -40,7 +40,7 @@
       />
       <zoa-help v-if="help" :text="help" :position="helpPosition" />
       <zoa-input-component
-        v-bind="options"
+        v-bind="config"
         v-model="value"
         @zoa-event="handleCustomEvent"
         ref="inputComponent"
@@ -98,7 +98,7 @@ const props = defineProps({
   /**
    * Parameters passed to the input.
    */
-  options: {
+  config: {
     type: Object,
     default: () => {
       return {};
@@ -163,8 +163,8 @@ const rootClassKeys = computed(() => {
   }
   if (zoaInput.value.wrapperProps) {
     zoaInput.value.wrapperProps.forEach((p) => {
-      if (props.options[p] != null) {
-        _keys.push(`rootWrapper-${p}--${props.options[p]}`);
+      if (props.config[p] != null) {
+        _keys.push(`rootWrapper-${p}--${props.config[p]}`);
       }
     });
   }

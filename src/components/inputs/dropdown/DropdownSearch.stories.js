@@ -11,7 +11,7 @@ const template = `
            :help="help"
            :help-position="helpPosition"
            :disabled="disabled"
-           :options="{delay, placeholder, options, searchDelay, enableSearch, itemHeight}"
+           :config="{delay, placeholder, options, searchDelay, enableSearch, itemHeight}"
 />
 `;
 

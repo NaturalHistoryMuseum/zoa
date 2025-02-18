@@ -26,7 +26,7 @@ const meta = {
         disable: true,
       },
     },
-    options: {
+    config: {
       table: {
         disable: true,
       },

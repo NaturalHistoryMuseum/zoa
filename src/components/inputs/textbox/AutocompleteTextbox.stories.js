@@ -12,7 +12,7 @@ const template = `
            :help="help"
            :help-position="helpPosition"
            :disabled="disabled"
-           :options="{delay, placeholder, options, enableSearch}"
+           :config="{delay, placeholder, options, enableSearch}"
 />
 `;
 
@@ -88,7 +88,7 @@ export const Many = {
            label="${manyArgs.label}"
            label-position="${manyArgs.labelPosition}"
            help="${manyArgs.help}"
-           :options="{options, enableSearch: ${manyArgs.enableSearch}}"
+           :config="{options, enableSearch: ${manyArgs.enableSearch}}"
 />
         `,
       },
