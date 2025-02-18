@@ -24,6 +24,7 @@
           v-bind="options"
           v-model="value"
           ref="inputComponent"
+          @zoa-event="handleCustomEvent"
           v-else
         />
       </fieldset>
@@ -41,6 +42,7 @@
       <zoa-input-component
         v-bind="options"
         v-model="value"
+        @zoa-event="handleCustomEvent"
         ref="inputComponent"
       />
     </template>
@@ -180,8 +182,22 @@ const emit = defineEmits([
    * @ignore
    */
   'update:modelValue',
+  /**
+   * Search event (emitted by some child inputs).
+   */
+  'search',
+  /**
+   * Item selection event (emitted by some child inputs).
+   */
+  'selected',
 ]);
 const { value } = useChangeEmits(emit, props);
+
+function handleCustomEvent(eventName, ...args) {
+  // Emit "custom" (non-standard, i.e. not "change" or "update:modelValue")
+  // events emitted by child input components.
+  emit(eventName, ...args);
+}
 
 const rootContainer = ref(null);
 
