@@ -1,3 +1,9 @@
+## v0.12.1 (2025-02-18)
+
+### Docs
+
+- **readme**: update input examples with renamed prop
+
 ## v0.12.0 (2025-02-18)
 
 ### Breaking Changes
