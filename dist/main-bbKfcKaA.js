@@ -1564,7 +1564,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
     "update:modelValue"
   ],
   setup(e, { expose: r, emit: o }) {
-    const l = () => import("./dates-lEwMLwKL.js"), m = e, v = P("inputId"), h = P("labelId"), c = P("helpId"), p = P("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = w(() => {
+    const l = () => import("./dates-DczqFJOv.js"), m = e, v = P("inputId"), h = P("labelId"), c = P("helpId"), p = P("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = w(() => {
       let i;
       try {
         i = new Date(
@@ -1864,7 +1864,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "number",
                 label: "millenium",
                 "label-position": "none",
-                options: { placeholder: 0, min: 0, max: 9 },
+                config: { placeholder: 0, min: 0, max: 9 },
                 modelValue: Z.value.millenium,
                 "onUpdate:modelValue": N[1] || (N[1] = (C) => Z.value.millenium = C),
                 ref_key: "yrM",
@@ -1874,7 +1874,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "number",
                 label: "century",
                 "label-position": "none",
-                options: { placeholder: 0, min: 0, max: 9 },
+                config: { placeholder: 0, min: 0, max: 9 },
                 modelValue: Z.value.century,
                 "onUpdate:modelValue": N[2] || (N[2] = (C) => Z.value.century = C),
                 ref_key: "yrC",
@@ -1884,7 +1884,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "number",
                 label: "decade",
                 "label-position": "none",
-                options: { placeholder: 0, min: 0, max: 9 },
+                config: { placeholder: 0, min: 0, max: 9 },
                 modelValue: Z.value.decade,
                 "onUpdate:modelValue": N[3] || (N[3] = (C) => Z.value.decade = C),
                 ref_key: "yrD",
@@ -1894,7 +1894,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "number",
                 label: "year",
                 "label-position": "none",
-                options: { placeholder: 0, min: 0, max: 9 },
+                config: { placeholder: 0, min: 0, max: 9 },
                 modelValue: Z.value.year,
                 "onUpdate:modelValue": N[4] || (N[4] = (C) => Z.value.year = C),
                 ref_key: "yrY",
@@ -1927,7 +1927,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
           K(u(fe), {
             "zoa-type": "number",
             label: "month",
-            options: { placeholder: 1, min: 1, max: 12 },
+            config: { placeholder: 1, min: 1, max: 12 },
             modelValue: $e.value,
             "onUpdate:modelValue": N[5] || (N[5] = (C) => $e.value = C)
           }, null, 8, ["modelValue"]),
@@ -1955,10 +1955,10 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
           K(u(fe), {
             "zoa-type": "number",
             label: "day",
-            options: { placeholder: 1, min: 1, max: lt.value },
+            config: { placeholder: 1, min: 1, max: lt.value },
             modelValue: _e.value,
             "onUpdate:modelValue": N[6] || (N[6] = (C) => _e.value = C)
-          }, null, 8, ["options", "modelValue"]),
+          }, null, 8, ["config", "modelValue"]),
           D("div", {
             class: $(i.$style.dayGrid),
             tabindex: "0",
@@ -2500,10 +2500,10 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "checkbox",
                 label: T.label,
                 "label-position": "right",
-                options: { checkValue: T.value, name: u(v)("checkboxes") },
+                config: { checkValue: T.value, name: u(v)("checkboxes") },
                 modelValue: u(n),
                 "onUpdate:modelValue": V[3] || (V[3] = (q) => ve(n) ? n.value = q : null)
-              }, null, 8, ["label", "options", "modelValue"])) : ze("", !0)
+              }, null, 8, ["label", "config", "modelValue"])) : ze("", !0)
             ]))
           ], 14, Ya))), 256))
         ], 2)) : (A(), L("div", {
@@ -2750,11 +2750,11 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
                 "zoa-type": "radio",
                 label: F.label,
                 "label-position": "right",
-                options: { checkValue: F.value, name: u(v)("radio") },
+                config: { checkValue: F.value, name: u(v)("radio") },
                 modelValue: u(n),
                 "onUpdate:modelValue": H[1] || (H[1] = (x) => ve(n) ? n.value = x : null),
                 onChange: X
-              }, null, 8, ["label", "options", "modelValue"])) : ze("", !0)
+              }, null, 8, ["label", "config", "modelValue"])) : ze("", !0)
             ])
           ], 14, vo))), 128))
         ], 2)) : (A(), L("div", {
@@ -3064,7 +3064,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
         "zoa-type": "slider",
         label: e.labelLower,
         "label-position": e.labelsRight ? "right" : "left",
-        options: {
+        config: {
           min: e.min,
           max: e.max,
           step: e.step,
@@ -3076,12 +3076,12 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
         "onUpdate:modelValue": M[0] || (M[0] = (k) => d.value = k),
         ref: "lowerTrack",
         disabled: u(h)
-      }, null, 8, ["label", "label-position", "options", "modelValue", "disabled"]),
+      }, null, 8, ["label", "label-position", "config", "modelValue", "disabled"]),
       K(u(fe), {
         "zoa-type": "slider",
         label: e.labelUpper,
         "label-position": e.labelsRight ? "right" : "left",
-        options: {
+        config: {
           min: e.min,
           max: e.max,
           step: e.step,
@@ -3093,7 +3093,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
         "onUpdate:modelValue": M[1] || (M[1] = (k) => y.value = k),
         ref: "upperTrack",
         disabled: u(h)
-      }, null, 8, ["label", "label-position", "options", "modelValue", "disabled"])
+      }, null, 8, ["label", "label-position", "config", "modelValue", "disabled"])
     ], 10, Bo));
   }
 }, jo = {
@@ -3480,7 +3480,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
     /**
      * Parameters passed to the input.
      */
-    options: {
+    config: {
       type: Object,
       default: () => ({})
     },
@@ -3545,7 +3545,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
         l.zoaType
       ];
       return l.help && U.push("rootWrapper--help"), m.value.wrapperProps && m.value.wrapperProps.forEach((O) => {
-        l.options[O] != null && U.push(`rootWrapper-${O}--${l.options[O]}`);
+        l.config[O] != null && U.push(`rootWrapper-${O}--${l.config[O]}`);
       }), U;
     }), { addPropClasses: s } = Be(l), d = o, { value: y } = ce(d, l);
     function f(U, ...O) {
@@ -3596,7 +3596,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
           class: $([e.gridClass || U.$style.emptyGrid, U.$style.inputWrapper])
         }, [
           Ee(U.$slots, "default")
-        ], 2)) : (A(), Ae(u(v), rt({ key: 2 }, e.options, {
+        ], 2)) : (A(), Ae(u(v), rt({ key: 2 }, e.config, {
           modelValue: u(y),
           "onUpdate:modelValue": O[0] || (O[0] = (G) => ve(y) ? y.value = G : null),
           ref_key: "inputComponent",
@@ -3617,7 +3617,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
           text: e.help,
           position: e.helpPosition
         }, null, 8, ["text", "position"])) : ze("", !0),
-        K(u(v), rt(e.options, {
+        K(u(v), rt(e.config, {
           modelValue: u(y),
           "onUpdate:modelValue": O[1] || (O[1] = (G) => ve(y) ? y.value = G : null),
           onZoaEvent: f,
