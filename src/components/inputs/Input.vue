@@ -186,6 +186,10 @@ const emit = defineEmits([
    * Search event (emitted by some child inputs).
    */
   'search',
+  /**
+   * Item selection event (emitted by some child inputs).
+   */
+  'selected',
 ]);
 const { value } = useChangeEmits(emit, props);
 

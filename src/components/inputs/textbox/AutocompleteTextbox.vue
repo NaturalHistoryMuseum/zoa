@@ -113,6 +113,11 @@ const emit = defineEmits([
    * @arg {string} searchTerm the search term
    */
   'search',
+  /**
+   * Emitted when a value is selected from the dropdown.
+   * @arg {string} selected the selected value
+   */
+  'selected',
 ]);
 const { value, valueChanged, zoaEvent } = useChangeEmits(emit, props);
 // The value and the search term are the same, but we don't want to run the
@@ -241,6 +246,7 @@ onKeyStroke('Enter', () => {
 
 function setOption(text) {
   value.value = text;
+  zoaEvent('selected', text);
   unfocus();
 }
 </script>
