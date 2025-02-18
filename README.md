@@ -60,12 +60,12 @@ Inputs (other than the button and toggle button) are used via the `<zoa-input>` 
   <zoa-input
     zoa-type="checkbox"
     label="Checkbox"
-    :options="{ name: 'chkbox', delay: '200' }"
+    :config="{ name: 'chkbox', delay: '200' }"
   />
   <zoa-input
     zoa-type="textbox"
     label="Textbox"
-    :options="{ placeholder: 'this is a placeholder' }"
+    :config="{ placeholder: 'this is a placeholder' }"
   />
 </template>
 
