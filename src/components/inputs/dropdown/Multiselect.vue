@@ -195,7 +195,7 @@ const emit = defineEmits([
   'search',
 ]);
 const { value, zoaEvent } = useChangeEmits(emit, props);
-if (!Array.isArray(value)) {
+if (!Array.isArray(value.value)) {
   // needs to be initialised as an array or the checkboxes will all select as
   // one, but returning an empty array as the default prop breaks reactivity
   value.value = [];
