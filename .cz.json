@@ -6,6 +6,7 @@
     "update_changelog_on_bump": true,
     "changelog_incremental": true,
     "version_provider": "npm",
-    "major_version_zero": true
+    "major_version_zero": true,
+    "changelog_merge_prerelease": true
   }
 }
