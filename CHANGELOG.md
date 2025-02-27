@@ -1,3 +1,23 @@
+## v0.12.2a0 (2025-02-27)
+
+### Fix
+
+- **multiselect**: check value type correctly
+
+### Chores/Misc
+
+- **actions**: bump if the previous commit isn't a bump
+- **actions**: make prerelease target dev branch
+- **actions**: publish prereleases to npm dev tag
+- **actions**: add prerelease action
+- **actions**: rename bump
+- **cz**: do not automatically build a changelog
+- **cz**: remove version from .cz.json
+- **cz**: add flag to merge prereleases
+- **actions**: add scope to dist package build in bump action
+- **actions**: rebuild dist package on push to dev/main
+- **actions**: update release action version
+
 ## v0.12.1 (2025-02-18)
 
 ### Docs
