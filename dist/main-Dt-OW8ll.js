@@ -1564,7 +1564,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
     "update:modelValue"
   ],
   setup(e, { expose: r, emit: o }) {
-    const l = () => import("./dates-DczqFJOv.js"), m = e, v = P("inputId"), h = P("labelId"), c = P("helpId"), p = P("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = w(() => {
+    const l = () => import("./dates-CYGQIAyL.js"), m = e, v = P("inputId"), h = P("labelId"), c = P("helpId"), p = P("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = w(() => {
       let i;
       try {
         i = new Date(
@@ -2275,7 +2275,7 @@ const wt = /* @__PURE__ */ mn(Zn), Gn = "zoa__dateambiguous__input", Yn = "zoa__
   ],
   setup(e, { expose: r, emit: o }) {
     const l = e, m = P("inputId"), v = P("subId"), h = P("labelId"), c = P("helpId"), p = P("disabled"), t = o, { value: n, zoaEvent: a } = ce(t, l);
-    Array.isArray(n) || (n.value = []);
+    Array.isArray(n.value) || (n.value = []);
     const s = E(null), d = E(null), y = Re((x) => {
       d.value = x, a("search", x);
     }, l.searchDelay), f = w({
