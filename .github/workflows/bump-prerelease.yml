@@ -9,7 +9,7 @@ jobs:
   bump-and-release:
     name: Create prerelease
     runs-on: ubuntu-latest
-    if: "startsWith(github.event.head_commit.message, 'chore(dist):')"
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
