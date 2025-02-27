@@ -28,7 +28,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: dist
-          message: 'chore: build dist package'
+          message: 'chore(dist): build dist package'
           push: false
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
