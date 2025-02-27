@@ -2,7 +2,6 @@
   "commitizen": {
     "name": "cz_nhm",
     "tag_format": "v$version",
-    "update_changelog_on_bump": true,
     "changelog_incremental": true,
     "version_provider": "npm",
     "major_version_zero": true,
