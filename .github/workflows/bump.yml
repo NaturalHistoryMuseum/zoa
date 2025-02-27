@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build-then-bump:
-    name: Build dist package, bump version, create changelog
+  bump-and-release:
+    name: Build, bump, and create main release
     runs-on: ubuntu-latest
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     steps:
