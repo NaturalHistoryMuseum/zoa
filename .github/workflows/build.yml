@@ -1,9 +1,7 @@
 name: Build dist (dev/patch)
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - dev
       - patch
@@ -12,7 +10,7 @@ jobs:
   build-dist:
     name: Build dist package
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: "!startsWith(github.event.head_commit.message, 'chore(dist):')"
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -28,4 +26,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: dist
-          message: 'chore: build dist package'
+          message: 'chore(dist): build dist package'
