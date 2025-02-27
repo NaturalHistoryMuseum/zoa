@@ -30,5 +30,6 @@ jobs:
           body_path: 'CURRENT.md'
           tag_name: v${{ env.REVISION }}
           prerelease: true
+          target_commitish: dev
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
