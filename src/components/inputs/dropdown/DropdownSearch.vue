@@ -1,25 +1,25 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     ref="container"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
     <div :class="$style.textboxWrapper">
       <input
+        v-show="focused && !disabled"
+        :id="inputId"
+        ref="textbox"
+        v-model="search"
         type="text"
         :placeholder="placeholder"
-        :id="inputId"
         :class="$style.input"
-        v-model="search"
-        v-show="focused && !disabled"
-        ref="textbox"
         :disabled="disabled"
       />
       <div
+        v-show="!focused || disabled"
         :class="$style.input"
         tabindex="0"
-        v-show="!focused || disabled"
         @focusin="startFocus"
       >
         {{ displayLabel }}
@@ -30,29 +30,29 @@
         @click="toggleFocus"
       />
     </div>
-    <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
+    <div v-if="focused && !disabled" ref="dropdown" :class="$style.options">
       <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
         <li
           v-for="item in dropdownOptions"
+          :key="subId(`opt__${item.value}`)"
           :title="item.label"
           :class="[$style.listItem, $style.option]"
           :style="{ height: `${itemHeight}px` }"
-          :key="subId(`opt__${item.value}`)"
         >
           <div>
             <zoa-input
+              v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
+              v-model="value"
               zoa-type="radio"
               :label="item.label"
               label-position="right"
               :config="{ checkValue: item.value, name: subId('radio') }"
-              v-model="value"
-              v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
               @change="unfocus"
             />
           </div>
         </li>
       </ul>
-      <div :class="$style.noOptions" v-else>No options found</div>
+      <div v-else :class="$style.noOptions">No options found</div>
     </div>
   </div>
 </template>

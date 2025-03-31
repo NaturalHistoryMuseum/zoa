@@ -5,12 +5,12 @@
     :aria-describedby="helpId"
   >
     <input
+      :id="inputId"
+      ref="target"
+      v-model="value"
       type="text"
       :placeholder="placeholder"
-      :id="inputId"
       :class="$style.input"
-      v-model="value"
-      ref="target"
       :disabled="disabled"
     />
   </div>

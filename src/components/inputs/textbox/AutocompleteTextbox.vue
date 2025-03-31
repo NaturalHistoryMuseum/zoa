@@ -1,33 +1,33 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     ref="container"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
   >
     <input
+      :id="inputId"
+      ref="textbox"
+      v-model="value"
       type="text"
       :placeholder="placeholder"
-      :id="inputId"
       :class="$style.input"
-      v-model="value"
-      @focusin="focused = true"
-      ref="textbox"
       :disabled="disabled"
+      @focusin="focused = true"
     />
-    <div :class="$style.options" v-if="focused && !disabled" ref="dropdown">
+    <div v-if="focused && !disabled" ref="dropdown" :class="$style.options">
       <ul v-if="dropdownOptions.length > 0">
         <li
           v-for="opt in dropdownOptions"
           :class="$style.option"
-          @click="setOption(opt.value)"
           tabindex="0"
+          @click="setOption(opt.value)"
         >
           <span>{{ opt.value }}</span>
           <input type="hidden" :value="opt.value" />
         </li>
       </ul>
-      <div :class="$style.noOptions" v-else>No options found</div>
+      <div v-else :class="$style.noOptions">No options found</div>
     </div>
   </div>
 </template>

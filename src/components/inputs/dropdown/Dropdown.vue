@@ -6,9 +6,9 @@
   >
     <select
       :id="inputId"
-      :class="$style.input"
-      v-model="value"
       ref="target"
+      v-model="value"
+      :class="$style.input"
       :disabled="disabled"
     >
       <option :value="null">{{ placeholder }}</option>

@@ -1,9 +1,9 @@
 <template>
   <div
     :class="[$style.inputWrapper, , disabled ? $style.disabled : '']"
-    @wheel="onScroll"
     :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    @wheel="onScroll"
   >
     <span :class="$style.track"></span>
     <span
@@ -11,21 +11,21 @@
       :style="activeTrackStyle"
     ></span>
     <span
+      ref="valueLabel"
       :class="[$style.valueLabel, $style[`valueLabel--${valueLabelPosition}`]]"
       :style="{ left: `${handlePosition.label}%` }"
-      ref="valueLabel"
       tabindex="0"
       >{{ valueLabelText }}</span
     >
     <input
+      :id="inputId"
+      ref="slider"
+      v-model="value"
       type="range"
       :min="min"
       :max="max"
       :step="step"
-      :id="inputId"
       :class="$style.input"
-      v-model="value"
-      ref="slider"
       :disabled="disabled"
     />
   </div>

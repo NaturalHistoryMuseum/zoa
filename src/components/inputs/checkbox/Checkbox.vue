@@ -5,13 +5,13 @@
     :aria-describedby="helpId"
   >
     <input
-      type="checkbox"
       :id="inputId"
-      :class="$style.defaultCheckbox"
+      ref="checkboxInput"
       v-model="checked"
+      type="checkbox"
+      :class="$style.defaultCheckbox"
       :name="name ? name : null"
       :value="_checkValue"
-      ref="checkboxInput"
       :disabled="disabled"
     />
     <span :class="$style.checkbox" @click="toggleValue">

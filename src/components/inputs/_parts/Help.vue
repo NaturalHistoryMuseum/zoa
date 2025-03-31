@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="[$style.main, $style[`main--${labelPosition}`]]"
     ref="helpContainer"
+    :class="[$style.main, $style[`main--${labelPosition}`]]"
   >
     <font-awesome-icon
       :icon="['fa-solid', 'fa-circle-question']"
@@ -9,8 +9,8 @@
     />
     <div
       v-show="showText"
-      :class="[$style.popup, $style[`popup--${position}`]]"
       :id="helpId"
+      :class="[$style.popup, $style[`popup--${position}`]]"
       role="tooltip"
     >
       <slot>

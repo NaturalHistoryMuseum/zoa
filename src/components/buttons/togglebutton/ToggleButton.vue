@@ -1,19 +1,19 @@
 <template>
   <label
     :id="componentId"
+    ref="checkboxContainer"
     :for="subId('toggle')"
     tabindex="0"
-    ref="checkboxContainer"
     :class="addPropClasses([$style.container])"
   >
     <input
-      type="checkbox"
       :id="subId('toggle')"
-      :class="$style.checkbox"
+      ref="checkboxInput"
       v-model="value"
+      type="checkbox"
+      :class="$style.checkbox"
       :name="name"
       :value="_checkValue"
-      ref="checkboxInput"
     />
     <span
       :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"

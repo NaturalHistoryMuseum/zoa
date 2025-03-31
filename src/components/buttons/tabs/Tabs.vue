@@ -12,7 +12,7 @@
             $style[`state--${value === tab.value ? 'active' : 'inactive'}`],
           ]"
         >
-          <input type="radio" :value="tab.value" v-model="value" />
+          <input v-model="value" type="radio" :value="tab.value" />
           <span>{{ tab.label }}</span>
         </label>
       </li>

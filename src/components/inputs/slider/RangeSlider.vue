@@ -5,6 +5,8 @@
     :aria-describedby="helpId"
   >
     <zoa-input
+      ref="lowerTrack"
+      v-model="valueLower"
       zoa-type="slider"
       :label="labelLower"
       :label-position="labelsRight ? 'right' : 'left'"
@@ -16,11 +18,11 @@
         valueLabelPosition: 'above',
         placeholderPosition: 0.25,
       }"
-      v-model="valueLower"
-      ref="lowerTrack"
       :disabled="disabled"
     />
     <zoa-input
+      ref="upperTrack"
+      v-model="valueUpper"
       zoa-type="slider"
       :label="labelUpper"
       :label-position="labelsRight ? 'right' : 'left'"
@@ -32,8 +34,6 @@
         placeholderPosition: 0.75,
         activeTrackRight: true,
       }"
-      v-model="valueUpper"
-      ref="upperTrack"
       :disabled="disabled"
     />
   </div>

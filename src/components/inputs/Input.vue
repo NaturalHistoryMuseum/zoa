@@ -15,17 +15,17 @@
         />
         <zoa-help v-if="help" :text="help" :position="helpPosition" />
         <div
-          :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
           v-if="ZoaInputComponent == null"
+          :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
         >
           <slot />
         </div>
         <zoa-input-component
-          v-bind="config"
-          v-model="value"
-          ref="inputComponent"
-          @zoa-event="handleCustomEvent"
           v-else
+          v-bind="config"
+          ref="inputComponent"
+          v-model="value"
+          @zoa-event="handleCustomEvent"
         />
       </fieldset>
     </template>
@@ -41,9 +41,9 @@
       <zoa-help v-if="help" :text="help" :position="helpPosition" />
       <zoa-input-component
         v-bind="config"
+        ref="inputComponent"
         v-model="value"
         @zoa-event="handleCustomEvent"
-        ref="inputComponent"
       />
     </template>
   </div>
@@ -158,7 +158,7 @@ const rootClassKeys = computed(() => {
     `rootWrapper--${props.labelPosition}`,
     props.zoaType,
   ];
-  if (!!props.help) {
+  if (props.help) {
     _keys.push('rootWrapper--help');
   }
   if (zoaInput.value.wrapperProps) {

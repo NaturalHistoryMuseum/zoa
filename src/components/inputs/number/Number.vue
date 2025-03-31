@@ -5,15 +5,15 @@
     :aria-describedby="helpId"
   >
     <input
+      :id="inputId"
+      ref="target"
+      v-model="value"
       type="number"
       :placeholder="placeholder"
       :min="min"
       :max="max"
       :step="step"
-      :id="inputId"
       :class="$style.input"
-      v-model="value"
-      ref="target"
       :disabled="disabled"
     />
   </div>

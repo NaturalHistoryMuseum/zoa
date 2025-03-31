@@ -5,13 +5,13 @@
     :aria-describedby="helpId"
   >
     <input
-      type="radio"
       :id="inputId"
-      :class="$style.defaultRadio"
+      ref="radioInput"
       v-model="value"
+      type="radio"
+      :class="$style.defaultRadio"
       :name="name ? name : null"
       :value="_checkValue"
-      ref="radioInput"
       :disabled="disabled"
     />
     <span :class="$style.radio" @click="toggleValue">

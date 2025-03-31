@@ -5,100 +5,100 @@
     :aria-describedby="helpId"
   >
     <input
+      :id="inputId"
+      ref="displayBox"
       type="text"
       :placeholder="placeholder"
-      :id="inputId"
       :class="[$style.input, editing ? $style.editing : '']"
-      ref="displayBox"
-      @input="parseInput"
       :disabled="disabled"
+      @input="parseInput"
     />
     <div v-if="focused && !disabled" :class="$style.datePopup">
-      <div :class="$style.popupSection" v-if="guessedDates.length > 0">
+      <div v-if="guessedDates.length > 0" :class="$style.popupSection">
         <span
           v-for="dt in guessedDates"
-          @click="setDate(dt)"
-          @keydown.enter="setDate(dt)"
           :class="$style.suggestion"
           tabindex="0"
+          @click="setDate(dt)"
+          @keydown.enter="setDate(dt)"
           >{{ formatDate(dt.year, dt.month, dt.day) }}</span
         >
       </div>
       <div :class="$style.popupSection">
         <zoa-input label="year" :grid-class="$style.yearParts">
           <zoa-input
+            ref="yrM"
+            v-model="yearParts.millenium"
             zoa-type="number"
             label="millenium"
             label-position="none"
             :config="{ placeholder: 0, min: 0, max: 9 }"
-            v-model="yearParts.millenium"
-            ref="yrM"
           />
           <zoa-input
+            ref="yrC"
+            v-model="yearParts.century"
             zoa-type="number"
             label="century"
             label-position="none"
             :config="{ placeholder: 0, min: 0, max: 9 }"
-            v-model="yearParts.century"
-            ref="yrC"
           />
           <zoa-input
+            ref="yrD"
+            v-model="yearParts.decade"
             zoa-type="number"
             label="decade"
             label-position="none"
             :config="{ placeholder: 0, min: 0, max: 9 }"
-            v-model="yearParts.decade"
-            ref="yrD"
           />
           <zoa-input
+            ref="yrY"
+            v-model="yearParts.year"
             zoa-type="number"
             label="year"
             label-position="none"
             :config="{ placeholder: 0, min: 0, max: 9 }"
-            v-model="yearParts.year"
-            ref="yrY"
           />
         </zoa-input>
-        <div :class="$style.yearGrid" tabindex="0" ref="yearBtns">
+        <div ref="yearBtns" :class="$style.yearGrid" tabindex="0">
           <zoa-button
             v-for="opt in yearOptions"
             size="sm"
-            @click="setYear(opt)"
             tabindex="-1"
+            @click="setYear(opt)"
             >{{ formatYear(opt) }}
           </zoa-button>
         </div>
       </div>
       <div :class="$style.popupSection">
         <zoa-input
+          v-model="month"
           zoa-type="number"
           label="month"
           :config="{ placeholder: 1, min: 1, max: 12 }"
-          v-model="month"
         />
-        <div :class="$style.monthGrid" tabindex="0" ref="monthBtns">
+        <div ref="monthBtns" :class="$style.monthGrid" tabindex="0">
           <zoa-button
             v-for="opt in monthOptions"
             size="sm"
-            @click="month = opt[1]"
             tabindex="-1"
+            @click="month = opt[1]"
             >{{ opt[0] }}
           </zoa-button>
         </div>
       </div>
       <div :class="$style.popupSection">
         <zoa-input
+          v-model="day"
           zoa-type="number"
           label="day"
           :config="{ placeholder: 1, min: 1, max: monthDays }"
-          v-model="day"
         />
-        <div :class="$style.dayGrid" tabindex="0" ref="dayBtns">
+        <div ref="dayBtns" :class="$style.dayGrid" tabindex="0">
           <zoa-button
             v-for="opt in dayOptions"
             size="sm"
-            @click="day = opt"
             tabindex="-1"
+            @click="day = opt"
           >
             {{ opt || 'clear' }}
           </zoa-button>
@@ -270,7 +270,7 @@ const focusedButtons = computed(() => {
 
 // KEYBINDINGS
 onKeyStroke('Enter', () => {
-  if (!focusedContainer) {
+  if (!focusedContainer.value) {
     return;
   }
   focusedContainer.value.children[0].focus();
