@@ -61,11 +61,13 @@
     "eslint-plugin-vue": "^10.0.0",
     "globals": "^16.0.0",
     "lorem-ipsum": "^2.0.8",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.83.1",
     "storybook": "^8.4.7",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.8"
   }
 }
