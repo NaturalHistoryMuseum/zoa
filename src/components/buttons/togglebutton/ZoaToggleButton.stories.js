@@ -1,5 +1,5 @@
-import ZoaToggleButton from './ZoaToggleButton.vue';
 import { renderSetup } from '../../utils/stories.js';
+import ZoaToggleButton from './ZoaToggleButton.vue';
 
 const template = `
 <zoa-toggle-button :class="rootClass"

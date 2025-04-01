@@ -1,5 +1,5 @@
+import { htmlArgs, renderSetup } from '../../utils/stories.js';
 import ZoaModal from './ZoaModal.vue';
-import { renderSetup, htmlArgs } from '../../utils/stories.js';
 
 const template = `
 <zoa-modal :kind="kind"

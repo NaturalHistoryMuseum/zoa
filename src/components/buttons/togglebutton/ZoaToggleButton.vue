@@ -27,11 +27,11 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../../utils/compid.js';
+import { onKeyStroke, useFocusWithin } from '@vueuse/core';
+import { computed, isProxy, ref, toRaw } from 'vue';
 import { useChangeEmits } from '../../inputs/common.js';
-import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref, computed, isProxy, toRaw } from 'vue';
 import { usePropClasses } from '../../utils/classes.js';
+import { useComponentId } from '../../utils/compid.js';
 
 const props = defineProps({
   /**

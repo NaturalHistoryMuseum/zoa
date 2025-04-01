@@ -40,9 +40,9 @@
 </template>
 
 <script setup>
-import { useChangeEmits } from '../common.js';
 import { computed, inject, ref, watch } from 'vue';
 import { ZoaInput } from '../../index.js';
+import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   /**

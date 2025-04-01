@@ -18,9 +18,9 @@
 </template>
 
 <script setup>
-import { useKindIcon } from '../../utils/icons.js';
 import FontAwesomeIcon from '../../../icons.js';
 import { usePropClasses } from '../../utils/classes.js';
+import { useKindIcon } from '../../utils/icons.js';
 
 const props = defineProps({
   /**

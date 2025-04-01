@@ -1,5 +1,5 @@
-import ZoaTabs from './ZoaTabs.vue';
 import { renderSetup } from '../../utils/stories.js';
+import ZoaTabs from './ZoaTabs.vue';
 
 const template = `
 <zoa-tabs :class="rootClass"

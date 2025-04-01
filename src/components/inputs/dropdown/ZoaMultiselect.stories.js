@@ -1,8 +1,8 @@
-import ZoaMultiselect from './ZoaMultiselect.vue';
-import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
-import { renderSetup } from '../../utils/stories.js';
 import { loremIpsum } from 'lorem-ipsum';
+import { ZoaInput } from '../../index.js';
+import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaMultiselect from './ZoaMultiselect.vue';
 
 const template = `
 <zoa-input zoa-type="multiselect"

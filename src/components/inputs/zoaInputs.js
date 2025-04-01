@@ -1,14 +1,14 @@
-import ZoaAutocompleteTextbox from './textbox/ZoaAutocompleteTextbox.vue';
 import ZoaCheckbox from './checkbox/ZoaCheckbox.vue';
 import ZoaDateAmbiguous from './date/ZoaDateAmbiguous.vue';
 import ZoaDateSimple from './date/ZoaDateSimple.vue';
 import ZoaDropdown from './dropdown/ZoaDropdown.vue';
-import ZoaMultiselect from './dropdown/ZoaMultiselect.vue';
 import ZoaDropdownSearch from './dropdown/ZoaDropdownSearch.vue';
+import ZoaMultiselect from './dropdown/ZoaMultiselect.vue';
 import ZoaNumber from './number/ZoaNumber.vue';
 import ZoaRadio from './radio/ZoaRadio.vue';
 import ZoaRangeSlider from './slider/ZoaRangeSlider.vue';
 import ZoaSlider from './slider/ZoaSlider.vue';
+import ZoaAutocompleteTextbox from './textbox/ZoaAutocompleteTextbox.vue';
 import ZoaTextbox from './textbox/ZoaTextbox.vue';
 
 export default {

@@ -1,5 +1,5 @@
+import { htmlArgs, renderSetup } from '../../utils/stories.js';
 import ZoaFlash from './ZoaFlash.vue';
-import { renderSetup, htmlArgs } from '../../utils/stories.js';
 
 const template = `
 <zoa-flash :kind="kind"

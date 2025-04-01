@@ -1,7 +1,7 @@
-import ZoaTextbox from './ZoaTextbox.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaTextbox from './ZoaTextbox.vue';
 
 const template = `
 <zoa-input zoa-type="textbox"

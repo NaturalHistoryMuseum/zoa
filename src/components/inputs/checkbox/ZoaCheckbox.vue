@@ -21,10 +21,10 @@
 </template>
 
 <script setup>
+import { onKeyStroke, useFocusWithin } from '@vueuse/core';
+import { computed, inject, ref } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { useChangeEmits } from '../common.js';
-import { useFocusWithin, onKeyStroke } from '@vueuse/core';
-import { ref, computed, inject } from 'vue';
 
 const props = defineProps({
   /**

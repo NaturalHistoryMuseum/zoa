@@ -87,19 +87,19 @@
 </template>
 
 <script setup>
-import { useChangeEmits } from '../common.js';
-import { computed, inject, ref } from 'vue';
 import {
   onClickOutside,
   onKeyStroke,
-  useFocusWithin,
   useFocus,
+  useFocusWithin,
   useScroll,
 } from '@vueuse/core';
-import FontAwesomeIcon from '../../../icons.js';
-import { ZoaInput } from '../../index.js';
 import { debounce } from 'dettle';
 import { fuzzySearch } from 'levenshtein-search';
+import { computed, inject, ref } from 'vue';
+import FontAwesomeIcon from '../../../icons.js';
+import { ZoaInput } from '../../index.js';
+import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   /**

@@ -1,7 +1,7 @@
-import ZoaDateSimple from './ZoaDateSimple.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaDateSimple from './ZoaDateSimple.vue';
 
 const template = `
 <zoa-input zoa-type="date-simple"

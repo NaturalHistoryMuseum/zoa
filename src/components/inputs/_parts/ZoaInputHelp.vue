@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-import FontAwesomeIcon from '../../../icons.js';
-import { ref, inject, watch } from 'vue';
 import { onKeyStroke, useElementHover } from '@vueuse/core';
+import { inject, ref, watch } from 'vue';
+import FontAwesomeIcon from '../../../icons.js';
 
 const props = defineProps({
   text: {

@@ -1,7 +1,7 @@
-import ZoaNumber from './ZoaNumber.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaNumber from './ZoaNumber.vue';
 
 const template = `
 <zoa-input zoa-type="number"

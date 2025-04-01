@@ -1,7 +1,7 @@
-import ZoaRangeSlider from './ZoaRangeSlider.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaRangeSlider from './ZoaRangeSlider.vue';
 
 const template = `
 <zoa-input zoa-type="range-slider"

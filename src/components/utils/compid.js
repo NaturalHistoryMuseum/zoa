@@ -1,5 +1,5 @@
-import { ref } from 'vue';
 import { nanoid } from 'nanoid';
+import { ref } from 'vue';
 
 export function useComponentId() {
   const componentId = ref(nanoid(6));

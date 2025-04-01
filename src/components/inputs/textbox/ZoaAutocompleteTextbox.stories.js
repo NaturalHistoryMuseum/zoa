@@ -1,8 +1,8 @@
-import ZoaAutocompleteTextbox from './ZoaAutocompleteTextbox.vue';
-import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
-import { renderSetup } from '../../utils/stories.js';
 import { loremIpsum } from 'lorem-ipsum';
+import { ZoaInput } from '../../index.js';
+import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaAutocompleteTextbox from './ZoaAutocompleteTextbox.vue';
 
 const template = `
 <zoa-input zoa-type="autocomplete-textbox"

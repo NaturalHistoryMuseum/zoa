@@ -50,12 +50,12 @@
 </template>
 
 <script setup>
-import { useComponentId } from '../utils/compid.js';
-import { useChangeEmits } from './common.js';
 import { computed, provide, ref } from 'vue';
 import { usePropClasses } from '../utils/classes.js';
-import ZoaInputLabel from './_parts/ZoaInputLabel.vue';
+import { useComponentId } from '../utils/compid.js';
 import ZoaInputHelp from './_parts/ZoaInputHelp.vue';
+import ZoaInputLabel from './_parts/ZoaInputLabel.vue';
+import { useChangeEmits } from './common.js';
 import zoaInputConfig from './zoaInputs.js';
 
 const props = defineProps({

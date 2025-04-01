@@ -1,7 +1,7 @@
-import ZoaDateAmbiguous from './ZoaDateAmbiguous.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaDateAmbiguous from './ZoaDateAmbiguous.vue';
 
 const template = `
 <zoa-input zoa-type="date-ambiguous"

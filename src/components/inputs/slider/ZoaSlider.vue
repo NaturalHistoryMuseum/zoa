@@ -32,9 +32,9 @@
 </template>
 
 <script setup>
-import { useChangeEmits } from '../common.js';
+import { onKeyStroke, useFocus, useFocusWithin } from '@vueuse/core';
 import { computed, inject, ref, watch } from 'vue';
-import { onKeyStroke, useFocusWithin, useFocus } from '@vueuse/core';
+import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   /**

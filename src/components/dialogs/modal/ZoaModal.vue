@@ -33,12 +33,12 @@
 </template>
 
 <script setup>
-import { ZoaButton } from '../../index.js';
-import { useKindIcon } from '../../utils/icons.js';
-import FontAwesomeIcon from '../../../icons.js';
-import { ref } from 'vue';
-import { usePropClasses } from '../../utils/classes.js';
 import { onClickOutside } from '@vueuse/core';
+import { ref } from 'vue';
+import FontAwesomeIcon from '../../../icons.js';
+import { ZoaButton } from '../../index.js';
+import { usePropClasses } from '../../utils/classes.js';
+import { useKindIcon } from '../../utils/icons.js';
 
 const props = defineProps({
   /**

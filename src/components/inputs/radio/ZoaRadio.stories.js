@@ -1,7 +1,7 @@
-import ZoaRadio from './ZoaRadio.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaRadio from './ZoaRadio.vue';
 
 const template = `
 <zoa-input zoa-type="radio"

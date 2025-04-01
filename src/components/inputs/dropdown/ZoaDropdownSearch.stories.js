@@ -1,7 +1,7 @@
-import ZoaDropdownSearch from './ZoaDropdownSearch.vue';
 import { ZoaInput } from '../../index.js';
-import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
+import { argTypes } from '../stories.js';
+import ZoaDropdownSearch from './ZoaDropdownSearch.vue';
 
 const template = `
 <zoa-input zoa-type="dropdown-search"

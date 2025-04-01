@@ -33,16 +33,16 @@
 </template>
 
 <script setup>
-import { useChangeEmits } from '../common.js';
-import { computed, inject, ref } from 'vue';
 import {
   onClickOutside,
   onKeyStroke,
-  useFocusWithin,
   useFocus,
+  useFocusWithin,
 } from '@vueuse/core';
-import { fuzzySearch } from 'levenshtein-search';
 import { debounce } from 'dettle';
+import { fuzzySearch } from 'levenshtein-search';
+import { computed, inject, ref } from 'vue';
+import { useChangeEmits } from '../common.js';
 
 const props = defineProps({
   /**
