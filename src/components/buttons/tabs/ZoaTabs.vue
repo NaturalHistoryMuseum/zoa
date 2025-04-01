@@ -1,7 +1,7 @@
 <template>
-  <div :class="addPropClasses([])">
+  <div :id="componentId" :class="addPropClasses([])">
     <ul :class="[$style.tabContainer, $style[`orient--${activePosition}`]]">
-      <li v-for="tab in tabOptions">
+      <li v-for="tab in tabOptions" :key="tab.value">
         <label
           tabindex="0"
           :class="[
@@ -21,8 +21,7 @@
 </template>
 
 <script setup>
-import { useFocusWithin } from '@vueuse/core';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useChangeEmits } from '../../inputs/common.js';
 import { usePropClasses } from '../../utils/classes.js';
 import { useComponentId } from '../../utils/compid.js';
@@ -81,6 +80,7 @@ const props = defineProps({
    */
   options: {
     type: Array,
+    default: () => [],
   },
   /**
    * Initial value to set. If not set, or not a valid option, the first option
@@ -92,7 +92,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
+const { componentId } = useComponentId();
 const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
@@ -107,11 +107,6 @@ const emit = defineEmits([
   'update:modelValue',
 ]);
 const { value } = useChangeEmits(emit, props);
-
-// ELEMENTS
-const checkboxContainer = ref(null);
-const checkboxInput = ref(null);
-const focus = useFocusWithin(checkboxContainer);
 
 // PROP PROCESSING
 const tabOptions = computed(() => {
