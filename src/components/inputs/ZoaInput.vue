@@ -63,6 +63,7 @@ const props = defineProps({
    * @model
    */
   modelValue: {
+    type: null, // any type
     default: undefined,
   },
   /**
@@ -239,9 +240,7 @@ function blur() {
 }
 const target = computed(() => {
   // the primary target, e.g. the input
-  if (inputComponent.value) {
-    return inputComponent.value.target;
-  }
+  return inputComponent.value ? inputComponent.value.target : null;
 });
 const elements = computed(() => {
   // any other elements that might need to be exposed
