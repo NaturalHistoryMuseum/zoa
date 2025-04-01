@@ -17,6 +17,7 @@
       <div v-if="guessedDates.length > 0" :class="$style.popupSection">
         <span
           v-for="dt in guessedDates"
+          :key="formatDate(dt.year, dt.month, dt.day)"
           :class="$style.suggestion"
           tabindex="0"
           @click="setDate(dt)"
@@ -62,6 +63,7 @@
         <div ref="yearBtns" :class="$style.yearGrid" tabindex="0">
           <zoa-button
             v-for="opt in yearOptions"
+            :key="`y${opt}`"
             size="sm"
             tabindex="-1"
             @click="setYear(opt)"
@@ -79,6 +81,7 @@
         <div ref="monthBtns" :class="$style.monthGrid" tabindex="0">
           <zoa-button
             v-for="opt in monthOptions"
+            :key="`m${opt}`"
             size="sm"
             tabindex="-1"
             @click="month = opt[1]"
@@ -96,6 +99,7 @@
         <div ref="dayBtns" :class="$style.dayGrid" tabindex="0">
           <zoa-button
             v-for="opt in dayOptions"
+            :key="`d${opt}`"
             size="sm"
             tabindex="-1"
             @click="day = opt"
@@ -129,6 +133,15 @@ const props = defineProps({
    */
   modelValue: {
     type: Object,
+    default: () => {
+      return {
+        year: null,
+        month: null,
+        day: null,
+        earliest: null,
+        latest: null,
+      };
+    },
   },
   /**
    * Debounce delay for the `change` event, in ms.

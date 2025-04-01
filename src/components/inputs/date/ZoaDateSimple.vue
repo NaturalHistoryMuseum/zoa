@@ -28,7 +28,8 @@ const props = defineProps({
    * @model
    */
   modelValue: {
-    type: Object,
+    type: String,
+    default: null,
   },
   /**
    * Debounce delay for the `change` event, in ms.
