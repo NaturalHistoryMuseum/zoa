@@ -59,6 +59,7 @@
         </li>
         <li
           v-for="item in dropdownOptions"
+          :key="item.value"
           :title="item.label"
           :class="[
             $style.listItem,
@@ -107,6 +108,7 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
+    default: () => [],
   },
   /**
    * Debounce delay for the `change` event, in ms.

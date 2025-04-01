@@ -34,7 +34,7 @@
       <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
         <li
           v-for="item in dropdownOptions"
-          :key="subId(`opt__${item.value}`)"
+          :key="item.value"
           :title="item.label"
           :class="[$style.listItem, $style.option]"
           :style="{ height: `${itemHeight}px` }"
@@ -78,6 +78,7 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
+    default: null,
   },
   /**
    * Debounce delay for the `change` event, in ms.

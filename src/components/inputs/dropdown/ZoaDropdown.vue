@@ -12,7 +12,11 @@
       :disabled="disabled"
     >
       <option :value="null">{{ placeholder }}</option>
-      <option v-for="opt in dropdownOptions" :value="opt.value">
+      <option
+        v-for="opt in dropdownOptions"
+        :key="opt.value"
+        :value="opt.value"
+      >
         {{ opt.label }}
       </option>
     </select>
@@ -31,6 +35,7 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
+    default: null,
   },
   /**
    * Debounce delay for the `change` event, in ms.
