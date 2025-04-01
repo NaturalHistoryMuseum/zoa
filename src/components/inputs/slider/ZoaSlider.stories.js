@@ -1,4 +1,4 @@
-import ZoaSlider from './Slider.vue';
+import ZoaSlider from './ZoaSlider.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';

@@ -1,4 +1,4 @@
-import ZoaMultiselect from './Multiselect.vue';
+import ZoaMultiselect from './ZoaMultiselect.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';

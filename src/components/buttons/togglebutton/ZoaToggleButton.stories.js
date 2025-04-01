@@ -1,20 +1,20 @@
-import ZoaTabs from './Tabs.vue';
+import ZoaToggleButton from './ZoaToggleButton.vue';
 import { renderSetup } from '../../utils/stories.js';
 
 const template = `
-<zoa-tabs :class="rootClass"
-          :delay="delay"
-          :active-position="activePosition"
-          :initial-value="initialValue"
-          :kind="kind"
-          :options="options"
-          :size="size"
+<zoa-toggle-button :class="rootClass"
+                   :delay="delay"
+                   :label="label"
+                   :check-value="checkValue"
+                   :kind="kind"
+                   :name="name"
+                   :size="size"
 />
 `;
 
 const meta = {
-  component: ZoaTabs,
-  title: 'Components/Buttons/Tabs',
+  component: ZoaToggleButton,
+  title: 'Components/Buttons/ToggleButton',
   argTypes: {
     'update:modelValue': {
       table: {
@@ -34,15 +34,12 @@ const meta = {
       control: 'select',
       options: ['sm', 'md'],
     },
-    activePosition: {
-      control: 'select',
-      options: ['above', 'below', 'left', 'right'],
-    },
   },
   parameters: {
     docs: {
       description: {
-        component: 'A set of radio buttons displayed as tabs.',
+        component:
+          "A toggleable button. Only shows its status via colour change, so it's mostly useful for things like opening menus rather than as a part of a form.",
       },
       source: {
         code: template,
@@ -57,19 +54,14 @@ const Base = {
   args: {
     class: '',
     delay: 0,
-    activePosition: 'below',
-    initialValue: 'Tab 1',
+    label: 'Button',
+    checkValue: 'toggle',
     kind: 'normal',
-    options: [
-      'Tab 1',
-      'Tab 2',
-      { label: 'Tab 3', value: 'tab3', order: 0 },
-      { label: 'Tab 4', order: 2 },
-    ],
+    name: 'toggle-group',
     size: 'md',
   },
   render: (args) => ({
-    components: { ZoaTabs },
+    components: { ZoaToggleButton },
     setup() {
       return renderSetup(args);
     },

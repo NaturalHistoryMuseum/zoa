@@ -1,4 +1,4 @@
-import ZoaTextbox from './Textbox.vue';
+import ZoaTextbox from './ZoaTextbox.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';

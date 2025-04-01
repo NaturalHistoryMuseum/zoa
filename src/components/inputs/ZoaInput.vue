@@ -6,14 +6,14 @@
   >
     <template v-if="zoaInput.multi">
       <fieldset :class="$style.fieldset">
-        <zoa-label
+        <ZoaInputLabel
           :input-id="inputId"
           :legend="true"
           :label="label"
           :label-position="labelPosition"
           :tabbable="zoaInput.tabLabel"
         />
-        <zoa-help v-if="help" :text="help" :position="helpPosition" />
+        <ZoaInputHelp v-if="help" :text="help" :position="helpPosition" />
         <div
           v-if="ZoaInputComponent == null"
           :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
@@ -30,7 +30,7 @@
       </fieldset>
     </template>
     <template v-else>
-      <zoa-label
+      <ZoaInputLabel
         :input-id="inputId"
         :legend="false"
         :label="label"
@@ -38,7 +38,7 @@
         :tabbable="zoaInput.tabLabel"
         :help="help"
       />
-      <zoa-help v-if="help" :text="help" :position="helpPosition" />
+      <ZoaInputHelp v-if="help" :text="help" :position="helpPosition" />
       <zoa-input-component
         v-bind="config"
         ref="inputComponent"
@@ -54,8 +54,8 @@ import { useComponentId } from '../utils/compid.js';
 import { useChangeEmits } from './common.js';
 import { computed, provide, ref } from 'vue';
 import { usePropClasses } from '../utils/classes.js';
-import ZoaLabel from './_parts/Label.vue';
-import ZoaHelp from './_parts/Help.vue';
+import ZoaInputLabel from './_parts/ZoaInputLabel.vue';
+import ZoaInputHelp from './_parts/ZoaInputHelp.vue';
 import zoaInputConfig from './zoaInputs.js';
 
 const props = defineProps({

@@ -1,15 +1,15 @@
-import ZoaAutocompleteTextbox from './textbox/AutocompleteTextbox.vue';
-import ZoaCheckbox from './checkbox/Checkbox.vue';
-import ZoaDateAmbiguous from './date/DateAmbiguous.vue';
-import ZoaDateSimple from './date/DateSimple.vue';
-import ZoaDropdown from './dropdown/Dropdown.vue';
-import ZoaMultiselect from './dropdown/Multiselect.vue';
-import ZoaDropdownSearch from './dropdown/DropdownSearch.vue';
-import ZoaNumber from './number/Number.vue';
-import ZoaRadio from './radio/Radio.vue';
-import ZoaRangeSlider from './slider/RangeSlider.vue';
-import ZoaSlider from './slider/Slider.vue';
-import ZoaTextbox from './textbox/Textbox.vue';
+import ZoaAutocompleteTextbox from './textbox/ZoaAutocompleteTextbox.vue';
+import ZoaCheckbox from './checkbox/ZoaCheckbox.vue';
+import ZoaDateAmbiguous from './date/ZoaDateAmbiguous.vue';
+import ZoaDateSimple from './date/ZoaDateSimple.vue';
+import ZoaDropdown from './dropdown/ZoaDropdown.vue';
+import ZoaMultiselect from './dropdown/ZoaMultiselect.vue';
+import ZoaDropdownSearch from './dropdown/ZoaDropdownSearch.vue';
+import ZoaNumber from './number/ZoaNumber.vue';
+import ZoaRadio from './radio/ZoaRadio.vue';
+import ZoaRangeSlider from './slider/ZoaRangeSlider.vue';
+import ZoaSlider from './slider/ZoaSlider.vue';
+import ZoaTextbox from './textbox/ZoaTextbox.vue';
 
 export default {
   checkbox: {

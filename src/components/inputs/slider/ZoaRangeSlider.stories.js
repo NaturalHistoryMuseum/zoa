@@ -1,28 +1,35 @@
-import ZoaRadio from './Radio.vue';
+import ZoaRangeSlider from './ZoaRangeSlider.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
 
 const template = `
-<zoa-input zoa-type="radio"
+<zoa-input zoa-type="range-slider"
            :class="rootClass"
            :label="label"
            :label-position="labelPosition"
            :help="help"
            :help-position="helpPosition"
            :disabled="disabled"
-           :config="{delay, name, checkValue}"
+           :config="{delay, placeholder, min, max, step, labelsRight,
+                     labelUpper, labelLower}"
 />
 `;
 
 const meta = {
-  component: ZoaRadio,
-  title: 'Components/Inputs/Radio',
-  argTypes,
+  component: ZoaRangeSlider,
+  title: 'Components/Inputs/Slider/Range',
+  argTypes: {
+    ...argTypes,
+    labelsRight: {
+      control: 'boolean',
+    },
+  },
   parameters: {
     docs: {
       description: {
-        component: 'A single radio button with an optional label.',
+        component:
+          'A component with two sliders representing a lower and upper value. Returns the values as an array.',
       },
       source: {
         code: template,
@@ -35,15 +42,19 @@ export default meta;
 
 const Base = {
   args: {
-    class: '',
-    label: 'Radio button',
-    labelPosition: 'right',
+    label: 'Range',
+    labelPosition: 'above',
     help: 'Some example help text.',
     helpPosition: 'right',
     disabled: false,
-    delay: 0,
-    name: '',
-    checkValue: 'radiobtn',
+    delay: 200,
+    placeholder: null,
+    min: 0,
+    max: 100,
+    step: 1,
+    labelsRight: false,
+    labelUpper: 'Upper',
+    labelLower: 'Lower',
   },
   render: (args) => ({
     components: { ZoaInput },

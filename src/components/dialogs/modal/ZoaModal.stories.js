@@ -1,4 +1,4 @@
-import ZoaModal from './Modal.vue';
+import ZoaModal from './ZoaModal.vue';
 import { renderSetup, htmlArgs } from '../../utils/stories.js';
 
 const template = `

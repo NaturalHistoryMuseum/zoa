@@ -1,4 +1,4 @@
-import ZoaButton from './Button.vue';
+import ZoaButton from './ZoaButton.vue';
 import { renderSetup, htmlArgs } from '../../utils/stories.js';
 
 const template = `

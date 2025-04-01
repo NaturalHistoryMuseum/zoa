@@ -1,4 +1,4 @@
-import ZoaAutocompleteTextbox from './AutocompleteTextbox.vue';
+import ZoaAutocompleteTextbox from './ZoaAutocompleteTextbox.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';

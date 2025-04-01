@@ -1,28 +1,28 @@
-import ZoaNumber from './Number.vue';
+import ZoaRadio from './ZoaRadio.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
 
 const template = `
-<zoa-input zoa-type="number"
+<zoa-input zoa-type="radio"
            :class="rootClass"
            :label="label"
            :label-position="labelPosition"
            :help="help"
            :help-position="helpPosition"
            :disabled="disabled"
-           :config="{delay, placeholder, min, max, step}"
+           :config="{delay, name, checkValue}"
 />
 `;
 
 const meta = {
-  component: ZoaNumber,
-  title: 'Components/Inputs/Number',
+  component: ZoaRadio,
+  title: 'Components/Inputs/Radio',
   argTypes,
   parameters: {
     docs: {
       description: {
-        component: 'A number select component.',
+        component: 'A single radio button with an optional label.',
       },
       source: {
         code: template,
@@ -36,16 +36,14 @@ export default meta;
 const Base = {
   args: {
     class: '',
-    label: 'Number',
-    labelPosition: 'above',
+    label: 'Radio button',
+    labelPosition: 'right',
     help: 'Some example help text.',
     helpPosition: 'right',
     disabled: false,
-    delay: 200,
-    placeholder: 0,
-    min: null,
-    max: null,
-    step: 1,
+    delay: 0,
+    name: '',
+    checkValue: 'radiobtn',
   },
   render: (args) => ({
     components: { ZoaInput },

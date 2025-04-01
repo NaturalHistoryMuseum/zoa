@@ -1,4 +1,4 @@
-import ZoaFlash from './Flash.vue';
+import ZoaFlash from './ZoaFlash.vue';
 import { renderSetup, htmlArgs } from '../../utils/stories.js';
 
 const template = `

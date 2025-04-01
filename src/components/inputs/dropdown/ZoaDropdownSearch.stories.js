@@ -1,4 +1,4 @@
-import ZoaDropdownSearch from './DropdownSearch.vue';
+import ZoaDropdownSearch from './ZoaDropdownSearch.vue';
 import { ZoaInput } from '../../index.js';
 import { argTypes } from '../stories.js';
 import { renderSetup } from '../../utils/stories.js';
