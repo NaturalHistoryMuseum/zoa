@@ -8,12 +8,19 @@
       <fieldset :class="$style.fieldset">
         <ZoaInputLabel
           :input-id="inputId"
+          :label-id="labelId"
           :legend="true"
           :label="label"
           :label-position="labelPosition"
           :tabbable="zoaInput.tabLabel"
         />
-        <ZoaInputHelp v-if="help" :text="help" :position="helpPosition" />
+        <ZoaInputHelp
+          v-if="help"
+          :help-id="helpId"
+          :text="help"
+          :position="helpPosition"
+          :label-position="labelPosition"
+        />
         <div
           v-if="ZoaInputComponent == null"
           :class="[gridClass || $style.emptyGrid, $style.inputWrapper]"
@@ -32,13 +39,20 @@
     <template v-else>
       <ZoaInputLabel
         :input-id="inputId"
+        :label-id="labelId"
         :legend="false"
         :label="label"
         :label-position="labelPosition"
         :tabbable="zoaInput.tabLabel"
         :help="help"
       />
-      <ZoaInputHelp v-if="help" :text="help" :position="helpPosition" />
+      <ZoaInputHelp
+        v-if="help"
+        :help-id="helpId"
+        :text="help"
+        :position="helpPosition"
+        :label-position="labelPosition"
+      />
       <zoa-input-component
         v-bind="config"
         ref="inputComponent"

@@ -18,11 +18,10 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
-
-const props = defineProps({
+defineProps({
   label: {
     type: String,
+    default: null,
   },
   labelPosition: {
     type: String,
@@ -30,6 +29,11 @@ const props = defineProps({
   },
   inputId: {
     type: String,
+    default: null,
+  },
+  labelId: {
+    type: String,
+    default: null,
   },
   legend: {
     type: Boolean,
@@ -40,8 +44,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-const labelId = inject('labelId');
 </script>
 
 <style module lang="scss">

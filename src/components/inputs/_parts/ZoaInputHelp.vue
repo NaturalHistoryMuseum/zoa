@@ -22,21 +22,27 @@
 
 <script setup>
 import { onKeyStroke, useElementHover } from '@vueuse/core';
-import { inject, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 
-const props = defineProps({
+defineProps({
   text: {
     type: String,
+    default: null,
   },
   position: {
     type: String,
     default: 'right',
   },
+  helpId: {
+    type: String,
+    default: null,
+  },
+  labelPosition: {
+    type: String,
+    default: 'above',
+  },
 });
-
-const labelPosition = inject('labelPosition');
-const helpId = inject('helpId');
 
 const showText = ref(false);
 
