@@ -1,9 +1,9 @@
 <template>
   <div
     ref="container"
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <div :class="$style.textboxWrapper">
       <input
@@ -11,10 +11,10 @@
         :id="inputId"
         ref="textbox"
         v-model="search"
-        type="text"
-        :placeholder="placeholder"
         :class="$style.input"
         :disabled="disabled"
+        :placeholder="placeholder"
+        type="text"
       />
       <div
         v-show="!focused || disabled"
@@ -25,8 +25,8 @@
         {{ displayLabel }}
       </div>
       <font-awesome-icon
-        icon="fa-solid fa-caret-down"
         :class="$style.arrow"
+        icon="fa-solid fa-caret-down"
         @click="toggleFocus"
       />
     </div>
@@ -35,18 +35,18 @@
         <li
           v-for="item in dropdownOptions"
           :key="item.value"
-          :title="item.label"
           :class="[$style.listItem, $style.option]"
           :style="{ height: `${itemHeight}px` }"
+          :title="item.label"
         >
           <div>
             <zoa-input
               v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
               v-model="value"
-              zoa-type="radio"
+              :config="{ checkValue: item.value, name: subId('radio') }"
               :label="item.label"
               label-position="right"
-              :config="{ checkValue: item.value, name: subId('radio') }"
+              zoa-type="radio"
               @change="unfocus"
             />
           </div>

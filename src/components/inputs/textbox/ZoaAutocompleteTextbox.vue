@@ -1,18 +1,18 @@
 <template>
   <div
     ref="container"
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="textbox"
       v-model="value"
-      type="text"
-      :placeholder="placeholder"
       :class="$style.input"
       :disabled="disabled"
+      :placeholder="placeholder"
+      type="text"
       @focusin="focused = true"
     />
     <div v-if="focused && !disabled" ref="dropdown" :class="$style.options">

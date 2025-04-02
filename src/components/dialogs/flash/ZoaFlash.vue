@@ -5,7 +5,7 @@
     "
   >
     <div :class="$style.header">
-      <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
+      <font-awesome-icon :class="$style.icon" :icon="['fa-solid', icon]" />
       <h2 :class="$style.headerText">{{ header }}</h2>
     </div>
     <div :class="$style.content">

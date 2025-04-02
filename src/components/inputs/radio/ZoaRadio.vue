@@ -1,21 +1,21 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="radioInput"
       v-model="value"
-      type="radio"
       :class="$style.defaultRadio"
-      :name="name ? name : null"
-      :value="_checkValue"
       :disabled="disabled"
+      :name="name ? name : null"
+      type="radio"
+      :value="_checkValue"
     />
     <span :class="$style.radio" @click="toggleValue">
-      <font-awesome-icon icon="fa-solid fa-circle" :class="$style.check" />
+      <font-awesome-icon :class="$style.check" icon="fa-solid fa-circle" />
     </span>
   </div>
 </template>

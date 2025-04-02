@@ -1,16 +1,16 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="displayBox"
-      type="text"
-      :placeholder="placeholder"
       :class="[$style.input, editing ? $style.editing : '']"
       :disabled="disabled"
+      :placeholder="placeholder"
+      type="text"
       @input="parseInput"
     />
     <div v-if="focused && !disabled" :class="$style.datePopup">
@@ -26,38 +26,38 @@
         >
       </div>
       <div :class="$style.popupSection">
-        <zoa-input label="year" :grid-class="$style.yearParts">
+        <zoa-input :grid-class="$style.yearParts" label="year">
           <zoa-input
             ref="yrM"
             v-model="yearParts.millenium"
-            zoa-type="number"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             label="millenium"
             label-position="none"
-            :config="{ placeholder: 0, min: 0, max: 9 }"
+            zoa-type="number"
           />
           <zoa-input
             ref="yrC"
             v-model="yearParts.century"
-            zoa-type="number"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             label="century"
             label-position="none"
-            :config="{ placeholder: 0, min: 0, max: 9 }"
+            zoa-type="number"
           />
           <zoa-input
             ref="yrD"
             v-model="yearParts.decade"
-            zoa-type="number"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             label="decade"
             label-position="none"
-            :config="{ placeholder: 0, min: 0, max: 9 }"
+            zoa-type="number"
           />
           <zoa-input
             ref="yrY"
             v-model="yearParts.year"
-            zoa-type="number"
+            :config="{ placeholder: 0, min: 0, max: 9 }"
             label="year"
             label-position="none"
-            :config="{ placeholder: 0, min: 0, max: 9 }"
+            zoa-type="number"
           />
         </zoa-input>
         <div ref="yearBtns" :class="$style.yearGrid" tabindex="0">
@@ -74,9 +74,9 @@
       <div :class="$style.popupSection">
         <zoa-input
           v-model="month"
-          zoa-type="number"
-          label="month"
           :config="{ placeholder: 1, min: 1, max: 12 }"
+          label="month"
+          zoa-type="number"
         />
         <div ref="monthBtns" :class="$style.monthGrid" tabindex="0">
           <zoa-button
@@ -92,9 +92,9 @@
       <div :class="$style.popupSection">
         <zoa-input
           v-model="day"
-          zoa-type="number"
-          label="day"
           :config="{ placeholder: 1, min: 1, max: monthDays }"
+          label="day"
+          zoa-type="number"
         />
         <div ref="dayBtns" :class="$style.dayGrid" tabindex="0">
           <zoa-button

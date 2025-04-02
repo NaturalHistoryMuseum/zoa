@@ -1,9 +1,9 @@
 <template>
   <div
     ref="container"
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <div :class="$style.textboxWrapper">
       <input
@@ -11,10 +11,10 @@
         :id="inputId"
         ref="textbox"
         v-model="search"
-        type="text"
-        :placeholder="placeholder"
         :class="$style.input"
         :disabled="disabled"
+        :placeholder="placeholder"
+        type="text"
       />
       <div
         v-show="!focused || disabled"
@@ -25,47 +25,47 @@
         {{ value ? value.length : 0 }} {{ itemString }} selected
       </div>
       <font-awesome-icon
-        icon="fa-solid fa-caret-down"
         :class="$style.arrow"
+        icon="fa-solid fa-caret-down"
         @click="toggleFocus"
       />
     </div>
     <div v-if="focused && !disabled" ref="dropdown" :class="$style.options">
       <ul v-if="dropdownOptions.length > 0" :class="$style.optlist">
         <li
-          title="Select all"
           :class="[$style.selectAll, $style.listItem, $style.option]"
           :style="{ height: `${itemHeight}px` }"
+          title="Select all"
         >
           <zoa-input
             v-model="selectAll"
-            zoa-type="checkbox"
             label="Select all"
             label-position="right"
+            zoa-type="checkbox"
           />
         </li>
         <li
           v-if="!!search"
-          title="Select results"
           :class="[$style.selectAll, $style.listItem, $style.option]"
           :style="{ height: `${itemHeight}px` }"
+          title="Select results"
         >
           <zoa-input
             v-model="selectFiltered"
-            zoa-type="checkbox"
             label="Select results"
             label-position="right"
+            zoa-type="checkbox"
           />
         </li>
         <li
           v-for="item in dropdownOptions"
           :key="item.value"
-          :title="item.label"
           :class="[
             $style.listItem,
             item.kind === 'group' ? $style.subgroup : $style.option,
           ]"
           :style="{ height: `${itemHeight}px` }"
+          :title="item.label"
         >
           <div v-if="item.kind === 'group'" @click="selectGroup(item.group)">
             {{ item.label }}
@@ -74,10 +74,10 @@
             <zoa-input
               v-if="item.ix >= lowerVisible && item.ix <= upperVisible"
               v-model="value"
-              zoa-type="checkbox"
+              :config="{ checkValue: item.value, name: subId('checkboxes') }"
               :label="item.label"
               label-position="right"
-              :config="{ checkValue: item.value, name: subId('checkboxes') }"
+              zoa-type="checkbox"
             />
           </div>
         </li>

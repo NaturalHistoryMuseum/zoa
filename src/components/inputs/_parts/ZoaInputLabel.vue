@@ -2,8 +2,8 @@
   <label
     v-if="label && !legend"
     :id="labelId"
-    :for="inputId"
     :class="[$style.main, $style[`main--${labelPosition}`]]"
+    :for="inputId"
     :tabindex="tabbable ? 0 : -1"
   >
     {{ label }}

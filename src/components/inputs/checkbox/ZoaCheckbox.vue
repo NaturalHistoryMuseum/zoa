@@ -1,21 +1,21 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="checkboxInput"
       v-model="checked"
-      type="checkbox"
       :class="$style.defaultCheckbox"
-      :name="name ? name : null"
-      :value="_checkValue"
       :disabled="disabled"
+      :name="name ? name : null"
+      type="checkbox"
+      :value="_checkValue"
     />
     <span :class="$style.checkbox" @click="toggleValue">
-      <font-awesome-icon icon="fa-solid fa-check" :class="$style.check" />
+      <font-awesome-icon :class="$style.check" icon="fa-solid fa-check" />
     </span>
   </div>
 </template>

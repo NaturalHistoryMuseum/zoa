@@ -1,15 +1,12 @@
 <template>
   <div
-    :class="$style.inputWrapper"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="$style.inputWrapper"
   >
     <zoa-input
       ref="lowerTrack"
       v-model="valueLower"
-      zoa-type="slider"
-      :label="labelLower"
-      :label-position="labelsRight ? 'right' : 'left'"
       :config="{
         min,
         max,
@@ -19,13 +16,13 @@
         placeholderPosition: 0.25,
       }"
       :disabled="disabled"
+      :label="labelLower"
+      :label-position="labelsRight ? 'right' : 'left'"
+      zoa-type="slider"
     />
     <zoa-input
       ref="upperTrack"
       v-model="valueUpper"
-      zoa-type="slider"
-      :label="labelUpper"
-      :label-position="labelsRight ? 'right' : 'left'"
       :config="{
         min,
         max,
@@ -35,6 +32,9 @@
         activeTrackRight: true,
       }"
       :disabled="disabled"
+      :label="labelUpper"
+      :label-position="labelsRight ? 'right' : 'left'"
+      zoa-type="slider"
     />
   </div>
 </template>

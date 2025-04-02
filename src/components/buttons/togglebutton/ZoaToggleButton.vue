@@ -2,17 +2,17 @@
   <label
     :id="componentId"
     ref="checkboxContainer"
+    :class="addPropClasses([$style.container])"
     :for="subId('toggle')"
     tabindex="0"
-    :class="addPropClasses([$style.container])"
   >
     <input
       :id="subId('toggle')"
       ref="checkboxInput"
       v-model="value"
-      type="checkbox"
       :class="$style.checkbox"
       :name="name"
+      type="checkbox"
       :value="_checkValue"
     />
     <span

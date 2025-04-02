@@ -8,18 +8,18 @@
       <fieldset :class="$style.fieldset">
         <ZoaInputLabel
           :input-id="inputId"
-          :label-id="labelId"
-          :legend="true"
           :label="label"
+          :label-id="labelId"
           :label-position="labelPosition"
+          :legend="true"
           :tabbable="zoaInput.tabLabel"
         />
         <ZoaInputHelp
           v-if="help"
           :help-id="helpId"
-          :text="help"
-          :position="helpPosition"
           :label-position="labelPosition"
+          :position="helpPosition"
+          :text="help"
         />
         <div
           v-if="ZoaInputComponent == null"
@@ -38,20 +38,20 @@
     </template>
     <template v-else>
       <ZoaInputLabel
-        :input-id="inputId"
-        :label-id="labelId"
-        :legend="false"
-        :label="label"
-        :label-position="labelPosition"
-        :tabbable="zoaInput.tabLabel"
         :help="help"
+        :input-id="inputId"
+        :label="label"
+        :label-id="labelId"
+        :label-position="labelPosition"
+        :legend="false"
+        :tabbable="zoaInput.tabLabel"
       />
       <ZoaInputHelp
         v-if="help"
         :help-id="helpId"
-        :text="help"
-        :position="helpPosition"
         :label-position="labelPosition"
+        :position="helpPosition"
+        :text="help"
       />
       <zoa-input-component
         v-bind="config"

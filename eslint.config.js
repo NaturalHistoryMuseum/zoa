@@ -13,5 +13,10 @@ export default defineConfig([
     extends: ['js/recommended'],
   },
   pluginVue.configs['flat/recommended'],
+  {
+    rules: {
+      'vue/attributes-order': ['error', { alphabetical: true }],
+    },
+  },
   eslintConfigPrettier,
 ]);

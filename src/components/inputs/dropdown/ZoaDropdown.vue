@@ -1,8 +1,8 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <select
       :id="inputId"
@@ -20,7 +20,7 @@
         {{ opt.label }}
       </option>
     </select>
-    <font-awesome-icon icon="fa-solid fa-caret-down" :class="$style.arrow" />
+    <font-awesome-icon :class="$style.arrow" icon="fa-solid fa-caret-down" />
   </div>
 </template>
 

@@ -1,17 +1,17 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="target"
       v-model="value"
-      type="text"
-      :placeholder="placeholder"
       :class="$style.input"
       :disabled="disabled"
+      :placeholder="placeholder"
+      type="text"
     />
   </div>
 </template>

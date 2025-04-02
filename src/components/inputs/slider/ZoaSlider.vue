@@ -1,8 +1,8 @@
 <template>
   <div
-    :class="[$style.inputWrapper, , disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, , disabled ? $style.disabled : '']"
     @wheel="onScroll"
   >
     <span :class="$style.track"></span>
@@ -21,12 +21,12 @@
       :id="inputId"
       ref="slider"
       v-model="value"
-      type="range"
-      :min="min"
-      :max="max"
-      :step="step"
       :class="$style.input"
       :disabled="disabled"
+      :max="max"
+      :min="min"
+      :step="step"
+      type="range"
     />
   </div>
 </template>

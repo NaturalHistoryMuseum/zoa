@@ -1,20 +1,20 @@
 <template>
   <div
-    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
-    :aria-labelledby="labelId"
     :aria-describedby="helpId"
+    :aria-labelledby="labelId"
+    :class="[$style.inputWrapper, disabled ? $style.disabled : '']"
   >
     <input
       :id="inputId"
       ref="target"
       v-model="value"
-      type="date"
-      :placeholder="placeholder"
-      :min="min"
-      :max="max"
-      :step="step"
       :class="$style.input"
       :disabled="disabled"
+      :max="max"
+      :min="min"
+      :placeholder="placeholder"
+      :step="step"
+      type="date"
     />
   </div>
 </template>

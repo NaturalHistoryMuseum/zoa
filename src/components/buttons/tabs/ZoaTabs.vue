@@ -3,7 +3,6 @@
     <ul :class="[$style.tabContainer, $style[`orient--${activePosition}`]]">
       <li v-for="tab in tabOptions" :key="tab.value">
         <label
-          tabindex="0"
           :class="[
             $style.tab,
             $style[`orient--${activePosition}`],
@@ -11,6 +10,7 @@
             $style[`size--${size}`],
             $style[`state--${value === tab.value ? 'active' : 'inactive'}`],
           ]"
+          tabindex="0"
         >
           <input v-model="value" type="radio" :value="tab.value" />
           <span>{{ tab.label }}</span>

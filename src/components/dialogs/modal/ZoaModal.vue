@@ -9,14 +9,14 @@
   >
     <div :class="$style.container">
       <div :class="$style.header">
-        <font-awesome-icon :icon="['fa-solid', icon]" :class="$style.icon" />
+        <font-awesome-icon :class="$style.icon" :icon="['fa-solid', icon]" />
         <h2 :class="$style.headerText">
           <!-- @slot The header content (within <h2> tags); overrides the header prop. -->
           <slot name="header">
             {{ header }}
           </slot>
         </h2>
-        <form method="dialog" :class="$style.form" @submit="emit('closed')">
+        <form :class="$style.form" method="dialog" @submit="emit('closed')">
           <button :class="$style.close">
             <font-awesome-icon icon="fa-solid fa-xmark" />
           </button>

@@ -4,8 +4,8 @@
     :class="[$style.main, $style[`main--${labelPosition}`]]"
   >
     <font-awesome-icon
-      :icon="['fa-solid', 'fa-circle-question']"
       :class="$style.icon"
+      :icon="['fa-solid', 'fa-circle-question']"
     />
     <div
       v-show="showText"
