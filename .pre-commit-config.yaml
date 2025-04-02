@@ -21,3 +21,9 @@ repos:
       - id: prettier
         types_or: [javascript, vue, less, sass, scss, css]
         args: ['--single-quote']
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npx eslint --fix --no-warn-ignored
+        language: node
