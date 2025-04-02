@@ -1,3 +1,9 @@
+## v0.12.2a2 (2025-04-02)
+
+### CI System(s)
+
+- add build step to prerelease workflow
+
 ## v0.12.2a1 (2025-04-02)
 
 ### Refactor
