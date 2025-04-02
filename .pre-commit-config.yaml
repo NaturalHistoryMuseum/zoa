@@ -21,9 +21,19 @@ repos:
       - id: prettier
         types_or: [javascript, vue, less, sass, scss, css]
         args: ['--single-quote']
-  - repo: local
+        additional_dependencies:
+          - prettier-plugin-organize-imports@4.1.0
+          - vue-tsc@2.2.8
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.23.0
     hooks:
       - id: eslint
-        name: eslint
-        entry: npx eslint --fix --no-warn-ignored
-        language: node
+        args: ['--fix', '--no-warn-ignored']
+        files: '^(?!dist/).+\.(js|mjs|cjs|vue)'
+        types: [ file ]
+        additional_dependencies:
+          - eslint@9.23.0
+          - eslint-config-prettier@10.1.1
+          - eslint-plugin-vue@5.2.1
+          - globals@16.0.0
+          - '@eslint/js@9.23.0'
