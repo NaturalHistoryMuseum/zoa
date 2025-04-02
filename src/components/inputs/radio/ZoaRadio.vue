@@ -77,7 +77,7 @@ const emit = defineEmits([
    */
   'update:modelValue',
 ]);
-const { value, valueChanged } = useChangeEmits(emit, props);
+const { value } = useChangeEmits(emit, props);
 
 // ELEMENTS
 const rootContainer = inject('rootContainer');

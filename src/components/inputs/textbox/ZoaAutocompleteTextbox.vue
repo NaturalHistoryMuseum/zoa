@@ -19,6 +19,7 @@
       <ul v-if="dropdownOptions.length > 0">
         <li
           v-for="opt in dropdownOptions"
+          :key="opt.value"
           :class="$style.option"
           tabindex="0"
           @click="setOption(opt.value)"
@@ -50,6 +51,7 @@ const props = defineProps({
    */
   modelValue: {
     type: String,
+    default: null,
   },
   /**
    * Debounce delay for the `change` event, in ms.

@@ -68,7 +68,7 @@ const manyArgs = {
   label: 'Many Options',
   labelPosition: 'above',
   help: 'An example with a lot of randomly generated options.',
-  options: [...Array(300).keys()].map((i) => {
+  options: [...Array(300).keys()].map(() => {
     return loremIpsum({
       count: Math.ceil(Math.random() * 20),
       units: 'words',

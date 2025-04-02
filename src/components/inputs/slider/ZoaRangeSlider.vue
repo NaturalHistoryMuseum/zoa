@@ -50,6 +50,7 @@ const props = defineProps({
    */
   modelValue: {
     type: Array,
+    default: () => [],
   },
   /**
    * Debounce delay for the `change` event, in ms.
@@ -109,7 +110,6 @@ const props = defineProps({
   },
 });
 
-const inputId = inject('inputId');
 const labelId = inject('labelId');
 const helpId = inject('helpId');
 const disabled = inject('disabled');
@@ -133,9 +133,7 @@ const trackUpper = ref(null);
 
 // EXPOSE
 const target = computed(() => {
-  if (trackLower.value) {
-    return trackLower.value.target;
-  }
+  return trackLower.value ? trackLower.value.target : null;
 });
 const elements = computed(() => {
   if (trackLower.value && trackUpper.value) {
