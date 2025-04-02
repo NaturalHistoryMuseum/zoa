@@ -7,7 +7,7 @@ on:
 
 jobs:
   bump-and-release:
-    name: Create prerelease
+    name: Build, bump, and create prerelease
     runs-on: ubuntu-latest
     if: "!startsWith(github.event.head_commit.message, 'bump:')"
     steps:
@@ -16,6 +16,20 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install packages
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: dist
+          message: 'chore(dist): build dist package'
+          push: false
       - name: Create bump
         uses: commitizen-tools/commitizen-action@master
         with:

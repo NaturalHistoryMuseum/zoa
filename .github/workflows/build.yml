@@ -1,9 +1,8 @@
-name: Build dist (dev/patch)
+name: Build dist (patch)
 
 on:
   push:
     branches:
-      - dev
       - patch
 
 jobs:
