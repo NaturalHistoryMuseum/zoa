@@ -1,3 +1,27 @@
+## v0.12.2a1 (2025-04-02)
+
+### Refactor
+
+- **storybook**: sort imports
+- **html**: sort html attributes alphabetically
+- **inputs**: fix linter issues
+- **dropdowns**: fix linter issues
+- **dates**: fix linter issues
+- **input-parts**: fix linter errors, remove injects
+- **input**: fix linter errors
+- **tabs**: remove unnecessary vars, set key, set default
+- sort imports and remove unused
+- change component file names to multi-word
+- automated eslint fixes
+
+### CI System(s)
+
+- use local repo for prettier and eslint pre-commit hooks
+- use pre-commit eslint mirror and install dependencies
+- add eslint hook for pre-commit
+- add prettier plugin to organise imports
+- add eslint configuration
+
 ## v0.12.2a0 (2025-02-27)
 
 ### Fix
