@@ -125,7 +125,7 @@ onKeyStroke('Enter', () => {
   font-family: fonts.$header-font;
   font-weight: 600;
   border: none;
-  border-radius: vars.$rounding;
+  border-radius: vars.$rounding-button;
   display: inline-block;
   transition: 0.2s;
   cursor: pointer;

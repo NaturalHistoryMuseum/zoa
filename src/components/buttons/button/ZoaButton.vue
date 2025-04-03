@@ -63,7 +63,7 @@ const { addPropClasses } = usePropClasses(props);
   font-family: fonts.$header-font;
   font-weight: 600;
   border: none;
-  border-radius: vars.$rounding;
+  border-radius: vars.$rounding-button;
 
   transition: 0.2s;
   cursor: pointer;
@@ -79,10 +79,6 @@ const { addPropClasses } = usePropClasses(props);
   &:active {
     background-color: palette.$secondary-b;
   }
-
-  .checkbox:checked + & {
-    background-color: palette.$secondary-b;
-  }
 }
 
 .kind--primary {
@@ -94,10 +90,6 @@ const { addPropClasses } = usePropClasses(props);
   &:active {
     background-color: palette.$primary-b;
   }
-
-  .checkbox:checked + & {
-    background-color: palette.$primary-b;
-  }
 }
 
 .kind--alt {
@@ -107,10 +99,6 @@ const { addPropClasses } = usePropClasses(props);
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$tertiary-b;
-  }
-
-  .checkbox:checked + & {
     background-color: palette.$tertiary-b;
   }
 }

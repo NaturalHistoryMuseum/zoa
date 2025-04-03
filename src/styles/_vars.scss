@@ -9,7 +9,9 @@ $label-v-gap: var(--zoa-label-gap-v, 2px);
 $label-h-gap: var(--zoa-label-gap-h, $h-pad);
 $label-gap: $label-v-gap $label-h-gap;
 
-$rounding: var(--zoa-rounding, 10px);
+$rounding: var(--zoa-rounding, 4px);
+$rounding-button: var(--zoa-rounding-button, 24px);
+$rounding-full: var(--zoa-rounding-full, 9999px);
 
 $sm: 576px;
 $md: 768px;
