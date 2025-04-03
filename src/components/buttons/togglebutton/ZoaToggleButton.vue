@@ -137,7 +137,7 @@ onKeyStroke('Enter', () => {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$secondary-b;
+    background-color: palette.$secondary-hover;
     color: palette.$secondary-text;
   }
 
@@ -151,7 +151,7 @@ onKeyStroke('Enter', () => {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$primary-b;
+    background-color: palette.$primary-hover;
     color: palette.$primary-text;
   }
 
@@ -165,7 +165,7 @@ onKeyStroke('Enter', () => {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$tertiary-b;
+    background-color: palette.$tertiary-hover;
     color: palette.$tertiary-text;
   }
 

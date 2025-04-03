@@ -220,7 +220,7 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$secondary-b;
+    background-color: palette.$secondary-hover;
     color: palette.$secondary-text;
   }
 
@@ -247,7 +247,7 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$primary-b;
+    background-color: palette.$primary-hover;
     color: palette.$primary-text;
   }
 
@@ -274,7 +274,7 @@ if (value.value == null) {
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$tertiary-b;
+    background-color: palette.$tertiary-hover;
     color: palette.$tertiary-text;
   }
 

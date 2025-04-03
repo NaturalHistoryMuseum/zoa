@@ -3,7 +3,7 @@
 @use '../../styles/vars';
 
 .main {
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
   border-radius: vars.$rounding;
   padding: 0;
@@ -40,49 +40,53 @@
 }
 
 .kind--info {
-  border-color: palette.$info-dark;
+  border-color: palette.$info-border;
 
   .header {
-    background: palette.$info-light;
+    background: palette.$info;
+    color: palette.$info-text;
   }
 
   .icon {
-    color: palette.$info-dark;
+    color: palette.$info-border;
   }
 }
 
 .kind--warning {
-  border-color: palette.$warning-dark;
+  border-color: palette.$warning-border;
 
   .header {
-    background: palette.$warning-light;
+    background: palette.$warning;
+    color: palette.$warning-text;
   }
 
   .icon {
-    color: palette.$warning-dark;
+    color: palette.$warning-border;
   }
 }
 
 .kind--error {
-  border-color: palette.$error-dark;
+  border-color: palette.$error-border;
 
   .header {
-    background: palette.$error-light;
+    background: palette.$error;
+    color: palette.$error-text;
   }
 
   .icon {
-    color: palette.$error-dark;
+    color: palette.$error-border;
   }
 }
 
 .kind--success {
-  border-color: palette.$success-dark;
+  border-color: palette.$success-border;
 
   .header {
-    background: palette.$success-light;
+    background: palette.$success;
+    color: palette.$success-text;
   }
 
   .icon {
-    color: palette.$success-dark;
+    color: palette.$success-border;
   }
 }

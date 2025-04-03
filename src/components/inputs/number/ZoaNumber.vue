@@ -100,7 +100,7 @@ defineExpose({
 @use '../../../styles/palette';
 
 .input:invalid {
-  border-color: palette.$error-dark;
+  border-color: palette.$error;
 }
 
 .inputWrapper.disabled {

@@ -77,7 +77,7 @@ const { addPropClasses } = usePropClasses(props);
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$secondary-b;
+    background-color: palette.$secondary-hover;
   }
 }
 
@@ -88,7 +88,7 @@ const { addPropClasses } = usePropClasses(props);
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$primary-b;
+    background-color: palette.$primary-hover;
   }
 }
 
@@ -99,7 +99,7 @@ const { addPropClasses } = usePropClasses(props);
   &:hover,
   &:focus,
   &:active {
-    background-color: palette.$tertiary-b;
+    background-color: palette.$tertiary-hover;
   }
 }
 

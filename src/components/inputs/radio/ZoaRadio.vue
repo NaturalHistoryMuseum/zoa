@@ -135,7 +135,7 @@ onKeyStroke(' ', () => {
   display: block;
 
   .defaultRadio:checked ~ & {
-    background: palette.$primary-a;
+    background: palette.$primary;
 
     & > .check {
       display: block;

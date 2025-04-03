@@ -104,6 +104,6 @@ defineExpose({
 }
 
 .input:invalid {
-  border-color: palette.$error-dark;
+  border-color: palette.$error;
 }
 </style>

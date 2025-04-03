@@ -155,7 +155,7 @@ onKeyStroke(' ', () => {
   display: block;
 
   .defaultCheckbox:checked ~ & {
-    background: palette.$primary-a;
+    background: palette.$primary;
 
     & > .check {
       display: block;
