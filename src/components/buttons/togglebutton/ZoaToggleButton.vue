@@ -1,34 +1,30 @@
 <template>
-  <label
+  <a
     :id="componentId"
-    ref="checkboxContainer"
-    :class="addPropClasses([$style.container])"
-    :for="subId('toggle')"
+    ref="button"
+    :aria-pressed="value"
+    :class="
+      addPropClasses([
+        $style.container,
+        $style.main,
+        $style[`kind--${kind}`],
+        $style[`size--${size}`],
+      ])
+    "
+    role="button"
     tabindex="0"
+    @click="toggle"
   >
-    <input
-      :id="subId('toggle')"
-      ref="checkboxInput"
-      v-model="value"
-      :class="$style.checkbox"
-      :name="name"
-      type="checkbox"
-      :value="_checkValue"
-    />
-    <span
-      :class="[$style.main, $style[`kind--${kind}`], $style[`size--${size}`]]"
-    >
-      <!-- @slot Text for the button; overrides the label prop. -->
-      <slot>
-        {{ label }}
-      </slot>
-    </span>
-  </label>
+    <!-- @slot Text for the button; overrides the label prop. -->
+    <slot>
+      {{ label }}
+    </slot>
+  </a>
 </template>
 
 <script setup>
 import { onKeyStroke, useFocusWithin } from '@vueuse/core';
-import { computed, isProxy, ref, toRaw } from 'vue';
+import { ref } from 'vue';
 import { useChangeEmits } from '../../inputs/common.js';
 import { usePropClasses } from '../../utils/classes.js';
 import { useComponentId } from '../../utils/compid.js';
@@ -38,7 +34,7 @@ const props = defineProps({
    * @model
    */
   modelValue: {
-    type: [Boolean, Array],
+    type: Boolean,
     default: undefined,
   },
   /**
@@ -63,21 +59,6 @@ const props = defineProps({
     default: 0,
   },
   /**
-   * An optional name for the toggle; useful if making a group.
-   */
-  name: {
-    type: [String, null],
-    default: null,
-  },
-  /**
-   * An optional alternative value for the checkbox to return. If not specified,
-   * the label value will be used.
-   */
-  checkValue: {
-    type: [String, null],
-    default: null,
-  },
-  /**
    * The appearance class of the button.
    * @values normal, primary, alt
    */
@@ -95,7 +76,7 @@ const props = defineProps({
   },
 });
 
-const { componentId, subId } = useComponentId();
+const { componentId } = useComponentId();
 const { addPropClasses } = usePropClasses(props);
 
 const emit = defineEmits([
@@ -109,44 +90,22 @@ const emit = defineEmits([
    */
   'update:modelValue',
 ]);
-const { value } = useChangeEmits(emit, props);
+const { value, valueChanged } = useChangeEmits(emit, props);
 
-const checkboxContainer = ref(null);
-const checkboxInput = ref(null);
-const focus = useFocusWithin(checkboxContainer);
-
-// for convenience and consistency
-const _checkValue = computed(() => {
-  return props.checkValue || props.label;
-});
+const button = ref(null);
+const { focused } = useFocusWithin(button);
 
 function toggle() {
-  // if the same v-model is set on a group of checkboxes, they return an array
-  // of their _checkValue values instead of a single boolean. There may be a
-  // better way to check for this.
-  let currentValue = isProxy(value.value) ? toRaw(value.value) : value.value;
-  if (Array.isArray(currentValue)) {
-    // if it's currently unchecked, we want to check it, and vice versa
-    let check = !checkboxInput.value.checked;
-    // double-check the value isn't on there already
-    currentValue = currentValue.filter((v) => v !== _checkValue.value);
-    if (check) {
-      currentValue.push(_checkValue.value);
-    }
-    value.value = currentValue;
-    checkboxInput.value.checked = check;
-  } else {
-    value.value = !value.value;
-  }
+  valueChanged(!value.value);
 }
 
 onKeyStroke(' ', () => {
-  if (focus.focused.value) {
+  if (focused.value) {
     toggle();
   }
 });
 onKeyStroke('Enter', () => {
-  if (focus.focused.value) {
+  if (focused.value) {
     toggle();
   }
 });
@@ -182,7 +141,7 @@ onKeyStroke('Enter', () => {
     color: palette.$secondary-text;
   }
 
-  .checkbox:checked + & {
+  &[aria-pressed='true'] {
     background-color: palette.$secondary;
     color: palette.$secondary-text;
   }
@@ -196,7 +155,7 @@ onKeyStroke('Enter', () => {
     color: palette.$primary-text;
   }
 
-  .checkbox:checked + & {
+  &[aria-pressed='true'] {
     background-color: palette.$primary;
     color: palette.$primary-text;
   }
@@ -210,7 +169,7 @@ onKeyStroke('Enter', () => {
     color: palette.$tertiary-text;
   }
 
-  .checkbox:checked + & {
+  &[aria-pressed='true'] {
     background-color: palette.$tertiary;
     color: palette.$tertiary-text;
   }
@@ -223,9 +182,5 @@ onKeyStroke('Enter', () => {
 
 .size--md {
   padding: vars.$padding;
-}
-
-.checkbox {
-  display: none;
 }
 </style>

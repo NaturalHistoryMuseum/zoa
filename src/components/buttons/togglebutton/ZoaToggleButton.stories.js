@@ -5,9 +5,7 @@ const template = `
 <zoa-toggle-button :class="rootClass"
                    :delay="delay"
                    :label="label"
-                   :check-value="checkValue"
                    :kind="kind"
-                   :name="name"
                    :size="size"
 />
 `;
@@ -55,9 +53,7 @@ const Base = {
     class: '',
     delay: 0,
     label: 'Button',
-    checkValue: 'toggle',
     kind: 'normal',
-    name: 'toggle-group',
     size: 'md',
   },
   render: (args) => ({
