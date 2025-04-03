@@ -1,6 +1,7 @@
 export { default as ZoaButton } from './buttons/button/ZoaButton.vue';
-export { default as ZoaTabs } from './buttons/tabs/ZoaTabs.vue';
 export { default as ZoaToggleButton } from './buttons/togglebutton/ZoaToggleButton.vue';
+
+export { default as ZoaTabs } from './nav/tabs/ZoaTabs.vue';
 
 export { default as ZoaInput } from './inputs/ZoaInput.vue';
 

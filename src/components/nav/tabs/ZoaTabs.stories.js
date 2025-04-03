@@ -14,7 +14,7 @@ const template = `
 
 const meta = {
   component: ZoaTabs,
-  title: 'Components/Buttons/Tabs',
+  title: 'Components/Nav/Tabs',
   argTypes: {
     'update:modelValue': {
       table: {
