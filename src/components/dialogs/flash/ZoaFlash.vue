@@ -3,6 +3,7 @@
     :class="
       addPropClasses([$style.main, $style.container, $style[`kind--${kind}`]])
     "
+    :role="ariaRole"
   >
     <div :class="$style.header">
       <font-awesome-icon :class="$style.icon" :icon="['fa-solid', icon]" />
@@ -18,6 +19,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { usePropClasses } from '../../utils/classes.js';
 import { useKindIcon } from '../../utils/icons.js';
@@ -53,10 +55,27 @@ const props = defineProps({
     default:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
   },
+  /**
+   * Override the ARIA role. If not set, "alert" will be used for warning and
+   * error, and "status" for info and success.
+   */
+  customRole: {
+    type: String,
+    default: null,
+  },
 });
 
 const { icon } = useKindIcon(props);
 const { addPropClasses } = usePropClasses(props);
+
+const ariaRole = computed(() => {
+  if (props.customRole) {
+    return props.customRole;
+  }
+  return props.kind === 'warning' || props.kind === 'error'
+    ? 'alert'
+    : 'status';
+});
 </script>
 
 <style module lang="scss">

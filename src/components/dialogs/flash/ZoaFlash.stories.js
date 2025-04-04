@@ -6,6 +6,7 @@ const template = `
            :header="header"
            :message="message"
            :class="rootClass"
+           :custom-role="customRole"
 />
 `;
 
@@ -40,6 +41,7 @@ const Base = {
     message:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis at tellus at urna condimentum.',
     class: '',
+    customRole: '',
   },
   render: (args) => ({
     components: { ZoaFlash },
