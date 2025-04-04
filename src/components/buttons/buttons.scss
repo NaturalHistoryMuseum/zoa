@@ -1,0 +1,70 @@
+@use '../../styles/palette';
+@use '../../styles/fonts';
+@use '../../styles/vars';
+@use '../../styles/mixins';
+
+.main {
+  @include mixins.focus-outline();
+
+  border-radius: vars.$rounding-button;
+  border: none;
+  cursor: pointer;
+  font-family: fonts.$header-font;
+  font-weight: 600;
+  line-height: 1.25rem;
+  transition: 0.2s;
+}
+
+.kind--normal {
+  @include mixins.focus-outline(palette.$secondary-focus);
+
+  background-color: palette.$secondary;
+  color: palette.$secondary-text;
+
+  &:hover {
+    background-color: palette.$secondary-hover;
+  }
+
+  &:focus {
+    background-color: palette.$secondary-focus;
+  }
+}
+
+.kind--primary {
+  @include mixins.focus-outline(palette.$primary-focus);
+
+  background-color: palette.$primary;
+  color: palette.$primary-text;
+
+  &:hover {
+    background-color: palette.$primary-hover;
+  }
+
+  &:focus {
+    background-color: palette.$primary-focus;
+  }
+}
+
+.kind--alt {
+  @include mixins.focus-outline(palette.$tertiary-focus);
+
+  background-color: palette.$tertiary;
+  color: palette.$tertiary-text;
+
+  &:hover {
+    background-color: palette.$tertiary-hover;
+  }
+
+  &:focus {
+    background-color: palette.$tertiary-focus;
+  }
+}
+
+.size--sm {
+  font-size: 0.8em;
+  padding: vars.$half-pad;
+}
+
+.size--md {
+  padding: vars.$padding;
+}

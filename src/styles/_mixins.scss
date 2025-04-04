@@ -1,0 +1,10 @@
+@use 'palette';
+
+@mixin focus-outline($colour: palette.$black) {
+  outline: 2px solid transparent;
+
+  &:focus {
+    outline-offset: 3px;
+    outline-color: $colour;
+  }
+}

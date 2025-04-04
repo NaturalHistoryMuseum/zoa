@@ -5,7 +5,6 @@
     :aria-pressed="value"
     :class="
       addPropClasses([
-        $style.container,
         $style.main,
         $style[`kind--${kind}`],
         $style[`size--${size}`],
@@ -112,75 +111,27 @@ onKeyStroke('Enter', () => {
 </script>
 
 <style module lang="scss">
-@use '../../inputs/inputs';
-@use '../../../styles/fonts';
 @use '../../../styles/palette';
-@use '../../../styles/vars';
-
-.container {
-  display: inline-block;
-}
-
-.main {
-  font-family: fonts.$header-font;
-  font-weight: 600;
-  border: none;
-  border-radius: vars.$rounding-button;
-  display: inline-block;
-  transition: 0.2s;
-  cursor: pointer;
-  color: black;
-  background-color: palette.$grey;
-}
+@use '../buttons';
 
 .kind--normal {
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: palette.$secondary-hover;
-    color: palette.$secondary-text;
-  }
-
   &[aria-pressed='true'] {
-    background-color: palette.$secondary;
-    color: palette.$secondary-text;
+    box-shadow: inset 0 2px 1px 0 palette.$secondary-text;
+    background-color: palette.$secondary-hover;
   }
 }
 
 .kind--primary {
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: palette.$primary-hover;
-    color: palette.$primary-text;
-  }
-
   &[aria-pressed='true'] {
-    background-color: palette.$primary;
-    color: palette.$primary-text;
+    box-shadow: inset 0 2px 1px 0 palette.$primary-text;
+    background-color: palette.$primary-hover;
   }
 }
 
 .kind--alt {
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: palette.$tertiary-hover;
-    color: palette.$tertiary-text;
-  }
-
   &[aria-pressed='true'] {
-    background-color: palette.$tertiary;
-    color: palette.$tertiary-text;
+    box-shadow: inset 0 2px 1px 0 palette.$tertiary-text;
+    background-color: palette.$tertiary-hover;
   }
-}
-
-.size--sm {
-  padding: calc(vars.$v-pad/2) calc(vars.$h-pad/2);
-  font-size: 0.8em;
-}
-
-.size--md {
-  padding: vars.$padding;
 }
 </style>
