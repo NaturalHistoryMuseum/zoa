@@ -6,13 +6,13 @@
   -webkit-appearance: none;
   background: white;
   color: palette.$black;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: vars.$rounding;
   padding: vars.$padding;
   width: 100%;
 
   &:disabled {
-    color: palette.$grey;
+    color: palette.$grey-200;
   }
 }
 

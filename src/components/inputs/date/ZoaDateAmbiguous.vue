@@ -825,7 +825,7 @@ watch(returnDate, () => {
   min-width: 250px;
   max-width: 380px;
   background: white;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: vars.$rounding;
   top: 100%;
   left: 0;
@@ -841,7 +841,7 @@ watch(returnDate, () => {
   padding: vars.$v-pad vars.$h-pad 1em;
 
   &:not(:last-child) {
-    border-bottom: 1px solid palette.$grey;
+    border-bottom: 1px solid palette.$grey-200;
   }
 }
 

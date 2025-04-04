@@ -170,7 +170,7 @@ if (value.value == null) {
   transition: 0.2s;
   cursor: pointer;
   color: black;
-  background-color: palette.$grey;
+  background-color: palette.$grey-200;
 
   & input {
     @include vars.sr-only;

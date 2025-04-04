@@ -396,7 +396,7 @@ onKeyStroke('Enter', () => {
 .options {
   position: absolute;
   background: white;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: vars.$rounding;
   width: 100%;
   margin-top: 2px;

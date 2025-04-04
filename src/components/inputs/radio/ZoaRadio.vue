@@ -129,7 +129,7 @@ onKeyStroke(' ', () => {
   width: 1.5em;
   cursor: pointer;
   background: white;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: 100%;
   position: relative;
   display: block;

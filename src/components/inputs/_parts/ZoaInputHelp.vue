@@ -73,13 +73,13 @@ onKeyStroke('Escape', () => (showText.value = false));
 }
 
 .icon {
-  color: palette.$grey;
+  color: palette.$grey-200;
 }
 
 .popup {
   position: absolute;
   background: white;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: vars.$rounding;
   padding: vars.$box-padding;
   z-index: 9999;

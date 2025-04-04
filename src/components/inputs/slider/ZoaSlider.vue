@@ -339,7 +339,7 @@ $handleBorder: 2px;
     cursor: pointer;
     border-radius: 100%;
     z-index: 100;
-    border: $handleBorder solid palette.$grey;
+    border: $handleBorder solid palette.$grey-200;
   }
 }
 
@@ -357,7 +357,7 @@ $handleBorder: 2px;
   left: 0;
   right: 0;
   border-radius: vars.$rounding;
-  background: palette.$grey;
+  background: palette.$grey-200;
 
   &.track--active {
     background: palette.$secondary;
@@ -368,7 +368,7 @@ $handleBorder: 2px;
   position: absolute;
   font-size: 0.8em;
   padding: vars.$half-pad;
-  border: 1px solid palette.$grey;
+  border: 1px solid palette.$grey-200;
   border-radius: vars.$rounding;
   background: white;
   height: 30px;
