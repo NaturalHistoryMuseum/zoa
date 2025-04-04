@@ -6,6 +6,7 @@
   <dialog
     ref="modal"
     :class="addPropClasses([$style.main, $style[`kind--${kind}`]])"
+    @close="emit('closed')"
   >
     <div :class="$style.container">
       <div :class="$style.header">
@@ -16,11 +17,9 @@
             {{ header }}
           </slot>
         </h2>
-        <form :class="$style.form" method="dialog" @submit="emit('closed')">
-          <button :class="$style.close">
-            <font-awesome-icon icon="fa-solid fa-xmark" />
-          </button>
-        </form>
+        <button :class="$style.close" @click="closeModal">
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </button>
       </div>
       <div :class="$style.content">
         <!-- @slot The main content of the modal; overrides the message prop. -->
@@ -33,7 +32,6 @@
 </template>
 
 <script setup>
-import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue';
 import FontAwesomeIcon from '../../../icons.js';
 import { ZoaButton } from '../../index.js';
@@ -97,14 +95,14 @@ const { addPropClasses } = usePropClasses(props);
 const modal = ref(null);
 
 function openModal() {
-  modal.value.show();
+  modal.value.showModal();
   emit('opened');
 }
 
-onClickOutside(modal, () => {
+function closeModal() {
   modal.value.close();
   emit('closed');
-});
+}
 </script>
 
 <style module lang="scss">
