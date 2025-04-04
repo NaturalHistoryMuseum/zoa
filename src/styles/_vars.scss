@@ -1,7 +1,7 @@
 @use 'sass:map';
 
-$v-pad: var(--zoa-pad-v, 8px);
-$h-pad: var(--zoa-pad-h, 16px);
+$v-pad: var(--zoa-pad-v, 0.75rem);
+$h-pad: var(--zoa-pad-h, 1.5rem);
 $padding: $v-pad $h-pad;
 $half-pad: calc($v-pad / 2) calc($h-pad / 2);
 $box-padding: 20px;
