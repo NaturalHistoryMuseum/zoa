@@ -107,7 +107,7 @@ function closeModal() {
 
 <style module lang="scss">
 @use '../dialogs';
-@use '../../../styles/vars';
+@use '../../../styles/mixins';
 
 .main {
   position: fixed;
@@ -116,19 +116,19 @@ function closeModal() {
   left: 0;
   right: 0;
 
-  @include vars.media-less-than('sm') {
+  @include mixins.media-less-than('sm') {
     width: 90vw;
   }
 
-  @include vars.media-between('sm', 'md') {
+  @include mixins.media-between('sm', 'md') {
     width: 80vw;
   }
 
-  @include vars.media-between('md', 'lg') {
+  @include mixins.media-between('md', 'lg') {
     width: 70vw;
   }
 
-  @include vars.media-from('lg') {
+  @include mixins.media-from('lg') {
     width: 50vw;
   }
 }

@@ -158,6 +158,7 @@ if (value.value == null) {
 @use '../../../styles/fonts';
 @use '../../../styles/palette';
 @use '../../../styles/vars';
+@use '../../../styles/mixins';
 
 .tab {
   $arrowSize: 6px;
@@ -173,7 +174,7 @@ if (value.value == null) {
   background-color: palette.$grey-200;
 
   & input {
-    @include vars.sr-only;
+    @include mixins.sr-only;
   }
 
   &::after {
