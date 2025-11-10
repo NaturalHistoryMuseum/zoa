@@ -17,7 +17,7 @@
           </slot>
         </h2>
         <form :class="$style.form" method="dialog" @submit="emit('closed')">
-          <button :class="$style.close" aria-label="Close modal">
+          <button aria-label="Close modal" :class="$style.close">
             <font-awesome-icon icon="fa-solid fa-xmark" />
           </button>
         </form>
