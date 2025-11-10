@@ -1,3 +1,9 @@
+## v0.13.0a0 (2025-11-10)
+
+### Feature
+
+- Add aria-label to close button in ZoaModal
+
 ## v0.12.2a2 (2025-04-02)
 
 ### CI System(s)
