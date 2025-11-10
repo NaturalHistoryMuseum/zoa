@@ -1,9 +1,9 @@
 /** @type { import('@storybook/vue3').Preview } */
 
-import './assets/storybook.css';
-import theme from './theme.js';
 import { setup } from '@storybook/vue3';
 import { Zoa } from '../src/main.js';
+import './assets/storybook.css';
+import theme from './theme.js';
 
 setup((app) => {
   app.use(Zoa);

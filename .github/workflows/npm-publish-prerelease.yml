@@ -1,4 +1,4 @@
-name: Upload NPM Package
+name: Upload NPM Package (dev)
 
 on:
   release:
@@ -9,7 +9,7 @@ jobs:
   deploy:
     name: Publish to NPM
     runs-on: ubuntu-latest
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -22,6 +22,6 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
       - name: Publish package
-        run: npm publish
+        run: npm publish --tag dev
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

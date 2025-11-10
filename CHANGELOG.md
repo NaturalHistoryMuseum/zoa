@@ -1,3 +1,65 @@
+## v0.13.0a1 (2025-11-10)
+
+### Chores/Misc
+
+- sort attributes
+
+## v0.13.0a0 (2025-11-10)
+
+### Feature
+
+- Add aria-label to close button in ZoaModal
+
+## v0.12.2a2 (2025-04-02)
+
+### CI System(s)
+
+- add build step to prerelease workflow
+
+## v0.12.2a1 (2025-04-02)
+
+### Refactor
+
+- **storybook**: sort imports
+- **html**: sort html attributes alphabetically
+- **inputs**: fix linter issues
+- **dropdowns**: fix linter issues
+- **dates**: fix linter issues
+- **input-parts**: fix linter errors, remove injects
+- **input**: fix linter errors
+- **tabs**: remove unnecessary vars, set key, set default
+- sort imports and remove unused
+- change component file names to multi-word
+- automated eslint fixes
+
+### CI System(s)
+
+- use local repo for prettier and eslint pre-commit hooks
+- use pre-commit eslint mirror and install dependencies
+- add eslint hook for pre-commit
+- add prettier plugin to organise imports
+- add eslint configuration
+
+## v0.12.2a0 (2025-02-27)
+
+### Fix
+
+- **multiselect**: check value type correctly
+
+### Chores/Misc
+
+- **actions**: bump if the previous commit isn't a bump
+- **actions**: make prerelease target dev branch
+- **actions**: publish prereleases to npm dev tag
+- **actions**: add prerelease action
+- **actions**: rename bump
+- **cz**: do not automatically build a changelog
+- **cz**: remove version from .cz.json
+- **cz**: add flag to merge prereleases
+- **actions**: add scope to dist package build in bump action
+- **actions**: rebuild dist package on push to dev/main
+- **actions**: update release action version
+
 ## v0.12.1 (2025-02-18)
 
 ### Docs

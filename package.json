@@ -1,6 +1,6 @@
 {
   "name": "@nhm-data/zoa",
-  "version": "0.12.1",
+  "version": "0.13.0a1",
   "description": "UI toolkit for the NHM Data Portal.",
   "homepage": "https://github.com/NaturalHistoryMuseum/zoa",
   "bugs": {
@@ -27,7 +27,9 @@
     "build": "vite build",
     "watch": "vite build --watch",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build -o docs"
+    "build-storybook": "storybook build -o docs",
+    "tidy:lint": "eslint --fix --no-warn-ignored",
+    "tidy:format": "prettier -w"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@eslint/js": "^9.23.0",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
@@ -55,12 +58,19 @@
     "@storybook/vue3": "^8.4.7",
     "@storybook/vue3-vite": "^8.4.7",
     "@vitejs/plugin-vue": "^5.2.1",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-vue": "^10.0.0",
+    "globals": "^16.0.0",
     "lorem-ipsum": "^2.0.8",
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.83.1",
     "storybook": "^8.4.7",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "vue-tsc": "^2.2.8"
   }
 }

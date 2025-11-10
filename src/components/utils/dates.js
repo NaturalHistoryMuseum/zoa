@@ -1,4 +1,4 @@
-import parser, { Parser, Format } from 'any-date-parser';
+import parser, { Format, Parser } from 'any-date-parser';
 import datenames from 'date-names';
 
 const monthRgx = new RegExp(
