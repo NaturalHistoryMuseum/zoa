@@ -1,3 +1,9 @@
+## v0.13.0a1 (2025-11-10)
+
+### Chores/Misc
+
+- sort attributes
+
 ## v0.13.0a0 (2025-11-10)
 
 ### Feature
