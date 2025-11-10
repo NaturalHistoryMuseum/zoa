@@ -1160,7 +1160,7 @@ const kt = /* @__PURE__ */ xn(Vn), Nn = "zoa__zoadateambiguous__input", Wn = "zo
     "update:modelValue"
   ],
   setup(e, { expose: u, emit: o }) {
-    const l = () => import("./dates-Bz0VhvC8.js"), m = e, b = O("inputId"), h = O("labelId"), p = O("helpId"), c = O("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = x(() => {
+    const l = () => import("./dates-B19eKZ06.js"), m = e, b = O("inputId"), h = O("labelId"), p = O("helpId"), c = O("disabled"), t = o, { valueChanged: n } = ce(t, m.delay), a = x(() => {
       let i;
       try {
         i = new Date(
@@ -3861,8 +3861,8 @@ const wu = "zoa__zoaflash__main", xu = "zoa__zoaflash__container", Mu = "zoa__zo
               onSubmit: t[0] || (t[0] = (n) => l("closed"))
             }, [
               D("button", {
-                class: z(c.$style.close),
-                "aria-label": "Close modal"
+                "aria-label": "Close modal",
+                class: z(c.$style.close)
               }, [
                 K(r(Ne), { icon: "fa-solid fa-xmark" })
               ], 2)
